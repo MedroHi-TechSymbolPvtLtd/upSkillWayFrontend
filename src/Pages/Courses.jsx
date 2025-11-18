@@ -1,0 +1,632 @@
+import React, { useState , useEffect } from 'react';
+import { Search, Star, Users, TrendingUp, DollarSign } from 'lucide-react';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+import anime from '../assets/Images/anime.mp4';
+import { Check } from 'lucide-react';
+import * as Lucide from 'lucide-react';
+import ScheduleAnime from '../assets/Images/ScheduleAnime.mp4';
+import Grid from "../components/Courses/Grid";
+import Pagination from './Pagination'; // Add this import
+import { useNavigate } from 'react-router-dom';
+
+
+
+const Courses = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [pagination, setPagination] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+const navigate = useNavigate();
+
+  // Function to fetch courses from API
+  const fetchCourses = async (page = 1) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`http://localhost:3000/api/v1/cms/courses?page=${page}&limit=10`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setCourses(data.data);
+        setPagination(data.pagination);
+        setError(null);
+        // Smooth scroll to courses section
+        window.scrollTo({ top: 800, behavior: 'smooth' });
+      } else {
+        throw new Error(data.message || 'Failed to fetch courses');
+      }
+    } catch (err) {
+      console.error('Error fetching courses:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch courses on component mount
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  // Function to get course card color based on index
+  const getCardColor = (index) => {
+    const colors = [
+      'bg-gradient-to-br from-blue-400 to-blue-600',
+      'bg-gradient-to-br from-purple-400 to-purple-600',
+      'bg-gradient-to-br from-green-400 to-green-600',
+      'bg-gradient-to-br from-orange-400 to-orange-600',
+      'bg-gradient-to-br from-red-400 to-red-600',
+      'bg-gradient-to-br from-indigo-400 to-indigo-600',
+      'bg-gradient-to-br from-pink-400 to-pink-600',
+      'bg-gradient-to-br from-teal-400 to-teal-600',
+    ];
+    return colors[index % colors.length];
+  };
+
+  // Function to get badge text based on course data
+  const getBadgeText = (course) => {
+    if (course.tags && course.tags.length > 0) {
+      return course.tags[0].replace('-', ' ').toUpperCase();
+    }
+    return 'COURSE';
+  };
+
+  // Function to generate mock rating and reviews (since API doesn't provide them)
+  const getMockRating = (courseId) => {
+    const hash = courseId.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0);
+      return a & a;
+    }, 0);
+    const rating = (4.0 + (Math.abs(hash) % 10) / 10).toFixed(1);
+    const reviews = 150 + (Math.abs(hash) % 500);
+    return { rating, reviews };
+  };
+
+  // Function to extract instructor name or use default
+  const getInstructorName = (course) => {
+    return course.creator?.name || 'Expert Instructor';
+  };
+
+  // Function to render stars for rating
+  const renderStars = (rating) => {
+    const numRating = typeof rating === 'number' ? rating : parseFloat(rating) || 0;
+    return Array.from({ length: 5 }, (_, index) => (
+      <Star
+        key={index}
+        className={`w-4 h-4 ${
+          index < Math.floor(numRating)
+            ? "fill-current text-amber-500"
+            : "text-gray-300"
+        }`}
+      />
+    ));
+  };
+
+  // Filter courses based on search term
+  const filteredCourses = courses.filter((course) => {
+    if (!searchTerm.trim()) return true;
+    
+    const searchLower = searchTerm.toLowerCase();
+    const titleMatch = course.title?.toLowerCase().includes(searchLower);
+    const descriptionMatch = course.description?.toLowerCase().includes(searchLower);
+    const tagsMatch = course.tags?.some(tag => 
+      tag.toLowerCase().includes(searchLower)
+    );
+    const categoryMatch = course.category?.toLowerCase().includes(searchLower);
+    
+    return titleMatch || descriptionMatch || tagsMatch || categoryMatch;
+  });
+
+  
+  return (
+    <div className="min-h-screen bg-white">
+      <Navbar />
+
+      {/* Hero Section */}
+      <section className="bg-white py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-5 items-center">
+            {/* Left Content */}
+            <div className="space-y-6 sm:space-y-8">
+              <div classname="w-[643] h-[318]">
+                <h1 
+                  className="font-bold text-black leading-none " 
+                  style={{
+                    
+                    Width: '653px',
+                    fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
+                    fontSize: 'clamp(2rem, 6vw, 3.625rem)',
+                    lineHeight: '1.14',
+                    letterSpacing: '0px',
+                    fontWeight: 700
+                  }}
+                >
+                  Transform Your 
+                  <span className="bg-[#FCB11F] to-red-500 bg-clip-text text-transparent ml-[10px]">
+                  Career
+                  </span>
+                  <br />
+                  with Our Courses
+                </h1>
+                
+                <div 
+                  className="relative mx-auto sm:left-[-40px] md:left-[-60px] lg:left-[-80px]"
+                  style={{
+                    width: '100%',
+                    maxWidth: '504.0880126953125px',
+                    height: 'auto',
+                    top: '10px',
+                    left: '0',
+                  }}
+                >
+                  <p 
+                    className="text-sm sm:text-base md:text-lg max-w-md mx-auto"
+                    style={{
+                      fontFamily: 'Plus Jakarta Sans, sans-serif',
+                      fontWeight: 400,
+                      fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
+                      lineHeight: '1.5',
+                      letterSpacing: '0px',
+                      color: '#52525B',
+                      opacity: 1,
+                      transform: 'rotate(0deg)',  
+                      marginRight: '100px'
+
+                    }}
+                  >Industry-aligned curriculum, expert instructors, and hands-on projects to help you master in-demand skills
+                  </p>
+                </div>
+                <div 
+                  className="relative hidden sm:block"
+                  style={{
+                    width: '24px',
+                    height: '18px', 
+                    top: '0px',
+                    left: '100px',
+                  }}
+                  
+                >
+                  
+                </div>
+                
+                <button 
+                  style={{
+                    width: '100%',
+                    maxWidth: '229.784912109375px',
+                    height: '50px',
+                    borderRadius: '3px',
+                    opacity: 1,
+                    transform: 'rotate(0deg)',
+                    backgroundColor: '#111827',
+                    color: 'white',
+                    paddingLeft: '24px',
+                    paddingRight: '24px',
+                    paddingTop: '10px',
+                    paddingBottom: '10px',
+                    fontWeight: '600',
+                    border: 'none',
+                    cursor: 'pointer',
+                    marginTop: '30px',
+                    transition: 'background-color 0.2s ease',
+                    fontSize: '14px'
+                  }}
+                  className="sm:w-[200px] sm:h-[55px] sm:px-[28px] sm:py-[12px] sm:text-base sm:mt-[35px] md:w-[229.784912109375px] md:h-[61px] md:px-[32px] md:py-[12px] md:mt-[40px]"
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#1f2937'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = '#111827'}
+                  onClick={() => navigate("/contact")}
+
+                >
+                  Join with us
+                </button>
+              </div>
+              
+              {/* Stats */}
+              <div className="">
+                <div className="space-y-3 sm:space-y-4 max-w-sm w-full">
+                  {/* Students Trained Card */}
+                  <div 
+                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px]"
+                    style={{
+                      width: '100%',
+                      maxWidth: '343.57px',
+                      height: '70px',
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #E4E4E7',
+                      borderRadius: '16px',
+                      marginLeft: '10px',
+
+                      opacity: 1,
+                      transform: 'rotate(0deg)',
+                      boxShadow: '-2px 5px 100px 0px #0000003B'
+                    }}
+                  >
+                    <div className="flex items-center space-x-2 sm:space-x-3 h-full p-3 sm:p-4">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-blue-500 sm:w-4 sm:h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-lg sm:text-xl font-bold text-gray-900 font-['Plus_Jakarta_Sans']">50,000+</div>
+                        <div className="text-gray-400 text-xs sm:text-sm font-['Plus_Jakarta_Sans']">Students Trained</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hiring Partners Card */}
+                  <div 
+                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px] sm:ml-[20px] md:ml-[40px]"
+                    style={{
+                      width: '100%',
+                      maxWidth: '343.57px',
+                      height: '70px',
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #E4E4E7',
+                      borderRadius: '16px',
+                      opacity: 1,
+                      transform: 'rotate(0deg)',
+                      marginLeft: '70px',
+                      boxShadow: '-2px 5px 100px 0px #0000003B'
+                    }}
+                  >
+                    <div className="flex items-center space-x-2 sm:space-x-3 h-full p-3 sm:p-4">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-blue-500 sm:w-4 sm:h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-lg sm:text-xl font-bold text-gray-900 font-['Plus_Jakarta_Sans']">400+</div>
+                        <div className="text-gray-400 text-xs sm:text-sm font-['Plus_Jakarta_Sans']">Hiring Partners</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Placement Rate Card */}
+                  <div 
+                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px] sm:ml-[20px] md:ml-[40px]"
+                    style={{
+                      width: '100%',
+                      maxWidth: '343.57px',
+                      height: '70px',
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #E4E4E7',
+                      borderRadius: '16px',
+                      opacity: 1,
+                      marginLeft: '70px',
+                      transform: 'rotate(0deg)',
+                      boxShadow: '-2px 5px 100px 0px #0000003B'
+                    }}
+                  >
+                    <div className="flex items-center space-x-2 sm:space-x-3 h-full p-3 sm:p-4">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-blue-500 sm:w-4 sm:h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-lg sm:text-xl font-bold text-gray-900  font-['Plus_Jakarta_Sans']">92%</div>
+                        <div className="text-gray-400 text-xs sm:text-sm font-['Plus_Jakarta_Sans']">Placement Rate</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Avg Salary Hike Card */}
+                  <div 
+                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px]"
+                    style={{
+                      width: '100%',
+                      maxWidth: '343.57px',
+                      height: '70px',
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #E4E4E7',
+                      borderRadius: '16px',
+                      opacity: 1,
+                      transform: 'rotate(0deg)',
+                      marginLeft: '10px',
+
+                      boxShadow: '-2px 5px 100px 0px #0000003B'
+                    }}
+                  >
+                    <div className="flex items-center space-x-2 sm:space-x-3 h-full p-3 sm:p-4">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-blue-500 sm:w-4 sm:h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-lg sm:text-xl font-bold text-gray-900 font-['Plus_Jakarta_Sans'] ">250%</div>
+                        <div className="text-gray-400 text-xs sm:text-sm font-['Plus_Jakarta_Sans']">Avg. Salary Hike</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            {/* Right Content - Illustration */}
+            <Grid />
+          </div>
+        </div>
+      </section>
+
+      {/* Search Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white -mt-25">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative w-full max-w-2xl mx-auto">
+            {/* Search Container with Gradient Border */}
+            <div 
+              className="relative w-full h-[50px] sm:h-[55px] md:h-[61px] rounded-full bg-white"
+              style={{
+                border: '2px solid transparent',
+                backgroundImage: 'linear-gradient(white, white), linear-gradient(180deg, #6941C6 0%, #439A02 25%, #FE5910 50%, #FCB11F 100%)',
+                backgroundClip: 'padding-box, border-box',
+                backgroundOrigin: 'border-box',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+              }}
+            >
+              {/* Search Icon */}
+              <Search 
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 z-10" 
+                size={18}
+              />
+              
+              {/* Search Input */}
+              <input
+                type="text"
+                placeholder="Search for Courses"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={`w-full h-full rounded-full pl-12 sm:pl-12 bg-transparent border-none outline-none text-gray-700 placeholder-gray-400 text-sm sm:text-base ${
+                  searchTerm ? 'pr-20 sm:pr-24' : 'pr-4'
+                }`}
+              />
+              
+              {/* Cancel Button */}
+              {searchTerm && (
+                <button 
+                  className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 font-medium text-[#0A84FF] hover:text-orange-500 transition-colors text-sm sm:text-base z-10"
+                  onClick={() => setSearchTerm('')}
+                  type="button"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Courses Grid Section */}
+      <section className="py-8 sm:py-10 md:py-16 px-4 sm:px-6 bg-white min-h-screen -mt-25">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Courses</h1>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our comprehensive collection of courses designed to help you master new skills and advance your career.
+            </p>
+          </div>
+
+          {/* Loading State */}
+          {loading && (
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <Lucide.Loader2 className="w-8 h-8 animate-spin text-orange-400 mx-auto mb-4" />
+                <p className="text-gray-600">Loading courses...</p>
+              </div>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <Lucide.AlertCircle className="w-8 h-8 text-red-400 mx-auto mb-4" />
+                <p className="text-gray-600 mb-4">Error loading courses: {error}</p>
+                <button 
+                  onClick={() => fetchCourses()}
+                  className="bg-orange-400 text-white px-4 py-2 rounded-lg hover:bg-orange-500 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Empty State - No courses */}
+          {!loading && !error && courses.length === 0 && (
+            <div className="text-center py-20">
+              <Lucide.BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-600 text-lg">No courses available at the moment.</p>
+            </div>
+          )}
+
+          {/* Empty State - Search results */}
+          {!loading && !error && courses.length > 0 && filteredCourses.length === 0 && searchTerm && (
+            <div className="text-center py-20">
+              <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-600 text-lg mb-2">No courses found matching "{searchTerm}"</p>
+              <button 
+                onClick={() => setSearchTerm('')}
+                className="text-[#0A84FF] hover:text-orange-500 transition-colors text-sm font-medium"
+              >
+                Clear search
+              </button>
+            </div>
+          )}
+
+          {/* Courses Grid */}
+          {!loading && !error && filteredCourses.length > 0 && (
+            <>
+              {/* Search Results Count */}
+              {searchTerm && (
+                <div className="mb-6 text-center sm:text-left">
+                  <p className="text-base text-gray-600">
+                    Found <span className="font-semibold text-gray-900">{filteredCourses.length}</span> course{filteredCourses.length !== 1 ? 's' : ''} matching <span className="font-semibold text-gray-900">"{searchTerm}"</span>
+                  </p>
+                </div>
+              )}
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-8 sm:mb-12">
+                {filteredCourses.map((course, index) => {
+                  const mockData = getMockRating(course.id);
+                  return (
+                    <div
+                      key={course.id}
+                      className="w-full h-[455px] flex flex-col bg-white border border-gray-100 rounded-2xl shadow-[0_15px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_20px_60px_rgba(15,23,42,0.12)] transition"
+                    >
+                      <div className="relative w-full max-w-[278px] h-[190px] mx-auto mt-5">
+                        <img
+                          src={course.image || "https://placehold.co/300x200/gray/white"}
+                          alt={course.title}
+                          className="w-full h-full object-cover rounded-t-2xl"
+                        />
+                      </div>
+
+                      <div className="p-5 flex flex-col gap-4 flex-1">
+                        <div className="flex items-center justify-between text-xs text-gray-500">
+                          {course.category && (
+                            <span className="px-3 py-1 bg-[#FDB11F] text-black rounded-full">
+                              {course.category}
+                            </span>
+                          )}
+                          <div className="flex items-center gap-2">
+                            {course.originalPrice && (
+                              <span className="text-black line-through text-[10px] text-xl">
+                                {course.originalPrice}
+                              </span>
+                            )}
+                            {course.price && (
+                              <span className="text-[#FF302F] text-xl">
+                                {course.price}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <h3 className="font-semibold text-lg text-gray-900 leading-snug line-clamp-2">
+                          {course.title}
+                        </h3>
+
+                        <div className="flex items-center justify-between text-xs text-gray-500">
+                          <div className="flex items-center gap-3 text-sm text-gray-600">
+                            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-700">
+                              {getInstructorName(course).charAt(0).toUpperCase()}
+                            </div>
+                            <span>{getInstructorName(course)}</span>
+                          </div>
+
+                          <div className="flex items-center gap-1 text-amber-500">
+                            {renderStars(parseFloat(mockData.rating))}
+                            <span className="text-gray-500 ml-1">{mockData.reviews}</span>
+                          </div>
+                        </div>
+
+                        <button 
+                          onClick={() => navigate(`/course/${course.id}`)}
+                          className="mt-auto w-[103px] py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition mx-auto"
+                        >
+                          Enroll Now
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              {/* Pagination Component - Only show when not searching */}
+              {!searchTerm && pagination && pagination.totalPages > 1 && (
+                <div className="mt-8">
+                  <Pagination
+                    currentPage={pagination.page}
+                    totalPages={pagination.totalPages}
+                    hasNext={pagination.hasNext}
+                    hasPrev={pagination.hasPrev}
+                    onPageChange={(page) => fetchCourses(page)}
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* Consultation Section */}
+      <section className="">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 style={{
+                width: '530px',
+                height: '91.35px',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                fontWeight: 600,
+                fontSize: '42px',
+                lineHeight: '48px',
+                letterSpacing: '0px',
+                color: 'black',
+                margin: 0,
+                opacity: 1,
+                transform: 'rotate(0deg)',
+                position: 'absolute',
+                left: '158px'
+              }}>
+                Not sure which course to choose?
+              </h2>
+              <p style={{
+                width: '431px',
+                height: '49.48px',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '26px',
+                letterSpacing: '0px',
+                color: '#6B7280',
+                marginBottom: '2rem',
+                position: 'absolute',
+                left: '158px',
+                opacity: 1,
+                marginTop: '6rem',
+                transform: 'rotate(0deg)'
+              }}>
+                Schedule a free consultation with our career advisors to find the perfect course for you.
+              </p>
+              <div className="mt-40 ml-10 relative">
+                <div className="absolute -top-0.5 -left-0.5 -bottom-0.5 w-1/3 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                <div className="relative">
+                  <button className="w-[228px] h-[53.287750244140625px] bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center">
+                    Schedule Consultation
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="bg-white rounded-3xl h-96 flex items-center justify-center">
+                <div className="text-center">
+                  <video 
+                    src={ScheduleAnime}
+                    style={{
+                      width: '598px',
+                      height: '365px',
+                      transform: 'rotate(0deg)',
+                      opacity: 1,
+                      borderRadius: '35px'
+                    }}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+    </div>
+  );
+};
+
+export default Courses;

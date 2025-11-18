@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+:root {
+    --main-font: 'Plus Jakarta Sans', sans-serif;
+}

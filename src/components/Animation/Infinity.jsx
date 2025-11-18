@@ -6,98 +6,175 @@ export default function InfinityFlow({ className }) {
   const pathId = `path-${gid}`;
   const shineId = `shine-${gid}`;
 
-  // ViewBox adjusted for better spacing
   return (
     <div className={`w-full ${className || ''}`}>
       <svg
-        viewBox="0 0 1600 900"
+        viewBox="0 0 1800 1000"
         className="w-full h-auto"
         aria-label="Discover, Define, Deliver animated infinity flow"
       >
         <defs>
+          {/* Gradient matching the image: Yellow -> Orange -> Peach -> Purple */}
           <linearGradient id={gradId} x1="200" x2="1400" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F6C23E" />
-            <stop offset="18%" stopColor="#F59E0B" />
-            <stop offset="40%" stopColor="#F3A58E" />
-            <stop offset="55%" stopColor="#F7E8BE" />
-            <stop offset="75%" stopColor="#BFAEFF" />
-            <stop offset="100%" stopColor="#9D8CFF" />
-            <animateTransform attributeName="gradientTransform" type="translate" values="0 0; 140 0; 0 0; -140 0; 0 0" dur="9s" repeatCount="indefinite" />
+            <stop offset="0%" stopColor="#FFD700" />
+            <stop offset="15%" stopColor="#FFA500" />
+            <stop offset="35%" stopColor="#FF8C69" />
+            <stop offset="50%" stopColor="#FFB6C1" />
+            <stop offset="70%" stopColor="#DDA0DD" />
+            <stop offset="100%" stopColor="#9370DB" />
+            <animateTransform attributeName="gradientTransform" type="translate" values="0 0; 100 0; 0 0; -100 0; 0 0" dur="8s" repeatCount="indefinite" />
           </linearGradient>
 
-          {/* Subtle highlight that sweeps along the ribbon */}
+          {/* Shine effect */}
           <linearGradient id={shineId} x1="0" x2="1" y1="0" y2="0">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="50%" stopColor="#ffffff" stopOpacity="0.6" />
+            <stop offset="50%" stopColor="#ffffff" stopOpacity="0.8" />
             <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
           </linearGradient>
 
-          {/* Motion path reused by sparkles - adjusted for better spacing */}
+          {/* Infinity symbol path - wider Define section with more vertical space */}
           <path
             id={pathId}
-            d="M 200 450 C 200 250 450 230 600 400 C 750 570 950 570 1100 400 C 1250 230 1400 250 1400 450 C 1400 650 1250 670 1100 500 C 950 330 750 330 600 500 C 450 670 200 650 200 450"
+            d="M 280 500 C 280 280 480 250 680 450 C 880 650 1020 650 1200 450 C 1380 250 1580 280 1580 500 C 1580 720 1380 750 1200 550 C 1020 350 880 350 680 550 C 480 750 280 720 280 500"
             fill="none"
           />
+          
           <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="8" stdDeviation="12" floodColor="#000" floodOpacity="0.15" />
+            <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#000" floodOpacity="0.1" />
           </filter>
         </defs>
 
-        {/* Background panel */}
-        <rect x="40" y="60" width="full" height="780" rx="36" fill="#F6F7FB" />
+        {/* Background */}
+        <rect x="0" y="0" width="1800" height="1000" fill="white" />
 
-        {/* Ribbon base */}
-        <use href={`#${pathId}`} stroke="#E6E8F0" strokeWidth="64" opacity="0.5" />
+        {/* Central dotted line */}
+        
+
+         {/* Top labels with connecting lines - Background */}
+         {[
+           { x: 430, y: 200, text: ["Goal setting and", "management"], color: "#FF8C69", connectY: 300 },
+           { x: 930, y: 140, text: ["Org design and", "strategy"], color: "#FFB6C1", connectY: 390 },
+           { x: 1430, y: 200, text: ["Customer journey", "mapping"], color: "#DDA0DD", connectY: 300 },
+         ].map((item, idx) => (
+           <g key={`top-${idx}`}>
+             {/* Pin base - solid circle */}
+             <circle cx={item.x} cy={item.connectY} r="4" fill={item.color} />
+             {/* Pin line */}
+             <line x1={item.x} y1={item.connectY} x2={item.x} y2={item.y + 40} stroke={item.color} strokeWidth="2" />
+             {/* Pin tip - hollow circle */}
+             <circle cx={item.x} cy={item.y + 40} r="3" fill="none" stroke={item.color} strokeWidth="2" />
+             <text
+               x={item.x}
+               y={item.y}
+               textAnchor="middle"
+               fontFamily="Inter, ui-sans-serif"
+               fontSize="18"
+               fontWeight="500"
+               fill="#374151"
+             >
+               {item.text.map((line, i) => (
+                 <tspan key={i} x={item.x} dy={i === 0 ? 0 : 24}>
+                   {line}
+                 </tspan>
+               ))}
+             </text>
+           </g>
+         ))}
+
+         {/* Bottom labels with connecting lines - Background */}
+         {[
+           { x: 350, y: 850, text: ["Customer insights", "and feedback"], color: "#FFD700", connectY: 690 },
+           { x: 530, y: 850, text: ["Product planning", "and roadmapping"], color: "#FFA500", connectY: 670 },
+           { x: 750, y: 750, text: ["Technical", "design"], color: "#FF8C69", connectY: 540 },
+           { x: 930, y: 860, text: ["Prototyping"], color: "#FFB6C1", connectY: 610 },
+           { x: 1120, y: 750, text: ["Sprint", "planning"], color: "#DDA0DD", connectY: 540 },
+           { x: 1330, y: 850, text: ["Project", "execution"], color: "#9370DB", connectY: 670 },
+         ].map((item, idx) => (
+           <g key={`bottom-${idx}`}>
+             {/* Pin base - solid circle */}
+             <circle cx={item.x} cy={item.connectY} r="4" fill={item.color} />
+             {/* Pin line */}
+             <line x1={item.x} y1={item.connectY} x2={item.x} y2={item.y - 40} stroke={item.color} strokeWidth="2" />
+             {/* Pin tip - hollow circle */}
+             <circle cx={item.x} cy={item.y - 40} r="3" fill="none" stroke={item.color} strokeWidth="2" />
+             <text
+               x={item.x}
+               y={item.y}
+               textAnchor="middle"
+               fontFamily="Inter, ui-sans-serif"
+               fontSize="16"
+               fontWeight="500"
+               fill="#6B7280"
+             >
+               {Array.isArray(item.text) ? (
+                 item.text.map((line, i) => (
+                   <tspan key={i} x={item.x} dy={i === 0 ? 0 : 20}>
+                     {line}
+                   </tspan>
+                 ))
+               ) : (
+                 item.text
+               )}
+             </text>
+           </g>
+         ))}
+
+        {/* Infinity symbol base */}
+        <use href={`#${pathId}`} stroke="#E0E0E0" strokeWidth="60" opacity="0.3" />
+        
+        {/* Main infinity symbol with gradient */}
         <use
           href={`#${pathId}`}
           stroke={`url(#${gradId})`}
-          strokeWidth="64"
+          strokeWidth="60"
           strokeLinecap="round"
           strokeLinejoin="round"
           filter="url(#softShadow)"
         />
 
-        {/* Sweeping shine effect - this creates the animated highlight */}
+        {/* Animated shine effect */}
         <use
           href={`#${pathId}`}
           stroke={`url(#${shineId})`}
-          strokeWidth="68"
+          strokeWidth="65"
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity="0.4"
+          opacity="0.6"
         >
           <animate
             attributeName="stroke-dasharray"
-            values="120 1800; 360 1560; 120 1800"
-            dur="9s"
+            values="100 1600; 300 1400; 100 1600"
+            dur="8s"
             repeatCount="indefinite"
           />
           <animate
             attributeName="stroke-dashoffset"
-            values="0; -900; 0"
-            dur="9s"
+            values="0; -800; 0"
+            dur="8s"
             repeatCount="indefinite"
           />
         </use>
 
-        {/* Sparkles moving along the path - these create the moving star effects */}
+        {/* Sparkles/Stars moving along the path */}
         {Array.from({ length: 6 }).map((_, i) => (
-          <g key={i} opacity="0.9">
+          <g key={i} opacity="0.8">
             <path
-              d="M0 -6 L1.6 -1.6 L6 0 L1.6 1.6 L0 6 L-1.6 1.6 L-6 0 L-1.6 -1.6 Z"
-              fill={i % 2 === 0 ? "#FFE08A" : "#B7A5FF"}
+              d="M0 -8 L2.5 -2.5 L8 0 L2.5 2.5 L0 8 L-2.5 2.5 L-8 0 L-2.5 -2.5 Z"
+              fill={i % 2 === 0 ? "#9370DB" : "#4169E1"}
+              stroke="white"
+              strokeWidth="1"
             >
               <animate
                 attributeName="opacity"
                 values="0;1;0"
-                dur="2.2s"
-                begin={`${i * 0.7}s`}
+                dur="2s"
+                begin={`${i * 0.8}s`}
                 repeatCount="indefinite"
               />
             </path>
             <animateMotion
-              dur={`${7 + i * 0.4}s`}
-              begin={`${i * 0.6}s`}
+              dur={`${6 + i * 0.5}s`}
+              begin={`${i * 0.7}s`}
               rotate="auto"
               repeatCount="indefinite"
             >
@@ -106,73 +183,14 @@ export default function InfinityFlow({ className }) {
           </g>
         ))}
 
-        {/* Top pins and labels - better spaced */}
-        {[
-          { x: 350, y: 200, text: ["Goal setting and", "management"] },
-          { x: 800, y: 180, text: ["Org design and", "strategy"] },
-          { x: 1250, y: 200, text: ["Customer journey", "mapping"] },
-        ].map((item, idx) => (
-          <g key={`top-${idx}`}>
-            <circle cx={item.x} cy={280} r="8" fill="#F6F7FB" stroke="#C9CFDE" strokeWidth="4" />
-            <line x1={item.x} y1={280} x2={item.x} y2={320} stroke="#C9CFDE" strokeWidth="3" />
-            <text
-              x={item.x}
-              y={item.y}
-              textAnchor="middle"
-              fontFamily="Inter, ui-sans-serif"
-              fontSize="22"
-              fill="#4B5563"
-            >
-              {item.text.map((line, i) => (
-                <tspan key={i} x={item.x} dy={i === 0 ? 0 : 26}>
-                  {line}
-                </tspan>
-              ))}
-            </text>
-          </g>
-        ))}
-
-        {/* Bottom pins and labels - properly spaced to avoid overlap */}
-        {[
-          { x: 280, y: 720, text: ["Customer insights", "and feedback"] },
-          { x: 480, y: 720, text: ["Product planning", "and roadmapping"] },
-          { x: 680, y: 720, text: ["Technical", "design"] },
-          { x: 850, y: 720, text: ["Prototyping"] },
-          { x: 1020, y: 720, text: ["Sprint", "planning"] },
-          { x: 1220, y: 720, text: ["Project", "execution"] },
-        ].map((item, idx) => (
-          <g key={`bottom-${idx}`}>
-            <circle cx={item.x} cy={620} r="8" fill="#F6F7FB" stroke="#C9CFDE" strokeWidth="4" />
-            <line x1={item.x} y1={580} x2={item.x} y2={620} stroke="#C9CFDE" strokeWidth="3" />
-            <text
-              x={item.x}
-              y={item.y}
-              textAnchor="middle"
-              fontFamily="Inter, ui-sans-serif"
-              fontSize="20"
-              fill="#6B7280"
-            >
-              {Array.isArray(item.text) ? (
-                item.text.map((line, i) => (
-                  <tspan key={i} x={item.x} dy={i === 0 ? 0 : 22}>
-                    {line}
-                  </tspan>
-                ))
-              ) : (
-                item.text
-              )}
-            </text>
-          </g>
-        ))}
-
-        {/* Section titles - corrected order: Discover -> Define -> Deliver */}
-        <text x="400" y="450" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="52" fontWeight="600" fill="#374151">
+        {/* Main section titles */}
+        <text x="430" y="500" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="48" fontWeight="700" fill="#374151">
           Discover
         </text>
-        <text x="850" y="455" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="52" fontWeight="600" fill="#374151">
+        <text x="930" y="505" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="48" fontWeight="700" fill="#374151">
           Define
         </text>
-        <text x="1250" y="450" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="52" fontWeight="600" fill="#374151">
+        <text x="1430" y="500" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="48" fontWeight="700" fill="#374151">
           Deliver
         </text>
       </svg>

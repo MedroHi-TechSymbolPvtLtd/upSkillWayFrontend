@@ -1,0 +1,1587 @@
+import React from "react";
+import {
+  Star,
+  Target,
+  Users,
+  Briefcase,
+  TrendingUp,
+  Rocket,
+  Award,
+  UserCheck,
+  Building2,
+  DollarSign,
+  UserCog,
+  TrendingUpIcon,
+  BarChart3,
+  ChevronLeft,
+  ChevronRight,
+  BookOpen,
+  Heart,
+  Shield,
+  UserCircle,
+  FileText,
+  Lightbulb,
+  Calendar,
+  Phone,
+  GraduationCap,
+} from "lucide-react";
+
+import College from "../assets/Images/college.png";
+import College1 from "../assets/Images/college1.png";
+import College2 from "../assets/Images/XY.png";
+import GetInTouch from "../assets/Images/GetInTouch.png";
+import CollegeTestimonials from "../components/College/CollegeTestimonials";
+
+const UpskillWayLanding = () => {
+  const [formData, setFormData] = React.useState({
+    name: "",
+    mobile: "",
+    college: "",
+    email: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState({
+    type: "",
+    message: "",
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: "", message: "" });
+
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.mobile,
+          organization: formData.college,
+          requirement: formData.message,
+          source: "college-training-contact-form",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you! We'll get back to you soon.",
+        });
+        setFormData({
+          name: "",
+          mobile: "",
+          college: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        throw new Error(data.message || "Failed to submit");
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: error.message || "Failed to submit. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 mb-4 sm:mb-6 md:mb-7">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+            <div className="space-y-6 sm:space-y-8 ml-0 sm:ml-10 md:ml-20 lg:ml-25">
+              <div className="text-xs sm:text-sm font-medium text-purple-600 bg-purple-100 px-2 sm:px-3 py-1 rounded-full inline-block mt-5">
+                College Training
+              </div>
+
+              <h1 className="w-full sm:w-[500px] md:w-[600px] lg:w-[722px] h-auto sm:h-[180px] md:h-[210px] lg:h-[243px] font-['Plus_Jakarta_Sans'] font-bold text-[32px] sm:text-[40px] md:text-[50px] lg:text-[64px] leading-[120%] tracking-[0%] border border-transparent -mt-8">
+                "Transform Your Campus with{" "}
+                <span className="text-[#FDB11F] underline decoration-[#FDB11F]">
+                  Industry-Ready Skills Programs
+                </span>
+                "
+              </h1>
+
+              <br />
+
+              <p className="w-[722px] h-[75px] font-plusJakarta font-normal not-italic text-[20px] leading-[100%] tracking-[0%] -mt-15  ">
+                Partner with Upskillway to integrate globally
+                recognized,hands-on programs designed by industry experts.
+                Empower your students, upskill your faculty, and strengthen your
+                placement outcomes.
+              </p>
+
+              <div className="flex items-center space-x-4 -mt-9 w-[259px] h-[60px]">
+                <div className="flex -space-x-2">
+                  <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full border-2 border-white"></div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full border-2 border-white"></div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full border-2 border-white"></div>
+                </div>
+                <div className="">
+                  <div className="flex items-center space-x-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-500 ">4.9K Reviews</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 text-white -mt-5">
+                <button
+                  className="absolute  left-[123px] w-[202px] h-[58px] opacity-100 rounded-[80px] 
+            pt-4 pr-8 pb-4 pl-4 gap-[10px] 
+            bg-gradient-to-r from-[#5835D2] to-[#FDB11F] font-bold"
+                >
+                  Download Brochure
+                </button>
+                <button
+                  className="absolute  left-[348px] w-[202px] h-[58px] opacity-100 
+            rounded-[80px] pt-4 pr-8 pb-4 pl-8 gap-[10px] font-bold
+            bg-gradient-to-r from-[#5D38DE] to-[#FDB11F]"
+                >
+                  Start Parnership
+                </button>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="relative z-10">
+                <div className="">
+                  <div className=" w-[690px] h-[518px] text-white p-8 rounded-2xl">
+                    <img
+                      src={College}
+                      alt=""
+                      className="w-[790px] h-[500px]  "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-20  ml-25 grid grid-cols-2 lg:grid-cols-4 gap-8 ">
+            <div
+              className="absolute ml-[150px] w-[227px] h-[83.22px] opacity-100 
+            rounded-[20px] bg-[rgba(255,255,255,1)] border border-[rgba(228,228,231,1)] 
+            shadow-[-2px_3px_100px_0px_#0000003B]"
+            >
+              <div
+                className="absolute  w-[227px] h-[83px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-semibold text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle ml-10 mt-4"
+              >
+                50,000+
+              </div>
+              <div
+                className="text-gray-600 absolute  w-[179.05px] h-[15px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-normal text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle mt-10 ml-8 "
+              >
+                Students Trained
+              </div>
+            </div>
+            <div
+              className="absolute ml-[400px] w-[227px] h-[83.22px] opacity-100 
+            rounded-[20px] bg-[rgba(255,255,255,1)] border border-[rgba(228,228,231,1)] 
+            shadow-[-2px_5px_100px_0px_#0000003B]"
+            >
+              <div
+                className="absolute  w-[227px] h-[83px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-semibold text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle ml-10 mt-4"
+              >
+                400+
+              </div>
+              <div
+                className="text-gray-600 absolute  w-[179.05px] h-[15px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-normal text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle mt-10 ml-8"
+              >
+                Partner Colleges
+              </div>
+            </div>
+            <div
+              className="absolute  ml-[650px] w-[227px] h-[83.22px] opacity-100 
+            rounded-[20px] bg-[rgba(255,255,255,1)] border border-[rgba(228,228,231,1)] 
+            shadow-[-2px_5px_100px_0px_#0000003B]"
+            >
+              <div
+                className="absolute  w-[227px] h-[83px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-semibold text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle ml-10 mt-4"
+              >
+                92%
+              </div>
+              <div
+                className="text-gray-600 absolute  w-[179.05px] h-[15px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-normal text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle mt-10 ml-8"
+              >
+                Placement Rate
+              </div>
+            </div>
+            <div
+              className="absolute ml-[900px] w-[227px] h-[83.22px] opacity-100 
+            rounded-[20px] bg-[rgba(255,255,255,1)] border border-[rgba(228,228,231,1)] 
+            shadow-[-2px_5px_100px_0px_#0000003B]"
+            >
+              <div
+                className="absolute  w-[227px] h-[83px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-semibold text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle ml-10 mt-4"
+              >
+                200+
+              </div>
+              <div
+                className="text-gray-600 absolute  w-[179.05px] h-[15px] opacity-100 
+          font-['Plus_Jakarta_Sans'] font-normal text-[20px] leading-[28px] 
+          tracking-[-0.2px] align-middle mt-10 ml-8"
+              >
+                Corporate Partners
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Trusted By Leading Organizations Section */}
+      <section className="py-20 bg-white">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Top Section - Trusted By */}
+          <div className="">
+            <h2 className="w-[290px] h-[25] text-[20px]  ml-[480px] mb-[40px] text-gray-900 ">
+              Trusted by Leading Institutions
+            </h2>
+          </div>
+
+          {/* Company Logos - Animated Slider */}
+          <div className="w-full relative overflow-hidden mb-16">
+            <style>
+              {`
+                @keyframes scroll-left {
+                  0% {
+                    transform: translateX(0);
+                  }
+                  100% {
+                    transform: translateX(-50%);
+                  }
+                }
+                .animate-scroll {
+                  animation: scroll-left 20s linear infinite;
+                }
+                .animate-scroll:hover {
+                  animation-play-state: paused;
+                }
+              `}
+            </style>
+            <div className=" flex animate-scroll">
+              {/* First set of logos */}
+              <div className="flex items-center gap-12 sm:gap-16 px-8 grayscale opacity-70">
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  Google+
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  ■ Microsoft
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  Ⓐ MetalLB
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  Linked⬛in
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
+                  Instagram
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  🍎 Pay
+                </div>
+              </div>
+              {/* Duplicate set for seamless loop */}
+              <div className="flex items-center gap-12 sm:gap-16 px-8 grayscale opacity-70">
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  Google+
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  ■ Microsoft
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  Ⓐ MetalLB
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  Linked⬛in
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
+                  Instagram
+                </div>
+                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                  🍎 Pay
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Download Button */}
+        </div>
+      </section>
+
+      {/* What We Do for Colleges & Institutions Section */}
+      <section className="py-20 bg-white -mt-[150px]">
+        <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 ">
+          <div className="mb-12">
+            <h2 className="text-[50px]   font-['Plus_Jakarta_Sans'] font-bold sm:text-5xl  text-[#141219] mb-4">
+              What We Do for{" "}
+              <span className="text-[#FDB11F]">Colleges & Institutions</span>
+            </h2>
+            <p className="text-[20px]  text-[#38393E] w-[1150px]">
+              Upskillway partners with colleges and institutions to design and
+              deliver industry-aligned programs that enhance student
+              employability, faculty engagement, and institutional growth.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1 - Custom Skill Development Plans */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)] ">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Target className="w-7 h-7 text-white" />
+              </div>
+              <h3 className=" text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Custom Skill Development Plans
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Tailored programs for each department to build core and emerging
+                skills.
+              </p>
+            </div>
+
+            {/* Card 2 - Faculty & Student Engagement */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8 shadow-[0_0_150px_rgba(0,0,0,0.1)] hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Users className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Faculty & Student Engagement
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Workshops and mentoring sessions to boost learning outcomes.
+              </p>
+            </div>
+
+            {/* Card 3 - Hands-on Projects */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8 shadow-[0_0_150px_rgba(0,0,0,0.1)] hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Briefcase className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Hands-on Projects
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Real-world assignments to develop practical, job-ready skills.
+              </p>
+            </div>
+
+            {/* Card 4 - Placement & Internship Support */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8 shadow-[0_0_150px_rgba(0,0,0,0.1)] hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <TrendingUp className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Placement & Internship Support
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Corporate tie-ups for internships and placement opportunities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What Students Gain Section */}
+      <section className="py-20 bg-white -mt-[110px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <h2 className="text-[50px] sm:text-5xl font-bold text-[#141219] mb-4">
+              What <span className="text-[#FDB11F]">Students Gain</span>
+            </h2>
+            <p className="text-[20px] text-[#38393E] w-[1209px]">
+              Empower your students with the technical and professional
+              competencies required to succeed in today's job market.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* Card 1 - Industry-Ready Skills */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Rocket className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Industry-Ready Skills
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Hands-on training in high-demand tools and technologies.
+              </p>
+            </div>
+
+            {/* Card 2 - Recognized Certifications */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Award className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Recognized Certifications
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Earn co-branded certificates valued by recruiters and employers.
+              </p>
+            </div>
+
+            {/* Card 3 - Career Mentorship */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <UserCheck className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Career Mentorship
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Personalized guidance from experts to help students define and
+                achieve career goals.
+              </p>
+            </div>
+
+            {/* Card 4 - Guaranteed Interview Opportunities */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Building2 className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
+                Guaranteed Interview Opportunities
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Direct access to 200+ hiring companies through our corporate
+                network.
+              </p>
+            </div>
+          </div>
+
+          {/* Testimonial */}
+          <div className="w-[1216px] mx-auto">
+            <div
+              className="rounded-3xl p-8 sm:p-12 shadow-lg"
+              style={{
+                background: "#FEF9F8",
+                border: "1px solid #E5E7EB",
+              }}
+            >
+              {/* Purple line accent */}
+              <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-8"></div>
+
+              <blockquote className="text-center w-[1216px] h-[100px] -mt-10 font-[] ">
+                <p className="w-[1007px] text-[24px]  font-['Plus_Jakarta_Sans'] ml-13 font-semibold sm:text-2xl  text-[#374151]  mb-6">
+                  "Upskillway's programs transformed our confidence and
+                  placement readiness. The hands-on projects and mentoring
+                  helped me land my first job at a top MNC."
+                </p>
+                <footer className="text-gray-600">
+                  <div className="font-medium text-[16px] -ml-10  text-gray-900">
+                    — Priya Sharma, B.Tech CSE,
+                  </div>
+                  <div className="text-sm">Mount caramel college</div>
+                </footer>
+              </blockquote>
+
+            </div>
+          </div>
+        </div>
+            <div className="flex justify-center items-center gap-4 mt-8">
+                <button className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors">
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors">
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+      </section>
+
+      {/* What Colleges & Institutions Gain Section */}
+      <section className="py-20 bg-white  ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-[100px]">
+          <div className="mb-12">
+            <h2 className="text-[50px]  sm:text-5xl font-bold text-[#141219] font-['Plus_Jakarta_Sans']  mb-4">
+              What{" "}
+              <span className="text-[#FDB11F]">
+                Colleges & Institutions Gain
+              </span>
+            </h2>
+            <p className="text-[20px] text-[#38393E] max-w-[1268px]">
+              Our partnership goes beyond training — it strengthens your
+              placement ecosystem and enhances your institutional reputation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* Card 1 - Zero Infrastructure Cost */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <DollarSign className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Zero Infrastructure Cost
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                No setup investment required from your college
+              </p>
+            </div>
+
+            {/* Card 2 - No Faculty Burden */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <UserCog className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                No Faculty Burden
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Our expert trainers handle everything
+              </p>
+            </div>
+
+            {/* Card 3 - Enhanced College Reputation */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <TrendingUpIcon className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Enhanced College Reputation
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Boost rankings with higher placement rates
+              </p>
+            </div>
+
+            {/* Card 4 - Transparent Progress Reports */}
+            <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <BarChart3 className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Transparent Progress Reports
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Monthly analytics on student performance
+              </p>
+            </div>
+          </div>
+
+          {/* Testimonial with Navigation */}
+          <div className="w-[1189px]  h-[104px]  ">
+            <div
+              className="rounded-3xl p-8 sm:p-12 shadow-lg"
+              style={{
+                background: "#FEF9F8",
+                border: "1px solid #E5E7EB",
+              }}
+            >
+              {/* Purple line accent */}
+              <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-8"></div>
+
+              <blockquote className="text-center w-[1216px] h-[100px] -mt-10 font-[] ">
+                <p className="w-[907px] text-[24px]  font-['Plus_Jakarta_Sans'] ml-20 font-semibold sm:text-2xl  text-[#374151]  mb-6">
+                  "Upskillway's programs transformed our placement results within one semester."
+                </p>
+                <footer className="text-gray-600">
+                  <div className="font-medium text-[16px] font-['Plus_Jakarta_Sans']  -ml-20  text-gray-900">
+                    — Priya Sharma, B.Tech CSE,
+                      <div className="text-sm">Mount caramel college</div>
+                  </div>
+                
+                </footer>
+              </blockquote>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Programs We Offer for Your Campus Section */}
+      <section className="mt-10 py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 ">
+            <h2 className="w-[1198px] h-[58px] text-4xl text-center sm:text-5xl font-bold font-['Plus_Jakarta_Sans']  text-[#111827] mb-2">
+              Programs We Offer for Your{" "}
+              <span className="text-[#FDB11F]">Campus</span>
+            </h2>
+            <p className="text-lg text-[#374151] max-w-4xl text-center ml-35">
+              Designed to upskill students, boost placement outcomes, and
+              enhance institutional performance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1 - Campus Placement Training */}
+            <div className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans']  bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <h3 className="w-[98px] text-[24px] font-bold text-[#111827] mb-4">
+                Campus Placement Training
+              </h3>
+
+              <div className="mb-4">
+                <span className=" border-3 border-[#E8E8E8] rounded-xl text-purple-600 font-semibold text-sm p-2">
+                  3 months | 120 hours
+                </span>
+              </div>
+
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Aptitude & logical reasoning (40 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Communication skills (30 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Mock interviews & GDs (25 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Resume building workshops (25 hrs)</span>
+                </li>
+              </ul>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
+                <p className="text-sm font-semibold text-gray-900">
+                  85% placement rate
+                </p>
+                <p className="text-xs text-gray-600">All streams</p>
+              </div>
+
+              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Learn More →
+              </button>
+            </div>
+
+            {/* Card 2 - Technical Upskilling Program */}
+            <div className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <h3 className="w-[98px] text-[24px] font-bold text-[#111827] mb-4">
+                Technical Upskilling Program
+              </h3>
+
+              <div className="mb-4">
+                <span className=" border-3 border-[#E8E8E8] rounded-xl p-3 text-purple-600 font-semibold text-sm">
+                  6 months | 240 hours
+                </span>
+              </div>
+
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Data Analytics & Python (60 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>AI & Machine Learning (60 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Cloud computing - AWS/Azure (60 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Full-stack development (60 hrs)</span>
+                </li>
+              </ul>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
+                <p className="text-sm font-semibold text-gray-900 ">
+                  78% tech placement rate
+                </p>
+                <p className="text-xs text-gray-600">CSE, IT, ECE, EEE</p>
+              </div>
+
+              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Learn More →
+              </button>
+            </div>
+
+            {/* Card 3 - Soft Skills & Professional Grooming */}
+            <div className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <h3 className="w-[140px] text-[24px] font-bold text-[#111827] mb-4">
+                Soft Skills & Professional Grooming
+              </h3>
+
+              <div className="mb-4">
+                <span className= " border-3 border-[#E8E8E8] rounded-xl p-3 text-purple-600 font-semibold text-sm">
+                  6 weeks | 48 hours
+                </span>
+              </div>
+
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Confidence building (12 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Leadership & teamwork (12 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Time management (12 hrs)</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Professional etiquette (12 hrs)</span>
+                </li>
+              </ul>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
+                <p className="text-sm font-semibold text-gray-900">
+                  92% interview success
+                </p>
+                <p className="text-xs text-gray-600">All streams</p>
+              </div>
+
+              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Learn More →
+              </button>
+            </div>
+
+            {/* Card 4 - Customized Department Programs */}
+            <div className="w-[280px] h-[625px]font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow relative">
+              <div className="absolute top-4 right-4">
+                <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full -ml-60">
+                  POPULAR
+                </span>
+              </div>
+
+              <h3 className="w-[98px] text-[24px] font-bold text-[#111827] mb-4 mt-5">
+                Customized Department Programs
+              </h3>
+
+              <div className="mb-4">
+                <span className=" border-3 border-[#E8E8E8] rounded-xl p-2 text-purple-600 font-semibold text-sm">
+                  Flexible
+                </span>
+              </div>
+
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>CSE, IT, ECE, EEE, Mechanical</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Arts & Commerce streams available</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Aligned with academic calendar</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg
+                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Custom curriculum co-created</span>
+                </li>
+              </ul>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
+                <p className="text-sm font-semibold text-gray-900">
+                  Results vary by program
+                </p>
+                <p className="text-xs text-gray-600">All departments</p>
+              </div>
+
+              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Learn More →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Colleges & Institutions Choose Upskillway Section */}
+      <section className="py-20 bg-white -mt-22">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#141219] mb-4 -ml-[150px]">
+              Why Colleges & Institutions{" "}
+              <span className="text-[#FDB11F]">Choose Upskillway</span>
+            </h2>
+            <p className="text-lg text-[#38393E] max-w-3xl mx-auto  -ml-[30px]">
+              Join 400+ colleges that have partnered with Upskillway to make
+              their students job-ready.
+            </p>
+          </div>
+
+          {/* Feature Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {/* Card 1 - Industry-Aligned Curriculum */}
+            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-[592px] h-[134px] flex items-start gap-4">
+                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <BookOpen className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Industry-Aligned Curriculum
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    Designed with industry experts to build job-ready talent.
+                  </p>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1"></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                      Updated quarterly based on industry feedback
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 - Expert Trainers from Top Companies */}
+            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Award className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Expert Trainers from Top Companies
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    Delivered by professionals with 10+ years corporate
+                    experience from Google, Microsoft, Amazon.
+                  </p>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1"></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                      Not academic professors - actual industry practitioners
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 - Guaranteed Interview Opportunities */}
+            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Briefcase className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Guaranteed Interview Opportunities
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    Real job connections with 200+ corporate partners. Not just
+                    training - actual placement assistance.
+                  </p>
+                  <div className="flex items-start gap-2">
+                    <div className=""></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                      Direct recruiter connections, not job board listings
+                    </p>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4 - Post-Placement Support */}
+            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Heart className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Post-Placement Support
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    Continuous mentorship for 6 months after placement to ensure
+                    student success and retention.
+                  </p>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1"></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                      We care about long-term career growth, not just placement
+                      numbers
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Box */}
+          <div className="bg-white  rounded-3xl p-8 sm:p-12 border-2 border-[#FDB11F] border-b-white mb-12">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                  50k+
+                </div>
+                <div className="text-gray-600 font-medium">
+                  Students Trained
+                </div>
+              </div>
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                  400+
+                </div>
+                <div className="text-gray-600 font-medium">Colleges</div>
+              </div>
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                  92%
+                </div>
+                <div className="text-gray-600 font-medium">Placement Rate</div>
+              </div>
+              <div>
+                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                  200+
+                </div>
+                <div className="text-gray-600 font-medium">
+                  Corporate Partners
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MoU Partnership Benefits */}
+          <div className="text-center mb-12">
+            <div className="inline-block bg-[#EA580C]   text-white px-6 py-2 rounded-full text-sm font-semibold mb-6">
+              MoU PARTNERSHIP BENEFITS
+            </div>
+            <h3 className="w-[927px]  text-[50px] ml-40 font-['Plus_Jakarta_Sans'] font-bold sm:text-4xl  text-gray-900 mb-4">
+              Why Signing an MoU with Upskillway is a Smart Choice for Your
+              College
+            </h3>
+            <p className="text-[20px] w-[1183px] text-[#374151]  mx-auto">
+              Risk-free, transparent partnerships designed with college
+              administrators in mind. Experience measurable impact with zero
+              infrastructure investment.
+            </p>
+          </div>
+
+          {/* MoU Benefits Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {/* Zero Risk Partnership */}
+            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Shield className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="font-['Plus_Jakarta_Sans']  text-xl font-bold text-gray-900 mb-3">
+                Zero Risk Partnership
+              </h4>
+              <p className="text-gray-600 text-sm">
+                No liability until placement delivered. Pilot program option
+                available.
+              </p>
+            </div>
+
+            {/* Dedicated Account Manager */}
+            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <UserCircle className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+                Dedicated Account Manager
+              </h4>
+              <p className="text-gray-600 text-sm">
+                24/7 support with a single point of contact for all your needs.
+              </p>
+            </div>
+
+            {/* Long-term Institutional Branding */}
+            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <TrendingUpIcon className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+                Long-term Institutional Branding
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Position your college as an industry-preferred recruitment
+                destination.
+              </p>
+            </div>
+
+            {/* Co-branded Certificates */}
+            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Award className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+                Co-branded Certificates
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Joint certification programs that add value to student
+                credentials.
+              </p>
+            </div>
+
+            {/* Transparent MoU Terms */}
+            <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <FileText className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+                Transparent MoU Terms
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Clear, flexible agreements with no hidden costs or surprise
+                fees.
+              </p>
+            </div>
+
+            {/* Joint Industry Events */}
+            <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
+                <Calendar className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+                Joint Industry Events
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Access to corporate seminars, hackathons, and networking
+                opportunities.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-white rounded-2xl p-8 border-2 border-orange-200  border-t-white text-center">
+              <div className="text-5xl font-bold text-gray-900 mb-2">0</div>
+              <div className="text-gray-600 font-medium">Setup Cost</div>
+            </div>
+            <div className="bg-white rounded-2xl p-8 border-2 border-orange-200 border-t-white text-center">
+              <div className="text-5xl font-bold text-gray-900 mb-2">24/7</div>
+              <div className="text-gray-600 font-medium">Dedicated Support</div>
+            </div>
+            <div className="bg-white rounded-2xl p-8 border-2 border-orange-200 border-t-white text-center">
+              <div className="text-5xl font-bold text-gray-900 mb-2">100%</div>
+              <div className="text-gray-600 font-medium">Transparency</div>
+            </div>
+          </div>
+
+          {/* Special Pilot Program Offer */}
+          <div className="w-[1216px] h-[166px] bg-white border-l-4 border-[#FFEDD5] p-3 mb-4 rounded-xl text-sm text-gray-500 italic shadow-[0_4px_6px_rgba(0,0,0,0.10),0_10px_15px_rgba(0,0,0,0.10)]">
+            <div className="flex items-start gap-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Lightbulb className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-gray-900 mb-3">
+                  Special Pilot Program Offer
+                </h4>
+                <p className="text-gray-700 text-lg">
+                  Not sure? Start with a single batch pilot program. See the
+                  results firsthand before committing to a full partnership.
+                  Zero risk, maximum flexibility.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership Made Easy Section */}
+      <section className="py-20 bg-white -mt-19 font-['Plus_Jakarta_Sans'] ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-[55px] w-[1238px] sm:text-5xl font-bold text-gray-900 mb-4 -ml-20">
+              Partnership Made Easy — Let's Connect Today
+            </h2>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+              We understand that every college has unique needs — that's why our
+              MoU process is built to be flexible and result-oriented. From the
+              first conversation to student placements, we're with you at every
+              step.
+            </p>
+          </div>
+
+          {/* Process Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {/* Step 1 - Connect With Us */}
+            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className=" w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+                <Phone className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-3">
+                Connect With Us
+              </h4>
+              <p className="text-gray-600 text-sm mb-4">
+                Schedule a quick consultation call with our team to discuss your
+                college's needs and goals.
+              </p>
+              <div className="border-l-4 border-orange-500 pl-4">
+                <p className="text-sm text-gray-500 italic">
+                  No long paperwork, just a quick discussion to understand your
+                  campus vision.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 - Custom Proposal & MoU */}
+            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+                <FileText className="w-7 h-7  text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-3">
+                Custom Proposal & MoU
+              </h4>
+              <p className="text-gray-600 text-sm mb-4">
+                We prepare a tailored MoU and program structure that fits your
+                students' aspirations and department needs.
+              </p>
+              <div className="border-l-4 border-orange-500 pl-4">
+                <p className="text-sm text-gray-500 italic">
+                  Completely customizable — we align programs with your
+                  curriculum.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 - Training Implementation */}
+            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+                <GraduationCap className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-3">
+                Training Implementation
+              </h4>
+              <p className="text-gray-600 text-sm mb-4">
+                Our expert trainers deliver interactive, hands-on sessions —
+                online or on-campus — focusing on technical and soft skills.
+              </p>
+              <div className="border-l-4 border-orange-500 pl-4">
+                <p className="text-sm text-gray-500 italic">
+                  Students learn from real industry professionals.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 4 - Placement & Continuous Support */}
+            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+                <BarChart3 className="w-7 h-7 text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-3">
+                Placement & Continuous Support
+              </h4>
+              <p className="text-gray-600 text-sm mb-4">
+                After training, students receive dedicated placement assistance
+                and job mentorship.
+              </p>
+              <div className="border-l-4 border-orange-500 pl-4">
+                <p className="text-sm text-gray-500 italic">
+                  Your college's success is our success — we celebrate every
+                  placement with you.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center">
+            <p className="text-xl text-gray-700 mb-8 font-medium">
+              One partnership can boost placements — let's get your students
+              industry-ready.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg">
+                Sign MoU with Upskillway
+              </button>
+              <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg">
+                Request a Demo
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <CollegeTestimonials />
+
+      {/* CTA Section */}
+      <div className="flex-1 py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8 items-center">
+            {/* Left Student Image */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-[450px] h-[350px] bg-white rounded-3xl ">
+                <img
+                  src={College1}
+                  alt="Student 1"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Center Content */}
+            <div className="text-center space-y-6">
+              <h2 className="font-bold text-4xl lg:text-5xl leading-tight text-black max-w-xl mx-auto">
+                Ready to Transform Your Campus?
+              </h2>
+              <p className="text-lg text-gray-700 max-w-md mx-auto">
+                Join hundreds of leading institutions that have partnered with
+                us to create industry-ready professionals.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <button className="bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                  Partner With Us
+                </button>
+                
+                <button className="bg-gradient-to-r from-[#5D38DE] to-[#FDB11F] text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                  Request Demo
+                </button>
+              </div>
+            </div>
+
+            {/* Right Student Image */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="w-[280px] h-[350px] bg-white rounded-3xl ml-20 overflow-hidden">
+                <img
+                  src={College2}
+                  alt="Student 2"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Get In Touch Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* Left Side - Form */}
+              <div className="p-8 sm:p-12 lg:p-16">
+                <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8">
+                  Get In Touch
+                </h2>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Enter your name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="hello"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Mobile Number Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Enter your mobile number{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value="+91"
+                        disabled
+                        className="w-16 px-3 py-3 border border-gray-300 rounded-lg bg-gray-100 text-center"
+                      />
+                      <input
+                        type="tel"
+                        name="mobile"
+                        value={formData.mobile}
+                        onChange={handleInputChange}
+                        placeholder="9413477263"
+                        required
+                        pattern="[0-9]{10}"
+                        className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* College/Institution Name Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      College / Institution Name{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="college"
+                      value={formData.college}
+                      onChange={handleInputChange}
+                      placeholder="AICE"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Official Email ID <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Prateeksharma7263@gmail.com"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Message Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="hi there,"
+                      required
+                      rows="4"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all resize-none"
+                    ></textarea>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-orange-400 to-orange-500 text-white py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "Submitting..." : "Schedule a Demo"}
+                  </button>
+
+                  {/* Status Message */}
+                  {submitStatus.message && (
+                    <div
+                      className={`p-4 rounded-lg text-center ${
+                        submitStatus.type === "success"
+                          ? "bg-green-50 text-green-700"
+                          : "bg-red-50 text-red-700"
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
+                </form>
+              </div>
+
+              {/* Right Side - Illustration */}
+              <div className="p-8 sm:p-12 lg:p-16 flex items-center justify-center">
+                <div className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={GetInTouch}
+                    alt="Get In Touch Illustration"
+                    className="w-full h-full object-contain max-w-lg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default UpskillWayLanding;
