@@ -20,7 +20,7 @@ import Lgt from "../assets/Images/Lgt.png";
 import Vec from "../assets/Images/Vec.png";
 import Vec2 from "../assets/Images/Vec2.png";
 import Vec3 from "../assets/Images/Vec3.png";
-import School from "../assets/Images/School.png";
+import School from "../assets/Images/school.png";
 
 
 
