@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { Search, Star, Users, TrendingUp, DollarSign } from 'lucide-react';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import anime from '../assets/Images/anime.mp4';
 import { Check } from 'lucide-react';
 import * as Lucide from 'lucide-react';
