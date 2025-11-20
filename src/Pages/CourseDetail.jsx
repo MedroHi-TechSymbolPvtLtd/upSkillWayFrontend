@@ -23,8 +23,8 @@ import {
   Shield,
   Download,
 } from 'lucide-react';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import Share from '../components/Courses/Share';
 
 const offeringCards = [
