@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonial from "../components/home/Testimonials";
 import FAQSection from "../components/home/FAQ";
-import Coding from "../assets/Images/coding.png";
+import Coding from "../assets/Images/Coding.png";
 import Coding1 from "../assets/Images/coding1.png";
 import Coding2 from "../assets/Images/coding2.png";
 import Coding5 from "../assets/Images/coding5.png";
