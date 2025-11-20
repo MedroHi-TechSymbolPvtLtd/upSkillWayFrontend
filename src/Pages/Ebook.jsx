@@ -6,7 +6,7 @@ import halfCircle from "../assets/Images/halfCircle.png";
 import Girl from "../assets/Images/Ebook4.png";
 import Cup from "../assets/Images/Ebook5.png";
 import EbookS from "../assets/Images/ebooks.png";
-import EbookS1 from "../assets/Images/Ebooks1.png";
+import EbookS1 from "../assets/Images/EbookS1.png";
 
 export default function UpskillWayEbooks() {
   // const features = [
