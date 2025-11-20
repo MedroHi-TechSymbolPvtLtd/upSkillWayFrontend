@@ -5,21 +5,24 @@ phases:
     commands:
       - echo Logging into Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --no-include-email --region ap-south-1)
       - REPO=myreactrepo
       - IMAGE_TAG=latest
+      - ACCOUNT_ID=488479524661
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com
 
   build:
     commands:
       - echo Building Docker image...
       - docker build -t $REPO:$IMAGE_TAG .
-      - docker tag $REPO:$IMAGE_TAG <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/$REPO:$IMAGE_TAG
+      - docker tag $REPO:$IMAGE_TAG $ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com/$REPO:$IMAGE_TAG
 
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker push <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/$REPO:$IMAGE_TAG
-      - printf '[{"name":"frontend","imageUri":"%s"}]' <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/$REPO:$IMAGE_TAG > imagedefinitions.json
+      - docker push $ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com/$REPO:$IMAGE_TAG
+      - echo Creating imagedefinitions.json file...
+      - printf '[{"name":"frontend","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com/$REPO:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
   files:
