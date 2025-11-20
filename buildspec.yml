@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPO: "myreactrepo"
+    REPO: "upskillway"
     IMAGE_TAG: "latest"
     ACCOUNT_ID: "488479524661"
     REGION: "ap-south-1"
