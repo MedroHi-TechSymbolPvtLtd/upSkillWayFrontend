@@ -12,7 +12,8 @@ RUN npm run build
 # Step 2: Nginx serve stage
 FROM nginx:1.23-alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+# Vite builds to /dist (NOT /build)
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
