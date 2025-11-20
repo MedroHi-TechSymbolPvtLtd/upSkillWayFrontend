@@ -7,7 +7,7 @@ import FAQSection from "../components/home/FAQ";
 import Coding from "../assets/Images/Coding.png";
 import Coding1 from "../assets/Images/coding1.png";
 import Coding2 from "../assets/Images/coding2.png";
-import Coding5 from "../assets/Images/coding5.png";
+import Coding5 from "../assets/Images/Coding5.png";
 import User1 from "../assets/Images/User1.png";
 import Clock1 from "../assets/Images/Clock1.png";
 import BookOpen1 from "../assets/Images/BookOpen1.png";
