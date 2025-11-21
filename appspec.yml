@@ -6,7 +6,7 @@ files:
     destination: /home/ec2-user/app/scripts
   - source: appspec.yml
     destination: /home/ec2-user/app
-  - source: Dockerfile
+  - source: dockerfile
     destination: /home/ec2-user/app
 
 hooks:
