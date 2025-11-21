@@ -22,5 +22,4 @@ phases:
 artifacts:
   files:
     - '**/*'           # EXPORT EVERYTHING (IMPORTANT)
-    - appspec.yml
-    - imagedefinitions.json
+  
