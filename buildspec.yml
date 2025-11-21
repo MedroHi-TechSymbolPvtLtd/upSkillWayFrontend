@@ -8,14 +8,14 @@ phases:
 
   build:
     commands:
-      - echo Building Docker image...
+      - echo Building docker image...
       - docker build -t upskillway .
-      - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
+      - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway
 
   post_build:
     commands:
       - echo Pushing image...
-      - docker push 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
+      - docker push 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway
       - echo Writing imagedefinitions.json...
       - printf '[{"name":"upskillway","imageUri":"488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest"}]' > imagedefinitions.json
 
