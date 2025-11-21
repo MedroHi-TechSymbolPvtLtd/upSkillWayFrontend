@@ -1,33 +1,26 @@
 version: 0.2
 
-env:
-  variables:
-    REPO: "upskillway"
-    IMAGE_TAG: "latest"
-    ACCOUNT_ID: "488479524661"
-    REGION: "ap-south-1"
-
 phases:
   pre_build:
     commands:
       - echo Logging into Amazon ECR...
-      - aws --version
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 488479524661.dkr.ecr.ap-south-1.amazonaws.com
 
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t $REPO:$IMAGE_TAG .
-      - docker tag $REPO:$IMAGE_TAG $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:$IMAGE_TAG
+      - docker build -t upskillway .
+      - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
 
   post_build:
     commands:
-      - echo Pushing Docker image to ECR...
-      - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:$IMAGE_TAG
-      - echo Creating imagedefinitions.json file...
-      - printf '[{"name":"frontend","imageUri":"%s"}]' "$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:$IMAGE_TAG" > imagedefinitions.json
+      - echo Pushing image...
+      - docker push 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
+      - echo Writing imagedefinitions.json...
+      - printf '[{"name":"reactapp","imageUri":"488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest"}]' > imagedefinitions.json
 
 artifacts:
   files:
+    - appspec.yml
+    - scripts/* 
     - imagedefinitions.json
