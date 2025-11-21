@@ -1,4 +1,4 @@
-# Step 1: Build React App (ARM64 Node)
+# Build React/Vite App (ARM64)
 FROM --platform=linux/arm64 node:18-alpine AS build
 
 WORKDIR /app
@@ -9,10 +9,10 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Step 2: Serve with ARM64 Nginx
+# Serve with Nginx (ARM64)
 FROM --platform=linux/arm64 nginx:alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
