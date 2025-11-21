@@ -1,3 +1,3 @@
 #!/bin/bash
-docker stop reactapp || true
-docker rm reactapp || true
+docker stop upskillway || true
+docker rm upskillway || true
