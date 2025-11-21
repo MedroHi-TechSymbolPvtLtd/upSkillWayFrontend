@@ -8,15 +8,15 @@ phases:
 
   build:
     commands:
-      - echo Building ARM64 Docker image for Graviton EC2...
-      - docker build -t upskillway .
+      - echo Building Docker image for EC2 (AMD64)...
+      - docker build --platform=linux/amd64 -t upskillway .
       - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
 
   post_build:
     commands:
-      - echo Pushing image...
+      - echo Pushing image to ECR...
       - docker push 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
-      - echo Writing imagedefinitions.json...
+      - echo Creating imagedefinitions.json...
       - printf '[{"name":"upskillway","imageUri":"488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest"}]' > imagedefinitions.json
 
 artifacts:
