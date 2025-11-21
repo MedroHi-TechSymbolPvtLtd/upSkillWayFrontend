@@ -21,7 +21,8 @@ phases:
 
 artifacts:
   files:
-    - scripts/**
     - appspec.yml
+    - scripts/**
+    - Dockerfile
     - imagedefinitions.json
-
+    - '**/*'
