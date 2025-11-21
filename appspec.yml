@@ -7,7 +7,7 @@ files:
 
 hooks:
 
-  BeforeInstall:
+  AfterInstall:
     - location: scripts/permissions.sh
       timeout: 300
       runas: ec2-user
