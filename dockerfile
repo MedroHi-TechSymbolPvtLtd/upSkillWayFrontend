@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:1.23-alpine
 
 # Vite builds to /dist (NOT /build)
-COPY --from=build /app/dist/usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
