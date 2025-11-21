@@ -8,8 +8,8 @@ phases:
 
   build:
     commands:
-      - echo Building docker image for AMD64 EC2 instance...
-      - docker build --platform=linux/amd64 -t upskillway .
+      - echo Building docker image
+      - docker build  -t upskillway .
       - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
 
   post_build:
