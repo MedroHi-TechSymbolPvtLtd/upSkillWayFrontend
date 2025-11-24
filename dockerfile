@@ -12,13 +12,14 @@ RUN npm run build
 # Serve with Nginx (ARM64)
 FROM --platform=linux/arm64 nginx:alpine
 
-# REMOVE DEFAULT NGINX CONFIG (VERY IMPORTANT)
-RUN rm -f /etc/nginx/conf.d/default.conf
+# REMOVE ALL DEFAULT NGINX CONFIGS
+RUN rm -f /etc/nginx/conf.d/default.conf || true
+RUN rm -f /etc/nginx/http.d/default.conf || true
 
-# Copy your custom Nginx config
+# Copy your custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built app
+# Copy built frontend
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
