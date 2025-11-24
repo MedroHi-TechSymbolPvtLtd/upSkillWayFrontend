@@ -1,5 +1,5 @@
-# Step 1: Build stage
-FROM node:18-alpine AS build
+# Build React/Vite App (ARM64)
+FROM --platform=linux/arm64 node:18-alpine AS build
 
 WORKDIR /app
 
@@ -9,15 +9,14 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Step 2: Nginx serve stage
-FROM nginx:1.23-alpine
+# Serve with Nginx (ARM64)
+FROM --platform=linux/arm64 nginx:alpine
 
-# Vite builds to /dist (NOT /build)
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom NGINX config for SPA routing
+# IMPORTANT FIX
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
 
+CMD ["nginx", "-g", "daemon off;"]
