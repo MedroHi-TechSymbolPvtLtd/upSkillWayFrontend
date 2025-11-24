@@ -16,7 +16,8 @@ docker rm upskillway || true
 echo " Pulling latest Docker image"
 docker pull $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO:latest
 
-echo " Starting new container..."
-docker run -d -p 80:80 --name upskillway $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO:latest
+echo " Starting new container (running on port 8080)..."
+docker run -d -p 8080:80 --restart always --name upskillway \
+  $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO:latest
 
 echo " Deployment complete!"
