@@ -66,30 +66,14 @@ const ShareMenu = ({ className = "" }) => {
       <button
         ref={btnRef}
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center gap-2 rounded-full border border-gray-300/80 bg-white/80 px-4 py-2 text-sm font-medium text-gray-900 shadow-sm backdrop-blur hover:bg-white"
+        className="inline-flex items-center gap-2 rounded-full  px-6 py-4 text-sm font-medium text-gray-900 z-9999"
       >
-        {/* Share icon */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.8"
-            d="M8.59 13.51a5 5 0 1 1 0-3.02l6.82-3.59a5 5 0 1 1 .81 1.47l-6.82 3.59a5.03 5.03 0 0 1 0 1.05l6.82 3.59a5 5 0 1 1-.81 1.47l-6.82-3.59Z"
-          />
-        </svg>
-        Share
       </button>
 
       {/* Popover */}
       <div
         ref={menuRef}
-        className={`absolute right-0 z-50 mt-2 w-72 origin-top-right rounded-2xl border border-gray-200 bg-white p-3 shadow-xl transition-all ${
+        className={`z-9999 -mt-20 w-72 origin-top-right rounded-2xl border border-gray-200 bg-white p-3 shadow-xl transition-all ${
           open ? "scale-100 opacity-100" : "scale-90 opacity-0 pointer-events-none"
         }`}
       >

@@ -170,7 +170,7 @@ const BlogDetail = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-auto mx-auto px-20 py-8">
         {/* Article Header */}
         <header className="mb-8">
           {/* Category Tag */}
@@ -233,7 +233,7 @@ const BlogDetail = () => {
         <article className="prose prose-lg max-w-none">
           {/* Excerpt */}
           {blogPost.excerpt && (
-            <div className="bg-gray-50 border-l-4 border-[#FCB11F] p-6 mb-8 rounded-r-lg">
+            <div className=" border-l-4 border-[#FCB11F] p-6 mb-8 rounded-r-lg">
               <p className="text-lg text-gray-700 italic font-medium">
                 {blogPost.excerpt}
               </p>
@@ -334,16 +334,16 @@ const BlogDetail = () => {
         )}
 
         {/* Blog Inside Image with Form */}
-        <div className="mt-12">
+        <div className="mt-12 w-full">
           <div className="main-container w-full min-h-[562px] relative mx-auto my-0 flex justify-center px-4 sm:px-6 lg:px-8 ">
-            <div className="w-[550px] h-[647px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-12/dtd0y2OJQX.png)] bg-cover bg-no-repeat relative z-[18] mt-[-85px] mr-47 mb-0 " />
+            <div className="w-[550px] h-[647px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-12/dtd0y2OJQX.png)] bg-cover bg-no-repeat relative z-[18] mt-[-85px] mr-200 mb-0 " />
             <div className="w-full  min-h-[562px] bg-[#131313] rounded-[24px] absolute top-0 left-1/2 transform -translate-x-1/2 overflow-hidden">
-              <div className="w-[513.853px] h-[407.253px] absolute top-[-120.457px] left-[-107.874px] z-[17]">
+              <div className="w-[600px] h-[407.253px] absolute top-[-120.457px] left-[-107.874px] z-[17]">
                 <div className="w-[249.509px] h-[330.538px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-12/PzDbm4fJyM.png)] bg-cover bg-no-repeat absolute top-0 left-0 z-[14]" />
                 <div className="w-[107.978px] h-[324.942px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-12/3uiFHK6yH9.png)] bg-cover bg-no-repeat absolute top-[38.455px] left-[405.874px] z-[17]" />
                 <div className="w-[251.756px] h-[329.797px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-12/cJ4LMMfD1D.png)] bg-cover bg-no-repeat absolute top-[77.456px] left-[220.874px] z-[16]" />
               </div>
-              <div className="w-[706.539px] h-[668.625px] absolute top-[-85.001px] left-[563px] z-[15] lg:left-[600px]">
+              <div className="w-[706.539px] h-[668.625px] absolute top-[-85.001px] left-[563px] z-[15] lg:left-[600px] ">
                 <form
                   onSubmit={handleSubmit}
                   className="flex w-[450px] flex-col gap-[16px] items-start flex-nowrap relative z-[4] mt-[359.001px] mr-0 mb-0 ml-0"

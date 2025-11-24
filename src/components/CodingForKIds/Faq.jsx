@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const FAQ = ({ 
-  apiUrl = "http://localhost:3000/api/v1/cms/faqs",
-  title = "Frequently asked Questions",
+  faqs: propFaqs = [],
+  title = "Frequently Asked Questions",
   className = "",
   gridCols = "md:grid-cols-2"
 }) => {
-  // State for FAQs
-  const [faqs, setFaqs] = useState([]);
-  const [faqsLoading, setFaqsLoading] = useState(true);
-  const [faqsError, setFaqsError] = useState(null);
+  // Use FAQs from props
+  const faqs = propFaqs;
+  const faqsLoading = false;
   
   // State for FAQ expansion
   const [expandedFaq, setExpandedFaq] = useState(null);
@@ -17,43 +16,20 @@ const FAQ = ({
   // State for showing all FAQs
   const [showAll, setShowAll] = useState(false);
 
-  // Fetch FAQs from API
-  useEffect(() => {
-    const fetchFaqs = async () => {
-      try {
-        setFaqsLoading(true);
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.success) {
-          setFaqs(data.data);
-        } else {
-          setFaqsError("Failed to fetch FAQs");
-        }
-      } catch (err) {
-        setFaqsError("Error fetching FAQs: " + err.message);
-        console.error("Error fetching FAQs:", err);
-      } finally {
-        setFaqsLoading(false);
-      }
-    };
-
-    fetchFaqs();
-  }, [apiUrl]);
-
-  const handleRetry = () => {
-    setFaqsError(null);
-    setFaqsLoading(true);
-    // Trigger re-fetch by updating the dependency
-    window.location.reload();
-  };
-
   return (
-    <section className={`py-20 bg-white ${className}`}>
-      <div className=" px-8 sm:px-6 lg:px-32">
-        <h2 className="text-[56px] font-semibold text-center mb-16 mr-120 -mt-30 ">
-          {title}
-        </h2>
+    <section className={`py-10 bg-white ${className}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+          {title.split(" ").map((word, index) =>
+            word === "Asked" ? (
+              <span key={index} className="text-amber-500">
+                {word}{" "}
+              </span>
+            ) : (
+              <span key={index}>{word} </span>
+            )
+          )}
+        </h1>
 
         <div className={`grid grid-cols-1 ${gridCols} gap-8`}>
           {faqsLoading ? (
@@ -72,36 +48,9 @@ const FAQ = ({
                 </div>
               </div>
             ))
-          ) : faqsError ? (
-            // Error state
-            <div className="col-span-2 text-center py-8">
-              <div className="text-red-500 mb-4">
-                <svg
-                  className="w-12 h-12 mx-auto mb-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
-                <p className="text-lg font-semibold">Failed to load FAQs</p>
-                <p className="text-sm text-gray-600">{faqsError}</p>
-              </div>
-              <button
-                onClick={handleRetry}
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Try Again
-              </button>
-            </div>
           ) : faqs.length === 0 ? (
             // No FAQs state
-            <div className="col-span-2 text-center py-8 ">
+            <div className="col-span-2 text-center py-8">
               <div className="text-gray-500">
                 <svg
                   className="w-12 h-12 mx-auto mb-2"
@@ -127,9 +76,9 @@ const FAQ = ({
             (showAll ? faqs : faqs.slice(0, 6)).map((faq, index) => (
               <div
                 key={faq.id}
-                className="border border-gray-200 rounded-[20px] p-6 hover:shadow-md transition-shadow "
+                className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
               >
-                <div className="flex justify-between items-center ">
+                <div className="flex justify-between items-center">
                   <h3 className="text-lg font-semibold flex items-center">
                     <span className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 font-bold text-sm">
                       {String(index + 1).padStart(2, "0")}
@@ -169,7 +118,7 @@ const FAQ = ({
         </div>
         
         {/* View More Button - Only show if there are more than 6 FAQs */}
-        {!faqsLoading && !faqsError && faqs.length > 6 && (
+        {!faqsLoading && faqs.length > 6 && (
           <div className="text-center p-16">
             <button 
               onClick={() => setShowAll(!showAll)}

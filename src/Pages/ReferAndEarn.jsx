@@ -1,190 +1,230 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 import {
-  Share2,
-  Gift,
-  DollarSign,
   Star,
   Trophy,
-  ChevronDown,
-  ChevronUp,
   ArrowLeft,
-  CheckCircle,
-  ArrowRight,
-  Users,
-  Upload,
-  X,
-  Plus
+  ArrowRight
 } from 'lucide-react';
 
 import Refer1 from "../assets/Images/refer1.jpg";
 import Refer2 from "../assets/Images/Refer2.png";
-import Refer3 from "../assets/Images/Refer3.png";
-import Refer4 from "../assets/Images/Refer4.png";
 import Refer7 from "../assets/Images/Refer7.png";
 import Refer8 from "../assets/Images/Refer8.png";
 
 const FAQSection = () => {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(3); // Question 04 is open by default
+  const [faqs, setFaqs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const faqs = [
-    {
-      id: 1,
-      question: "How do I get my referral link?",
-      answer: "Once you create an account, you'll receive a unique referral link in your dashboard. You can share this link with friends, family, or on social media to start earning rewards."
-    },
-    {
-      id: 2,
-      question: "When do I receive my rewards?",
-      answer: "You'll receive your rewards instantly once your referred friend completes the qualifying action (such as enrolling in a course). Rewards are credited to your account immediately."
-    },
-    {
-      id: 3,
-      question: "Is there a limit to how many people I can refer?",
-      answer: "No, there's no limit! You can refer as many people as you want. The more you refer, the more rewards you earn. Check our rewards table to see all the exciting benefits."
-    },
-    {
-      id: 4,
-      question: "What rewards can I earn?",
-      answer: "You can earn a variety of rewards including smartwatches, Bluetooth accessories, Amazon vouchers, and more. The rewards increase as you refer more people - see our rewards table for details."
-    },
-    {
-      id: 5,
-      question: "Do my friends get any benefits when they sign up?",
-      answer: "Yes! Your friends also get exclusive welcome benefits when they sign up through your referral link, such as discounts on courses. It's a win-win for everyone!"
-    }
-  ];
+  // Fetch FAQs from partners API
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("http://localhost:3000/api/v1/refer/partners");
+        const data = await response.json();
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+        if (data.success && data.data) {
+          // Extract FAQs from all partners
+          const allFaqs = data.data
+            .filter(partner => partner.faqs && Array.isArray(partner.faqs))
+            .flatMap(partner => partner.faqs.map((faq, index) => ({
+              id: index + 1,
+              question: faq.question,
+              answer: faq.answer
+            })));
+          
+          // Remove duplicates based on question
+          const uniqueFaqs = allFaqs.filter((faq, index, self) =>
+            index === self.findIndex((f) => f.question === faq.question)
+          );
+          
+          setFaqs(uniqueFaqs.length > 0 ? uniqueFaqs : [
+            {
+              id: 1,
+              question: "How do I get my referral link?",
+              answer: "Once you create an account, you'll receive a unique referral link in your dashboard. You can share this link with friends, family, or on social media to start earning rewards."
+            },
+            {
+              id: 2,
+              question: "When do I receive my rewards?",
+              answer: "You'll receive your rewards instantly once your referred friend completes the qualifying action (such as enrolling in a course). Rewards are credited to your account immediately."
+            },
+            {
+              id: 3,
+              question: "Is there a limit to how many people I can refer?",
+              answer: "No, there's no limit! You can refer as many people as you want. The more you refer, the more rewards you earn. Check our rewards table to see all the exciting benefits."
+            }
+          ]);
+        }
+      } catch (err) {
+        console.error("Error fetching FAQs:", err);
+        // Fallback FAQs
+        setFaqs([
+          {
+            id: 1,
+            question: "How do I get my referral link?",
+            answer: "Once you create an account, you'll receive a unique referral link in your dashboard. You can share this link with friends, family, or on social media to start earning rewards."
+          },
+          {
+            id: 2,
+            question: "When do I receive my rewards?",
+            answer: "You'll receive your rewards instantly once your referred friend completes the qualifying action (such as enrolling in a course). Rewards are credited to your account immediately."
+          },
+          {
+            id: 3,
+            question: "Is there a limit to how many people I can refer?",
+            answer: "No, there's no limit! You can refer as many people as you want. The more you refer, the more rewards you earn. Check our rewards table to see all the exciting benefits."
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFAQs();
+  }, []);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-            <span className="text-[#FF9500]">Frequently</span> asked Questions
-          </h2>
-        </div>
+    <section className="py-20 bg-white -mt-20">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-bold text-center mb-16">
+          <span className="text-[#FF9500]">Frequently</span> Asked Questions
+        </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
-          {/* Left Column */}
-          <div className="space-y-4 sm:space-y-6">
-            {faqs.slice(0, 3).map((faq, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {loading ? (
+            // Loading skeleton
+            Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="border border-gray-200 rounded-lg p-6 animate-pulse"
+              >
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gray-300 rounded-full mr-3"></div>
+                    <div className="h-4 bg-gray-300 rounded w-64"></div>
+                  </div>
+                  <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+              </div>
+            ))
+          ) : faqs.length === 0 ? (
+            // No FAQs state
+            <div className="col-span-2 text-center py-8">
+              <div className="text-gray-500">
+                <svg
+                  className="w-12 h-12 mx-auto mb-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <p className="text-lg font-semibold">No FAQs available</p>
+                <p className="text-sm">
+                  Check back later for frequently asked questions!
+                </p>
+              </div>
+            </div>
+          ) : (
+            // Display FAQs from API
+            faqs.map((faq, index) => (
               <div
                 key={faq.id}
-                className={`bg-white rounded-lg border ${
-                  openIndex === index
-                    ? 'border-yellow-200 shadow-md'
-                    : 'border-gray-200'
-                } p-4 sm:p-6 transition-all duration-300`}
+                className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
               >
-                <div
-                  className="flex items-start justify-between cursor-pointer"
-                  onClick={() => toggleFAQ(index)}
-                >
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-sm sm:text-base font-semibold text-gray-700">
-                        {String(faq.id).padStart(2, '0')}
-                      </span>
-                    </div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 flex-1 pt-1">
-                      {faq.question}
-                    </h3>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    {openIndex === index ? (
-                      <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-                    ) : (
-                      <Plus className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-                    )}
-                  </div>
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold flex items-center">
+                    <span className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 font-bold text-sm">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1">{faq.question}</span>
+                  </h3>
+                  <button
+                    className={`p-2 rounded-full transition-colors ${
+                      openIndex === faq.id
+                        ? "text-red-500 hover:bg-red-50"
+                        : "text-blue-500 hover:bg-blue-50"
+                    }`}
+                    onClick={() =>
+                      setOpenIndex(openIndex === faq.id ? null : faq.id)
+                    }
+                  >
+                    <span className="text-xl font-bold">
+                      {openIndex === faq.id ? "×" : "+"}
+                    </span>
+                  </button>
                 </div>
-                {openIndex === index && (
-                  <div className="mt-4 ml-12 sm:ml-14">
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      {faq.answer}
-                    </p>
+                {openIndex === faq.id && (
+                  <div className="mt-4 pl-11 text-gray-600">
+                    <p>{faq.answer}</p>
                   </div>
                 )}
               </div>
-            ))}
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-4 sm:space-y-6">
-            {faqs.slice(3).map((faq, index) => {
-              const actualIndex = index + 3;
-              return (
-                <div
-                  key={faq.id}
-                  className={`bg-white rounded-lg border ${
-                    openIndex === actualIndex
-                      ? 'border-yellow-200 shadow-md'
-                      : 'border-gray-200'
-                  } p-4 sm:p-6 transition-all duration-300`}
-                >
-                  <div
-                    className="flex items-start justify-between cursor-pointer"
-                    onClick={() => toggleFAQ(actualIndex)}
-                  >
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm sm:text-base font-semibold text-gray-700">
-                          {String(faq.id).padStart(2, '0')}
-                        </span>
-                      </div>
-                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 flex-1 pt-1">
-                        {faq.question}
-                      </h3>
-                    </div>
-                    <div className="flex-shrink-0 ml-4">
-                      {openIndex === actualIndex ? (
-                        <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-                      ) : (
-                        <Plus className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-                      )}
-                    </div>
-                  </div>
-                  {openIndex === actualIndex && (
-                    <div className="mt-4 ml-12 sm:ml-14">
-                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+            ))
+          )}
         </div>
-
-        {/* View More Button */}
-        <div className="text-center">
-          <button 
-            onClick={() => navigate('/contact')}
-            className="bg-gradient-to-r from-[#FF9500] to-[#FFB84D] text-white px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg md:text-xl hover:opacity-90 transition-opacity duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
-          >
-            View More
-            <span className="text-xl">→</span>
-          </button>
-        </div>
+      </div>
+      
+      {/* View More Button */}
+      <div className="text-center p-16">
+        <button 
+          onClick={() => navigate('/contact')}
+          className="text-white text-[20px] bg-[#FCB11F] w-[220px] h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px]"
+        >
+          View More
+          <svg className="w-[40px] h-[40px] -mt-10 ml-35 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg> 
+        </button>
       </div>
     </section>
   );
 }
 
 const ReferAndEarn = () => {
-  const [openFaq, setOpenFaq] = useState(3); // Question 04 is open by default
+  const [partners, setPartners] = useState([]);
+  const [partnersLoading, setPartnersLoading] = useState(true);
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  // Fetch partners from API
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        setPartnersLoading(true);
+        const response = await fetch("http://localhost:3000/api/v1/refer/partners");
+        const data = await response.json();
+
+        if (data.success && data.data) {
+          // Extract partners with logos
+          const partnersWithLogos = data.data
+            .filter(partner => partner.logoUrl && partner.name)
+            .map(partner => ({
+              name: partner.name,
+              logoUrl: partner.logoUrl
+            }));
+          
+          setPartners(partnersWithLogos.length > 0 ? partnersWithLogos : []);
+        }
+      } catch (err) {
+        console.error("Error fetching partners:", err);
+        setPartners([]);
+      } finally {
+        setPartnersLoading(false);
+      }
+    };
+
+    fetchPartners();
+  }, []);
 
   // Image Protection - Prevent downloading, right-click, and inspection
   useEffect(() => {
@@ -290,34 +330,6 @@ const ReferAndEarn = () => {
     };
   }, []);
 
-  const faqs = [
-    {
-      id: 1,
-      question: "How do I create an account on the job board?",
-      answer: "Creating an account is simple! Click on the 'Register Now' button in the header, fill in your details, and verify your email address. Once verified, you'll have full access to browse courses and refer friends."
-    },
-    {
-      id: 2,
-      question: "How do I apply for a job through the platform?",
-      answer: "After creating your account, you can browse through our comprehensive course catalog. Select the course that interests you and click 'Enroll Now' to begin your learning journey."
-    },
-    {
-      id: 3,
-      question: "How can I track the status of my job applications?",
-      answer: "You can track your referral status and rewards through your dashboard. Navigate to 'My Referrals' section where you'll see all your referrals, their enrollment status, and your earned rewards."
-    },
-    {
-      id: 4,
-      question: "How do I search for universities that match my academic profile and preferences?",
-      answer: "Use the search bar on the homepage to enter keywords related to your desired program, preferred country, or university name. You can also use the advanced search filters to narrow down results by degree level, field of study, tuition range, and location to find the perfect university match for your academic goals."
-    },
-    {
-      id: 5,
-      question: "Is there a cost to use the job board, and what features are free?",
-      answer: "Our referral program is completely free to join! There are no costs associated with referring friends. You earn rewards based on successful referrals, and your friends get exclusive discounts when they enroll through your referral link."
-    }
-  ];
-
   const rewards = [
     {
       referrals: "1st Referral",
@@ -336,8 +348,6 @@ const ReferAndEarn = () => {
     }
   ];
 
-  const partners = ['Google', 'Microsoft', 'MetalLB', 'LinkedIn', 'Instagram', 'Apple Pay'];
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -353,7 +363,7 @@ const ReferAndEarn = () => {
           opacity: 1
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className=" ml-15 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left Content */}
             <div className="text-white relative">
@@ -379,17 +389,17 @@ const ReferAndEarn = () => {
                 <br />
                 Money & Gifts
               </h1>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 leading-tight">
+              <h2 className="w-[707px] h-[122px] text-[55px]  text-regular font-['Plus_Jakarta_Sans']  ">
                 with upskillway's Referral Program!
               </h2>
-              <button className="bg-transparent text-white px-8 sm:px-12 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg mb-6 sm:mb-8 border-2 border-white hover:bg-white hover:text-purple-700 transition-colors duration-300 flex items-center gap-2 w-fit">
-                Invite Friends
+              <button className=" w-[303px] h-[74px] bg-transparent text-white  sm:px-12 py-3 sm:py-4 rounded-[99px] font-semibold text-base sm:text-lg mb-6 sm:mb-8 border-2 border-white hover:bg-white hover:text-purple-700 transition-colors duration-300 flex items-center gap-2 mt-12">
+                <span className='w-[183px] h-[42px] font-bold text-[25px] '>Invite Friends</span>
               </button>
               <p className="text-sm sm:text-base text-white mb-6 sm:mb-8">
                 Join over 20,000 users who've already benefited from our referral program.
               </p>
               {/* Rating Card */}
-              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-4 sm:px-6 py-3 sm:py-4 inline-flex items-center gap-3 sm:gap-4">
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-4xl px-4 sm:px-6 py-3 sm:py-4 inline-flex items-center gap-3 sm:gap-4">
                 <div className="flex items-center gap-2">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
@@ -398,13 +408,14 @@ const ReferAndEarn = () => {
                   </div>
                   <span className="text-lg sm:text-xl font-bold text-white">4.9</span>
                 </div>
-                <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-[#FFB84D]" />
+               
               </div>
+               <Trophy className="w-6 h-6  -mt-10 ml-50 sm:w-8 sm:h-8 fill-[#FFB84D] text-[black]" />
             </div>
 
             {/* Right Illustration */}
-            <div className="relative flex items-center justify-center min-h-[500px]">
-              <div className="relative w-full max-w-lg">  
+            <div className="relative flex items-center justify-center ">
+              <div className="relative w-[628px] h-[415px] -mr-5 mt-10">  
                 <img 
                   src={Refer7} 
                   alt="Refer and Earn" 
@@ -436,7 +447,7 @@ const ReferAndEarn = () => {
       </section>
 
       {/* Unlock Exclusive Rewards Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
+      <section className="py-12 sm:py-16 md:py-20  -mt-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 mb-6">
             Unlock <span className="text-[#FF9500]">Exclusive</span> Rewards!
@@ -451,7 +462,7 @@ const ReferAndEarn = () => {
           </div>
 
           {/* Rewards Illustration */}
-          <div className="w-full flex justify-center mb-12">
+          <div className="w-full flex justify-center  -mt-20">
             <img 
               src={Refer2} 
               alt="Exclusive Rewards Illustration" 
@@ -470,7 +481,7 @@ const ReferAndEarn = () => {
           </div>
 
           {/* Rewards Table */}
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto -mt-30">
             <table className="w-full max-w-6xl mx-auto bg-white">
               <thead>
                 <tr>
@@ -492,7 +503,7 @@ const ReferAndEarn = () => {
                         <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
                           <ArrowLeft className="w-3 h-3 text-gray-800" />
                         </div>
-                        <div className="flex-1 border-t-2 border-dashed border-gray-300 h-0"></div>
+                        
                         <span className="ml-2">{reward.referrals}</span>
                       </div>
                     </td>
@@ -559,86 +570,94 @@ const ReferAndEarn = () => {
       </section>
 
       {/* Referral Program FAQ Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12 sm:mb-16">
-            <span className="text-[#FF9500]">Referral Program</span> FAQ
-          </h2>
+      <section className=" sm:py-16 md:py-20  -mt-20">
+        <div className=" w-full  sm:px-6 lg:px-8">
+     
           <FAQSection/>
           
         </div>
       </section>
 
       {/* Our Partners Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-20 bg-white -mt-65">
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12 sm:mb-16">
             Our <span className="text-[#FF9500]">Partners</span>
           </h2>
-          <div className="w-full relative overflow-hidden">
-            <style>
-              {`
-                @keyframes scroll-left {
-                  0% {
-                    transform: translateX(0);
+          {partnersLoading ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600 text-lg">Loading partners...</p>
+            </div>
+          ) : (
+            <div className="w-full relative overflow-hidden ">
+              <style>
+                {`
+                  @keyframes scroll-left {
+                    0% {
+                      transform: translateX(0);
+                    }
+                    100% {
+                      transform: translateX(-50%);
+                    }
                   }
-                  100% {
-                    transform: translateX(-50%);
+                  .animate-scroll {
+                    animation: scroll-left 30s linear infinite;
                   }
-                }
-                .animate-scroll {
-                  animation: scroll-left 20s linear infinite;
-                }
-                .animate-scroll:hover {
-                  animation-play-state: paused;
-                }
-              `}
-            </style>
-            <div className=" flex animate-scroll">
-              {/* First set of logos */}
-              <div className="flex items-center gap-12 sm:gap-16 px-8 grayscale opacity-70">
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Google+
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  ■ Microsoft
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Ⓐ MetalLB
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Linked⬛in
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
-                  Instagram
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  🍎 Pay
-                </div>
-              </div>
-              {/* Duplicate set for seamless loop */}
-              <div className="flex items-center gap-12 sm:gap-16 px-8 grayscale opacity-70">
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Google+
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  ■ Microsoft
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Ⓐ MetalLB
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Linked⬛in
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
-                  Instagram
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  🍎 Pay
-                </div>
+                  .animate-scroll:hover {
+                    animation-play-state: paused;
+                  }
+                `}
+              </style>
+              <div className="flex animate-scroll">
+                {/* Render partners multiple times for infinite scroll effect */}
+                {[...Array(4)].map((_, setIndex) => (
+                  <div key={`set-${setIndex}`} className="flex items-center gap-12 sm:gap-16 px-8">
+                    {partners.length > 0 ? (
+                      partners.map((partner, index) => (
+                        <div
+                          key={`${setIndex}-${index}`}
+                          className="flex flex-col items-center gap-3 min-w-[200px]  hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                          <img
+                            src={partner.logoUrl}
+                            alt={partner.name}
+                            className="h-16 w-auto object-contain"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                            }}
+                          />
+                          <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">
+                            {partner.name}
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      <>
+                        <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                          Google+
+                        </div>
+                        <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                          ■ Microsoft
+                        </div>
+                        <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                          Ⓐ MetalLB
+                        </div>
+                        <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                          Linked⬛in
+                        </div>
+                        <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
+                          Instagram
+                        </div>
+                        <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                          🍎 Pay
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 

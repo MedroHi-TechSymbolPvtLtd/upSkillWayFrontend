@@ -220,9 +220,9 @@ export default function TrustSection() {
       <Schedule/>
 
       {/* Yellow Line Separator - Bottom */}
-      <div className="w-full flex justify-center py-4">
+      <div className="w-full flex justify-center  ">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-0.5 bg-yellow-400 w-full"></div>
+          <div className="h-0.5 bg-yellow-400 w-full -"></div>
         </div>
       </div>
 

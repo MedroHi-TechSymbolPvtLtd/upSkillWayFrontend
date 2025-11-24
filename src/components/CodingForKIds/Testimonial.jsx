@@ -10,8 +10,7 @@ import {
   useVelocity,
 } from "framer-motion";
 
-
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 // Utility function
@@ -190,89 +189,76 @@ function ScrollVelocityRow(props) {
 }
 
 // Individual Testimonial Card Component
-const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
-  // Map API fields to component fields (support both formats)
-  const name = testimonial.authorName || testimonial.studentName;
-  const role = testimonial.role || testimonial.studentRole;
-  const text = testimonial.text || testimonial.testimonialText;
-  const avatarUrl = testimonial.avatarUrl || testimonial.studentImageUrl;
-  
-  return (
-    <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
-      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
-        {/* Profile Picture */}
-        <div className="flex justify-center mb-4">
-          <img
-            src={avatarUrl || getPlaceholderImage(name)}
-            alt={name}
-            className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
-            onError={(e) => {
-              e.target.src = getPlaceholderImage(name);
-            }}
-          />
-        </div>
-
-        {/* Name */}
-        <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
-          {name}
-        </h3>
-
-        {/* Role */}
-        <p className="text-sm text-gray-600 text-center mb-4">
-          {role}
-        </p>
-
-        {/* Testimonial Text - Flexible height */}
-        <div className="flex-grow mb-4">
-          <p className="text-gray-700 text-sm leading-relaxed italic">
-            "{text}"
-          </p>
-        </div>
-  
-
-        {/* Watch Video Button */}
-        {testimonial.videoUrl && (
-          <div className="mb-3">
-            <button
-              onClick={() => window.open(testimonial.videoUrl, "_blank")}
-              className="text-amber-500 hover:text-amber-600 text-sm font-medium flex items-center justify-center mx-auto transition-all gap-1.5 hover:gap-2"
-            >
-              <Play className="w-4 h-4" />
-              Watch Video
-            </button>
-          </div>
-        )}
-
-        {/* Status Badge */}
-        {testimonial.status && (
-          <div className="flex justify-center">
-            <span className="px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-xs font-medium">
-              {testimonial.status}
-            </span>
-          </div>
-        )}
+const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
+  <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
+    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
+      {/* Profile Picture */}
+      <div className="flex justify-center mb-4">
+        <img
+          src={
+            testimonial.avatarUrl || getPlaceholderImage(testimonial.authorName)
+          }
+          alt={testimonial.authorName}
+          className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+          onError={(e) => {
+            e.target.src = getPlaceholderImage(testimonial.authorName);
+          }}
+        />
       </div>
+
+      {/* Name */}
+      <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
+        {testimonial.authorName}
+      </h3>
+
+      {/* Role */}
+      <p className="text-sm text-gray-600 text-center mb-4">
+        {testimonial.role}
+      </p>
+
+      {/* Testimonial Text - Flexible height */}
+      <div className="flex-grow mb-4">
+        <p className="text-gray-700 text-sm leading-relaxed italic">
+          "{testimonial.text}"
+        </p>
+      </div>
+
+      {/* Watch Video Button */}
+      {testimonial.videoUrl && (
+        <div className="mb-3">
+          <button
+            onClick={() => window.open(testimonial.videoUrl, "_blank")}
+            className="text-amber-500 hover:text-amber-600 text-sm font-medium flex items-center justify-center mx-auto transition-all gap-1.5 hover:gap-2"
+          >
+            <Play className="w-4 h-4" />
+            Watch Video
+          </button>
+        </div>
+      )}
+
+      {/* Status Badge */}
+      {testimonial.status && (
+        <div className="flex justify-center">
+          <span className="px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-xs font-medium">
+            {testimonial.status}
+          </span>
+        </div>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 // Main Animated Testimonials Component
 const AnimatedTestimonials = ({
-  testimonials: propTestimonials,
-  apiUrl = "http://localhost:3000/api/v1/cms/testimonials",
-  maxTestimonials = 12,
-  title = "From Aspiration to Achievement Our Success Stories",
-  subtitle = "Explore the inspiring journeys of Upskillway learners as they turn skills into careers and dreams into achievements.",
+  testimonials: propTestimonials = [],
+  title = "Hear What Our Users Are Saying",
+  subtitle = "Discover the varied perspectives and experiences as users share their stories, highlighting the versatility of our platform.",
   baseVelocity = 15,
 }) => {
-  const [testimonials, setTestimonials] = useState(propTestimonials || []);
-  const [testimonialsLoading, setTestimonialsLoading] = useState(false);
-  const [testimonialsError, setTestimonialsError] = useState(null);
+  const testimonialsLoading = false;
+  
 
-  console.log('AnimatedTestimonials - propTestimonials:', propTestimonials);
-  console.log('AnimatedTestimonials - testimonials state:', testimonials);
-
-  // Mock testimonials data for demonstration
+  // Use testimonials from props, or fallback to mock data
   const mockTestimonials = [
     {
       id: 1,
@@ -327,80 +313,7 @@ const AnimatedTestimonials = ({
     },
   ];
 
-  useEffect(() => {
-    // If testimonials are provided as props, don't fetch from API
-    if (propTestimonials && propTestimonials.length > 0) {
-      setTestimonials(propTestimonials);
-      setTestimonialsLoading(false);
-      return;
-    }
-
-    const fetchTestimonials = async () => {
-      try {
-        setTestimonialsLoading(true);
-        setTestimonialsError(null);
-
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.success) {
-          setTestimonials(data.data || []);
-        } else {
-          console.warn(
-            "API returned success: false, falling back to mock data"
-          );
-          setTestimonials(mockTestimonials);
-        }
-      } catch (err) {
-        console.warn(
-          "API fetch failed, falling back to mock data:",
-          err.message
-        );
-        setTestimonials(mockTestimonials);
-        setTestimonialsError(null);
-      } finally {
-        setTestimonialsLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, [apiUrl, propTestimonials]);
-
-  const handleRetry = () => {
-    setTestimonialsError(null);
-    setTestimonialsLoading(true);
-
-    const fetchTestimonials = async () => {
-      try {
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.success) {
-          setTestimonials(data.data || []);
-          setTestimonialsError(null);
-        } else {
-          setTestimonialsError("API returned unsuccessful response");
-        }
-      } catch (err) {
-        setTestimonialsError("Error fetching testimonials: " + err.message);
-        console.error("Error fetching testimonials:", err);
-      } finally {
-        setTestimonialsLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  };
+  const testimonials = propTestimonials.length > 0 ? propTestimonials : mockTestimonials;
 
   const getInitialFromName = (name) => {
     return name ? name.charAt(0).toUpperCase() : "?";
@@ -415,9 +328,8 @@ const AnimatedTestimonials = ({
     0,
     Math.ceil(testimonials.length / 2)
   );
-  
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-white to-white py-16 px-4 -mt-25">
@@ -432,9 +344,9 @@ const navigate = useNavigate();
 
       {/* Header */}
       <div className="text-center mb-12 max-w-3xl mx-auto">
-        <h1 className="text-4xl whitespace-nowrap md:text-5xl font-bold text-gray-900 mb-4 -ml-50">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           {title.split(" ").map((word, index) =>
-            word === "Achievement" ? (
+            word === "Users" ? (
               <span key={index} className="text-amber-500">
                 {word}{" "}
               </span>
@@ -458,21 +370,6 @@ const navigate = useNavigate();
               ))}
             </div>
           ))}
-        </div>
-      ) : testimonialsError ? (
-        <div className="text-center py-16">
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md mx-auto">
-            <p className="text-xl font-semibold text-gray-900 mb-2">
-              Failed to load testimonials
-            </p>
-            <p className="text-gray-600 mb-6">{testimonialsError}</p>
-            <button
-              onClick={handleRetry}
-              className="px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-medium"
-            >
-              Try Again
-            </button>
-          </div>
         </div>
       ) : testimonials.length === 0 ? (
         <div className="text-center py-16 ">

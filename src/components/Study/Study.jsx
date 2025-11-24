@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const StudyAbroad = () => {
   const [courses, setCourses] = useState([]);
@@ -46,14 +46,7 @@ const StudyAbroad = () => {
     return `$${parseFloat(price).toLocaleString()}`;
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
+  
 
   if (loading) {
     return (
@@ -93,9 +86,7 @@ const StudyAbroad = () => {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 -mt-22">
-          <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[55px] leading-[100%] tracking-[0] -ml-[550px]">
-            Popular Study <span className="text-[#FDB11F]"> Destinations</span>
-          </h2>
+      
        
         </div>
 
@@ -125,98 +116,63 @@ const StudyAbroad = () => {
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative">
-                  <div className="w-full h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                  <div className="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center overflow-hidden">
                     {course.imageUrl && course.imageUrl.startsWith('http') ? (
                       <img 
                         src={course.imageUrl} 
-                        alt={course.title || 'Study Abroad Program'}
-                        className="w-full h-48 object-cover"
+                        alt={course.city || course.title || 'Study Abroad Program'}
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'flex';
                         }}
                       />
                     ) : null}
-                    <div className="w-full h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-xl font-bold">
-                      {course.title ? course.title.charAt(0).toUpperCase() : course.country ? course.country.charAt(0).toUpperCase() : '🌍'}
-                    </div>
                   </div>
-                  <div className="absolute top-4 left-4 bg-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
-                    {course.status === 'published' || course.status === 'active' ? 'Available' : course.status || 'Available'}
-                  </div>
-                  <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                    {formatPrice(course.price || course.tuitionFee)}
+                  
+                  {/* City Badge */}
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-6 py-2 rounded-full shadow-lg">
+                    <span className="text-purple-600 font-bold text-lg lowercase">
+                      {course.city || course.country || 'united states'}
+                    </span>
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
-                    {course.title || course.programName || course.university || 'Study Abroad Program'}
-                  </h3>
-                  <p className="text-gray-600 mb-4 text-sm line-clamp-3">
-                    {course.description || course.summary || `Explore amazing study opportunities in ${course.country || 'international destinations'}`}
-                  </p>
-                  
-                  {(course.tags || course.subjects || course.categories) && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {(course.tags || course.subjects || course.categories || []).slice(0, 3).map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {(course.tags || course.subjects || course.categories || []).length > 3 && (
-                        <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
-                          +{(course.tags || course.subjects || course.categories || []).length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  )}
-                  
-                  <div className="space-y-2 mb-6 text-sm">
-                    {course.country && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Country:</span>
-                        <span className="font-semibold">{course.country}</span>
-                      </div>
-                    )}
-                    {course.duration && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Duration:</span>
-                        <span className="font-semibold">{course.duration}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Created:</span>
-                      <span className="font-semibold">{formatDate(course.createdAt)}</span>
-                    </div>
-                    {(course.slug || course.id) && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Program ID:</span>
-                        <span className="font-semibold text-xs">{course.slug || course.id}</span>
-                      </div>
-                    )}
+                  {/* Universities Count */}
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-gray-700 font-medium text-[14px]">Universities</span>
+                    <span className="text-gray-900 font-bold text-[14px]">
+                      {course.universities || '200+'}
+                    </span>
+                  </div>
+
+                  {/* Average Tuition */}
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-gray-700 font-medium text-[14px]">Avg. Tuition</span>
+                    <span className="text-gray-900 font-bold text-[14px]">
+                      ${course.avgTuition ? `${parseFloat(course.avgTuition).toLocaleString()}/year` : '20,000/year'}
+                    </span>
+                  </div>
+
+                  {/* Living Cost */}
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="text-gray-700 font-medium text-[14px]">Living Cost</span>
+                    <span className="text-gray-900 font-bold text-[14px]">
+                      ${course.livingCost ? `${parseFloat(course.livingCost).toLocaleString()}/month` : '1,200/month'}
+                    </span>
                   </div>
                   
-                  <div className="space-y-2">
-                    <button 
-                      onClick={() => handleLearnMore(course)}
-                      className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200"
-                    >
-                      Learn More →
-                    </button>
-                    
-                    {(course.videoDemoUrl || course.brochureUrl) && (
-                      <button 
-                        onClick={() => window.open(course.videoDemoUrl || course.brochureUrl, '_blank')}
-                        className="w-full border-2 border-orange-500 text-orange-500 py-2 rounded-lg font-semibold hover:bg-orange-50 transition-colors duration-200"
-                      >
-                        {course.videoDemoUrl ? 'Watch Demo' : 'View Brochure'}
-                      </button>
-                    )}
-                  </div>
+                  {/* Learn More Button */}
+                  <button 
+                    onClick={() => handleLearnMore(course)}
+                    className="w-full bg-gradient-to-r from-orange-400 to-yellow-400 text-gray-900 py-4 rounded-2xl font-bold text-lg hover:from-orange-500 hover:to-yellow-500 transition-all duration-200 flex items-center justify-center gap-2"
+                  >
+                    Learn More
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                      <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="2" fill="none"/>
+                      <path d="M10 6l4 4-4 4M6 10h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
             ))}

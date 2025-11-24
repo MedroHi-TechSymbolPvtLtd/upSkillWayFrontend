@@ -476,7 +476,7 @@ const navigate = useNavigate();
                     >
                       <div className="relative w-full max-w-[278px] h-[190px] mx-auto mt-5">
                         <img
-                          src={course.image || "https://placehold.co/300x200/gray/white"}
+                          src={course.bannerImageUrl || "https://placehold.co/300x200/gray/white"}
                           alt={course.title}
                           className="w-full h-full object-cover rounded-t-2xl"
                         />

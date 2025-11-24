@@ -19,7 +19,7 @@ const About = () => {
       <Navbar />
 
       {/* About Upskillway Section */}
-      <section className="pt-24 sm:pt-32 md:pt-40 pb-12 sm:pb-16 md:pb-20 bg-white">
+      <section className="pt-24 sm:pt-32 md:pt-40 pb-12 sm:pb-16 md:pb-20 bg-white -mt-20">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-7">
           <div
             className="text-left mb-12 sm:mb-16"
@@ -87,6 +87,7 @@ const About = () => {
                 fontSize: "55px",
                 lineHeight: "150%",
                 letterSpacing: "0%",
+                marginTop: "-180px"
               }}
             >
               Achievements
@@ -105,8 +106,8 @@ const About = () => {
             {/* Card 1: Trusted by Thousands */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -132,8 +133,8 @@ const About = () => {
             {/* Card 2: Award-Winning Courses */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -159,8 +160,8 @@ const About = () => {
             {/* Card 3: Positive Student Feedback */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -186,8 +187,8 @@ const About = () => {
             {/* Card 4: Industry Partnerships */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -230,6 +231,7 @@ const About = () => {
                 fontSize: "55px",
                 lineHeight: "150%",
                 letterSpacing: "0%",
+                marginTop:"-120px"
               }}
             >
               Our Goals
@@ -246,8 +248,8 @@ const About = () => {
             {/* Card 1: Provide Practical Skills */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -273,8 +275,8 @@ const About = () => {
             {/* Card 2: Foster Creative Problem-Solving */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -300,8 +302,8 @@ const About = () => {
             {/* Card 3: Promote Collaboration and Community */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -327,8 +329,8 @@ const About = () => {
             {/* Card 4: Stay Ahead of the Curve */}
             <div
               style={{
-                width: "607.5px",
-                height: "327px",
+                width: "580px",
+                height: "280px",
                 backgroundColor: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "50px",
@@ -372,6 +374,7 @@ const About = () => {
                   fontSize: "55px",
                   lineHeight: "150%",
                   letterSpacing: "0%",
+                  marginTop:"-90px"
                 }}
               >
                 <span style={{ color: "#FF9500" }}>Together</span>, let's shape

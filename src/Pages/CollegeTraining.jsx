@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  TrendingUpIcon,
   Star,
   Target,
   Users,
@@ -8,10 +9,6 @@ import {
   Rocket,
   Award,
   UserCheck,
-  Building2,
-  DollarSign,
-  UserCog,
-  TrendingUpIcon,
   BarChart3,
   ChevronLeft,
   ChevronRight,
@@ -24,7 +21,13 @@ import {
   Calendar,
   Phone,
   GraduationCap,
+  Zap,
 } from "lucide-react";
+import User1 from "../assets/Images/User1.png";
+import CollegeV1 from "../assets/Images/CollegeV1.png";
+import CollegeV2 from "../assets/Images/CollegeV2.png";
+
+
 
 import College from "../assets/Images/college.png";
 import College1 from "../assets/Images/college1.png";
@@ -32,7 +35,12 @@ import College2 from "../assets/Images/XY.png";
 import GetInTouch from "../assets/Images/GetInTouch.png";
 import CollegeTestimonials from "../components/College/CollegeTestimonials";
 
+
+
+
 const UpskillWayLanding = () => {
+  const [programs, setPrograms] = React.useState([]);
+const [programsLoading, setProgramsLoading] = React.useState(true);
   const [formData, setFormData] = React.useState({
     name: "",
     mobile: "",
@@ -40,12 +48,97 @@ const UpskillWayLanding = () => {
     email: "",
     message: "",
   });
-
+   
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState({
     type: "",
     message: "",
   });
+
+  // NEW: leads + loading state and fetch
+  const [leads, setLeads] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  // Add this useEffect after your existing leads useEffect
+React.useEffect(() => {
+  let mounted = true;
+  const url =
+    "http://localhost:3000/api/v1/cms/training-programs?page=1&limit=10&trainingType=college";
+
+  async function loadPrograms() {
+    setProgramsLoading(true);
+    try {
+      const res = await fetch(url);
+      const json = await res.json();
+      console.log("programs response:", json);
+
+      const items = Array.isArray(json?.data) ? json.data : [];
+
+      if (!mounted) return;
+      setPrograms(items);
+    } catch (err) {
+      console.error("Failed to fetch programs:", err);
+      if (mounted) setPrograms([]);
+    } finally {
+      if (mounted) setProgramsLoading(false);
+    }
+  }
+
+  loadPrograms();
+  return () => {
+    mounted = false;
+  };
+}, []);
+
+
+  React.useEffect(() => {
+    let mounted = true;
+    const url =
+      "http://localhost:3000/api/v1/cms/training-programs?page=1&limit=10&trainingType=college";
+
+    async function load() {
+      setIsLoading(true);
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        console.log("training-programs response:", json);
+
+        // extract array from common API shapes
+        const items = Array.isArray(json)
+          ? json
+          : Array.isArray(json?.data)
+          ? json.data
+          : Array.isArray(json?.results)
+          ? json.results
+          : [];
+
+        // normalize masteredTools: ensure each tool has logoUrl and name
+        const normalized = items.map((item) => ({
+          ...item,
+          masteredTools: Array.isArray(item.masteredTools)
+            ? item.masteredTools.map((t) => ({
+                ...t,
+                logoUrl: t.url ?? t.logoUrl ?? "",
+                name: t.name ?? t.title ?? "",
+              }))
+            : [],
+        }));
+
+        if (!mounted) return;
+        setLeads(normalized);
+      } catch (err) {
+        console.error("Failed to fetch training programs:", err);
+        if (mounted) setLeads([]);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    }
+
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -132,9 +225,15 @@ const UpskillWayLanding = () => {
 
               <div className="flex items-center space-x-4 -mt-9 w-[259px] h-[60px]">
                 <div className="flex -space-x-2">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full border-2 border-white"></div>
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full border-2 border-white"></div>
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full border-2 border-white"></div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full border-2 border-white overflow-hidden">
+                    <img src={User1} alt="Student 1" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full border-2 border-white overflow-hidden">
+                    <img src={CollegeV1} alt="Student 2" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full border-2 border-white overflow-hidden">
+                    <img src={CollegeV2} alt="Student 3" className="w-full h-full object-cover" />
+                  </div>
                 </div>
                 <div className="">
                   <div className="flex items-center space-x-1">
@@ -158,6 +257,12 @@ const UpskillWayLanding = () => {
                   Download Brochure
                 </button>
                 <button
+                  onClick={() => {
+                    const element = document.getElementById('get-in-touch');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
                   className="absolute  left-[348px] w-[202px] h-[58px] opacity-100 
             rounded-[80px] pt-4 pr-8 pb-4 pl-8 gap-[10px] font-bold
             bg-gradient-to-r from-[#5D38DE] to-[#FDB11F]"
@@ -269,11 +374,11 @@ const UpskillWayLanding = () => {
       </div>
 
       {/* Trusted By Leading Organizations Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white ">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Section - Trusted By */}
           <div className="">
-            <h2 className="w-[290px] h-[25] text-[20px]  ml-[480px] mb-[40px] text-gray-900 ">
+            <h2 className="w-[290px] h-[25] text-[20px]  ml-[570px] mb-[40px] text-gray-900 ">
               Trusted by Leading Institutions
             </h2>
           </div>
@@ -291,56 +396,77 @@ const UpskillWayLanding = () => {
                   }
                 }
                 .animate-scroll {
-                  animation: scroll-left 20s linear infinite;
-                }
-                .animate-scroll:hover {
-                  animation-play-state: paused;
+                  animation: scroll-left 40s linear infinite;
                 }
               `}
             </style>
-            <div className=" flex animate-scroll">
-              {/* First set of logos */}
-              <div className="flex items-center gap-12 sm:gap-16 px-8 grayscale opacity-70">
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Google+
+            <div className="flex animate-scroll">
+              {/* Render content multiple times for infinite effect */}
+              {[...Array(4)].map((_, setIndex) => (
+                <div
+                  key={`set-${setIndex}`}
+                  className="flex items-center gap-12 sm:gap-16 px-8"
+                >
+                  {isLoading ? (
+                    <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                      Loading...
+                    </div>
+                  ) : leads.length > 0 &&
+                    leads.some((v) => v.masteredTools) ? (
+                    leads
+                      .filter((lead) => lead.masteredTools)
+                      .flatMap((lead) =>
+                        Array.isArray(lead.masteredTools)
+                          ? lead.masteredTools
+                          : [lead.masteredTools]
+                      )
+                      .map((tool, index) => (
+                        <div
+                          key={`${setIndex}-${index}`}
+                          className="flex flex-col items-center gap-3 min-w-[200px]"
+                        >
+                          {typeof tool === "object" && tool.logoUrl ? (
+                            <>
+                              <img
+                                src={tool.logoUrl}
+                                alt={tool.name || "Tool logo"}
+                                className="h-16 w-auto object-contain"
+                              />
+                              <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">
+                                {tool.name}
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                              {typeof tool === "object" ? tool.name : tool}
+                            </span>
+                          )}
+                        </div>
+                      ))
+                  ) : (
+                    <>
+                      <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                        Google+
+                      </div>
+                      <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                        ■ Microsoft
+                      </div>
+                      <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                        Ⓐ MetalLB
+                      </div>
+                      <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                        Linked⬛in
+                      </div>
+                      <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
+                        Instagram
+                      </div>
+                      <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
+                        🍎 Pay
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  ■ Microsoft
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Ⓐ MetalLB
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Linked⬛in
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
-                  Instagram
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  🍎 Pay
-                </div>
-              </div>
-              {/* Duplicate set for seamless loop */}
-              <div className="flex items-center gap-12 sm:gap-16 px-8 grayscale opacity-70">
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Google+
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  ■ Microsoft
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Ⓐ MetalLB
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  Linked⬛in
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold italic whitespace-nowrap">
-                  Instagram
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold whitespace-nowrap">
-                  🍎 Pay
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -477,7 +603,7 @@ const UpskillWayLanding = () => {
             {/* Card 4 - Guaranteed Interview Opportunities */}
             <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <Building2 className="w-7 h-7 text-white" />
+                <UserCheck className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-[20px] font-bold text-[#111827] leading-[20px] -mt-4 mb-2">
                 Guaranteed Interview Opportunities
@@ -548,7 +674,7 @@ const UpskillWayLanding = () => {
             {/* Card 1 - Zero Infrastructure Cost */}
             <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <DollarSign className="w-7 h-7 text-white" />
+                <Zap className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 Zero Infrastructure Cost
@@ -561,7 +687,7 @@ const UpskillWayLanding = () => {
             {/* Card 2 - No Faculty Burden */}
             <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <UserCog className="w-7 h-7 text-white" />
+                <Shield className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 No Faculty Burden
@@ -574,7 +700,7 @@ const UpskillWayLanding = () => {
             {/* Card 3 - Enhanced College Reputation */}
             <div className="w-[280px] h-[236px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <TrendingUpIcon className="w-7 h-7 text-white" />
+                <Award className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 Enhanced College Reputation
@@ -642,345 +768,77 @@ const UpskillWayLanding = () => {
             </p>
           </div>
 
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 - Campus Placement Training */}
-            <div className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans']  bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <h3 className="w-[98px] text-[24px] font-bold text-[#111827] mb-4">
-                Campus Placement Training
-              </h3>
-
-              <div className="mb-4">
-                <span className=" border-3 border-[#E8E8E8] rounded-xl text-purple-600 font-semibold text-sm p-2">
-                  3 months | 120 hours
-                </span>
-              </div>
-
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Aptitude & logical reasoning (40 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Communication skills (30 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Mock interviews & GDs (25 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Resume building workshops (25 hrs)</span>
-                </li>
-              </ul>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
-                <p className="text-sm font-semibold text-gray-900">
-                  85% placement rate
-                </p>
-                <p className="text-xs text-gray-600">All streams</p>
-              </div>
-
-              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                Learn More →
-              </button>
-            </div>
-
-            {/* Card 2 - Technical Upskilling Program */}
-            <div className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <h3 className="w-[98px] text-[24px] font-bold text-[#111827] mb-4">
-                Technical Upskilling Program
-              </h3>
-
-              <div className="mb-4">
-                <span className=" border-3 border-[#E8E8E8] rounded-xl p-3 text-purple-600 font-semibold text-sm">
-                  6 months | 240 hours
-                </span>
-              </div>
-
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Data Analytics & Python (60 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>AI & Machine Learning (60 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Cloud computing - AWS/Azure (60 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Full-stack development (60 hrs)</span>
-                </li>
-              </ul>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
-                <p className="text-sm font-semibold text-gray-900 ">
-                  78% tech placement rate
-                </p>
-                <p className="text-xs text-gray-600">CSE, IT, ECE, EEE</p>
-              </div>
-
-              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                Learn More →
-              </button>
-            </div>
-
-            {/* Card 3 - Soft Skills & Professional Grooming */}
-            <div className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <h3 className="w-[140px] text-[24px] font-bold text-[#111827] mb-4">
-                Soft Skills & Professional Grooming
-              </h3>
-
-              <div className="mb-4">
-                <span className= " border-3 border-[#E8E8E8] rounded-xl p-3 text-purple-600 font-semibold text-sm">
-                  6 weeks | 48 hours
-                </span>
-              </div>
-
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Confidence building (12 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Leadership & teamwork (12 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Time management (12 hrs)</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Professional etiquette (12 hrs)</span>
-                </li>
-              </ul>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
-                <p className="text-sm font-semibold text-gray-900">
-                  92% interview success
-                </p>
-                <p className="text-xs text-gray-600">All streams</p>
-              </div>
-
-              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                Learn More →
-              </button>
-            </div>
-
-            {/* Card 4 - Customized Department Programs */}
-            <div className="w-[280px] h-[625px]font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow relative">
-              <div className="absolute top-4 right-4">
-                <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full -ml-60">
-                  POPULAR
-                </span>
-              </div>
-
-              <h3 className="w-[98px] text-[24px] font-bold text-[#111827] mb-4 mt-5">
-                Customized Department Programs
-              </h3>
-
-              <div className="mb-4">
-                <span className=" border-3 border-[#E8E8E8] rounded-xl p-2 text-purple-600 font-semibold text-sm">
-                  Flexible
-                </span>
-              </div>
-
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>CSE, IT, ECE, EEE, Mechanical</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Arts & Commerce streams available</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Aligned with academic calendar</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg
-                    className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Custom curriculum co-created</span>
-                </li>
-              </ul>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
-                <p className="text-sm font-semibold text-gray-900">
-                  Results vary by program
-                </p>
-                <p className="text-xs text-gray-600">All departments</p>
-              </div>
-
-              <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                Learn More →
-              </button>
-            </div>
+  {programsLoading ? (
+    <div className="col-span-4 text-center py-12">
+      <p className="text-gray-600">Loading programs...</p>
+    </div>
+  ) : programs.length > 0 ? (
+    programs.map((program, index) => (
+      <div
+        key={program.id}
+        className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow relative"
+      >
+        {index === 3 && (
+          <div className="absolute top-4 right-4">
+            <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full -ml-60">
+              POPULAR
+            </span>
           </div>
+        )}
+
+        <h3 className="w-[200px] text-[24px] font-bold text-[#111827] mb-4 ">
+          {program.title}
+        </h3>
+
+        <div className="mb-4">
+          <span className="border-3 border-[#E8E8E8] rounded-xl text-purple-600 font-semibold text-sm p-2">
+            {program.durationMonths} months | {program.durationHours} hours
+          </span>
+        </div>
+
+        <ul className="space-y-3 mb-6">
+          {program.description.split('.').slice(0, 4).filter(item => item.trim()).map((item, idx) => (
+            <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+              <svg
+                className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{item.trim()}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="bg-green-50 border-l-4 border-green-500 p-3 mb-4 rounded-xl">
+          <p className="text-sm font-semibold text-gray-900">
+            {program.successMetric}% {program.placementRate ? 'placement rate' : 'success rate'}
+          </p>
+          <p className="text-xs text-gray-600">
+            {program.skills && program.skills.length > 0 ? program.skills.join(', ') : 'All streams'}
+          </p>
+        </div>
+
+        <button className="w-full bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+          Learn More →
+        </button>
+      </div>
+    ))
+  ) : (
+    <div className="col-span-4 text-center py-12">
+      <p className="text-gray-600">No programs available</p>
+    </div>
+  )}
+</div>
+
+         
         </div>
       </section>
 
@@ -1004,7 +862,7 @@ const UpskillWayLanding = () => {
             <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-[592px] h-[134px] flex items-start gap-4">
                 <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <BookOpen className="w-7 h-7 text-white" />
+                  <Target className="w-7 h-7 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -1027,7 +885,7 @@ const UpskillWayLanding = () => {
             <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Award className="w-7 h-7 text-white" />
+                  <Users className="w-7 h-7 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -1051,7 +909,7 @@ const UpskillWayLanding = () => {
             <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Briefcase className="w-7 h-7 text-white" />
+                  <UserCheck className="w-7 h-7 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -1076,7 +934,7 @@ const UpskillWayLanding = () => {
             <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Heart className="w-7 h-7 text-white" />
+                  <Rocket className="w-7 h-7 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -1167,7 +1025,7 @@ const UpskillWayLanding = () => {
             {/* Dedicated Account Manager */}
             <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <UserCircle className="w-7 h-7 text-white" />
+                <Phone className="w-7 h-7 text-white" />
               </div>
               <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
                 Dedicated Account Manager
@@ -1180,7 +1038,7 @@ const UpskillWayLanding = () => {
             {/* Long-term Institutional Branding */}
             <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
               <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <TrendingUpIcon className="w-7 h-7 text-white" />
+                <Star className="w-7 h-7 text-white" />
               </div>
               <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
                 Long-term Institutional Branding
@@ -1272,7 +1130,7 @@ const UpskillWayLanding = () => {
       </section>
 
       {/* Partnership Made Easy Section */}
-      <section className="py-20 bg-white -mt-19 font-['Plus_Jakarta_Sans'] ">
+      <section className="py-20 bg-white -mt-19 font-['Plus_Jakarta_Sans'] -mb-20 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-[55px] w-[1238px] sm:text-5xl font-bold text-gray-900 mb-4 -ml-20">
@@ -1289,9 +1147,9 @@ const UpskillWayLanding = () => {
           {/* Process Steps Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {/* Step 1 - Connect With Us */}
-            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className=" w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
-                <Phone className="w-7 h-7 text-white" />
+            <div className="w-[280px] h-[416px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className=" w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20 ">
+                <Phone className="w-7 h-7 text-white item-center " />
               </div>
               <h4 className="text-xl font-bold text-gray-900 mb-3">
                 Connect With Us
@@ -1309,8 +1167,8 @@ const UpskillWayLanding = () => {
             </div>
 
             {/* Step 2 - Custom Proposal & MoU */}
-            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+            <div className="w-[280px] h-[416px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20">
                 <FileText className="w-7 h-7  text-white" />
               </div>
               <h4 className="text-xl font-bold text-gray-900 mb-3">
@@ -1329,8 +1187,8 @@ const UpskillWayLanding = () => {
             </div>
 
             {/* Step 3 - Training Implementation */}
-            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+            <div className="w-[280px] h-[416px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow ">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20">
                 <GraduationCap className="w-7 h-7 text-white" />
               </div>
               <h4 className="text-xl font-bold text-gray-900 mb-3">
@@ -1348,8 +1206,8 @@ const UpskillWayLanding = () => {
             </div>
 
             {/* Step 4 - Placement & Continuous Support */}
-            <div className="w-[280px] h-[516px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6">
+            <div className="w-[280px] h-[416px] bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20">
                 <BarChart3 className="w-7 h-7 text-white" />
               </div>
               <h4 className="text-xl font-bold text-gray-900 mb-3">
@@ -1375,10 +1233,26 @@ const UpskillWayLanding = () => {
               industry-ready.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg">
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('get-in-touch');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
+              >
                 Sign MoU with Upskillway
               </button>
-              <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg">
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('get-in-touch');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
+              >
                 Request a Demo
               </button>
             </div>
@@ -1415,11 +1289,27 @@ const UpskillWayLanding = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <button className="bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                <button 
+                  onClick={() => {
+                    const element = document.getElementById('get-in-touch');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  className="bg-gradient-to-r from-[#FDB11F] to-[#5D38DE] text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity"
+                >
                   Partner With Us
                 </button>
                 
-                <button className="bg-gradient-to-r from-[#5D38DE] to-[#FDB11F] text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                <button 
+                  onClick={() => {
+                    const element = document.getElementById('get-in-touch');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  className="bg-gradient-to-r from-[#5D38DE] to-[#FDB11F] text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity"
+                >
                   Request Demo
                 </button>
               </div>
@@ -1440,7 +1330,7 @@ const UpskillWayLanding = () => {
       </div>
 
       {/* Get In Touch Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="get-in-touch" className="py-20 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
             <div className="grid lg:grid-cols-2 gap-0">

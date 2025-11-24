@@ -190,71 +190,64 @@ function ScrollVelocityRow(props) {
 }
 
 // Individual Testimonial Card Component
-const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
-  // Map API fields to component fields (support both formats)
-  const name = testimonial.authorName || testimonial.studentName;
-  const role = testimonial.role || testimonial.studentRole;
-  const text = testimonial.text || testimonial.testimonialText;
-  const avatarUrl = testimonial.avatarUrl || testimonial.studentImageUrl;
-  
-  return (
-    <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
-      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
-        {/* Profile Picture */}
-        <div className="flex justify-center mb-4">
-          <img
-            src={avatarUrl || getPlaceholderImage(name)}
-            alt={name}
-            className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
-            onError={(e) => {
-              e.target.src = getPlaceholderImage(name);
-            }}
-          />
-        </div>
-
-        {/* Name */}
-        <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
-          {name}
-        </h3>
-
-        {/* Role */}
-        <p className="text-sm text-gray-600 text-center mb-4">
-          {role}
-        </p>
-
-        {/* Testimonial Text - Flexible height */}
-        <div className="flex-grow mb-4">
-          <p className="text-gray-700 text-sm leading-relaxed italic">
-            "{text}"
-          </p>
-        </div>
-  
-
-        {/* Watch Video Button */}
-        {testimonial.videoUrl && (
-          <div className="mb-3">
-            <button
-              onClick={() => window.open(testimonial.videoUrl, "_blank")}
-              className="text-amber-500 hover:text-amber-600 text-sm font-medium flex items-center justify-center mx-auto transition-all gap-1.5 hover:gap-2"
-            >
-              <Play className="w-4 h-4" />
-              Watch Video
-            </button>
-          </div>
-        )}
-
-        {/* Status Badge */}
-        {testimonial.status && (
-          <div className="flex justify-center">
-            <span className="px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-xs font-medium">
-              {testimonial.status}
-            </span>
-          </div>
-        )}
+const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
+  <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
+    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
+      {/* Profile Picture */}
+      <div className="flex justify-center mb-4">
+        <img
+          src={
+            testimonial.avatarUrl || getPlaceholderImage(testimonial.authorName)
+          }
+          alt={testimonial.authorName}
+          className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+          onError={(e) => {
+            e.target.src = getPlaceholderImage(testimonial.authorName);
+          }}
+        />
       </div>
+
+      {/* Name */}
+      <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
+        {testimonial.authorName}
+      </h3>
+
+      {/* Role */}
+      <p className="text-sm text-gray-600 text-center mb-4">
+        {testimonial.role}
+      </p>
+
+      {/* Testimonial Text - Flexible height */}
+      <div className="flex-grow mb-4">
+        <p className="text-gray-700 text-sm leading-relaxed italic">
+          "{testimonial.text}"
+        </p>
+      </div>
+
+      {/* Watch Video Button */}
+      {testimonial.videoUrl && (
+        <div className="mb-3">
+          <button
+            onClick={() => window.open(testimonial.videoUrl, "_blank")}
+            className="text-amber-500 hover:text-amber-600 text-sm font-medium flex items-center justify-center mx-auto transition-all gap-1.5 hover:gap-2"
+          >
+            <Play className="w-4 h-4" />
+            Watch Video
+          </button>
+        </div>
+      )}
+
+      {/* Status Badge */}
+      {testimonial.status && (
+        <div className="flex justify-center">
+          <span className="px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-xs font-medium">
+            {testimonial.status}
+          </span>
+        </div>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 // Main Animated Testimonials Component
 const AnimatedTestimonials = ({
@@ -268,9 +261,6 @@ const AnimatedTestimonials = ({
   const [testimonials, setTestimonials] = useState(propTestimonials || []);
   const [testimonialsLoading, setTestimonialsLoading] = useState(false);
   const [testimonialsError, setTestimonialsError] = useState(null);
-
-  console.log('AnimatedTestimonials - propTestimonials:', propTestimonials);
-  console.log('AnimatedTestimonials - testimonials state:', testimonials);
 
   // Mock testimonials data for demonstration
   const mockTestimonials = [
@@ -415,7 +405,9 @@ const AnimatedTestimonials = ({
     0,
     Math.ceil(testimonials.length / 2)
   );
-  
+  const secondRowTestimonials = testimonials.slice(
+    Math.ceil(testimonials.length / 2)
+  );
 
 const navigate = useNavigate();
 

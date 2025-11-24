@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, CheckCircle, Users, GraduationCap, CreditCard, Home, Calculator, Star, FileText, Building2, Award, TrendingUp, Plane, UserCircle, FileCheck, Wallet, MapPin, HeadphonesIcon, Phone, Send, Plus, X, ChevronRight } from 'lucide-react';
 import Study from "../components/Study/Study";
 import Studyimg from "../assets/Images/Study.png";
@@ -7,9 +7,10 @@ import Study1 from "../assets/Images/Study1.png";
 import Study2 from "../assets/Images/Study2.png";
 import Study3 from "../assets/Images/Study3.png";
 import Study4 from "../assets/Images/Study4.png";
-import illustration from "../assets/Images/Illustration.png";
+import "../assets/Images/Illustration.png";
 import sitting from "../assets/Images/sitting.png";
 import sit from "../assets/Images/sittig3.png";
+import popUp from "../assets/Images/popUp.png";
 
 
 const Main = () => {
@@ -21,118 +22,61 @@ const Main = () => {
   const [selectedLocation, setSelectedLocation] = useState('All Locations');
   const [selectedSubject, setSelectedSubject] = useState('All Subjects');
   const [selectedDuration, setSelectedDuration] = useState('All Duration');
+  const [programsData, setProgramsData] = useState([]);
+  const [programsLoading, setProgramsLoading] = useState(true);
+  const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
+  const [consultationForm, setConsultationForm] = useState({
+    name: '',
+    phone: '',
+    email: ''
+  });
 
-  // Demo programs data
-  const programsData = [
-    {
-      id: 1,
-      title: 'Master of Business Administration',
-      university: 'Harvard Business School, USA',
-      location: 'USA',
-      subject: 'Business',
-      duration: '2 Years',
-      type: 'Full-time',
-      tuition: '$73,440/year',
-      status: 'Open',
-      category: 'postgraduate'
-    },
-    {
-      id: 2,
-      title: 'Bachelor of Computer Science',
-      university: 'MIT, USA',
-      location: 'USA',
-      subject: 'Computer Science',
-      duration: '4 Years',
-      type: 'Full-time',
-      tuition: '$53,450/year',
-      status: 'Open',
-      category: 'undergraduate'
-    },
-    {
-      id: 3,
-      title: 'Master of Data Science',
-      university: 'Stanford University, USA',
-      location: 'USA',
-      subject: 'Data Science',
-      duration: '2 Years',
-      type: 'Full-time',
-      tuition: '$54,315/year',
-      status: 'Open',
-      category: 'postgraduate'
-    },
-    {
-      id: 4,
-      title: 'Summer Business Program',
-      university: 'London Business School, UK',
-      location: 'UK',
-      subject: 'Business',
-      duration: '3 Months',
-      type: 'Part-time',
-      tuition: '$8,500/program',
-      status: 'Open',
-      category: 'short-term'
-    },
-    {
-      id: 5,
-      title: 'Fulbright Scholarship Program',
-      university: 'Various Universities, USA',
-      location: 'USA',
-      subject: 'Various',
-      duration: '2 Years',
-      type: 'Full-time',
-      tuition: 'Fully Funded',
-      status: 'Open',
-      category: 'scholarship'
-    },
-    {
-      id: 6,
-      title: 'Bachelor of Engineering',
-      university: 'University of Cambridge, UK',
-      location: 'UK',
-      subject: 'Engineering',
-      duration: '3 Years',
-      type: 'Full-time',
-      tuition: '$37,500/year',
-      status: 'Open',
-      category: 'undergraduate'
-    },
-    {
-      id: 7,
-      title: 'Master of Arts in Design',
-      university: 'Royal College of Art, UK',
-      location: 'UK',
-      subject: 'Design',
-      duration: '2 Years',
-      type: 'Full-time',
-      tuition: '$29,000/year',
-      status: 'Open',
-      category: 'postgraduate'
-    },
-    {
-      id: 8,
-      title: 'Intensive Language Program',
-      university: 'Sorbonne University, France',
-      location: 'France',
-      subject: 'Languages',
-      duration: '6 Months',
-      type: 'Part-time',
-      tuition: '$4,200/program',
-      status: 'Open',
-      category: 'short-term'
-    },
-    {
-      id: 9,
-      title: 'Chevening Scholarship',
-      university: 'Various Universities, UK',
-      location: 'UK',
-      subject: 'Various',
-      duration: '1 Year',
-      type: 'Full-time',
-      tuition: 'Fully Funded',
-      status: 'Open',
-      category: 'scholarship'
-    }
-  ];
+  // Fetch programs from API
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        setProgramsLoading(true);
+        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad?page=1&limit=10');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+          // Map API data to program cards format
+          const mappedPrograms = data.data.map(program => ({
+            id: program.id,
+            title: program.title || program.programName || 'Study Program',
+            university: program.university || program.city || 'International University',
+            location: program.city || program.country || 'International',
+            subject: program.tags && program.tags.length > 0 ? program.tags[0] : 'General',
+            duration: program.durationMonths 
+              ? `${program.durationMonths < 12 ? program.durationMonths + ' Months' : Math.floor(program.durationMonths / 12) + ' Years'}`
+              : '2 Years',
+            type: program.partTimeAvailable ? 'Part-time' : 'Full-time',
+            tuition: program.pricePerYear 
+              ? `$${parseFloat(program.pricePerYear).toLocaleString()}/year`
+              : program.price
+              ? `$${parseFloat(program.price).toLocaleString()}/year`
+              : 'Contact for Price',
+            status: 'Open',
+            category: program.programDetails || 'postgraduate',
+            description: program.description || '',
+            tags: program.tags || []
+          }));
+          setProgramsData(mappedPrograms);
+        }
+      } catch (error) {
+        console.error('Error fetching programs:', error);
+        // Keep empty array on error
+        setProgramsData([]);
+      } finally {
+        setProgramsLoading(false);
+      }
+    };
+
+    fetchPrograms();
+  }, []);
+
+  // Fallback demo programs data
+  
 
   // Filter programs based on selected filters
   const filteredPrograms = programsData.filter(program => {
@@ -458,10 +402,10 @@ const Main = () => {
       <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B] -ml-[670px]">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B] -ml-[670px] ">
           Popular Study <span className="text-[#FDB11F]">Destination</span>
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-4 sm:mt-6 -ml-[730px]">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-4 sm:mt-6 -ml-[730px] -mb-40">
             Explore world-class education opportunities across the globel.            </p>
           </div>
         </div>
@@ -475,7 +419,7 @@ const Main = () => {
 
           {/* Heading Section */}
           <div className="mb-8">
-          <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B]">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B] -mt-20">
           Find <span className='text-[#FDB11F]'>Your Perfect </span> Program
             </h2>
             <p className="font-['Plus_Jakarta_Sans'] text-base leading-[26px] font-normal text-[#52525B]">
@@ -601,7 +545,12 @@ const Main = () => {
 
           {/* Program Cards Grid */}
           <div className="relative w-full max-w-[1216px] min-h-[554px] mb-8">
-            {filteredPrograms.length > 0 ? (
+            {programsLoading ? (
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FBB03B] mx-auto mb-4"></div>
+                <p className="font-['Inter'] text-lg text-[#6B7280]">Loading programs...</p>
+              </div>
+            ) : filteredPrograms.length > 0 ? (
               filteredPrograms.slice(0, 6).map((program, index) => {
                 // Calculate position for each card
                 const row = Math.floor(index / 3);
@@ -672,7 +621,7 @@ const Main = () => {
       </section>
 
       {/* Why Choose Upskillway */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <div className="inline-block mb-4 sm:mb-6">
@@ -833,7 +782,10 @@ const Main = () => {
                 </p>
 
                 {/* Button */}
-                <button className="w-full sm:w-[308px] h-[54px] bg-white rounded-[80px] flex items-center justify-center font-['Inter'] text-base sm:text-lg leading-[22px] font-bold text-[#5D38DE] hover:bg-gray-100 transition-colors">
+                <button 
+                  onClick={() => setIsConsultationModalOpen(true)}
+                  className="w-full sm:w-[308px] h-[54px] bg-white rounded-[80px] flex items-center justify-center font-['Inter'] text-base sm:text-lg leading-[22px] font-bold text-[#5D38DE] hover:bg-gray-100 transition-colors "
+                >
                   Schedule Free Consultation
                 </button>
               </div>
@@ -854,7 +806,7 @@ const Main = () => {
       {/* Student Testimonials */}
 
       {/* How It Works */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
@@ -965,17 +917,27 @@ const Main = () => {
             <p className="text-lg sm:text-xl md:text-2xl text-gray-900 mb-6 sm:mb-8 font-semibold">
               Ready to take the first step?
             </p>
-            <button className="bg-[#FF9500] text-white px-8 sm:px-12 md:px-16 py-3 sm:py-4 md:py-5 rounded-lg font-bold text-base sm:text-lg md:text-xl hover:bg-orange-600 transition-colors duration-300 shadow-lg hover:shadow-xl">
+            <button 
+              onClick={() => {
+                const element = document.getElementById('book-counseling');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              className="bg-[#FF9500] text-white px-8 sm:px-12 md:px-16 py-3 sm:py-4 md:py-5 rounded-lg font-bold text-base sm:text-lg md:text-xl hover:bg-orange-600 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
               Start Your Journey Today
             </button>
           </div>
         </div>
       </section>
 
-      <Testimonial />
+      <StudyAbroadTestimonials />
 
-      {/* Our Services */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+
+
+
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
@@ -1140,21 +1102,245 @@ const Main = () => {
           </div>
         </div>
       </section>
-
-      {/* FAQ Section */}
+ {/* FAQ Section */}
       <FAQSection />
+      {/* Our Services */}
+     
 
       {/* Book Free Counseling Session */}
       <BookCounselingSection />
+
+      {/* Consultation Modal */}
+      {isConsultationModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="relative bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-auto">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsConsultationModalOpen(false)}
+              className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors shadow-lg"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Modal Content - Form and Image Side by Side */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              {/* Left Side - Form */}
+              <div className="p-8 lg:p-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
+                  Get In Touch
+                </h2>
+
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log('Form submitted:', consultationForm);
+                    // Handle form submission here
+                    alert('Thank you! We will get in touch with you soon.');
+                    setIsConsultationModalOpen(false);
+                    setConsultationForm({ name: '', phone: '', email: '' });
+                  }}
+                  className="space-y-6"
+                >
+                  {/* Name Input */}
+                  <div>
+                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                      Enter your name
+                    </label>
+                    <input
+                      type="text"
+                      value={consultationForm.name}
+                      onChange={(e) => setConsultationForm({ ...consultationForm, name: e.target.value })}
+                      placeholder="hello"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Phone Input */}
+                  <div>
+                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                      Enter your mobile number
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value="+91"
+                        disabled
+                        className="w-16 px-3 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
+                      />
+                      <input
+                        type="tel"
+                        value={consultationForm.phone}
+                        onChange={(e) => setConsultationForm({ ...consultationForm, phone: e.target.value })}
+                        placeholder="9413477263"
+                        required
+                        pattern="[0-9]{10}"
+                        className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email Input */}
+                  <div>
+                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                      Enter your email
+                    </label>
+                    <input
+                      type="email"
+                      value={consultationForm.email}
+                      onChange={(e) => setConsultationForm({ ...consultationForm, email: e.target.value })}
+                      placeholder="example@email.com"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 rounded-full font-semibold text-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    Get Connected
+                  </button>
+                </form>
+              </div>
+
+              {/* Right Side - Illustration */}
+              <div className="hidden lg:flex items-center justify-center bg-gradient-to-br from-purple-50 to-white p-8 rounded-r-2xl">
+                <img
+                  src={popUp}
+                  alt="Get In Touch Illustration"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
 
-// FAQ Section Component
-const FAQSection = () => {
-  const [openIndex, setOpenIndex] = useState(3); // Question 04 is open by default
+// Study Abroad Testimonials Component
+const StudyAbroadTestimonials = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(true);
 
-  const faqs = [
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        setTestimonialsLoading(true);
+        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad?page=1&limit=10');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+          // Collect all testimonials from all programs
+          const allTestimonials = [];
+          data.data.forEach(program => {
+            if (program.testimonialBlocks && Array.isArray(program.testimonialBlocks)) {
+              program.testimonialBlocks.forEach(testimonial => {
+                allTestimonials.push({
+                  id: allTestimonials.length + 1,
+                  studentName: testimonial.studentName,
+                  studentRole: testimonial.studentRole || 'Student',
+                  testimonialText: testimonial.testimonialText,
+                  rating: testimonial.rating || 5,
+                  studentImageUrl: testimonial.studentImageUrl
+                });
+              });
+            }
+          });
+          
+          setTestimonials(allTestimonials);
+        }
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+        setTestimonials([]);
+      } finally {
+        setTestimonialsLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  if (testimonialsLoading) {
+    return (
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF9500] mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading testimonials...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (testimonials.length === 0) {
+    return null; // Don't show section if no testimonials
+  }
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-white to-orange-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Hear What Our <span className="text-[#FF9500]">Students</span> Are Saying
+          </h2>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            Discover the experiences of students who transformed their lives through studying abroad
+          </p>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                {testimonial.studentImageUrl ? (
+                  <img 
+                    src={testimonial.studentImageUrl} 
+                    alt={testimonial.studentName}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-orange-200"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+                <div
+                  className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-xl border-2 border-orange-200"
+                  style={{ display: testimonial.studentImageUrl ? 'none' : 'flex' }}
+                >
+                  {testimonial.studentName?.charAt(0) || 'S'}
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900">{testimonial.studentName}</h4>
+                  <p className="text-sm text-gray-600">{testimonial.studentRole}</p>
+                </div>
+              </div>
+              <p className="text-gray-700 italic mb-4">"{testimonial.testimonialText}"</p>
+              {testimonial.rating && (
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className={`w-5 h-5 ${i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Fallback FAQs - defined outside component to avoid re-creation
+const FALLBACK_FAQS = [
     {
       id: 1,
       question: "How do I start my study abroad journey?",
@@ -1180,22 +1366,77 @@ const FAQSection = () => {
       question: "What financial support options are available for studying abroad?",
       answer: "We provide comprehensive financial planning services including scholarship guidance, education loan assistance, and budgeting support. We help you explore merit-based scholarships, need-based aid, country-specific funding, and university grants to make your study abroad dream financially feasible."
     }
-  ];
+];
+
+// FAQ Section Component
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = useState(3); // Question 04 is open by default
+  const [faqs, setFaqs] = useState([]);
+  const [faqsLoading, setFaqsLoading] = useState(true);
+
+  // Fetch FAQs from API
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        setFaqsLoading(true);
+        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad?page=1&limit=10');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+          // Collect all FAQs from all programs
+          const allFaqs = [];
+          data.data.forEach(program => {
+            if (program.faqs && Array.isArray(program.faqs)) {
+              program.faqs.forEach(faq => {
+                allFaqs.push({
+                  id: allFaqs.length + 1,
+                  question: faq.question,
+                  answer: faq.answer
+                });
+              });
+            }
+          });
+          
+          // If we have FAQs from API, use them; otherwise use fallback
+          if (allFaqs.length > 0) {
+            setFaqs(allFaqs);
+          } else {
+            setFaqs(FALLBACK_FAQS);
+          }
+        } else {
+          setFaqs(FALLBACK_FAQS);
+        }
+      } catch (error) {
+        console.error('Error fetching FAQs:', error);
+        setFaqs(FALLBACK_FAQS);
+      } finally {
+        setFaqsLoading(false);
+      }
+    };
+
+    fetchFAQs();
+  }, []); // Empty dependency array - FALLBACK_FAQS is a constant
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+    <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-            <span className="text-[#FF9500]">Frequently</span> asked Questions
+            <span className="text-[#FF9500]">Frequently</span> Asked Questions
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
+        {faqsLoading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF9500] mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading FAQs...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {/* Left Column */}
           <div className="space-y-4 sm:space-y-6">
             {faqs.slice(0, 3).map((faq, index) => (
@@ -1242,7 +1483,7 @@ const FAQSection = () => {
 
           {/* Right Column */}
           <div className="space-y-4 sm:space-y-6">
-            {faqs.slice(3).map((faq, index) => {
+            {faqs.slice(3,6).map((faq, index) => {
               const actualIndex = index + 3;
               return (
                 <div
@@ -1287,14 +1528,17 @@ const FAQSection = () => {
             })}
           </div>
         </div>
+        )}
 
         {/* View More Button */}
-        <div className="text-center">
-          <button className="bg-gradient-to-r from-[#FF9500] to-[#FFB84D] text-white px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg md:text-xl hover:opacity-90 transition-opacity duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2">
-            View More
-            <span className="text-xl">→</span>
-          </button>
-        </div>
+        {!faqsLoading && faqs.length > 0 && (
+          <div className="text-center">
+            <button className="bg-gradient-to-r from-[#FF9500] to-[#FFB84D] text-white px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg md:text-xl hover:opacity-90 transition-opacity duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2">
+              View More
+              <span className="text-xl">→</span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -1335,15 +1579,15 @@ const BookCounselingSection = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+    <section id="book-counseling" className="py-12 sm:py-16 md:py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-8 sm:mb-12 -mt-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
             Book Your <span className="relative inline-block">
-              <span className="text-[#FF9500] relative z-10">Free</span>
+              <span className="text-[#FF9500] relative z-10">Free Counseling</span>
               <span className="absolute bottom-0 left-0 right-0 h-3 bg-[#FF9500] opacity-20 -rotate-1"></span>
-            </span> Counseling Session
+            </span>  Session
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Take the first step towards your dream of studying abroad. Our experts are here to guide you.

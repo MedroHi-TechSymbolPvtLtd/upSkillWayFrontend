@@ -130,7 +130,7 @@ const EnterpriseSection = () => {
           </div>
         </div>
         <div className="text-center mt-10 " >
-        <button className=" text-white text-[28px] bg-[#FCB11F] w-[355px] h-[53px] text-bold rounded-xl"  onClick={() => navigate("/corporate")}>Explore Our Solution
+        <button className=" text-white text-[28px] bg-[#FCB11F] w-[355px] h-[53px] text-bold rounded-3xl"  onClick={() => navigate("/corporate")}>Explore Our Solution
            <svg className="w-[40px] h-[40px] -mt-10 ml-77  bg-[#FCB11F] text-white " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg> 

@@ -295,7 +295,7 @@ const ScheduleDemoSection = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-[298px] h-[49px] text-white px-12 py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
+                className={`w-[298px] h-[49px] text-white px-12 py-4 rounded-3xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
                   isSubmitting
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-[#FDB11F] hover:bg-[#FDB11F]"

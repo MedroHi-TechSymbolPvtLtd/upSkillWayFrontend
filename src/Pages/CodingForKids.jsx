@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Testimonial from "../components/home/Testimonials";
-import FAQSection from "../components/home/FAQ";
+import Testimonial from "../components/CodingForKIds/Testimonial";
+import FAQSection from "../components/CodingForKIds/Faq";
 import Coding from "../assets/Images/Coding.png";
 import Coding1 from "../assets/Images/Coding1.png";
 import Coding2 from "../assets/Images/Coding2.png";
@@ -54,40 +54,99 @@ import {
   Package,
   ChevronLeft,
   ChevronRight,
+  Laptop,
+  Monitor,
+  Handshake,
+  FileEdit,
 } from "lucide-react";
-import { span } from "framer-motion/client";
 
 const CodingForKids = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedAgeTab, setSelectedAgeTab] = useState("all");
+  const [testimonials, setTestimonials] = useState([]);
+  const [faqs, setFaqs] = useState([]);
 
-  // Fetch videos from API
+  // Function to extract YouTube thumbnail from video URL
+  const getYouTubeThumbnail = (url) => {
+    if (!url) return null;
+    
+    // Extract video ID from various YouTube URL formats
+    let videoId = null;
+    
+    // Format: https://www.youtube.com/watch?v=VIDEO_ID
+    const watchMatch = url.match(/[?&]v=([^&]+)/);
+    if (watchMatch) {
+      videoId = watchMatch[1];
+    }
+    
+    // Format: https://youtu.be/VIDEO_ID
+    const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+    if (shortMatch) {
+      videoId = shortMatch[1];
+    }
+    
+    // Format: https://www.youtube.com/embed/VIDEO_ID
+    const embedMatch = url.match(/youtube\.com\/embed\/([^?&]+)/);
+    if (embedMatch) {
+      videoId = embedMatch[1];
+    }
+    
+    // Return high quality thumbnail if video ID found
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+    
+    return null;
+  };
+
+  // Fetch coding courses from API
   useEffect(() => {
-    const fetchVideos = async () => {
+    const fetchCourses = async () => {
       try {
         setLoading(true);
         const response = await fetch("http://localhost:3000/api/v1/cms/videos");
         const data = await response.json();
 
-        if (data.success) {
-          setVideos(data.data);
+        if (data.success && data.data) {
+          setVideos(data.data); // Store original data with testimonials
+          
+          // Extract testimonials from all videos
+          const allTestimonials = data.data
+            .filter(video => video.testimonial)
+            .map(video => ({
+              text: video.testimonial,
+              authorName: video.title, // Using title as author name
+              role: "Course Student",
+              videoUrl: video.videoUrl,
+              status: "approved"
+            }));
+          setTestimonials(allTestimonials);
+          
+          // Extract FAQs from all videos
+          const allFaqs = data.data
+            .filter(video => video.faqs && Array.isArray(video.faqs))
+            .flatMap(video => video.faqs.map(faq => ({
+              ...faq,
+              id: `${video.slug}-${faq.question}` // Create unique ID
+            })));
+          setFaqs(allFaqs);
         } else {
-          setError("Failed to fetch videos");
+          setError("Failed to fetch courses");
         }
       } catch (err) {
-        setError("Error fetching videos: " + err.message);
-        console.error("Error fetching videos:", err);
+        setError("Error fetching courses: " + err.message);
+        console.error("Error fetching courses:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVideos();
+    fetchCourses();
   }, []);
 
   useEffect(() => {
@@ -115,28 +174,13 @@ const CodingForKids = () => {
     }
   }, []);
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  
 
-  const testimonials = [
-    {
-      quote:
-        "Upskillway's programs boosted our students' creativity and digital confidence. The excitement in class is incredible!",
-      author: "Sujata Menon",
-      role: "Academic Director, Blossom Public School",
-    },
-  ];
+  
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
+  
 
-  const prevTestimonial = () => {
-    setCurrentTestimonial(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
+  
 
   // Age group tabs configuration (max 6 tabs)
   const ageTabs = [
@@ -149,83 +193,11 @@ const CodingForKids = () => {
   ];
 
   // Filter videos based on selected age tab
-  const filterVideosByAge = (videos, ageTab) => {
-    if (ageTab === "all") {
-      return videos;
-    }
+  
 
-    return videos.filter((video) => {
-      // Check if video has age-related tags
-      if (video.tags && Array.isArray(video.tags)) {
-        const tagsString = video.tags.join(" ").toLowerCase();
-        const ageString = ageTab.toLowerCase();
+  
 
-        // Check if any tag contains the age range
-        if (tagsString.includes(ageString) || tagsString.includes(ageTab.replace("-", " to "))) {
-          return true;
-        }
-
-        // Check for specific age patterns
-        if (ageTab === "6-8" && (tagsString.includes("6") || tagsString.includes("7") || tagsString.includes("8") || tagsString.includes("beginner") || tagsString.includes("starter"))) {
-          return true;
-        }
-        if (ageTab === "9-11" && (tagsString.includes("9") || tagsString.includes("10") || tagsString.includes("11") || tagsString.includes("intermediate"))) {
-          return true;
-        }
-        if (ageTab === "12-14" && (tagsString.includes("12") || tagsString.includes("13") || tagsString.includes("14") || tagsString.includes("advanced"))) {
-          return true;
-        }
-        if (ageTab === "15-17" && (tagsString.includes("15") || tagsString.includes("16") || tagsString.includes("17") || tagsString.includes("expert"))) {
-          return true;
-        }
-        if (ageTab === "18+" && (tagsString.includes("18") || tagsString.includes("adult") || tagsString.includes("professional"))) {
-          return true;
-        }
-      }
-
-      // Check video title or description for age references
-      const searchText = `${video.title} ${video.description || ""}`.toLowerCase();
-      if (searchText.includes(ageTab) || searchText.includes(ageTab.replace("-", " to "))) {
-        return true;
-      }
-
-      // If no age info found, return false for specific age tabs
-      return false;
-    });
-  };
-
-  const filteredVideos = filterVideosByAge(videos, selectedAgeTab);
-
-  const faqs =
-    videos.length > 0 && videos[0].faqs
-      ? videos[0].faqs
-      : [
-          {
-            question: "What age groups do you cater to?",
-            answer:
-              "We offer coding programs for children aged 6-18 years, with age-appropriate curriculum and activities designed for different learning stages.",
-          },
-          {
-            question: "Do schools need any special equipment?",
-            answer:
-              "We provide comprehensive support including curriculum design, teacher training, and can work with existing school infrastructure. We also offer guidance on necessary equipment.",
-          },
-          {
-            question: "What coding languages are taught?",
-            answer:
-              "Our curriculum includes visual programming languages for beginners (Scratch, Blockly) and progresses to text-based languages like Python, JavaScript, and more advanced topics.",
-          },
-          {
-            question: "How do online classes work?",
-            answer:
-              "Our online classes are live, interactive sessions with experienced instructors. Students participate in real-time, collaborate on projects, and receive personalized attention.",
-          },
-          {
-            question: "What is included in the partnership program?",
-            answer:
-              "Our partnership includes curriculum design, teacher training, marketing support, ongoing technical assistance, and access to our learning platform.",
-          },
-        ];
+  
 
   return (
     <div className="min-h-screen bg-white">
@@ -237,14 +209,15 @@ const CodingForKids = () => {
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left Content */}
             <div className="text-left relative">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 sm:mb-6">
+              <h1 className="w-[630px]  text-[56px] sm:text-5xl md:text-6xl  font-bold text-gray-900 mb-4 sm:mb-6">
                 Welcome To The World Of{" "}
-                <span className="text-[#FF9500]">Coding Fun!</span>
+                <span className="text-[#FF9500]">Coding </span>
+                Fun!
               </h1>
-              <p className="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 font-semibold">
+              <p className="w-[483px] text-[24px] sm:text-xl text-gray-700 mb-6 sm:mb-8 font-semibold">
                 Where imagination meets technology — and every child becomes a creator!
               </p>
-              <div className="space-y-4 mb-8 sm:mb-10">
+              <div className=" mb-4 sm:mb-10">
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   At Upskillway, kids don't just play games — they create them!
                 </p>
@@ -258,7 +231,12 @@ const CodingForKids = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 relative z-10">
                 <button
-                  onClick={() => navigate("/courses")}
+                  onClick={() => {
+                    const element = document.getElementById('coding-courses');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
                   className="bg-gray-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center gap-2"
                 >
                   Start Learning Today
@@ -279,7 +257,7 @@ const CodingForKids = () => {
                     { value: "200+", label: "Futuristic Schools" },
                     { value: "40+", label: "Countries' Learners" },
                     { value: "1,00,000+", label: "Student Coders" },
-                  ].map((stat, index) => (
+                  ].map((stat) => (
                     <div
                       key={stat.label}
                       className="flex-1 py-4 px-4"
@@ -471,7 +449,7 @@ const CodingForKids = () => {
       </section>
 
       {/* Popular Coding Courses Section */}
-      <section className="py-12 sm:py-16 md:py-20 mt-[-10px] bg-white">
+      <section id="coding-courses" className="py-12 sm:py-16 md:py-20 mt-[-10px] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
             Explore Our <span className="text-[#FFB84D]">Popular</span> Coding
@@ -510,54 +488,75 @@ const CodingForKids = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {videos.map((video) => {
-                // Extract YouTube video ID from URL
-                const getYouTubeId = (url) => {
-                  const match = url.match(
-                    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/
-                  );
-                  return match ? match[1] : null;
-                };
-                const videoId = getYouTubeId(video.videoUrl);
-                const thumbnailUrl = videoId
-                  ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-                  : null;
+              {videos.map((course) => {
+                // Debug log
+                console.log('Course data:', {
+                  title: course.title,
+                  imageUrl: course.imageUrl,
+                  videoUrl: course.videoUrl
+                });
 
                 return (
                   <div
-                    key={video.id}
+                    key={course.id}
                     className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
                   >
-                    <div className="relative h-48 bg-gray-800 flex items-center justify-center overflow-hidden">
-                      {thumbnailUrl ? (
-                        <img
-                          src={thumbnailUrl}
-                          alt={video.title}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <Code className="w-16 h-16 text-gray-400" />
-                      )}
-                      <a
-                        href={video.videoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-50 transition-all duration-300"
+                    <div className="relative h-48 overflow-hidden">
+                      {/* Try YouTube thumbnail first, then imageUrl, then fallback */}
+                      {(() => {
+                        const youtubeThumbnail = getYouTubeThumbnail(course.videoUrl);
+                        const thumbnailUrl = youtubeThumbnail || course.imageUrl;
+                        
+                        return thumbnailUrl ? (
+                          <img
+                            src={thumbnailUrl}
+                            alt={course.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              console.log('Image failed to load:', thumbnailUrl);
+                              e.target.style.display = 'none';
+                              const fallback = e.target.parentElement.querySelector('.fallback-bg');
+                              if (fallback) {
+                                fallback.style.display = 'flex';
+                              }
+                            }}
+                          />
+                        ) : null;
+                      })()}
+                      
+                      {/* Fallback gradient background */}
+                      <div
+                        className="fallback-bg absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-400 to-orange-400"
+                        style={{ display: (getYouTubeThumbnail(course.videoUrl) || course.imageUrl) ? 'none' : 'flex' }}
                       >
-                        <Play className="w-12 h-12 text-white" />
-                      </a>
+                        <Code className="w-16 h-16 text-white" />
+                      </div>
+
+                      {/* Play button overlay - only if videoUrl exists */}
+                      {course.videoUrl && course.videoUrl !== '#' && (
+                        <a
+                          href={course.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-50 transition-all duration-300 z-10"
+                        >
+                          <div className="bg-white rounded-full p-3 shadow-lg">
+                            <Play className="w-8 h-8 text-red-600" fill="currentColor" />
+                          </div>
+                        </a>
+                      )}
                     </div>
                     <div className="p-4 sm:p-6">
                       <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                        {video.title}
+                        {course.title}
                       </h3>
                       <p className="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3">
-                        {video.description.split("\n")[0]}
+                        {course.description}
                       </p>
                       <div className="flex items-center gap-2 flex-wrap">
-                        {video.tags &&
-                          video.tags.length > 0 &&
-                          video.tags.map((tag, idx) => (
+                        {course.tags &&
+                          course.tags.length > 0 &&
+                          course.tags.map((tag, idx) => (
                             <span
                               key={idx}
                               className="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded"
@@ -565,9 +564,11 @@ const CodingForKids = () => {
                               {tag}
                             </span>
                           ))}
-                        <span className="text-sm text-gray-500">
-                          {video.status}
-                        </span>
+                        {course.level && (
+                          <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded capitalize">
+                            {course.level}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -600,25 +601,31 @@ const CodingForKids = () => {
           <div className="w-full mb-12 sm:mb-16 -ml-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-14 sm:gap-40 -left-10">
               {[
-                'Online Courses',
-                'Virtual Programs',
-                'School Partnership Programs',
-                'Teacher Training Programs',
-                'In-School Curriculum Integration'
-              ].map((program, index) => (
-                <div
-                  key={index}
-                  onClick={() => navigate('/courses')}
-                  className="w-[270px] h-[39px] bg-white border border-gray-200 hover:border-[#FF9500] rounded-[16px] px-5 py-5 flex items-center gap-3 cursor-pointer transition-all duration-300 shadow-[0px_6px_30px_rgba(0,0,0,0.05)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.12)] min-h-[60px]"
-                >
-                  <div className="w-[40px] h-[40px] bg-[#A3A3F5] rounded-[12px] flex items-center justify-center flex-shrink-0">
-                    <Lightbulb className="w-4 h-4 text-white" />
+                { name: 'Online Courses', icon: Laptop, color: '#A3A3F5' },
+                { name: 'Virtual Programs', icon: Monitor, color: '#FF9500' },
+                { name: 'School Partnership Programs', icon: Building, color: '#10B981' },
+                { name: 'Teacher Training Programs', icon: GraduationCap, color: '#8B5CF6' },
+                { name: 'In-School Curriculum Integration', icon: BookOpen, color: '#F59E0B' }
+              ].map((program, index) => {
+                const IconComponent = program.icon;
+                return (
+                  <div
+                    key={index}
+                    onClick={() => navigate('/courses')}
+                    className="w-[270px] h-[39px] bg-white border border-gray-200 hover:border-[#FF9500] rounded-[16px] px-5 py-5 flex items-center gap-3 cursor-pointer transition-all duration-300 shadow-[0px_6px_30px_rgba(0,0,0,0.05)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.12)] min-h-[60px]"
+                  >
+                    <div 
+                      className="w-[40px] h-[40px] rounded-[12px] flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: program.color }}
+                    >
+                      <IconComponent className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="font-['Plus_Jakarta_Sans'] font-semibold text-sm sm:text-base text-[#18181B] leading-[14px]">
+                      {program.name}
+                    </span>
                   </div>
-                  <span className="font-['Plus_Jakarta_Sans'] font-semibold text-sm sm:text-base text-[#18181B] leading-[14px]">
-                    {program}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -652,14 +659,14 @@ const CodingForKids = () => {
                     'Assessments, certificates & competitions'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start text-gray-700">
-                      <CheckCircle className="w-5 h-5 text-[#FF9500] mr-2 flex-shrink-0 mt-0.5" fill="#FF9500" />
+                      <CheckCircle className="w-5 h-5 text-[#FF9500] mr-2 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
                 <button 
                   onClick={() => navigate('/contact')}
-                  className="bg-[#FF9500] text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-[#FF8500] transition-colors duration-300"
+                  className="bg-[#FF9500] text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-[#FF8500] transition-colors duration-300 ml-45"
                 >
                   Start Partnership
                 </button>
@@ -694,14 +701,14 @@ const CodingForKids = () => {
                     'Real-world mini projects to apply coding concepts'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start text-gray-700">
-                      <CheckCircle className="w-5 h-5 text-[#FF9500] mr-2 flex-shrink-0 mt-0.5" fill="#FF9500" />
+                      <CheckCircle className="w-5 h-5 text-[#FF9500] mr-2 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
                 <button 
                   onClick={() => navigate('/courses')}
-                  className="bg-[#FF9500] text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-[#FF8500] transition-colors duration-300"
+                  className="bg-[#FF9500] text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-[#FF8500] transition-colors duration-300 ml-45 mt-10"
                 >
                   Explore Courses
                 </button>
@@ -785,17 +792,17 @@ const CodingForKids = () => {
       </section>
 
       {/* Benefits of Coding for Kids Section */}
-      <section className="py-12 sm:py-16 md:py-20 -mt-12">
+      <section className="py-12 sm:py-16 md:py-20 -mt-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[48px] leading-[142%] text-center text-black mb-12 sm:mb-16 capitalize">
             Benefits Of <span className="text-[#FF9500]">Coding</span> For Kids
           </h2>
           
           {/* Layout with illustration in center and cards on sides */}
-          <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12">
+          <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 -mt-[65px]">
             {/* Left Column - 3 Benefit Cards */}
-            <div className="flex flex-col gap-6 w-[310px] h-[90] gap-8 w-full lg:w-auto ">
-              <div className="border-2 border-[rgba(93,56,222,0.5)] rounded-[15px] bg-white flex items-center gap-2">
+            <div className="flex flex-col gap-6 w-[310px] h-[90]    ">
+              <div className="border-2 border-[rgba(93,56,222,0.5)] rounded-[15px] bg-white flex items-center gap-2 ">
                 <div className="w-[87.44px] h-[90px] bg-[rgba(93,56,222,0.5)] rounded-[15px] flex items-center justify-center flex-shrink-0">
                 <img src={User1} alt="User" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
                 </div>
@@ -853,7 +860,7 @@ const CodingForKids = () => {
       </section>
 
       {/* What We Do for Schools & Institutions Section */}
-      <section className="py-12 sm:py-16 md:py-20 -mt-20">
+      <section className="py-12 sm:py-16 md:py-20 -mt-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[42px] leading-[63px] text-left text-[#141219] mb-3   -mt-10">
             What We Do for <span className="text-[#FF9500]">Schools & Institutions</span>
@@ -996,8 +1003,19 @@ const CodingForKids = () => {
               { title: 'Corporate School Partnership Model', subtitle: 'Ideal for large school chains and educational groups seeking a scalable model.', features: ['Centralized training for all branches', 'Cross-branch competition support','Unified reporting and dashboard', 'Co-branding and national recognition'] }
             ].map((model, index) => (
               <div key={index} className="w-[511px] bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-200 rounded-xl">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                  <Building className="w-8 h-8 text-purple-600" />
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
+                  index === 0 ? 'bg-blue-100' : 
+                  index === 1 ? 'bg-orange-100' : 
+                  index === 2 ? 'bg-green-100' : 
+                  index === 3 ? 'bg-purple-100' : 
+                  index === 4 ? 'bg-indigo-100' : 'bg-pink-100'
+                }`}>
+                  {index === 0 && <Handshake className="w-8 h-8 text-blue-600" />}
+                  {index === 1 && <Zap className="w-8 h-8 text-orange-600" />}
+                  {index === 2 && <Monitor className="w-8 h-8 text-green-600" />}
+                  {index === 3 && <FileEdit className="w-8 h-8 text-purple-600" />}
+                  {index === 4 && <GraduationCap className="w-8 h-8 text-indigo-600" />}
+                  {index === 5 && <Building className="w-8 h-8 text-pink-600" />}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{model.title}</h3>
                 {model.subtitle && (
@@ -1174,9 +1192,9 @@ const CodingForKids = () => {
       <section className="py-12 sm:py-16 md:py-20 -mt-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Badge */}
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-4 -mt-15">
             <div className="bg-[#EA580C] rounded-full px-4 py-2">
-              <span className="font-['Inter'] font-bold text-sm leading-[17px] text-white">MoU PARTNERSHIP BENEFITS</span>
+              <span className="font-['Inter'] font-bold text-sm leading-[17px] text-white -">MoU PARTNERSHIP BENEFITS</span>
             </div>
           </div>
           
@@ -1318,7 +1336,7 @@ const CodingForKids = () => {
             </div>
         </div>
         <div className="pt-[100px]">
-        <Testimonial/>
+        <Testimonial testimonials={testimonials} />
             </div>
       </section>
 
@@ -1394,7 +1412,7 @@ const CodingForKids = () => {
       {/* End of Wrapper Container */}
 
       {/* FAQ Section */}
-      <FAQSection />
+      <FAQSection faqs={faqs} />
       
     </div>
   );

@@ -4,9 +4,7 @@ const LeadForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    organization: '',
-    phone: '',
-    requirement: ''
+    message: ''
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,10 +33,8 @@ const LeadForm = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          organization: formData.organization,
-          phone: formData.phone,
-          requirement: formData.requirement,
-          source: 'website'
+          requirement: formData.message,
+          source: 'corporate-training-consultation'
         })
       });
 
@@ -50,9 +46,7 @@ const LeadForm = () => {
         setFormData({
           name: '',
           email: '',
-          organization: '',
-          phone: '',
-          requirement: ''
+          message: ''
         });
       } else {
         throw new Error(data.message || 'Failed to submit lead');
@@ -116,51 +110,17 @@ const LeadForm = () => {
           />
         </div>
 
-        {/* Organization Field */}
+        {/* Message Field */}
         <div>
-          <label htmlFor="organization" className="block text-sm font-medium text-white mb-2">
-            Organization
-          </label>
-          <input
-            type="text"
-            id="organization"
-            name="organization"
-            value={formData.organization}
-            onChange={handleInputChange}
-            placeholder="Enter your organization"
-            className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/30 rounded-none focus:ring-0 focus:border-white outline-none transition-all text-white placeholder-white/70"
-            required
-          />
-        </div>
-
-        {/* Phone Field */}
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
-            Phone
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            placeholder="Enter your phone number"
-            className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/30 rounded-none focus:ring-0 focus:border-white outline-none transition-all text-white placeholder-white/70"
-            required
-          />
-        </div>
-
-        {/* Requirement Field */}
-        <div>
-          <label htmlFor="requirement" className="block text-sm font-medium text-white mb-2">
+          <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
             Message
           </label>
           <textarea
-            id="requirement"
-            name="requirement"
-            value={formData.requirement}
+            id="message"
+            name="message"
+            value={formData.message}
             onChange={handleInputChange}
-            placeholder="..."
+            placeholder="Enter your message..."
             rows={3}
             className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/30 rounded-none focus:ring-0 focus:border-white outline-none transition-all resize-none text-white placeholder-white/70"
             required

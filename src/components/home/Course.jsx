@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BookOpen, Star } from 'lucide-react';
+import { BookOpen, Star, Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 
 
@@ -95,9 +95,11 @@ const mockCourses = [
 ];
 
 const Course = () => {
+  const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -140,6 +142,13 @@ const Course = () => {
     fetchCourses();
   }, []);
 
+  const nextSlide = () => {
+    setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+  };
+  
+  const prevSlide = () => {
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  };
 
   const handleRetry = () => {
     setError(null);
@@ -158,8 +167,17 @@ const Course = () => {
     fetchCourses();
   };
 
+  const itemsPerPage = 3;
+  const maxIndex = Math.max(0, courses.length - itemsPerPage);
+  const visibleCourses = courses.slice(currentIndex, currentIndex + itemsPerPage);
+  const canNavigate = courses.length > itemsPerPage;
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
+
   // Create course illustration component
-  const CourseIllustration = ({ title, color = "blue" }) => {
+  const CourseIllustration = ({ title, color = "blue", bannerImageUrl }) => {
     const colorMap = {
       blue: "#3B82F6",
       green: "#10B981",
@@ -177,62 +195,79 @@ const Course = () => {
       pink: "#FDF2F8",
       indigo: "#EEF2FF"
     };
-
-
    
-const navigate = useNavigate();
     return (
       <div 
-        className="h-[125px] p-8 rounded-t-2xl flex flex-col items-start justify-between  relative overflow-hidden"
-        style={{ backgroundColor: bgColorMap[color] }}
+        className="h-[125px] p-8 rounded-t-2xl flex flex-col items-start justify-between relative overflow-hidden"
+        style={{ backgroundColor: bannerImageUrl ? 'transparent' : bgColorMap[color] }}
       >
+        {/* Banner Image from API */}
+        {bannerImageUrl && (
+          <img 
+            src={bannerImageUrl} 
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+        )}
+        
+        {/* Overlay for better text readability */}
+        {bannerImageUrl && (
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-[1] -"></div>
+        )}
+        
         {/* Top Section - Text */}
-        <div className="text-left z-10">
-          <div className="text-gray-500 text-sm font-medium mb-1">
+        <div className="text-left z-10 relative">
+          <div className={`text-sm font-medium mb-1 ${bannerImageUrl ? 'text-white' : 'text-gray-500'}`}>
             Courses
           </div>
-          <div className="text-gray-500 text-sm font-medium mb-2">
+          <div className={`text-sm font-medium mb-2 ${bannerImageUrl ? 'text-white' : 'text-gray-500'}`}>
             to Learn
           </div>
-          <div className="text-gray-900 text-2xl font-bold leading-tight">
+          <div className={`text-2xl font-bold leading-tight ${bannerImageUrl ? 'text-white' : 'text-gray-900'}`}>
             {title.split(' ').slice(0, 2).join(' ')}
           </div>
         </div>
 
-        {/* Bottom Right - Laptop Illustration */}
-        <div className="absolute bottom-4 right-4 z-10">
-          <svg width="120" height="90" viewBox="0 0 120 90" fill="none">
-            {/* Laptop screen */}
-            <rect x="15" y="10" width="90" height="60" rx="4" fill={colorMap[color]} opacity="0.2"/>
-            <rect x="20" y="15" width="80" height="50" rx="2" fill="white"/>
-            
-            {/* Screen content */}
-            <rect x="30" y="25" width="30" height="4" rx="2" fill={colorMap[color]} opacity="0.3"/>
-            <rect x="30" y="33" width="40" height="4" rx="2" fill={colorMap[color]} opacity="0.3"/>
-            <rect x="30" y="41" width="35" height="4" rx="2" fill={colorMap[color]} opacity="0.3"/>
-            
-            {/* Chart/Graph illustration */}
-            <circle cx="80" cy="35" r="8" fill={colorMap[color]} opacity="0.4"/>
-            <rect x="75" y="45" width="3" height="10" rx="1.5" fill={colorMap[color]} opacity="0.4"/>
-            <rect x="80" y="40" width="3" height="15" rx="1.5" fill={colorMap[color]} opacity="0.4"/>
-            <rect x="85" y="43" width="3" height="12" rx="1.5" fill={colorMap[color]} opacity="0.4"/>
-            
-            {/* Laptop base */}
-            <path d="M10 70 L5 75 L115 75 L110 70 Z" fill={colorMap[color]} opacity="0.3"/>
-            <rect x="15" y="68" width="90" height="2" fill={colorMap[color]} opacity="0.4"/>
-          </svg>
-        </div>
-
-        {/* Top Right - Star decoration */}
-        <div className="absolute top-4 right-4 z-10">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill={colorMap[color]} opacity="0.3">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-          </svg>
-        </div>
+        {/* Bottom Right - Laptop Illustration (only show if no banner image) */}
+        {!bannerImageUrl && (
+          <div className="absolute bottom-4 right-4 z-10 ">
+            <svg width="120" height="90" viewBox="0 0 120 90" fill="none">
+              {/* Laptop screen */}
+              <rect x="15" y="10" width="90" height="60" rx="4" fill={colorMap[color]} opacity="0.2"/>
+              <rect x="20" y="15" width="80" height="50" rx="2" fill="white"/>
+              
+              {/* Screen content */}
+              <rect x="30" y="25" width="30" height="4" rx="2" fill={colorMap[color]} opacity="0.3"/>
+              <rect x="30" y="33" width="40" height="4" rx="2" fill={colorMap[color]} opacity="0.3"/>
+              <rect x="30" y="41" width="35" height="4" rx="2" fill={colorMap[color]} opacity="0.3"/>
+              
+              {/* Chart/Graph illustration */}
+              <circle cx="80" cy="35" r="8" fill={colorMap[color]} opacity="0.4"/>
+              <rect x="75" y="45" width="3" height="10" rx="1.5" fill={colorMap[color]} opacity="0.4"/>
+              <rect x="80" y="40" width="3" height="15" rx="1.5" fill={colorMap[color]} opacity="0.4"/>
+              <rect x="85" y="43" width="3" height="12" rx="1.5" fill={colorMap[color]} opacity="0.4"/>
+              
+              {/* Laptop base */}
+              <path d="M10 70 L5 75 L115 75 L110 70 Z" fill={colorMap[color]} opacity="0.3"/>
+              <rect x="15" y="68" width="90" height="2" fill={colorMap[color]} opacity="0.4"/>
+            </svg>
+          </div>
+        )}
+        
+        {/* Top Right - Star decoration (only show if no banner image) */}
+        {!bannerImageUrl && (
+          <div className="absolute top-4 right-4 z-10 ">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill={colorMap[color]} opacity="0.3">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+          </div>
+        )}
       </div>
     );
   };
-const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
@@ -243,7 +278,7 @@ const navigate = useNavigate();
               Explore Our <span className="text-amber-500">Programs</span>
             </h2>
          
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg -mb-20">
               Find the best Program for your Growth and boosts your
               Confidence 10x!
             </p>
@@ -316,9 +351,10 @@ const navigate = useNavigate();
             ) : (
               // Display courses
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {courses.map((course, index) => {
+                {visibleCourses.map((course, index) => {
                   const colors = ['blue', 'green', 'purple', 'orange', 'pink', 'indigo'];
-                  const courseColor = colors[index % colors.length];
+                  const absoluteIndex = currentIndex + index;
+                  const courseColor = colors[absoluteIndex % colors.length];
                   
                   return (
                     <div
@@ -326,7 +362,11 @@ const navigate = useNavigate();
                       className="w-[398px] h-[338px] bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
                     >
                       {/* Course Illustration */}
-                      <CourseIllustration title={course.title} color={courseColor} />
+                      <CourseIllustration 
+                        title={course.title} 
+                        color={courseColor} 
+                        bannerImageUrl={course.bannerImageUrl}
+                      />
                       
                       <div className="p-6">
                         {/* Rating */}
@@ -378,16 +418,48 @@ const navigate = useNavigate();
               </div>
             )}
 
-            {/* View All Button */}
+           
+
             
-            <div className="text-center mt-8 mb-5 ml-[500px] pb-10">
-              <button className="bg-white border-2 border-[#FFE6A1] text-[25px]  text-black px-8 py-3 rounded-4xl font-semibold hover:bg-yellow-500 transition-colors flex items-center ">
-                <button onClick={() => navigate("/courses")} >View All </button>
-                <svg className="w-[40px] h-[40px] -mr-4 ml-8 border-2 rounded-3xl bg-[#FCB11F] text-white " fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </button>
+              {/* Navigation & View All */}
+          {courses.length > 0 && (
+            <div className="mt-8 mb-10 pb-10 flex flex-col items-center gap-3">
+              <div className="flex items-center gap-100">
+                <button
+                  onClick={prevSlide}
+                  disabled={!canNavigate || currentIndex === 0}
+                  className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => navigate("/courses")}
+                  className="bg-white border-2 border-[#FFE6A1] text-[20px] text-black px-8 py-3 rounded-4xl font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-4"
+                >
+                  View All
+                  <span className="w-10 h-10 flex items-center justify-center border-2 rounded-3xl bg-[#FCB11F] text-white">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  disabled={!canNavigate || currentIndex >= maxIndex}
+                  className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+              {canNavigate && (
+                <div className="text-sm text-gray-600">
+                  {currentIndex + 1} - {Math.min(currentIndex + itemsPerPage, courses.length)} of {courses.length}
+                </div>
+              )}
             </div>
+          )}
+
+
           </div>
         </div>
       </div>

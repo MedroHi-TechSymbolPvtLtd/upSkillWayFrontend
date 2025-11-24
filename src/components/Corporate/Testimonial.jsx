@@ -136,7 +136,7 @@ function ScrollVelocityRowImpl({
 
     const bw = unitWidth.get() || 0;
     if (bw <= 0) return;
-    const pixelsPerSecond = (bw * baseVelocity) / 100;
+    const pixelsPerSecond = (bw * baseVelocity) / 500;
     const moveBy =
       currentDirectionRef.current * pixelsPerSecond * speedMultiplier * dt;
     baseX.set(baseX.get() + moveBy);
