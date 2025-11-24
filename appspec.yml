@@ -1,0 +1,26 @@
+version: 0.0
+os: linux
+
+files:
+  - source: scripts/
+    destination: /home/ec2-user/app/scripts
+  - source: appspec.yml
+    destination: /home/ec2-user/app
+  - source: dockerfile
+    destination: /home/ec2-user/app
+
+hooks:
+  BeforeInstall:
+    - location: scripts/permissions.sh
+      timeout: 300
+      runas: root
+
+  ApplicationStop:
+    - location: scripts/stop_docker.sh
+      timeout: 300
+      runas: root
+
+  ApplicationStart:
+    - location: scripts/start_docker.sh
+      timeout: 300
+      runas: root

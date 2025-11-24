@@ -5,8 +5,8 @@ import Footer from "../components/Footer";
 import Testimonial from "../components/CodingForKIds/Testimonial";
 import FAQSection from "../components/CodingForKIds/Faq";
 import Coding from "../assets/Images/Coding.png";
-import Coding1 from "../assets/Images/Coding1.png";
-import Coding2 from "../assets/Images/Coding2.png";
+import Coding1 from "../assets/Images/coding1.png";
+import Coding2 from "../assets/Images/coding2.png";
 import Coding5 from "../assets/Images/Coding5.png";
 import User1 from "../assets/Images/User1.png";
 import Clock1 from "../assets/Images/Clock1.png";
@@ -20,7 +20,7 @@ import Lgt from "../assets/Images/Lgt.png";
 import Vec from "../assets/Images/Vec.png";
 import Vec2 from "../assets/Images/Vec2.png";
 import Vec3 from "../assets/Images/Vec3.png";
-import School from "../assets/Images/School.png";
+import School from "../assets/Images/school.png";
 
 
 

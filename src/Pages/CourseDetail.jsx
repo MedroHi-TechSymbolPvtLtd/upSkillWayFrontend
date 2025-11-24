@@ -27,7 +27,8 @@ import {
   MessageCircle,
   X
 } from 'lucide-react';
-
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
 import Share from '../components/Courses/Share';
 
 

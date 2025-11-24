@@ -15,7 +15,7 @@ import Credibility from "../components/home/Credibility";
 import Enterprises from "../components/home/Enterprises";
 import Certified from "../components/home/Certificate";
 import Stats from "../components/home/Stats";
-import Process from "../assets/Images/Process.mp4";
+import Process from "../assets/Images/process.mp4";
 
 
 export default function TrustSection() {
