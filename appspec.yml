@@ -4,10 +4,15 @@ os: linux
 files:
   - source: scripts/
     destination: /home/ec2-user/app/scripts
+
   - source: appspec.yml
     destination: /home/ec2-user/app
+
   - source: dockerfile
     destination: /home/ec2-user/app
+
+  - source: nginx.conf
+    destination: /home/ec2-user/app   # <-- MOST IMPORTANT FIX
 
 hooks:
   BeforeInstall:
