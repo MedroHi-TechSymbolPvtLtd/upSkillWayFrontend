@@ -14,14 +14,11 @@ phases:
 
   post_build:
     commands:
-      - echo "Pushing image to ECR..."
+      - echo "Pushing frontend image to ECR..."
       - docker push 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
-      - echo "Creating imagedefinitions.json..."
-      - printf '[{"name":"upskillway","imageUri":"488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest"}]' > imagedefinitions.json
 
 artifacts:
   files:
     - appspec.yml
     - scripts/**
     - Dockerfile
-    - imagedefinitions.json
