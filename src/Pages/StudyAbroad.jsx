@@ -10,7 +10,7 @@ import Study4 from "../assets/Images/Study4.png";
 import "../assets/Images/Illustration.png";
 import sitting from "../assets/Images/sitting.png";
 import sit from "../assets/Images/sittig3.png";
-import popUp from "../assets/Images/popup_real.png";
+import popUp from "../assets/Images/pop_main.png";
 
 
 
