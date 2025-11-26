@@ -12,6 +12,10 @@ RUN npm run build
 # Serve with Nginx (ARM64)
 FROM --platform=linux/arm64 public.ecr.aws/docker/library/nginx:alpine
 
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy built project
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
