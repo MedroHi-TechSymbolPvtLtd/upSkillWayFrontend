@@ -8,13 +8,13 @@ phases:
 
   build:
     commands:
-      - echo "Building ARM64 Docker image for EC2 (Graviton)..."
+      - echo "Building ARM64 Docker image..."
       - docker build --platform=linux/arm64 -t upskillway .
       - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
 
   post_build:
     commands:
-      - echo "Pushing frontend image to ECR..."
+      - echo "Pushing image..."
       - docker push 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
 
 artifacts:
