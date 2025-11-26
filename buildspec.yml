@@ -5,9 +5,6 @@ phases:
     commands:
       - echo "Logging into Amazon ECR..."
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 488479524661.dkr.ecr.ap-south-1.amazonaws.com
-      - echo "Make deploy scripts executable (if present at root or src/scripts)"
-      - if [ -d scripts ]; then chmod +x scripts/*.sh || true; fi
-      - if [ -d src/scripts ]; then chmod +x src/scripts/*.sh || true; fi
 
   build:
     commands:
@@ -23,8 +20,6 @@ phases:
 artifacts:
   files:
     - appspec.yml
+    - scripts/*
     - Dockerfile
-    - nginx.conf
-    - scripts/**/*
-    - src/scripts/**/*
-    - '**/scripts/**/*'   # catch-all if scripts are nested somewhere else
+  discard-paths: yes
