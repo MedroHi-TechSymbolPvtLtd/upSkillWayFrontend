@@ -7,9 +7,9 @@ hooks:
       runas: root
 
   ApplicationStop:
-    - location: scripts/stop.sh
+    - location: scripts/stop_docker.sh
       runas: root
 
   AfterInstall:
-    - location: scripts/start.sh
+    - location: scripts/start_docker.sh
       runas: root
