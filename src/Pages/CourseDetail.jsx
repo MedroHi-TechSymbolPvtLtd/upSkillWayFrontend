@@ -29,7 +29,7 @@ import {
   X
 } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
-import Footer from '../Components/Footer';
+import Footer from '../components/Footer.jsx';
 import Share from '../components/Courses/Share';
 
 
