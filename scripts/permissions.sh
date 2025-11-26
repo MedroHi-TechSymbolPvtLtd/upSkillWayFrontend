@@ -1,2 +1,6 @@
 #!/bin/bash
-chmod +x /home/ec2-user/app/scripts/*.sh
+set -e
+
+DEPLOY_DIR=$(dirname "$0")
+
+chmod +x "$DEPLOY_DIR"/*.sh || true
