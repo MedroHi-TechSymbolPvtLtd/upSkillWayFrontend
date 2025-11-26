@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Star, ChevronRight } from "lucide-react";
-import Certified1 from "../../assets/Images/certified1.png"; 
+import Certified1 from "../../assets/Images/Certified1.png"; 
 import Certified from '../../assets/Images/certified2.png';
 import Certified3 from "../../assets/Images/certified3.png";
 
