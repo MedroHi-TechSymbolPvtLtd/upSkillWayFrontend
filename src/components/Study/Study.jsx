@@ -113,15 +113,15 @@ const StudyAbroad = () => {
             {courses.map((course, index) => (
               <div 
                 key={course.id || index} 
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="w-[356px] h-[426px]  bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="relative">
-                  <div className="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center overflow-hidden">
+                
+                  <div className="bg-gradient-to-br flex items-center justify-center overflow-hidden rounded-[16px]">
                     {course.imageUrl && course.imageUrl.startsWith('http') ? (
                       <img 
                         src={course.imageUrl} 
                         alt={course.city || course.title || 'Study Abroad Program'}
-                        className="w-full h-full object-cover"
+                        className="w-[308px] h-[242px] object-cover rounded-[16px]"
                         onError={(e) => {
                           e.target.style.display = 'none';
                         }}
@@ -130,16 +130,19 @@ const StudyAbroad = () => {
                   </div>
                   
                   {/* City Badge */}
-                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-6 py-2 rounded-full shadow-lg">
-                    <span className="text-purple-600 font-bold text-lg lowercase">
+                  <div className='relative'>
+                           <div className="w-[147px] h-[34px] absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-6 py-2 rounded-full shadow-lg ml-5">
+                    <span className="w-[107px] h-[18px] text-purple-600 font-bold text-[14px] text-lg lowercase ml-7">
                       {course.city || course.country || 'united states'}
                     </span>
                   </div>
-                </div>
+                  </div>
+         
                 
-                <div className="p-6">
+                
+                <div className="w-[257px] h-[78px]  ml-10 mt-5 ">
                   {/* Universities Count */}
-                  <div className="flex justify-between items-center mb-4">
+                  <div className="flex justify-between items-center mb-1 -ml-5">
                     <span className="text-gray-700 font-medium text-[14px]">Universities</span>
                     <span className="text-gray-900 font-bold text-[14px]">
                       {course.universities || '200+'}
@@ -147,7 +150,7 @@ const StudyAbroad = () => {
                   </div>
 
                   {/* Average Tuition */}
-                  <div className="flex justify-between items-center mb-4">
+                  <div className="flex justify-between items-center mb-1 -ml-5">
                     <span className="text-gray-700 font-medium text-[14px]">Avg. Tuition</span>
                     <span className="text-gray-900 font-bold text-[14px]">
                       ${course.avgTuition ? `${parseFloat(course.avgTuition).toLocaleString()}/year` : '20,000/year'}
@@ -155,7 +158,7 @@ const StudyAbroad = () => {
                   </div>
 
                   {/* Living Cost */}
-                  <div className="flex justify-between items-center mb-6">
+                  <div className="flex justify-between items-center mb-6 -ml-5">
                     <span className="text-gray-700 font-medium text-[14px]">Living Cost</span>
                     <span className="text-gray-900 font-bold text-[14px]">
                       ${course.livingCost ? `${parseFloat(course.livingCost).toLocaleString()}/month` : '1,200/month'}
@@ -165,7 +168,7 @@ const StudyAbroad = () => {
                   {/* Learn More Button */}
                   <button 
                     onClick={() => handleLearnMore(course)}
-                    className="w-full bg-gradient-to-r from-orange-400 to-yellow-400 text-gray-900 py-4 rounded-2xl font-bold text-lg hover:from-orange-500 hover:to-yellow-500 transition-all duration-200 flex items-center justify-center gap-2"
+                    className="w-[228px] h-[41px] bg-[#FBB11F] text-gray-900 py-4 rounded-2xl font-bold text-lg hover:from-orange-500 hover:to-yellow-500 transition-all duration-200 flex items-center justify-center gap-2 ml-5"
                   >
                     Learn More
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">

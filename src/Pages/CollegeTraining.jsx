@@ -781,8 +781,8 @@ React.useEffect(() => {
         className="w-[280px] h-[625px] font-['Plus_Jakarta_Sans'] bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow relative"
       >
         {index === 3 && (
-          <div className="absolute top-4 right-4">
-            <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full -ml-60">
+          <div className="absolute top-0 right-4 ">
+            <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full -ml-60 ">
               POPULAR
             </span>
           </div>
@@ -1133,7 +1133,7 @@ React.useEffect(() => {
       <section className="py-20 bg-white -mt-19 font-['Plus_Jakarta_Sans'] -mb-20 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-[55px] w-[1238px] sm:text-5xl font-bold text-gray-900 mb-4 -ml-20">
+            <h2 className="text-[55px] w-[1238px] sm:text-5xl font-bold text-gray-900 mb-4 ">
               Partnership Made Easy — Let's Connect Today
             </h2>
             <p className="text-lg text-gray-600 max-w-4xl mx-auto">
@@ -1330,13 +1330,13 @@ React.useEffect(() => {
       </div>
 
       {/* Get In Touch Section */}
-      <section id="get-in-touch" className="py-20 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="get-in-touch" className="py-20   -mt-20">
+        <div className=" w-[1029px] h-[783px]   mx-auto   ">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Left Side - Form */}
               <div className="p-8 sm:p-12 lg:p-16">
-                <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8">
+                <h2 className="text-[32px] sm:text-5xl font-semibold text-gray-900 mb-8">
                   Get In Touch
                 </h2>
 
@@ -1462,7 +1462,7 @@ React.useEffect(() => {
                   <img
                     src={GetInTouch}
                     alt="Get In Touch Illustration"
-                    className="w-full h-full object-contain max-w-lg"
+                    className="w-[1043px] h-[587px] object-contain max-w-lg"
                   />
                 </div>
               </div>

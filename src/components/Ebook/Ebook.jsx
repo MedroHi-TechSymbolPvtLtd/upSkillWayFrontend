@@ -124,7 +124,7 @@ const EBooksSection = () => {
   }
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-white">
+    <section className="py-12 sm:py-16 md:py-20 bg-white -mt-50 -mb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <div className="inline-block bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">

@@ -3,7 +3,7 @@ import Mobile from "../assets/Images/Ebook.png";
 import Tree from "../assets/Images/Ebook2.png";
 import Book from "../assets/Images/Ebook3.png";
 import halfCircle from "../assets/Images/halfCircle.png";
-import Girl from "../assets/Images/Ebook5.png";
+
 import Cup from "../assets/Images/Ebook4.png";
 import EbookS from "../assets/Images/ebooks.png";
 import EbookS1 from "../assets/Images/EbookS1.png";
@@ -35,12 +35,12 @@ export default function UpskillWayEbooks() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-16 sm:pt-18 md:pt-20 pb-20 sm:pb-24 md:pb-32 bg-gradient-to-b from-purple-600 via-purple-700 to-purple-800 rounded-br-[100px] rounded-bl-[100px]">
-        <div className="absolute inset-0 bg-[#5B3ED9] rounded-br-[100px] rounded-bl-[100px]"></div>
+      <section className="h-[950px] relative overflow-hidden pt-16 sm:pt-18 md:pt-20 pb-20 sm:pb-24 md:pb-32 bg-gradient-to-b  ">
+        <div className="absolute inset-0 bg-[#5B3ED9]  rounded-bl-[100px] rounded-br-[100px]"></div>
         {/* curved bottom edge */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 md:h-24 bg-white rounded-br-[100px] rounded-bl-[100px]"></div>
+        
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-16 sm:mt-18 md:mt-20 ">
-          <h1 className="w-full sm:w-[600px] md:w-[700px] lg:w-[786px] h-auto sm:h-[180px] md:h-[200px] lg:h-[224px] text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 mx-auto lg:ml-40  -mr-10">
+          <h1 className="w-full sm:w-[600px] md:w-[700px] lg:w-[786px] h-auto sm:h-[180px] md:h-[200px] lg:h-[224px] text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 mx-auto lg:ml-60  ">
             Explore Our <span className="text-[#FDB11F]">E-Books</span>
             <br />
             Collection
@@ -105,9 +105,9 @@ export default function UpskillWayEbooks() {
       {/* About Section */}
       <section className="py-12 sm:py-16 md:py-20 bg-white -mt-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center ">
             <div>
-              <h2 className="w-[523px] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-8">
+              <h2 className="w-[523px] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-8 mt-5">
                 About Our <span className="text-[#FDB11F]">eBooks</span>
               </h2>
               <div className="w-[180px] sm:w-[200px] md:w-[250px] lg:w-[420px] h-[6px] sm:h-[8px] md:h-[10px] lg:h-[11px] rounded-[2px] bg-[#FFD700] -mt-8 sm:mb-8 "></div>
@@ -116,7 +116,7 @@ export default function UpskillWayEbooks() {
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <span className="mt-2 inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#A280FF52]" />
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className=" text-[30px] sm:text-lg font-semibold text-gray-900 mb-10">
                       Diverse Collection
                     </h3>
                   </div>
@@ -125,7 +125,7 @@ export default function UpskillWayEbooks() {
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <span className="mt-2 inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#A280FF52] ml-4 sm:ml-6 md:ml-8 lg:ml-12" />
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-[30px] sm:text-lg font-semibold text-gray-900 mb-10">
                       Accessible Anywhere
                     </h3>
                   </div>
@@ -134,7 +134,7 @@ export default function UpskillWayEbooks() {
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <span className="mt-2 inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#A280FF52]" />
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-[30px] sm:text-lg font-semibold text-gray-900 mb-10">
                       Designed for Everyone
                     </h3>
                   </div>
@@ -143,7 +143,7 @@ export default function UpskillWayEbooks() {
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <span className="mt-2 inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#A280FF52] ml-8 sm:ml-10 md:ml-12 lg:ml-15" />
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-[30px]  sm:text-lg font-semibold text-gray-900 mb-10">
                       Smart & Eco-Friendly
                     </h3>
                   </div>
@@ -156,7 +156,7 @@ export default function UpskillWayEbooks() {
                 <img
                   src={Mobile}
                   alt="mobile with book"
-                  className="w-[1153px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[800px] xl:max-w-[1154px] h-[650px] relative z-10 mx-auto opacity-100 -ml-60"
+                  className="w-[1153px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[800px] xl:max-w-[1154px] h-[650px] relative z-10 mx-auto opacity-100 -ml-60 mt-30"
                 />
               </div>
             </div>
@@ -165,61 +165,31 @@ export default function UpskillWayEbooks() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white -mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-20 bg-white -mt-70">
+        <div className=" w-full px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
-            <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[540px]">
+            <div className="relative h-[350px] sm:h-[400px] md:h-[500px] lg:h-[700px] ">
               {/* Top-right portrait (rounded quarter) */}
-              <div className="absolute right-0 top-0 w-[200px] sm:w-[280px] md:w-[320px] lg:w-[360px] h-[240px] sm:h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden bg-gray-200 rounded-[100px_0px_100px_100px] sm:rounded-[150px_0px_150px_150px] md:rounded-[180px_0px_180px_180px] lg:rounded-[200px_0px_200px_200px] z-20">
-                <img
-                  src={Girl}
-                  alt="girl with books"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+          
 
               {/* Bottom-left portrait (rounded 3/4 circle) */}
-              <div className="absolute left-0 bottom-0 w-[200px] sm:w-[280px] md:w-[320px] lg:w-[380px] h-[200px] sm:h-[280px] lg:h-[380px] overflow-hidden bg-gray-200 rounded-[120px_120px_120px_0px] sm:rounded-[160px_160px_160px_0px] md:rounded-[180px_180px_180px_0px] lg:rounded-[220px_220px_220px_0px] -ml-10">
+
                 <img
                   src={Cup}
                   alt="thinking student"
-                  className="w-full h-full object-cover"
+                  className="w-[498px] h-[496px] object-cover mt-30 ml-30"
                 />
-              </div>
+              
 
               {/* Badge: BEST Author */}
-              <div className="absolute left-[-5px] sm:left-[-8px] md:left-[-10px] top-[60px] sm:top-[80px] md:top-[100px] lg:top-[110px] bg-white/90 backdrop-blur rounded-[20px] sm:rounded-[24px] md:rounded-[26px] lg:rounded-[28px] border border-gray-200 shadow-sm px-3 py-2 sm:px-4 sm:py-3 md:px-5 md:py-3 lg:px-6 lg:py-4 flex items-center gap-2 sm:gap-3 md:gap-4 -mt-10">
-                <span className="inline-flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-purple-100 text-purple-600 text-xs sm:text-sm">
-                  •
-                </span>
-                <div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-900">
-                    BEST
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-600 -mt-1">
-                    Author
-                  </div>
-                </div>
-              </div>
+            
 
               {/* Badge: VIDEO Lessons */}
-              <div className="absolute right-[-5px] sm:right-[-8px] md:right-[-10px] bottom-[20px] sm:bottom-[30px] md:bottom-[35px] lg:bottom-[40px] bg-white/90 backdrop-blur rounded-[20px] sm:rounded-[24px] md:rounded-[26px] lg:rounded-[28px] border border-gray-200 shadow-sm px-3 py-2 sm:px-4 sm:py-3 md:px-5 md:py-3 lg:px-6 lg:py-4 flex items-center gap-2 sm:gap-3 md:gap-4">
-                <span className="inline-flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-purple-100 text-purple-600 text-xs sm:text-sm">
-                  ▶
-                </span>
-                <div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-900">
-                    VIDEO
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-600 -mt-1">
-                    Lessons
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <div>
-              <div className="text-xs sm:text-sm text-purple-600 font-semibold mb-2">
+              <div className="text-xs sm:text-sm text-purple-600 font-semibold mb-2 " >
                 Fresh Reads
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">

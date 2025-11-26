@@ -4,6 +4,7 @@ import sitting from "../assets/Images/sitting.png";
 import popUp from "../assets/Images/popUp.png";
 import FAQ from "../components/Courses/FAQ";
 import { useParams } from 'react-router-dom';
+import GetInTouch from "../assets/Images/HELP.png";
 import { 
   ArrowLeft, 
   Play, 
@@ -59,7 +60,66 @@ const CourseDetail = () => {
     courseType: ''
   });
   
+  // Help form state
+  const [helpStep, setHelpStep] = useState(1);
+  const [helpForm, setHelpForm] = useState({
+    name: '',
+    phone: '',
+    otp: '',
+    domain: '',
+    background: '',
+    courseType: ''
+  });
+  const [isHelpFormSubmitting, setIsHelpFormSubmitting] = useState(false);
+  const [helpFormStatus, setHelpFormStatus] = useState({ type: '', message: '' });
   
+  // Handle help form submission
+  const handleHelpFormSubmit = async () => {
+    setIsHelpFormSubmitting(true);
+    setHelpFormStatus({ type: '', message: '' });
+
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: helpForm.name,
+          phone: helpForm.phone,
+          email: '', // Optional, can be added if needed
+          organization: helpForm.domain || '',
+          requirement: `Background: ${helpForm.background}, Course Type: ${helpForm.courseType}, Domain: ${helpForm.domain}`,
+          source: 'course-detail-help-form',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setHelpFormStatus({
+          type: 'success',
+          message: 'Thank you! We will contact you soon.',
+        });
+        // Reset form after 2 seconds
+        setTimeout(() => {
+          setHelpStep(1);
+          setHelpForm({name: '', phone: '', otp: '', domain: '', background: '', courseType: ''});
+          setHelpFormStatus({ type: '', message: '' });
+        }, 2000);
+      } else {
+        throw new Error(data.message || 'Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Error submitting help form:', error);
+      setHelpFormStatus({
+        type: 'error',
+        message: error.message || 'Failed to submit. Please try again.',
+      });
+    } finally {
+      setIsHelpFormSubmitting(false);
+    }
+  };
 
   // Default course data with structured curriculum for different tabs
   const defaultCourse = useMemo(() => ({
@@ -1592,7 +1652,7 @@ const CourseDetail = () => {
                       <div className="w-[704px] h-[96px] bg-[rgba(0,0,0,0)] relative z-[436] mt-0 mr-0 mb-0 ml-[4px]">
                         <div className="w-[704px] h-[24px] bg-[rgba(0,0,0,0)] relative z-[437] mt-[24px] mr-0 mb-0 ml-0" />
                         <div className="w-[704px] h-[48px] text-[0px] bg-[rgba(0,0,0,0)] relative z-[438] mt-0 mr-0 mb-0 ml-0">
-                          <span className="block h-[22px] font-['Nunito_Sans'] text-[16px] font-normal leading-[21.824px] text-[#757575] relative text-left whitespace-nowrap z-[439] mt-px mr-0 mb-0 ml-0">
+                          <span className="block h-[22px] font-['Nunito_Sans'] text-[16px] font-normal leading-[21.824px] text-[#757575] relative text-left whitespace-nowrap z-[439] mt-30 mr-0 mb-0 ml-0">
                             The above criteria is only for getting the course
                             completion certificate. For details regarding Job
                           </span>
@@ -1611,7 +1671,7 @@ const CourseDetail = () => {
                     <div className="w-[720px] h-[26px] bg-[rgba(0,0,0,0)] relative z-[429] mt-0 mr-0 mb-0 ml-0">
                       <div className="w-[360px] h-[26px] bg-[rgba(0,0,0,0)] relative z-[430] mt-0 mr-0 mb-0 ml-0">
                         <div className="w-[328.188px] h-[26px] bg-[rgba(0,0,0,0)] rounded-[6px] relative z-[431] mt-0 mr-0 mb-0 ml-0">
-                          <span className="flex w-[329px] h-[24px] justify-center items-start font-['Nunito_Sans'] text-[18px] font-normal leading-[18px] text-[#1b2124] absolute top-px left-0 text-center underline whitespace-nowrap z-[432]">
+                          <span className="flex w-[329px] h-[24px] justify-center items-start font-['Nunito_Sans'] text-[18px] font-normal leading-[18px] text-[#1b2124] absolute top-px left-0 text-center underline whitespace-nowrap z-[432] -ml-15">
                             {course?.programName || course?.title || 'Full Stack Development with AI Course'}
                           </span>
                         </div>
@@ -1626,8 +1686,8 @@ const CourseDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[704px] h-[24px] bg-[rgba(0,0,0,0)] absolute top-[193px] left-[23px] z-[442]">
-              <span className="flex h-[22px] justify-start items-start font-['Nunito_Sans'] text-[16px] font-normal leading-[21.824px] text-[#757575] absolute top-px -mt-13   left-0 text-left whitespace-nowrap z-[443]">
+            <div className="w-[704px] h-[24px] bg-[rgba(0,0,0,0)] absolute top-[193px] left-[23px] z-[442] mt-20">
+              <span className="flex h-[22px] justify-start items-start font-['Nunito_Sans'] text-[16px] font-normal leading-[21.824px] text-[#757575] absolute top-px -mt-13   left-0 text-left whitespace-nowrap z-[443] ">
                 After watching 70% of videos
               </span>
             </div>
@@ -1695,7 +1755,7 @@ const CourseDetail = () => {
       {console.log('course?.relatedPrograms:', course?.relatedPrograms)}
       
       <div className="w-[1410px] h-auto relative overflow-hidden z-[598] mt-[36px] mr-0 mb-0 ml-[91px]">
-        <div className="w-[1410px] h-[1232px] relative z-[822] mt-0 mr-0 mb-0 ml-0">
+        <div className="w-[1410px] h-[550px] relative z-[822] mt-0 mr-0 mb-0 ml-0">
           <div className="w-[330px] absolute top-0 bottom-[604px] left-0 z-[661]">
             <div className="w-[330px] h-[455.88px] bg-[#fff] rounded-[10px] relative z-[662] mt-0 mr-0 mb-0 ml-0">
               <div className="w-[278px] h-[190px] relative overflow-hidden z-[713] mt-[26px] mr-0 mb-0 ml-[26px]">
@@ -2146,83 +2206,8 @@ const CourseDetail = () => {
           </div>
           <div className="w-[60px] h-[38px] bg-[#fff] rounded-[20px] border-solid border-2 border-[#e7e7e7] absolute top-[498px] left-[310px] rotate-180 z-[785]" />
           <div className="w-[60px] h-[38px] bg-[#fff] rounded-[20px] border-solid border-2 border-[#e7e7e7] absolute top-[500px] left-[1033px] z-[784]" />
-          <div className="w-[1.21%] h-[29px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-19/Xpbujiy75y.png)] bg-cover bg-no-repeat absolute top-1/2 left-[23.55%] translate-x-0 translate-y-[-386.21%] z-[787]" />
-          <div className="w-[1.21%] h-[29px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-19/oviLHsUfdo.png)] bg-cover bg-no-repeat absolute top-1/2 left-[74.75%] translate-x-0 translate-y-[-386.21%] z-[786]" />
-          <div className="w-[1240px] h-[648px] text-[0px] bg-[#fff] rounded-[24px] border-solid border border-[#e6e9ea] absolute top-1/2 left-1/2 translate-x-[-51.94%] translate-y-[-4.94%] overflow-hidden shadow-[0_2px_50px_0_rgba(0,0,0,0.1)] z-[822]">
-            <span className="block h-[69px] font-['Plus_Jakarta_Sans'] text-[55px] font-bold leading-[69px] text-[rgba(0,0,0,0.7)] relative text-left whitespace-nowrap z-[823] mt-[27px] mr-0 mb-0 ml-[39px]">
-              Need help?
-            </span>
-            <div className="w-[1223px] h-[437px] relative z-[854] mt-[-6px] mr-0 mb-0 ml-[39px]">
-              <div className="w-[711px] h-[400px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/default/image/2025-11-19/01c53605-a1f8-438c-9a29-e110658b694c.png)] bg-cover bg-no-repeat absolute top-0 left-[512px] z-[825]" />
-              <span className="flex h-[17px] justify-start items-start font-['Plus_Jakarta_Sans'] text-[20px] font-normal leading-[17px] text-[#3d3d3d] absolute top-[17px] left-0 text-left whitespace-nowrap z-[824]">
-                Connect with us & know what's best for you.
-              </span>
-              <div className="flex w-[45px] h-[45px] pt-[8px] pr-[23px] pb-[8px] pl-[23px] flex-col gap-[10px] justify-center items-center flex-nowrap bg-[#ffa800] rounded-[30px] absolute top-[78px] left-0 z-[847]">
-                <span className="h-[30px] shrink-0 basis-auto font-['Plus_Jakarta_Sans'] text-[24px] font-bold leading-[30px] text-[#000] relative text-left whitespace-nowrap z-[848]">
-                  1
-                </span>
-              </div>
-              <div className="flex w-[45px] h-[45px] pt-[8px] pr-[23px] pb-[8px] pl-[23px] flex-col gap-[10px] justify-center items-center flex-nowrap bg-[rgba(252,177,31,0.26)] rounded-[30px] absolute top-[78px] left-[215px] z-[849]">
-                <span className="h-[30px] shrink-0 basis-auto font-['Plus_Jakarta_Sans'] text-[24px] font-bold leading-[30px] text-[#000] relative text-left whitespace-nowrap z-[850]">
-                  2
-                </span>
-              </div>
-              <div className="flex w-[45px] h-[45px] pt-[8px] pr-[23px] pb-[8px] pl-[23px] flex-col gap-[10px] justify-center items-center flex-nowrap bg-[rgba(252,177,31,0.26)] rounded-[30px] absolute top-[78px] left-[430px] z-[851]">
-                <span className="h-[30px] shrink-0 basis-auto font-['Plus_Jakarta_Sans'] text-[24px] font-bold leading-[30px] text-[#000] relative text-left whitespace-nowrap z-[852]">
-                  3
-                </span>
-              </div>
-              <div className="w-[147px] h-[1.014px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-19/WC41T5y7kO.png)] bg-cover bg-no-repeat absolute top-[100px] left-[52px] z-[853]" />
-              <div className="w-[147px] h-[1.014px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-19/BZctQs5OZb.png)] bg-cover bg-no-repeat absolute top-[101px] left-[272px] z-[854]" />
-              <div className="flex w-[512px] h-[252px] flex-col gap-[48px] items-start flex-nowrap absolute top-[185px] left-0 z-[826]">
-                <div className="flex flex-col gap-[32px] items-start self-stretch shrink-0 flex-nowrap relative z-[827]">
-                  <div className="flex flex-col gap-[24px] items-start self-stretch shrink-0 flex-nowrap relative z-[828]">
-                    <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[829]">
-                      <div className="flex flex-col gap-[6px] items-start self-stretch shrink-0 flex-nowrap relative z-[830]">
-                        <div className="flex flex-col gap-[6px] items-start self-stretch shrink-0 flex-nowrap relative z-[831]">
-                          <span className="h-[20px] shrink-0 basis-auto font-['Inter'] text-[14px] font-medium leading-[20px] text-[#344053] relative text-left whitespace-nowrap z-[832]">
-                            Tell us about your background?
-                          </span>
-                          <div className="flex pt-[12px] pr-[16px] pb-[12px] pl-[16px] gap-[8px] items-center self-stretch shrink-0 flex-nowrap bg-[#fff] rounded-[8px] border-solid border border-[#cfd4dc] relative overflow-hidden shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] z-[833]">
-                            <div className="flex gap-[8px] items-center grow shrink-0 basis-0 flex-nowrap relative z-[834]">
-                              <span className="h-[24px] grow shrink-0 basis-auto font-['Inter'] text-[16px] font-normal leading-[24px] text-[#667084] relative text-left whitespace-nowrap z-[835]">
-                                Upskillway
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[836]">
-                      <div className="flex flex-col gap-[6px] items-start self-stretch shrink-0 flex-nowrap relative z-[837]">
-                        <div className="flex flex-col gap-[6px] items-start self-stretch shrink-0 flex-nowrap relative z-[838]">
-                          <span className="h-[20px] shrink-0 basis-auto font-['Inter'] text-[14px] font-medium leading-[20px] text-[#344053] relative text-left whitespace-nowrap z-[839]">
-                            What type of course are you interested in?
-                          </span>
-                          <div className="flex pt-[12px] pr-[16px] pb-[12px] pl-[16px] gap-[8px] items-center self-stretch shrink-0 flex-nowrap bg-[#fff] rounded-[8px] border-solid border border-[#cfd4dc] relative overflow-hidden shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] z-[840]">
-                            <div className="flex gap-[8px] items-center grow shrink-0 basis-0 flex-nowrap relative z-[841]">
-                              <span className="h-[24px] grow shrink-0 basis-auto font-['Inter'] text-[16px] font-normal leading-[24px] text-[#667084] relative text-left whitespace-nowrap z-[842]">
-                                Select Industry
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-[16px] items-start self-stretch shrink-0 flex-nowrap relative z-[843]">
-                    <div className="flex items-start self-stretch shrink-0 flex-nowrap rounded-[40px] relative z-[844]">
-                      <div className="flex pt-[12px] pr-[20px] pb-[12px] pl-[20px] gap-[8px] justify-center items-center grow shrink-0 basis-0 flex-nowrap rounded-[40px] border-solid border border-[#fff] relative overflow-hidden shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] z-[845]">
-                        <button className="h-[24px] shrink-0 basis-auto font-['Inter'] text-[16px] font-medium leading-[24px] text-black relative text-left whitespace-nowrap z-[846]">
-                          Next
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div className="w-[1.21%] h-[29px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-19/Xpbujiy75y.png)] bg-cover bg-no-repeat absolute top-1/2 left-[23.55%] translate-x-0 translate-y-[-386.21%] z-[787] mt-85" />
+          <div className="w-[1.21%] h-[29px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-11-19/oviLHsUfdo.png)] bg-cover bg-no-repeat absolute top-1/2 left-[74.75%] translate-x-0 translate-y-[-386.21%] z-[786] mt-85" />
         </div>
         
       </div>
@@ -2994,6 +2979,211 @@ const CourseDetail = () => {
           </div>
         </div>
       )}
+
+      {/* Need Help Section */}
+      <section className="">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* Left Side - Multi-Step Form */}
+              <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center ">
+                <div className="mb-8">
+                  <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                    Need help?
+                  </h2>
+                  <p className="text-xl text-gray-700 font-medium">
+                    Connect with us & know what's best for you
+                  </p>
+                </div>
+
+                {/* Step Indicator */}
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-2">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${helpStep >= 1 ? 'bg-[#F4A6A6] text-gray-400' : 'bg-[FFFFFF] text-gray-500'}`}>
+                      1
+                    </div>
+                    <span className={`text-sm font-medium ${helpStep >= 1 ? 'text-[#F4A6A6]' : 'text-gray-400'}`}>About You</span>
+                  </div>
+                  <div className="flex-1 h-0.5 bg-gray-300 mx-2"></div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${helpStep >= 2 ? 'bg-[#F4A6A6] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      2
+                    </div>
+                    <span className={`text-sm font-medium ${helpStep >= 2 ? 'text-[#F4A6A6]' : 'text-gray-400'}`}>Preferences</span>
+                  </div>
+                  <div className="flex-1 h-0.5 bg-gray-300 mx-2"></div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${helpStep >= 3 ? 'bg-[#F4A6A6] text-white' : 'bg-gray-200 text-gray-500'}`}>
+                      3
+                    </div>
+                    <span className={`text-sm font-medium ${helpStep >= 3 ? 'text-[#F4A6A6]' : 'text-gray-400'}`}>Details</span>
+                  </div>
+                </div>
+
+                {/* Step 1: Background and Course Type */}
+                {helpStep === 1 && (
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-gray-700 text-lg font-medium mb-4">Tell us about your background?</label>
+                      <select
+                        value={helpForm.background}
+                        onChange={(e) => setHelpForm({...helpForm, background: e.target.value})}
+                        className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:border-[#F4A6A6] outline-none bg-white transition-colors"
+                      >
+                        <option value="">Select Background</option>
+                        <option value="school-student">School Student</option>
+                        <option value="college-student">College Student</option>
+                        <option value="graduate">Graduate/Not Working</option>
+                        <option value="working-professional">Working Professional</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 text-lg font-medium mb-4">What type of course are you interested in?</label>
+                      <select
+                        value={helpForm.courseType}
+                        onChange={(e) => setHelpForm({...helpForm, courseType: e.target.value})}
+                        className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:border-[#F4A6A6] outline-none bg-white transition-colors"
+                      >
+                        <option value="">Select Course</option>
+                        <option value="upskilling">Upskilling Course</option>
+                        <option value="online-degree">Online Degree</option>
+                      </select>
+                    </div>
+
+                    <button
+                      onClick={() => setHelpStep(2)}
+                      className="w-full py-4 bg-[#F4A6A6] text-white font-bold rounded-lg hover:bg-[#e89595] transition-colors mt-6"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+
+                {/* Step 2: Domain Selection */}
+                {helpStep === 2 && (
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-gray-700 text-lg font-medium mb-4">Which domain interests you the most?</label>
+                      <select
+                        value={helpForm.domain}
+                        onChange={(e) => setHelpForm({...helpForm, domain: e.target.value})}
+                        className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:border-[#F4A6A6] outline-none bg-white transition-colors"
+                      >
+                        <option value="">Select Domain</option>
+                        <option value="data-science">Data Science & Analytics</option>
+                        <option value="software-development">Software Development Courses</option>
+                        <option value="digital-marketing">Digital Marketing With AI</option>
+                        <option value="banking-finance">Banking & Finance</option>
+                        <option value="programming">Programming Courses</option>
+                        <option value="pw-careerlift">PW CareerLift</option>
+                      </select>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => setHelpStep(1)}
+                        className="flex-1 py-4 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-colors"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        onClick={() => setHelpStep(3)}
+                        className="flex-1 py-4 bg-[#F4A6A6] text-white font-bold rounded-lg hover:bg-[#e89595] transition-colors"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3: Name and Phone */}
+                {helpStep === 3 && (
+                  <div className="space-y-6">
+                    {helpFormStatus.message && (
+                      <div
+                        className={`p-4 rounded-lg text-sm ${
+                          helpFormStatus.type === 'success'
+                            ? 'bg-green-50 text-green-700 border border-green-200'
+                            : 'bg-red-50 text-red-700 border border-red-200'
+                        }`}
+                      >
+                        {helpFormStatus.message}
+                      </div>
+                    )}
+
+                    <div>
+                      <label className="block text-gray-600 text-sm mb-2">Name *</label>
+                      <input
+                        type="text"
+                        value={helpForm.name}
+                        onChange={(e) => setHelpForm({...helpForm, name: e.target.value})}
+                        className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-[#F4A6A6] outline-none bg-transparent transition-colors"
+                        placeholder="Enter your name"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-600 text-sm mb-2">Mobile Number *</label>
+                      <div className="flex gap-2">
+                        <div className="flex items-center gap-2 px-4 py-3 border-b-2 border-gray-300">
+                          <span className="font-bold">IN</span>
+                          <ChevronDown className="w-4 h-4" />
+                          <span className="text-gray-600">+91</span>
+                        </div>
+                        <input
+                          type="tel"
+                          value={helpForm.phone}
+                          onChange={(e) => setHelpForm({...helpForm, phone: e.target.value})}
+                          className="flex-1 px-4 py-3 border-b-2 border-gray-300 focus:border-[#F4A6A6] outline-none bg-transparent transition-colors"
+                          placeholder="Enter your mobile number"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => setHelpStep(2)}
+                        disabled={isHelpFormSubmitting}
+                        className="flex-1 py-4 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        onClick={handleHelpFormSubmit}
+                        disabled={isHelpFormSubmitting || !helpForm.name || !helpForm.phone}
+                        className="flex-1 py-4 bg-[#F4A6A6] text-white font-bold rounded-lg hover:bg-[#e89595] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isHelpFormSubmitting ? 'Submitting...' : 'Submit'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Side - Image/Illustration */}
+              <div className="">
+                <div className="relative z-10 w-full h-full flex items-center justify-center">
+                  <img 
+                    src={GetInTouch} 
+                    alt="Get in touch with us"
+                    className="w-full h-full object-contain max-w-lg"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+                
+                {/* Decorative circles */}
+                <div className="absolute top-10 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                <div className="absolute bottom-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

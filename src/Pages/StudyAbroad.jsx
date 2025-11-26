@@ -796,7 +796,7 @@ const Main = () => {
               <img 
                 src={sitting}
                 alt="Counseling session illustration"
-                className="w-full h-full object-cover object-center"
+                className="w-full  object-cover object-center -mt-6"
               />
             </div>
           </div>

@@ -19,7 +19,7 @@ const FAQ = ({
   return (
     <section className={`py-10 bg-white ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 -ml-20">
           {title.split(" ").map((word, index) =>
             word === "Asked" ? (
               <span key={index} className="text-amber-500">
@@ -125,7 +125,7 @@ const FAQ = ({
               className="text-white text-[20px] bg-[#FCB11F] w-[220px] h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] hover:bg-[#FF9500] transition-colors relative"
             >
               {showAll ? 'View Less' : 'View More'}
-              <svg className="w-[40px] h-[40px] absolute -top-2 right-4 bg-[#FCB11F] text-white rounded-full p-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-[40px] h-[40px] absolute -top-2 right-4 bg-[#FCB11F] text-white rounded-full p-2 mt-5" fill="none" stroke="currentColor" viewBox="0 0 24 24 ">
                 <path 
                   strokeLinecap="round" 
                   strokeLinejoin="round" 

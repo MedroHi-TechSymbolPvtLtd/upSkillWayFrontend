@@ -481,49 +481,59 @@ const ReferAndEarn = () => {
           </div>
 
           {/* Rewards Table */}
-          <div className="overflow-x-auto -mt-30">
-            <table className="w-full max-w-6xl mx-auto bg-white">
-              <thead>
-                <tr>
-                  <th className="px-4 sm:px-6 py-4 text-left font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">Referrals Achieved</th>
-                  <th className="px-4 sm:px-6 py-4 text-left font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">Your Exclusive Reward</th>
-                  <th className="px-4 sm:px-6 py-4 text-left font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">
-                    <div className="flex items-center gap-2">
-                      <span>For Your Friend (Added Benefit)</span>
-                      <Star className="w-5 h-5 text-gray-400" strokeWidth={2} />
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {rewards.map((reward, index) => (
-                  <tr key={index} className="border-b border-dashed border-gray-300">
-                    <td className="px-4 sm:px-6 py-4 sm:py-6 font-semibold text-gray-900">
+          <div className="overflow-x-auto -mt-30 flex justify-center">
+            <div 
+              className="bg-white border border-[#E6E9EA] mt-5"
+              style={{
+                width: '1240px',
+                borderRadius: '40px',
+                padding: '42px',
+                gap: '10px'
+              }}
+            >
+              <table className="w-full">
+                <thead>
+                  <tr>
+                    <th className="px-4 sm:px-6 py-4 text-left font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">Referrals Achieved</th>
+                    <th className="px-4 sm:px-6 py-4 text-left font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">Your Exclusive Reward</th>
+                    <th className="px-4 sm:px-6 py-4 text-left font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                          <ArrowLeft className="w-3 h-3 text-gray-800" />
+                        <span>For Your Friend (Added Benefit)</span>
+                        <div className="w-[60px] h-[60px] bg-[#FDB11F] rounded-[40px] flex items-center justify-center">
+                          <Star className="w-5 h-5 text-white" fill="#FFFFFF" strokeWidth={2} />
                         </div>
-                        
-                        <span className="ml-2">{reward.referrals}</span>
                       </div>
-                    </td>
-                    <td className="px-4 sm:px-6 py-4 sm:py-6 text-gray-700">
-                      {reward.yourReward}
-                    </td>
-                    <td className="px-4 sm:px-6 py-4 sm:py-6 text-gray-700">
-                      <div className="flex items-start gap-2">
-                        {index === 0 || index === 2 ? (
-                          <Star className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" fill="#FFB84D" />
-                        ) : (
-                          <Star className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" strokeWidth={2} />
-                        )}
-                        <span>{reward.friendBenefit}</span>
-                      </div>
-                    </td>
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {rewards.map((reward, index) => (
+                    <tr key={index} className="border-b border-dashed border-gray-300">
+                      <td className="px-4 sm:px-6 py-4 sm:py-6 font-semibold text-gray-900">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 bg-gray-200 radius-[40px] rounded-full flex items-center justify-center flex-shrink-0">
+                            <ArrowLeft className="w-3 h-3 text-gray-800" />
+                          </div>
+                          
+                          <span className="ml-2">{reward.referrals}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 sm:px-6 py-4 sm:py-6 text-gray-700">
+                        {reward.yourReward}
+                      </td>
+                      <td className="px-4 sm:px-6 py-4 sm:py-6 text-gray-700">
+                        <div className="flex items-start gap-2">
+                          <span>{reward.friendBenefit}</span>
+                          <div className="w-[60px] h-[60px] bg-[#FDB11F] rounded-[40px] flex items-center justify-center flex-shrink-0">
+                            <Star className="w-5 h-5 text-white" fill="#FFFFFF" strokeWidth={2} />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -541,7 +551,19 @@ const ReferAndEarn = () => {
                 Refer your friends and earn exciting rewards! They get access to our top-rated courses, 
                 and you get gifts like smartwatches, Bluetooth accessories, and Amazon vouchers. A win-win for both!
               </p>
-              <button className="bg-[#FF9500] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-orange-600 transition-colors duration-300 flex items-center gap-2">
+              <button 
+                className="text-white font-semibold text-base sm:text-lg flex items-center transition-all duration-300 hover:opacity-90"
+                style={{
+                  width: '234px',
+                  height: '54px',
+                  borderRadius: '99px',
+                  padding: '20px 48px',
+                  gap: '11px',
+                  background: 'linear-gradient(90deg, #5D38DE 0%, #FDB11F 100%)',
+                  border: '1px solid transparent',
+                  backgroundClip: 'padding-box'
+                }}
+              >
                 Refer a friend
                 <ArrowRight className="w-5 h-5" />
               </button>

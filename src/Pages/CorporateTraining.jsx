@@ -1092,7 +1092,7 @@ const CorporateTrainingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center mb-12">
-            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[38px] leading-[46px] tracking-[0] text-gray-900 text-center capitalize align-middle mb-4">
+            <h2 className="w-full font-['Plus_Jakarta_Sans'] font-bold text-[38px] leading-[46px] tracking-[0] text-gray-900  capitalize align-middle mb-4 -ml-18 ">
               Build The <span className="text-[#FDB11F]">Capabilities</span>{" "}
               Your Business Strategy Demands
             </h2>
@@ -1802,12 +1802,12 @@ const CorporateTrainingPage = () => {
         <div className="max-w-[1216px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center mb-12">
-            <h2 className="font-['Plus_Jakarta_Sans'] text-[38px] leading-[46px] font-bold text-black capitalize mb-4">
+            <h2 className="font-['Plus_Jakarta_Sans'] text-[38px] leading-[46px] font-bold text-black capitalize mb-4 -ml-60">
               From Day One To{" "}
               <span className="text-[#FDB11F]">Business Impact</span> In Under 6
               Weeks
             </h2>
-            <p className="font-['Plus_Jakarta_Sans'] text-[18px] leading-[32px] text-[#38393E] max-w-1xl mx-auto">
+            <p className="font-['Plus_Jakarta_Sans'] text-[18px] leading-[32px] text-[#38393E] max-w-1xl mx-auto -ml-40">
               No six-month pilots. No endless planning. Your teams start
               learning—and applying skills—within weeks. Here's exactly how.
             </p>
@@ -2150,12 +2150,12 @@ const CorporateTrainingPage = () => {
       {/* Institution Benefits */}
   {faqs.length > 0 ? (
         <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-center mb-16">
+          <div className=" px-4 sm:px-6 lg:px-8">
+            <h2 className="text-[56px] font-bold text-center mb-16 -ml-150  ">
               Frequently asked Questions
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className=" max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
               {faqs.map((faq, index) => (
                 <div
                   key={faq.id || index}
@@ -2238,15 +2238,10 @@ const CorporateTrainingPage = () => {
                     Corporate Training
                   </span>
                 </h2>
-                <p className="text-gray-600">
-                  Submit your interest and our team will get in touch to tailor
-                  a training plan for your institution.
-                </p>
+          
               </div>
-              <div className="relative bg-white rounded-3xl shadow-2xl p-8">
-                <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-r from-orange-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                  {currentStep}
-                </div>
+              <div className="relative bg-white rounded-3xl  p-8">
+             
 
                 {submitStatus.message && (
                   <div
@@ -2260,137 +2255,185 @@ const CorporateTrainingPage = () => {
                   </div>
                 )}
 
+                {/* Step 1: Company Information */}
                 {currentStep === 1 && (
-                  <div className="space-y-5">
-                    <InputField
-                      label="Name"
-                      name="name"
-                      placeholder="Enter your name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <InputField
-                      label="Email"
-                      name="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <InputField
-                      label="Organization"
-                      name="organization"
-                      placeholder="Enter your organization"
-                      value={formData.organization}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <InputField
-                      label="Phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="Enter your phone number"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                    />
+                  <div className="space-y-6">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-100 to-purple-100 rounded-full mb-4">
+                        <span className="text-2xl font-bold text-gray-700">1</span>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Company Name
+                      </label>
+                      <input
+                        type="text"
+                        name="companyName"
+                        placeholder="Upskillway"
+                        value={formData.companyName}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Industry
+                      </label>
+                      <select
+                        name="industry"
+                        value={formData.industry}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all appearance-none bg-white"
+                        required
+                      >
+                        <option value="">Select Industry</option>
+                        <option value="technology">Technology</option>
+                        <option value="finance">Finance</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="retail">Retail</option>
+                        <option value="consulting">Consulting</option>
+                      </select>
+                    </div>
                   </div>
                 )}
 
+                {/* Step 2: Contact Information */}
                 {currentStep === 2 && (
-                  <div className="space-y-5">
-                    <InputField
-                      label="Company Name"
-                      name="companyName"
-                      placeholder="Enter company name"
-                      value={formData.companyName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <InputField
-                      label="Locations"
-                      name="locations"
-                      placeholder="Enter locations"
-                      value={formData.locations}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <SelectField
-                      label="Industry"
-                      name="industry"
-                      value={formData.industry}
-                      onChange={handleInputChange}
-                      options={[
-                        { value: "technology", label: "Technology" },
-                        { value: "finance", label: "Finance" },
-                        { value: "healthcare", label: "Healthcare" },
-                        { value: "education", label: "Education" },
-                      ]}
-                    />
-                    <SelectField
-                      label="Work Industry"
-                      name="workIndustry"
-                      value={formData.workIndustry}
-                      onChange={handleInputChange}
-                      options={[
-                        { value: "software", label: "Software Development" },
-                        { value: "consulting", label: "Consulting" },
-                        { value: "manufacturing", label: "Manufacturing" },
-                      ]}
-                    />
+                  <div className="space-y-6">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-100 to-purple-100 rounded-full mb-4">
+                        <span className="text-2xl font-bold text-gray-700">2</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Contact Person Name
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Dinesh"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="dinesh@upskillway.com"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="9413477263"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                        required
+                      />
+                    </div>
                   </div>
                 )}
 
+                {/* Step 3: Program Details */}
                 {currentStep === 3 && (
-                  <div className="space-y-5">
-                    <SelectField
-                      label="Program Type"
-                      name="programType"
-                      value={formData.programType}
-                      onChange={handleInputChange}
-                      options={
-                        resolvedData.curriculum?.map((module) => ({
-                          value: module.title,
-                          label: module.title,
-                        })) || []
-                      }
-                    />
-                    <InputField
-                      label="Number of Participants"
-                      name="numberOfParticipants"
-                      type="number"
-                      placeholder="200"
-                      value={formData.numberOfParticipants}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <InputField
-                      label="Preferred Start Date"
-                      name="preferredStartDate"
-                      type="date"
-                      value={formData.preferredStartDate}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <TextareaField
-                      label="Requirement"
-                      name="requirement"
-                      placeholder="Please describe your requirements"
-                      value={formData.requirement}
-                      onChange={handleInputChange}
-                      required
-                    />
+                  <div className="space-y-6">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-100 to-purple-100 rounded-full mb-4">
+                        <span className="text-2xl font-bold text-gray-700">3</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Program Type
+                      </label>
+                      <select
+                        name="programType"
+                        value={formData.programType}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all appearance-none bg-white"
+                        required
+                      >
+                        <option value="">select Program Type</option>
+                        {resolvedData.curriculum?.map((module, index) => (
+                          <option key={index} value={module.title}>
+                            {module.title}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Number of Participants
+                      </label>
+                      <input
+                        type="number"
+                        name="numberOfParticipants"
+                        placeholder="200"
+                        value={formData.numberOfParticipants}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Preferred Start Date
+                      </label>
+                      <input
+                        type="text"
+                        name="preferredStartDate"
+                        placeholder="dd-mm-yyyy"
+                        value={formData.preferredStartDate}
+                        onChange={handleInputChange}
+                        onFocus={(e) => e.target.type = 'date'}
+                        onBlur={(e) => {
+                          if (!e.target.value) e.target.type = 'text';
+                        }}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                        required
+                      />
+                    </div>
                   </div>
                 )}
 
-                <div className="flex gap-3 mt-8">
+                {/* Action Buttons */}
+                <div className="flex gap-4 mt-8">
                   {currentStep > 1 && (
                     <button
                       onClick={prevStep}
                       type="button"
-                      className="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all duration-300 text-sm sm:text-base"
+                      className="flex-1 py-3 rounded-full font-semibold text-white transition-all duration-300 text-base"
+                      style={{
+                        background: 'linear-gradient(90deg, #FFA726 0%, #7E57C2 100%)'
+                      }}
                     >
                       Previous
                     </button>
@@ -2399,7 +2442,10 @@ const CorporateTrainingPage = () => {
                     <button
                       onClick={nextStep}
                       type="button"
-                      className="flex-1 bg-gradient-to-r from-orange-400 to-purple-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
+                      className="flex-1 py-3 rounded-full font-semibold text-white transition-all duration-300 text-base"
+                      style={{
+                        background: 'linear-gradient(90deg, #FFA726 0%, #7E57C2 100%)'
+                      }}
                     >
                       Next
                     </button>
@@ -2408,7 +2454,10 @@ const CorporateTrainingPage = () => {
                       onClick={handleSubmit}
                       type="button"
                       disabled={isSubmitting}
-                      className="flex-1 bg-gradient-to-r from-orange-400 to-purple-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                      className="flex-1 py-3 rounded-full font-semibold text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-base"
+                      style={{
+                        background: 'linear-gradient(90deg, #FFA726 0%, #7E57C2 100%)'
+                      }}
                     >
                       {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
