@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Testimonial from "../components/Courses/Testimonial";
 import sitting from "../assets/Images/sitting.png";
-import popUp from "../assets/Images/popUp.png";
+import popUp from "../assets/Images/popup.png";
 import FAQ from "../components/Courses/FAQ";
 import { useParams } from 'react-router-dom';
 import GetInTouch from "../assets/Images/HELP.png";
