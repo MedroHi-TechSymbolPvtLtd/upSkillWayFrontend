@@ -4,19 +4,25 @@ set -e
 REGION="ap-south-1"
 ACCOUNT_ID="488479524661"
 IMAGE_REPO="upskillway"
+IMAGE_URI="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO:latest"
 
-echo " Logging in to Amazon ECR..."
+echo "Logging in to Amazon ECR..."
 aws ecr get-login-password --region $REGION | \
 docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
-echo " Stopping old container if exists"
+echo "Pulling latest Docker image..."
+docker pull $IMAGE_URI
+
+echo "Stopping old container if running..."
 docker stop upskillway || true
 docker rm upskillway || true
 
-echo " Pulling latest Docker image"
-docker pull $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO:latest
+echo "Starting new container..."
+docker run -d \
+  --name upskillway \
+  -p 80:80 \
+  --restart always \
+  $IMAGE_URI
 
-echo " Starting new container..."
-docker run -d -p 80:80 --name upskillway $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO:latest
-
-echo " Deployment complete!"
+echo "Container started successfully!"
+docker ps | grep upskillway

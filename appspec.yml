@@ -4,9 +4,7 @@ os: linux
 files:
   - source: scripts/
     destination: /home/ec2-user/app/scripts
-  - source: appspec.yml
-    destination: /home/ec2-user/app
-  - source: dockerfile
+  - source: Dockerfile
     destination: /home/ec2-user/app
 
 hooks:
@@ -16,11 +14,11 @@ hooks:
       runas: root
 
   ApplicationStop:
-    - location: scripts/stop_docker.sh
+    - location: scripts/stop.sh
       timeout: 300
       runas: root
 
-  ApplicationStart:
-    - location: scripts/start_docker.sh
+  AfterInstall:
+    - location: scripts/start.sh
       timeout: 300
       runas: root
