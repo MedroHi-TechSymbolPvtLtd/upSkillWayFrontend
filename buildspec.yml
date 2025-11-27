@@ -29,7 +29,7 @@ phases:
 artifacts:
   files:
     - appspec.yml
-    - scripts/*
+    - scripts/**
     - Dockerfile
     - nginx.conf
-  discard-paths: yes
+  discard-paths: no
