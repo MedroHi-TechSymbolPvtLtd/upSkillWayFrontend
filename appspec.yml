@@ -1,18 +1,19 @@
 version: 0.0
 os: linux
 
+files:
+  - source: scripts/
+    destination: /home/ec2-user/app/scripts
+  - source: Dockerfile
+    destination: /home/ec2-user/app
+
 hooks:
   ApplicationStop:
     - location: scripts/stop.sh
       timeout: 300
       runas: root
 
-  BeforeInstall:
-    - location: scripts/permissions.sh
-      timeout: 300
-      runas: root
-
-  AfterInstall:
+  ApplicationStart:
     - location: scripts/start_docker.sh
       timeout: 300
       runas: root
