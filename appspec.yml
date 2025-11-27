@@ -6,14 +6,21 @@ files:
     destination: /home/ec2-user/app/scripts
   - source: Dockerfile
     destination: /home/ec2-user/app
+  - source: nginx.conf
+    destination: /home/ec2-user/app
 
 hooks:
-  ApplicationStop:
-    - location: scripts/stop.sh
+  BeforeInstall:
+    - location: scripts/permissions.sh
       timeout: 300
-      runas: root
+      runas: ec2-user
+
+  ApplicationStop:
+    - location: scripts/stop_docker.sh
+      timeout: 300
+      runas: ec2-user
 
   AfterInstall:
     - location: scripts/start_docker.sh
       timeout: 300
-      runas: root
+      runas: ec2-user
