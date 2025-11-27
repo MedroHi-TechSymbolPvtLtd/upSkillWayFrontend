@@ -1,9 +1,23 @@
 #!/bin/bash
-set -e
 
-echo "Stopping existing container if running..."
+echo "Running ApplicationStop..."
 
-docker ps -q --filter "name=upskillway" | xargs -r docker stop || true
-docker ps -aq --filter "name=upskillway" | xargs -r docker rm || true
+# Check if docker exists
+if ! command -v docker &> /dev/null
+then
+    echo "Docker not installed on this instance. Skipping stop."
+    exit 0
+fi
 
-echo "Old container stopped successfully!"
+CONTAINER="upskillway"
+
+if docker ps -q --filter "name=$CONTAINER" | grep -q .
+then
+    echo "Stopping running container: $CONTAINER"
+    docker stop $CONTAINER || true
+    docker rm $CONTAINER || true
+else
+    echo "No running container found. Skipping..."
+fi
+
+echo "ApplicationStop completed successfully."
