@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
 
-if [ -f "$DIR/stop_docker.sh" ]; then
-  /bin/bash "$DIR/stop_docker.sh"
-  exit 0
-fi
+echo "Stopping existing container if running..."
 
 docker ps -q --filter "name=upskillway" | xargs -r docker stop || true
+docker ps -aq --filter "name=upskillway" | xargs -r docker rm || true
+
+echo "Old container stopped successfully!"
