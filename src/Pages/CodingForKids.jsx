@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonial from "../components/CodingForKIds/Testimonial";
 import FAQSection from "../components/CodingForKIds/Faq";
+import { api, endpoints } from "../utils/api";
 import Coding from "../assets/Images/Coding.png";
 import Coding1 from "../assets/Images/coding1.png";
 import Coding2 from "../assets/Images/coding2.png";
@@ -62,7 +63,7 @@ import {
 
 const CodingForKids = () => {
   const navigate = useNavigate();
-  const [openFaq, setOpenFaq] = useState(null);
+  
   
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,8 +110,7 @@ const CodingForKids = () => {
     const fetchCourses = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/api/v1/cms/videos");
-        const data = await response.json();
+        const data = await api.get(endpoints.cms.videos);
 
         if (data.success && data.data) {
           setVideos(data.data); // Store original data with testimonials
@@ -204,32 +204,32 @@ const CodingForKids = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white pt-20 pb-8 sm:pb-12 md:pb-16">
+      <section className="relative overflow-hidden bg-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 md:pb-12 lg:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-left relative">
-              <h1 className="w-[630px]  text-[56px] sm:text-5xl md:text-6xl  font-bold text-gray-900 mb-4 sm:mb-6">
+              <h1 className="w-full max-w-full sm:max-w-[500px] md:max-w-[580px] lg:max-w-[630px] text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
                 Welcome To The World Of{" "}
                 <span className="text-[#FF9500]">Coding </span>
                 Fun!
               </h1>
-              <p className="w-[483px] text-[24px] sm:text-xl text-gray-700 mb-6 sm:mb-8 font-semibold">
+              <p className="w-full max-w-full sm:max-w-[400px] md:max-w-[450px] lg:max-w-[483px] text-lg sm:text-xl md:text-[22px] lg:text-[24px] text-gray-700 mb-4 sm:mb-6 md:mb-8 font-semibold">
                 Where imagination meets technology — and every child becomes a creator!
               </p>
-              <div className=" mb-4 sm:mb-10">
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+              <div className="mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
                   At Upskillway, kids don't just play games — they create them!
                 </p>
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
                   We make learning to code easy, exciting, and full of creativity.
                 </p>
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
                   From building stories and animations to making real games and apps coding has never been this much fun!
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 relative z-10">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-10">
                 <button
                   onClick={() => {
                     const element = document.getElementById('coding-courses');
@@ -237,21 +237,21 @@ const CodingForKids = () => {
                       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="bg-gray-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center gap-2"
+                  className="bg-gray-900 text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center gap-2"
                 >
                   Start Learning Today
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
                 <button
                   onClick={() => navigate("/contact")}
-                  className="bg-[#FF9500] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-[#FF8500] transition-colors duration-300 flex items-center justify-center gap-2"
+                  className="bg-[#FF9500] text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg hover:bg-[#FF8500] transition-colors duration-300 flex items-center justify-center gap-2"
                 >
                   Book Free Trial
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
 
-              <div className="w-full mt-6">
+              <div className="w-full mt-4 sm:mt-5 md:mt-6">
                 <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-gray-200 text-center">
                   {[
                     { value: "200+", label: "Futuristic Schools" },
@@ -260,12 +260,12 @@ const CodingForKids = () => {
                   ].map((stat) => (
                     <div
                       key={stat.label}
-                      className="flex-1 py-4 px-4"
+                      className="flex-1 py-3 sm:py-4 px-2 sm:px-4"
                     >
-                      <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg text-gray-900">
+                      <div className="font-['Plus_Jakarta_Sans'] font-semibold text-base sm:text-lg text-gray-900">
                         {stat.value}
                       </div>
-                      <div className="font-['Plus_Jakarta_Sans'] font-medium text-sm text-gray-600">
+                      <div className="font-['Plus_Jakarta_Sans'] font-medium text-xs sm:text-sm text-gray-600">
                         {stat.label}
                       </div>
                     </div>
@@ -275,26 +275,15 @@ const CodingForKids = () => {
             </div>
 
             {/* Right Illustration */}
-            <div className="relative w-full h-[500px] sm:h-[600px] lg:h-[700px]">
+            <div className="relative w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[700px] mt-6 lg:mt-0">
               {/* Large Purple Circular Background */}
-              <div
-                className=""
-                style={{
-                  width: "624.88px",
-                  height: "624.88px",
-                  marginTop: "100px",
-                  left: "calc(50% - 312.44px)",
-                  transform: "rotate(0.56deg)",
-                  opacity: 1,
-                  zIndex: 1,
-                }}
-              >
+              <div className="flex items-center justify-center h-full">
                 {/* Coding Image Inside Circle */}
-                <div className=" mt-20 flex items-center justify-center ">
+                <div className="flex items-center justify-center">
                   <img
                     src={Coding5}
                     alt="Kids coding together"
-                    className="w-[624px] h-[624px] object-contain"
+                    className="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[624px] h-auto object-contain"
                   />
                 </div>
               </div>
@@ -324,9 +313,9 @@ const CodingForKids = () => {
       </section>
 
       {/* Trusted By Section */}
-      <section className="-mt-20 bg-white w-full">
+      <section className="-mt-10 sm:-mt-12 md:-mt-16 lg:-mt-20 bg-white w-full">
         <div className="w-full">
-          <p className="text-center text-gray-600 sm:mb-8 font-medium">
+          <p className="text-center text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 md:mb-8 font-medium">
             Trusted By
           </p>
           <div className="w-full relative overflow-hidden mb-16">
@@ -419,19 +408,19 @@ const CodingForKids = () => {
 
       {/* Empowerment Section */}
       <section className="py-12 sm:py-16 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ml-[0px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12 sm:mb-16">
             Empowering <span className="text-[#FF9500]">Young Minds</span>{" "}
             through Coding Education
           </h2>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 md:gap-50 mb-8 ml-[-30px]">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 mb-8">
             {[
               { icon: Star, title: "Hands-On Learning" },
               { icon: Box, title: "STEM Focus" },
               { icon: Cpu, title: "Coding Basics" },
             ].map((item, index) => (
               <div key={index} className="flex items-center gap-3 sm:gap-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-purple-200 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#A3A3F5] rounded-full flex items-center justify-center flex-shrink-0">
                   <item.icon
                     className="w-8 h-8 sm:w-10 sm:h-10 text-white"
                     strokeWidth={2}
@@ -598,8 +587,8 @@ const CodingForKids = () => {
           </div>
           
           {/* Program Type Cards */}
-          <div className="w-full mb-12 sm:mb-16 -ml-20">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-14 sm:gap-40 -left-10">
+          <div className="w-full mb-12 sm:mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-6 sm:gap-8 justify-items-center">
               {[
                 { name: 'Online Courses', icon: Laptop, color: '#A3A3F5' },
                 { name: 'Virtual Programs', icon: Monitor, color: '#FF9500' },
@@ -612,7 +601,7 @@ const CodingForKids = () => {
                   <div
                     key={index}
                     onClick={() => navigate('/courses')}
-                    className="w-[270px] h-[39px] bg-white border border-gray-200 hover:border-[#FF9500] rounded-[16px] px-5 py-5 flex items-center gap-3 cursor-pointer transition-all duration-300 shadow-[0px_6px_30px_rgba(0,0,0,0.05)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.12)] min-h-[60px]"
+                    className="w-full max-w-[270px] bg-white border border-gray-200 hover:border-[#FF9500] rounded-[16px] px-5 py-5 flex items-center gap-3 cursor-pointer transition-all duration-300 shadow-[0px_6px_30px_rgba(0,0,0,0.05)] hover:shadow-[0px_15px_40px_rgba(0,0,0,0.12)] min-h-[60px]"
                   >
                     <div 
                       className="w-[40px] h-[40px] rounded-[12px] flex items-center justify-center flex-shrink-0"
@@ -794,7 +783,7 @@ const CodingForKids = () => {
       {/* Benefits of Coding for Kids Section */}
       <section className="py-12 sm:py-16 md:py-20 -mt-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[48px] leading-[142%] text-center text-black mb-12 sm:mb-16 capitalize">
+          <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[48px] leading-[142%] text-center text-black mb-12 sm:mb-16s capitalize sm:mt-20">
             Benefits Of <span className="text-[#FF9500]">Coding</span> For Kids
           </h2>
           
@@ -865,10 +854,10 @@ const CodingForKids = () => {
           <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[42px] leading-[63px] text-left text-[#141219] mb-3   -mt-10">
             What We Do for <span className="text-[#FF9500]">Schools & Institutions</span>
           </h2>
-          <p className=" font-['Plus_Jakarta_Sans'] font-normal text-[16px] sm:text-[16px] text-left text-[#38393E]  sm:mb-14 leading-[160%] whitespace-nowrap">
-            Upskillway partners with schools and institutions to design and deliver modern, skill-based coding programs that foster digital <br></br> literacy, creativity, and innovation in students.
+          <p className="font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base lg:text-[16px] text-left text-[#38393E] mb-8 sm:mb-10 lg:mb-14 leading-relaxed lg:leading-[160%] whitespace-normal lg:whitespace-nowrap">
+            Upskillway partners with schools and institutions to design and deliver modern, skill-based coding programs that foster digital <br className="hidden lg:block" /> literacy, creativity, and innovation in students.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="font-['Plus_Jakarta_Sans'] font-normal text-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               { 
                 icon: Target, 
@@ -897,7 +886,7 @@ const CodingForKids = () => {
                   <item.icon className="w-7 h-7 text-white" strokeWidth={2.33} />
                 </div>
                 <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xl leading-[20px] text-[#111827] mb-3 text-left">{item.title}</h3>
-                <p className="font-['Inter'] font-normal text-base leading-[16px] text-[#374151] text-left">{item.description}</p>
+                <p className="font-['Plus_Jakarta_Sans'] font-Regular text-base leading-[16px] text-[#374151] text-left">{item.description}</p>
               </div>
             ))}
           </div>
@@ -910,7 +899,7 @@ const CodingForKids = () => {
           <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[50px] leading-[63px] text-left text-[#141219] mb-2">
             What <span className="text-[#FF9500]">Students Gain</span>
           </h2>
-          <p className="font-['Plus_Jakarta_Sans'] font-normal text-lg sm:text-xl text-left text-[#38393E] mb-2 sm:mb-12 leading-[160%] whitespace-nowrap">
+          <p className="font-['Plus_Jakarta_Sans'] font-normal text-base sm:text-lg lg:text-xl text-left text-[#38393E] mb-6 sm:mb-8 lg:mb-12 leading-relaxed lg:leading-[160%] whitespace-normal lg:whitespace-nowrap">
             Empower your students with essential coding and problem-solving skills that prepare them for the digital future.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
@@ -942,7 +931,7 @@ const CodingForKids = () => {
                   <item.icon className="w-7 h-7 text-white" strokeWidth={2.33} />
                 </div>
                 <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xl leading-[25px] text-[#111827] mb-3 text-left">{item.title}</h3>
-                <p className="font-['Inter'] font-normal text-base leading-[19px] text-[#374151] text-left">{item.description}</p>
+                <p className="font-['Plus_Jakarta_Sans'] font-normal text-base leading-[19px] text-[#374151] text-left">{item.description}</p>
               </div>
             ))}
           </div>
@@ -961,7 +950,7 @@ const CodingForKids = () => {
           <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[50px] leading-[63px] text-left text-[#141219]">
             What <span className="text-[#FFB84D]">Schools & Institutions</span> Gain
           </h2>
-          <p className="text-left text-gray-600 mb-12 sm:mb-16 whitespace-nowrap">
+          <p className="text-left text-gray-600 mb-8 sm:mb-12 lg:mb-16 whitespace-normal lg:whitespace-nowrap leading-relaxed">
           Our partnerships go beyond coding classes — they enhance your academic value, teacher capacity, and institutional reputation.          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
@@ -974,8 +963,8 @@ const CodingForKids = () => {
                 <div className="w-14 h-14 bg-[#FDB11F] rounded-[12px] flex items-center justify-center mx-auto mb-4">
                   <item.icon className="w-7 h-7 text-white" strokeWidth={2.33} />
                 </div>
-                <h3 className="font-['Inter'] font-bold text-xl leading-[20px] text-[#111827] mb-2">{item.title}</h3>
-                <p className="font-['Inter'] font-normal text-base leading-[16px] text-[#374151]">{item.description}</p>
+                <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xl leading-[20px] text-[#111827] mb-2">{item.title}</h3>
+                <p className="font-['Plus_Jakarta_Sans'] font-normal text-base leading-[16px] text-[#374151]">{item.description}</p>
               </div>
             ))}
           </div>
@@ -991,9 +980,9 @@ const CodingForKids = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
             Choose Your <span className="text-[#FFB84D]">Partnership Model</span>
           </h2>
-          <p className="text-center text-gray-600 mb-12 sm:mb-16 whitespace-nowrap">
-          Flexible collaboration options tailored to your school’s goals and teaching framework. Select a <br></br> model that fits your academic structure, schedule, and student needs.          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-6  mb-12">
+          <p className="text-center text-gray-600 mb-8 sm:mb-12 lg:mb-16 whitespace-normal lg:whitespace-nowrap leading-relaxed px-4 lg:px-0 max-w-4xl mx-auto">
+          Flexible collaboration options tailored to your school’s goals and teaching framework. Select a <br className="hidden lg:block"></br> model that fits your academic structure, schedule, and student needs.          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 mb-8 sm:mb-10 lg:mb-12 px-4 lg:px-0">
             {[
               { title: 'School Franchise / Long-Term Collaboration Model', subtitle: 'Become a certified Upskillway partner school with long-term educational benefits.', features: ['Exclusive partnership rights', 'Access to all Upskillway learning modules', 'Joint branding and marketing opportunities','Continuous educator support and content updates'] },
               { title: 'Coding Bootcamps for Schools', subtitle: 'Short-term intensive programs focused on mastering specific coding skills.', features: ['2–4 week bootcamp format', 'Focused on topics like Python, AI, or Game Design', 'Real-world project development','Certificates of completion for participants'] },
@@ -1002,7 +991,7 @@ const CodingForKids = () => {
               { title: 'Teacher Certification Programs', subtitle: 'Empower your existing faculty to teach coding with confidence and expertise.', features: ['40-hour certification course', 'Ongoing mentorship support', 'Teaching resource library','Annual refresher workshops'] },
               { title: 'Corporate School Partnership Model', subtitle: 'Ideal for large school chains and educational groups seeking a scalable model.', features: ['Centralized training for all branches', 'Cross-branch competition support','Unified reporting and dashboard', 'Co-branding and national recognition'] }
             ].map((model, index) => (
-              <div key={index} className="w-[511px] bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-200 rounded-xl">
+              <div key={index} className="w-full lg:w-[511px] bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 sm:p-5 lg:p-6 border border-gray-200 rounded-xl mx-auto">
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
                   index === 0 ? 'bg-blue-100' : 
                   index === 1 ? 'bg-orange-100' : 
@@ -1017,28 +1006,28 @@ const CodingForKids = () => {
                   {index === 4 && <GraduationCap className="w-8 h-8 text-indigo-600" />}
                   {index === 5 && <Building className="w-8 h-8 text-pink-600" />}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{model.title}</h3>
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">{model.title}</h3>
                 {model.subtitle && (
-                  <p className="text-sm text-gray-600 mb-4">{model.subtitle}</p>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">{model.subtitle}</p>
                 )}
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
                   {model.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-600 text-sm">
-                      <CheckCircle className="w-4 h-4 text-purple-600 mr-2 flex-shrink-0" />
+                    <li key={idx} className="flex items-start text-gray-600 text-xs sm:text-sm">
+                      <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-600 mr-2 flex-shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <button 
                   onClick={() => navigate('/courses')}
-                  className="bg-[#FFB84D] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#FF9500] transition-colors duration-300 mx-auto block"
+                  className="bg-[#FFB84D] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#FF9500] transition-colors duration-300 mx-auto block w-full sm:w-auto"
                 >
                   View More
                 </button> 
               </div>
             ))}
           </div>
-          <div className=" w-[652px] h-[30px] rounded-3xl text-center font-semibold text-black-600 mb-12 py-1 sm:mb-16 whitespace-nowrap bg-[#FFDE6B] mx-auto block">
+          <div className="w-full sm:w-auto sm:max-w-[652px] h-auto sm:h-[30px] rounded-2xl sm:rounded-3xl text-center font-semibold text-black-600 mb-8 sm:mb-12 lg:mb-16 py-2 sm:py-1 whitespace-normal sm:whitespace-nowrap bg-[#FFDE6B] mx-auto block px-4 sm:px-6">
           Not sure which model is right for your school? Let us help you decide.
                       </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1077,10 +1066,10 @@ const CodingForKids = () => {
                   <Target className="w-8 h-8 text-white" strokeWidth={2.67} />
                 </div>
                 <div>
-                  <h3 className="font-['Inter'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
                     Curriculum Aligned with Future Skills
                   </h3>
-                  <p className="font-['Inter'] font-normal text-lg leading-[18px] text-[#374151] mb-3">
+                  <p className="font-['Plus_Jakarta_Sans'] font-normal text-lg leading-[18px] text-[#374151] mb-3">
                     Students gain critical thinking, creativity, and problem-solving skills aligned with modern education standards.
                   </p>
                   <div className="flex items-start gap-2">
@@ -1100,10 +1089,10 @@ const CodingForKids = () => {
                   <Users className="w-8 h-8 text-white" strokeWidth={2.67} />
                 </div>
                 <div>
-                  <h3 className="font-['Inter'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
                     Certified Trainers & Mentors
                   </h3>
-                  <p className="font-['Inter'] font-normal text-lg leading-[18px] text-[#374151] mb-3">
+                  <p className="font-['Plus_Jakarta_Sans']font-normal text-lg leading-[18px] text-[#374151] mb-3">
                     Experienced instructors make coding engaging and easy to understand for every grade level.
                   </p>
                   <div className="flex items-start gap-2">
@@ -1124,10 +1113,10 @@ const CodingForKids = () => {
                   <Briefcase className="w-8 h-8 text-white" strokeWidth={2.67} />
                 </div>
                 <div>
-                  <h3 className="font-['Inter'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
                     Project-Based Learning Approach
                   </h3>
-                  <p className="font-['Inter'] font-normal text-lg leading-[18px] text-[#374151] mb-3">
+                  <p className="font-['Plus_Jakarta_Sans']font-normal text-lg leading-[18px] text-[#374151] mb-3">
                     Through hands-on projects like games and animations, kids turn ideas into real creations.
                   </p>
                   <div className="flex items-start gap-2">
@@ -1145,10 +1134,10 @@ const CodingForKids = () => {
                   <TrendingUp className="w-8 h-8 text-white" strokeWidth={2.67} />
                 </div>
                 <div>
-                  <h3 className="font-['Inter'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
                     Continuous Support & Assessment
                   </h3>
-                  <p className="font-['Inter'] font-normal text-lg leading-[18px] text-[#374151] mb-3">
+                  <p className="font-['Plus_Jakarta_Sans'] font-normal text-lg leading-[18px] text-[#374151] mb-3">
                     Continuous mentorship for 6 months after placement to ensure student success and retention.
                   </p>
                   <div className="flex items-start gap-2">
@@ -1218,8 +1207,8 @@ const CodingForKids = () => {
                 <div className="w-16 h-16 bg-[#FDB11F] rounded-[16px] flex items-center justify-center mb-4">
                   <item.icon className="w-8 h-8 text-white" strokeWidth={2.67} />
                 </div>
-                <h3 className="font-['Inter'] font-bold text-xl leading-[24px] text-[#111827] mb-3">{item.title}</h3>
-                <p className="font-['Inter'] font-normal text-base leading-[19px] text-[#374151]">{item.description}</p>
+                <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xl leading-[24px] text-[#111827] mb-3">{item.title}</h3>
+                <p className="font-['Plus_Jakarta_Sans'] font-normal text-base leading-[19px] text-[#374151]">{item.description}</p>
               </div>
             ))}
           </div>
@@ -1247,7 +1236,7 @@ const CodingForKids = () => {
                 <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-[24px] text-[#111827] mb-2">
                   Not ready for a full rollout? Start with a pilot batch.
                 </h3>
-                <p className="font-['Inter'] font-normal text-lg leading-[18px] text-[#374151]">
+                <p className="font-['Plus_Jakarta_Sans']font-normal text-lg leading-[18px] text-[#374151]">
                   Evaluate real classroom outcomes before expanding across grades — no risk, complete flexibility.
                 </p>
               </div>
@@ -1300,14 +1289,14 @@ const CodingForKids = () => {
                 <div className="w-16 h-16 bg-gradient-to-b from-[#FDB11F] to-[#976A13] rounded-[16px] flex items-center justify-center mb-14 mx-auto">
                   <item.icon className="w-8 h-8 text-white" strokeWidth={2.67} />
                 </div>
-                <h3 className="font-['Inter'] font-bold text-2xl leading-[24px] text-[#111827] mb-13 text-center">
+                <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-[24px] text-[#111827] mb-13 text-center">
                   {item.title}
                 </h3>
-                <p className="font-['Inter'] font-normal text-base leading-[19px] text-[#374151] mb-14 text-left px-7">
+                <p className="font-['Plus_Jakarta_Sans'] font-normal text-base leading-[19px] text-[#374151] mb-14 text-left px-7">
                   {item.description}
                 </p>
                 <div className="bg-gradient-to-r from-[#FAF5FF] to-[#FFF7ED] rounded-xl p-4 border-l-4 border-[#F97316]">
-                  <p className="font-['Inter'] font-medium text-sm leading-[14px] text-[#374151] text-center">
+                  <p className="font-['Plus_Jakarta_Sans'] font-medium text-sm leading-[14px] text-[#374151] text-center">
                     {item.note}
                   </p>
                 </div>
@@ -1317,7 +1306,7 @@ const CodingForKids = () => {
           
           {/* CTA Banner */}
           <div>
-          <div className=" w-[652px] h-[30px] rounded-3xl text-center font-semibold text-black-600 mb-12 py-1 sm:mb-16 whitespace-nowrap bg-[#FEF9F8] mx-auto block">
+          <div className="w-full sm:w-auto sm:max-w-[652px] h-auto sm:h-[30px] rounded-2xl sm:rounded-3xl text-center text-sm sm:text-base font-semibold text-black-600 mb-8 sm:mb-12 lg:mb-16 py-2 sm:py-1 whitespace-normal sm:whitespace-nowrap bg-[#FEF9F8] mx-auto block px-4 sm:px-6">
           One partnership can boost placements — let’s get your students industry-ready.                      </div>
             </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
