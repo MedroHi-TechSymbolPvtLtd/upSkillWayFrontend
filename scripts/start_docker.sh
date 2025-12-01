@@ -17,12 +17,14 @@ echo "Stopping old container if running..."
 docker stop upskillway || true
 docker rm upskillway || true
 
-echo "Starting new container..."
+echo "Starting new HTTPS-enabled container..."
 docker run -d \
   --name upskillway \
   -p 80:80 \
+  -p 443:443 \
   --restart always \
   $IMAGE_URI
 
 echo "Container started successfully!"
 docker ps | grep upskillway
+
