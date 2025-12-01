@@ -19,7 +19,7 @@ const FAQ = ({
   return (
     <section className={`py-10 bg-white ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 -ml-20">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-8 ml-0 lg:-ml-20">
           {title.split(" ").map((word, index) =>
             word === "Asked" ? (
               <span key={index} className="text-amber-500">

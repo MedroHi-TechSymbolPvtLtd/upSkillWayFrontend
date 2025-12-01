@@ -277,24 +277,24 @@ const Main = () => {
       )}
 
       {/* Hero Section */}
-      <section className="relative bg-white py-12 sm:py-16 md:py-20 px-4">
+      <section className="relative bg-white py-8 sm:py-10 md:py-14 lg:py-20 px-4">
         <div className="max-w-7xl mx-auto relative">
           {/* Shadow - positioned behind image */}
           <div className="absolute left-[862.31px] top-[186.09px] w-[559.32px] h-[707.86px] bg-gradient-to-l from-[rgba(253,177,31,0.6)] to-[rgba(93,56,222,0.6)] opacity-60 blur-[58.1664px] hidden lg:block"></div>
 
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-start mt-16 sm:mt-18 md:mt-20">
-            <div className="space-y-6 sm:space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-start mt-8 sm:mt-12 md:mt-16 lg:mt-20">
+            <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
               {/* Heading */}
-              <div className="mb-6 sm:mb-8 md:mb-10">
-                <h1 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B]">
+              <div className="mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+                <h1 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[66px] font-extrabold text-[#18181B]">
                   Transform Your Future:{" "}
                     <span className="text-[#FDB11F]">Study Abroad</span> With
-                  <br /> Confidence
+                  <br className="hidden sm:block" /> Confidence
                 </h1>
               </div>
 
               {/* Description */}
-              <p className="font-['Plus_Jakarta_Sans'] text-base leading-[26px] font-normal text-[#52525B]">
+              <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-relaxed sm:leading-[26px] font-normal text-[#52525B]">
                 Discover world-class education opportunities and unlock your potential with our comprehensive study abroad programs.
               </p>
               
@@ -324,7 +324,7 @@ const Main = () => {
               </div>
 
               {/* Stats Cards */}
-              <div className="relative pt-4 min-h-[173px]">
+              <div className="relative pt-4 min-h-[173px] hidden lg:block">
                 {/* Card 1 - 50+ Countries */}
                 <div className="absolute left-0 top-0 w-[268.27px] h-[79px] bg-white border border-[#E4E4E7] rounded-[20px] shadow-[drop-shadow(-2px_5px_100px_rgba(0,0,0,0.23))] p-4 flex items-center gap-3">
                   <div className="w-[21px] h-[19px] flex items-center justify-center flex-shrink-0">
@@ -379,13 +379,67 @@ const Main = () => {
                   </div>
                 </div>
               </div>
+              
+              {/* Mobile Stats Cards - Stacked */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:hidden">
+                <div className="bg-white border border-[#E4E4E7] rounded-[16px] shadow-md p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+                  <div className="w-[18px] h-[18px] sm:w-[21px] sm:h-[19px] flex items-center justify-center flex-shrink-0">
+                    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-base sm:text-lg md:text-xl leading-tight font-semibold text-[#18181B]">
+                      50+ Countries
+                    </div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-tight font-normal text-black/40">
+                      Global opportunities
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white border border-[#E4E4E7] rounded-[16px] shadow-md p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+                  <div className="w-[18px] h-[18px] sm:w-[19px] sm:h-[19px] flex items-center justify-center flex-shrink-0">
+                    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-base sm:text-lg md:text-xl leading-tight font-semibold text-[#18181B]">
+                      10,000+ Students
+                    </div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-tight font-normal text-black/40">
+                      Success stories
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white border border-[#E4E4E7] rounded-[16px] shadow-md p-3 sm:p-4 flex items-center gap-2 sm:gap-3 sm:col-span-2">
+                  <div className="w-[18px] h-[18px] sm:w-[21px] sm:h-[20px] flex items-center justify-center flex-shrink-0">
+                    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-base sm:text-lg md:text-xl leading-tight font-semibold text-[#18181B]">
+                      1000+ Universities
+                    </div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-tight font-normal text-black/40">
+                      Partner institutions
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Image Section */}
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:w-[475px] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[607px]">
+            <div className="relative flex justify-center lg:justify-end mt-6 sm:mt-8 lg:mt-0">
+              <div className="relative w-full max-w-[280px] sm:max-w-[350px] md:max-w-[450px] lg:w-[475px] h-[250px] sm:h-[320px] md:h-[420px] lg:h-[607px]">
                 {/* Image container with black background and white border */}
-                <div className="absolute left-0 top-0 w-full h-full bg-[#0B0B0B] border border-white rounded-[15px] overflow-hidden">
+                <div className="absolute left-0 top-0 w-full h-full bg-[#0B0B0B] border border-white rounded-[12px] sm:rounded-[15px] overflow-hidden">
                   <img 
                     src={Studyimg}
                     alt="Group of diverse students"
@@ -400,123 +454,123 @@ const Main = () => {
       </section>
 
       {/* Popular Destinations */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B] -ml-[670px] ">
+          <div className="text-center sm:text-left mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px]  leading-tight sm:leading-tight md:leading-tight lg:leading-[66px] font-extrabold text-[#18181B]  sm:-ml-[670px] lg:ml-[300px]">
           Popular Study <span className="text-[#FDB11F]">Destination</span>
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-4 sm:mt-6 -ml-[730px] -mb-40">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 md:mt-5 lg:mt-6 sm:-ml-[730px] -mb-20 sm:-mb-30 md:-mb-35 lg:-mb-40 lg:ml-80">
             Explore world-class education opportunities across the globel.            </p>
           </div>
         </div>
       </section>
-      <Study className="-mt-9"/>
+      <Study className="-mt-4 sm:-mt-6 md:-mt-8 lg:-mt-9"/>
 
       {/* Find Your Perfect Program */}
-      <section className="py-12 sm:py-10 md:py-20 px-4 bg-white relative">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white relative">
         <div className="max-w-[1280px] mx-auto relative">
           {/* Decorative vectors */}
 
           {/* Heading Section */}
-          <div className="mb-8">
-          <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B] -mt-20">
+          <div className="mb-6 sm:mb-7 md:mb-8">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[66px] font-extrabold text-[#18181B] -mt-10 sm:-mt-14 md:-mt-16 lg:-mt-20">
           Find <span className='text-[#FDB11F]'>Your Perfect </span> Program
             </h2>
-            <p className="font-['Plus_Jakarta_Sans'] text-base leading-[26px] font-normal text-[#52525B]">
+            <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-relaxed sm:leading-[26px] font-normal text-[#52525B]">
             Explore world-class education opportunities across the globe.
             </p>
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-3 w-full max-w-[1216px] mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3 w-full max-w-[1216px] mb-6 sm:mb-7 md:mb-8">
             <button
               onClick={() => setSelectedFilter('all')}
-              className={`h-[48px] px-6 rounded-full flex items-center justify-center gap-2 whitespace-nowrap transition-all ${
+              className={`h-[40px] sm:h-[44px] md:h-[48px] px-4 sm:px-5 md:px-6 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all ${
                 selectedFilter === 'all'
                   ? 'bg-[#FBB03B] text-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)]'
                   : 'bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]'
               }`}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={selectedFilter === 'all' ? 'stroke-white' : 'stroke-[#374151]'}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] ${selectedFilter === 'all' ? 'stroke-white' : 'stroke-[#374151]'}`}>
                 <path d="M3 3h18v18H3z" strokeWidth="1.67" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M9 9h6v6H9z" strokeWidth="1.67" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="font-['Inter'] text-base leading-[19px] font-semibold">All Courses</span>
+              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">All Courses</span>
             </button>
 
             <button
               onClick={() => setSelectedFilter('undergraduate')}
-              className={`h-[48px] px-6 rounded-full flex items-center justify-center gap-2 whitespace-nowrap transition-all ${
+              className={`h-[40px] sm:h-[44px] md:h-[48px] px-4 sm:px-5 md:px-6 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all ${
                 selectedFilter === 'undergraduate'
                   ? 'bg-[#FBB03B] text-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)]'
                   : 'bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]'
               }`}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={selectedFilter === 'undergraduate' ? 'stroke-white' : 'stroke-[#374151]'}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] ${selectedFilter === 'undergraduate' ? 'stroke-white' : 'stroke-[#374151]'}`}>
                 <path d="M8.33 3L8.33 9" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M16.67 3L16.67 9" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M12.5 9L12.5 15" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-base leading-[19px] font-semibold">Undergraduate</span>
+              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Undergraduate</span>
             </button>
 
             <button
               onClick={() => setSelectedFilter('postgraduate')}
-              className={`h-[48px] px-6 rounded-full flex items-center justify-center gap-2 whitespace-nowrap transition-all ${
+              className={`h-[40px] sm:h-[44px] md:h-[48px] px-4 sm:px-5 md:px-6 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all ${
                 selectedFilter === 'postgraduate'
                   ? 'bg-[#FBB03B] text-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)]'
                   : 'bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]'
               }`}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={selectedFilter === 'postgraduate' ? 'stroke-white' : 'stroke-[#374151]'}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] ${selectedFilter === 'postgraduate' ? 'stroke-white' : 'stroke-[#374151]'}`}>
                 <path d="M8.34 5L8.34 10" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M15.67 5L15.67 10" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M12 10L12 15" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M8.5 15L15.5 15" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-base leading-[19px] font-semibold">Postgraduate</span>
+              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Postgraduate</span>
             </button>
 
             <button
               onClick={() => setSelectedFilter('short-term')}
-              className={`h-[48px] px-6 rounded-full flex items-center justify-center gap-2 whitespace-nowrap transition-all ${
+              className={`h-[40px] sm:h-[44px] md:h-[48px] px-4 sm:px-5 md:px-6 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all ${
                 selectedFilter === 'short-term'
                   ? 'bg-[#FBB03B] text-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)]'
                   : 'bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]'
               }`}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={selectedFilter === 'short-term' ? 'stroke-white' : 'stroke-[#374151]'}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] ${selectedFilter === 'short-term' ? 'stroke-white' : 'stroke-[#374151]'}`}>
                 <path d="M6 2L6 8" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M12 2L12 8" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M18 2L18 8" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M8 13L16 13" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-base leading-[19px] font-semibold">Short-Term</span>
+              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Short-Term</span>
             </button>
 
             <button
               onClick={() => setSelectedFilter('scholarship')}
-              className={`h-[48px] px-6 rounded-full flex items-center justify-center gap-2 whitespace-nowrap transition-all ${
+              className={`h-[40px] sm:h-[44px] md:h-[48px] px-4 sm:px-5 md:px-6 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all ${
                 selectedFilter === 'scholarship'
                   ? 'bg-[#FBB03B] text-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)]'
                   : 'bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]'
               }`}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={selectedFilter === 'scholarship' ? 'stroke-white' : 'stroke-[#374151]'}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] ${selectedFilter === 'scholarship' ? 'stroke-white' : 'stroke-[#374151]'}`}>
                 <path d="M6 2L18 2" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M12 10L12 18" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-base leading-[19px] font-semibold">Scholarship Programs</span>
+              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Scholarship Programs</span>
             </button>
           </div>
 
           {/* Dropdown Selects */}
-          <div className="relative w-full max-w-[1216px] h-[48px] mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 w-full max-w-[1216px] mb-6 sm:mb-7 md:mb-8">
             <select 
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              className="absolute left-0 top-0 w-[394.66px] h-[48px] bg-white border border-[#D1D5DB] rounded-lg pl-[21px] pr-10 font-['Plus_Jakarta_Sans'] text-base leading-5 font-medium text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#FBB03B] cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%234B5563%22%20d%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center]"
+              className="w-full h-[44px] sm:h-[48px] bg-white border border-[#D1D5DB] rounded-lg px-4 pr-10 font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-5 font-medium text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#FBB03B] cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%234B5563%22%20d%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center]"
             >
               {locations.map((location, index) => (
                 <option key={index} value={location}>{location}</option>
@@ -526,7 +580,7 @@ const Main = () => {
             <select 
               value={selectedSubject}
               onChange={(e) => setSelectedSubject(e.target.value)}
-              className="absolute left-[410.66px] top-0 w-[394.67px] h-[48px] bg-white border border-[#D1D5DB] rounded-lg pl-[13.34px] pr-10 font-['Plus_Jakarta_Sans'] text-base leading-5 font-medium text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#FBB03B] cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%234B5563%22%20d%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center]"
+              className="w-full h-[44px] sm:h-[48px] bg-white border border-[#D1D5DB] rounded-lg px-4 pr-10 font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-5 font-medium text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#FBB03B] cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%234B5563%22%20d%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center]"
             >
               {subjects.map((subject, index) => (
                 <option key={index} value={subject}>{subject}</option>
@@ -536,7 +590,7 @@ const Main = () => {
             <select 
               value={selectedDuration}
               onChange={(e) => setSelectedDuration(e.target.value)}
-              className="absolute left-[821.33px] top-0 w-[394.66px] h-[48px] bg-white border border-[#D1D5DB] rounded-lg pl-[14.67px] pr-10 font-['Plus_Jakarta_Sans'] text-base leading-5 font-medium text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#FBB03B] cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%234B5563%22%20d%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center]"
+              className="w-full h-[44px] sm:h-[48px] bg-white border border-[#D1D5DB] rounded-lg px-4 pr-10 font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-5 font-medium text-[#4B5563] focus:outline-none focus:ring-2 focus:ring-[#FBB03B] cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%234B5563%22%20d%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center]"
             >
               {durations.map((duration, index) => (
                 <option key={index} value={duration}>{duration}</option>
@@ -545,76 +599,68 @@ const Main = () => {
           </div>
 
           {/* Program Cards Grid */}
-          <div className="relative w-full max-w-[1216px] min-h-[554px] mb-8">
+          <div className="w-full max-w-[1216px] mb-6 sm:mb-7 md:mb-8">
             {programsLoading ? (
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FBB03B] mx-auto mb-4"></div>
-                <p className="font-['Inter'] text-lg text-[#6B7280]">Loading programs...</p>
+              <div className="flex items-center justify-center py-20">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FBB03B] mx-auto mb-4"></div>
+                  <p className="font-['Inter'] text-base sm:text-lg text-[#6B7280]">Loading programs...</p>
+                </div>
               </div>
             ) : filteredPrograms.length > 0 ? (
-              filteredPrograms.slice(0, 6).map((program, index) => {
-                // Calculate position for each card
-                const row = Math.floor(index / 3);
-                const col = index % 3;
-                const leftPositions = [0, 413.33, 826.66];
-                const topPositions = [0, 289];
-                const cardWidths = ['389.33px', '389.33px', '389.34px'];
-                
-                return (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+                {filteredPrograms.slice(0, 6).map((program) => (
                   <div
                     key={program.id}
-                    className="absolute h-[265px] bg-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)] rounded-xl p-6 cursor-pointer hover:shadow-xl transition-shadow"
-                    style={{
-                      left: `${leftPositions[col]}px`,
-                      top: `${topPositions[row]}px`,
-                      width: cardWidths[col]
-                    }}
+                    className="bg-white shadow-[0px_4px_6px_rgba(0,0,0,0.1),0px_10px_15px_rgba(0,0,0,0.1)] rounded-xl p-4 sm:p-5 md:p-6 cursor-pointer hover:shadow-xl transition-shadow"
                   >
-                    <div className="relative w-full h-[48px] mb-4">
-                      <div className="absolute left-0 top-0 w-12 h-12 bg-[rgba(251,176,59,0.1)] rounded-lg flex items-center justify-center">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FBB03B" strokeWidth="2">
+                    <div className="flex items-start justify-between mb-3 sm:mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[rgba(251,176,59,0.1)] rounded-lg flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FBB03B" strokeWidth="2" className="sm:w-[24px] sm:h-[24px]">
                           <path d="M8.34 5L8.34 10" strokeLinecap="round"/>
                           <path d="M15.67 5L15.67 10" strokeLinecap="round"/>
                           <path d="M12 10L12 15" strokeLinecap="round"/>
                         </svg>
                       </div>
-                      <span className="absolute right-0 top-0 w-[55.16px] h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
-                        <span className="font-['Inter'] text-xs leading-[15px] font-semibold text-[#15803D]">{program.status}</span>
+                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#DCFCE7] rounded-full">
+                        <span className="font-['Inter'] text-[10px] sm:text-xs leading-tight font-semibold text-[#15803D]">{program.status}</span>
                       </span>
                     </div>
-                    <h3 className="font-['Inter'] text-xl leading-6 font-bold text-[#111827] mb-2 line-clamp-2">{program.title}</h3>
-                    <p className="font-['Inter'] text-sm leading-[17px] font-normal text-[#4B5563] mb-4 line-clamp-1">{program.university}</p>
-                    <div className="flex gap-2 mb-4 flex-wrap">
-                      <span className="px-3 py-1 bg-[#F3F4F6] rounded-full font-['Inter'] text-xs leading-[15px] font-normal text-[#374151]">{program.duration}</span>
-                      <span className="px-3 py-1 bg-[#F3F4F6] rounded-full font-['Inter'] text-xs leading-[15px] font-normal text-[#374151]">{program.type}</span>
+                    <h3 className="font-['Inter'] text-base sm:text-lg md:text-xl leading-tight sm:leading-6 font-bold text-[#111827] mb-2 line-clamp-2">{program.title}</h3>
+                    <p className="font-['Inter'] text-xs sm:text-sm leading-tight sm:leading-[17px] font-normal text-[#4B5563] mb-3 sm:mb-4 line-clamp-1">{program.university}</p>
+                    <div className="flex gap-2 mb-3 sm:mb-4 flex-wrap">
+                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#F3F4F6] rounded-full font-['Inter'] text-[10px] sm:text-xs leading-tight font-normal text-[#374151]">{program.duration}</span>
+                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#F3F4F6] rounded-full font-['Inter'] text-[10px] sm:text-xs leading-tight font-normal text-[#374151]">{program.type}</span>
                     </div>
                     <div className="flex justify-between items-end">
-                      <span className="font-['Inter'] text-sm leading-[14px] font-normal text-[#6B7280]">Tuition</span>
-                      <span className="font-['Inter'] text-base leading-4 font-bold text-[#FBB03B]">{program.tuition}</span>
+                      <span className="font-['Inter'] text-xs sm:text-sm leading-tight font-normal text-[#6B7280]">Tuition</span>
+                      <span className="font-['Inter'] text-sm sm:text-base leading-tight font-bold text-[#FBB03B]">{program.tuition}</span>
                     </div>
                   </div>
-                );
-              })
+                ))}
+              </div>
             ) : (
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                <p className="font-['Inter'] text-lg text-[#6B7280]">No programs found matching your filters.</p>
-                <button
-                  onClick={() => {
-                    setSelectedLocation('All Locations');
-                    setSelectedSubject('All Subjects');
-                    setSelectedDuration('All Duration');
-                  }}
-                  className="mt-4 px-6 py-2 bg-[#FBB03B] text-white rounded-lg font-['Inter'] font-semibold hover:bg-[#E5A21C] transition-colors"
-                >
-                  Reset Filters
-                </button>
+              <div className="flex items-center justify-center py-20">
+                <div className="text-center">
+                  <p className="font-['Inter'] text-base sm:text-lg text-[#6B7280] mb-4">No programs found matching your filters.</p>
+                  <button
+                    onClick={() => {
+                      setSelectedLocation('All Locations');
+                      setSelectedSubject('All Subjects');
+                      setSelectedDuration('All Duration');
+                    }}
+                    className="px-6 py-2 bg-[#FBB03B] text-white rounded-lg font-['Inter'] font-semibold hover:bg-[#E5A21C] transition-colors"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
               </div>
             )}
           </div>
 
           {/* View All Programs Button */}
-          <div className="relative w-full max-w-[1216px] h-[48px]">
-            <button className="absolute left-[505.39px] top-0 w-[205.22px] h-[48px] bg-[#1A1A1A] rounded-lg flex items-center justify-center font-['Inter'] text-base leading-[19px] font-semibold text-white hover:bg-[#2A2A2A] transition-colors">
+          <div className="w-full max-w-[1216px] flex justify-center">
+            <button className="w-full sm:w-auto px-8 sm:px-12 md:px-16 h-[44px] sm:h-[48px] bg-[#1A1A1A] rounded-lg flex items-center justify-center font-['Inter'] text-sm sm:text-base leading-[19px] font-semibold text-white hover:bg-[#2A2A2A] transition-colors">
               View All Programs
             </button>
           </div>
@@ -622,36 +668,37 @@ const Main = () => {
       </section>
 
       {/* Why Choose Upskillway */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-20">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white -mt-10 sm:-mt-14 md:-mt-16 lg:-mt-20">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <div className="inline-block mb-4 sm:mb-6">
-            <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[66px] font-extrabold text-[#18181B] -ml-[670px]">
+          <div className="text-center sm:text-left mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+            <div className="inline-block mb-3 sm:mb-4 md:mb-6">
+            <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[66px] font-extrabold text-[#18181B] sm:-ml-[670px] lg:ml-0">
             Why Choose <span className="text-[#FDB11F]">Upskillway</span>
               </h2>
             </div>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-2 sm:mt-1 -ml-[730px] mb-[-10px]">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-1 sm:-ml-[730px] mb-0 sm:mb-[-10px] lg:ml-0">
               Your trusted partner for a seamless study abroad journey
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center lg:justify-items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 justify-items-center lg:justify-items-start">
             {/* Card 1: Expert Academic Counseling */}
             <div 
-              className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-6 w-full max-w-[384px] lg:w-[384px]"
+              className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-4 sm:p-5 md:p-6 w-full max-w-[384px] lg:w-[384px]"
               style={{
-                height: '254px',
+                height: 'auto',
+                minHeight: '220px',
                 borderRadius: '12px',
                 opacity: 1
               }}
             >
-              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4">
-                <UserCircle className="w-8 h-8 text-white" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-3 sm:mb-3.5 md:mb-4">
+                <UserCircle className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-lg sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-2.5 md:mb-3">
                 Expert Academic Counseling
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed flex-1">
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed flex-1">
                 Personalized guidance from experienced counselors to match you with the perfect program and university.
               </p>
             </div>
@@ -760,32 +807,32 @@ const Main = () => {
       </section>
 
       {/* Newsletter / Free Counseling Banner */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white relative">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white relative">
         <div className="max-w-[1519px] mx-auto relative">
           {/* Main Container Frame */}
-          <div className="relative w-full max-w-[1519px] min-h-[366px] bg-[#5D38DE] rounded-[24px] overflow-hidden">
+          <div className="relative w-full max-w-[1519px] min-h-[280px] sm:min-h-[320px] md:min-h-[366px] bg-[#5D38DE] rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden">
             {/* Decorative Vectors */}
             <div className="absolute w-[323px] h-[101.62px] left-[879px] top-[297px] bg-[#6843E7] rounded hidden xl:block"></div>
             <div className="absolute w-[323px] h-[101.62px] left-[-107.87px] top-[-120.46px] bg-[#6843E7] rounded rotate-[120deg] hidden xl:block"></div>
             <div className="absolute w-[323px] h-[101.62px] left-[980px] top-[-64.49px] bg-[#6843E7] rounded rotate-[-150deg] hidden xl:block"></div>
 
             {/* Content Section */}
-            <div className="relative z-10 px-4 sm:px-8 md:px-[80px] py-8 sm:py-12 md:py-[80px]">
+            <div className="relative z-10 px-4 sm:px-6 md:px-12 lg:px-[80px] py-6 sm:py-8 md:py-12 lg:py-[80px]">
               <div className="max-w-[699px]">
                 {/* Heading */}
-                <h2 className="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl md:text-[48px] leading-tight sm:leading-[36px] font-bold text-white mb-4">
+                <h2 className="font-['Plus_Jakarta_Sans'] text-xl sm:text-2xl md:text-3xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[36px] font-bold text-white mb-3 sm:mb-3.5 md:mb-4">
                   Ready to Start Your Journey?
                 </h2>
 
                 {/* Description */}
-                <p className="font-['Inter'] text-base sm:text-lg md:text-xl leading-5 font-normal text-[rgba(255,255,255,0.9)] mb-6 sm:mb-8 max-w-[427px]">
+                <p className="font-['Inter'] text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-normal text-[rgba(255,255,255,0.9)] mb-4 sm:mb-5 md:mb-6 lg:mb-8 max-w-[427px]">
                   Book a free counseling session with our experts today
                 </p>
 
                 {/* Button */}
                 <button 
                   onClick={() => setIsConsultationModalOpen(true)}
-                  className="w-full sm:w-[308px] h-[54px] bg-white rounded-[80px] flex items-center justify-center font-['Inter'] text-base sm:text-lg leading-[22px] font-bold text-[#5D38DE] hover:bg-gray-100 transition-colors "
+                  className="w-full sm:w-[280px] md:w-[308px] h-[48px] sm:h-[52px] md:h-[54px] bg-white rounded-[80px] flex items-center justify-center font-['Inter'] text-sm sm:text-base md:text-lg leading-[22px] font-bold text-[#5D38DE] hover:bg-gray-100 transition-colors"
                 >
                   Schedule Free Consultation
                 </button>
@@ -793,11 +840,11 @@ const Main = () => {
             </div>
 
             {/* Image - positioned on the right side */}
-            <div className="absolute right-0 top-0 w-[40%] sm:w-[45%] md:w-[50%] lg:w-[600px] h-full max-h-[366px] overflow-hidden opacity-80 lg:opacity-100">
+            <div className="absolute right-0 top-0 w-[35%] sm:w-[40%] md:w-[45%] lg:w-[600px] h-full max-h-[280px] sm:max-h-[320px] md:max-h-[366px] overflow-hidden opacity-60 sm:opacity-70 md:opacity-80 lg:opacity-100">
               <img 
                 src={sitting}
                 alt="Counseling session illustration"
-                className="w-full  object-cover object-center -mt-6"
+                className="w-full object-cover object-center -mt-4 sm:-mt-5 md:-mt-6"
               />
             </div>
           </div>
@@ -807,32 +854,32 @@ const Main = () => {
       {/* Student Testimonials */}
 
       {/* How It Works */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-20">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white -mt-10 sm:-mt-14 md:-mt-16 lg:-mt-20">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
               How It Works
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600">
               Your journey to studying abroad in 5 simple steps
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-16">
             {/* Step 1: Free Counseling Call */}
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="relative mb-4 flex justify-center">
-                <div className="w-16 h-16 bg-[#FF9500] rounded-full flex items-center justify-center relative">
-                  <Phone className="w-8 h-8 text-white" />
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">1</span>
+            <div className="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="relative mb-3 sm:mb-3.5 md:mb-4 flex justify-center">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#FF9500] rounded-full flex items-center justify-center relative">
+                  <Phone className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
+                  <div className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 rounded-full flex items-center justify-center">
+                    <span className="text-white text-[10px] sm:text-xs font-bold">1</span>
                   </div>
                 </div>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 text-center">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-2.5 md:mb-3 text-center">
                 Free Counseling Call
               </h3>
-              <p className="text-sm sm:text-base text-gray-600 text-center leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 text-center leading-relaxed">
                 Schedule a consultation with our expert counselors to discuss your goals and preferences.
               </p>
             </div>
@@ -938,10 +985,10 @@ const Main = () => {
 
 
 
-      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-20">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white -mt-10 sm:-mt-14 md:-mt-16 lg:-mt-20">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
               Our <span className="text-[#FDB11F]">Services</span>
             </h2>
           </div>
@@ -1283,28 +1330,28 @@ const StudyAbroadTestimonials = () => {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white to-orange-50">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-white to-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
             Hear What Our <span className="text-[#FF9500]">Students</span> Are Saying
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">
             Discover the experiences of students who transformed their lives through studying abroad
           </p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
+            <div key={testimonial.id} className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                 {testimonial.studentImageUrl ? (
                   <img 
                     src={testimonial.studentImageUrl} 
                     alt={testimonial.studentName}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-orange-200"
+                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-orange-200"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
@@ -1312,21 +1359,21 @@ const StudyAbroadTestimonials = () => {
                   />
                 ) : null}
                 <div
-                  className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-xl border-2 border-orange-200"
+                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-yellow-400 flex items-center justify-center text-white font-bold text-lg sm:text-xl border-2 border-orange-200"
                   style={{ display: testimonial.studentImageUrl ? 'none' : 'flex' }}
                 >
                   {testimonial.studentName?.charAt(0) || 'S'}
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">{testimonial.studentName}</h4>
-                  <p className="text-sm text-gray-600">{testimonial.studentRole}</p>
+                  <h4 className="text-sm sm:text-base font-bold text-gray-900">{testimonial.studentName}</h4>
+                  <p className="text-xs sm:text-sm text-gray-600">{testimonial.studentRole}</p>
                 </div>
               </div>
-              <p className="text-gray-700 italic mb-4">"{testimonial.testimonialText}"</p>
+              <p className="text-sm sm:text-base text-gray-700 italic mb-3 sm:mb-4">"{testimonial.testimonialText}"</p>
               {testimonial.rating && (
-                <div className="flex gap-1">
+                <div className="flex gap-0.5 sm:gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className={`w-5 h-5 ${i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} viewBox="0 0 20 20">
+                    <svg key={i} className={`w-4 h-4 sm:w-5 sm:h-5 ${i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} viewBox="0 0 20 20">
                       <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                     </svg>
                   ))}
@@ -1423,10 +1470,10 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 bg-white -mt-30">
+    <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-30">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
             <span className="text-[#FF9500]">Frequently</span> Asked Questions
           </h2>
         </div>
@@ -1580,23 +1627,23 @@ const BookCounselingSection = () => {
   };
 
   return (
-    <section id="book-counseling" className="py-12 sm:py-16 md:py-20 px-4 bg-white">
+    <section id="book-counseling" className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12 -mt-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12 -mt-10 sm:-mt-14 md:-mt-16 lg:-mt-20">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
             Book Your <span className="relative inline-block">
               <span className="text-[#FF9500] relative z-10">Free Counseling</span>
-              <span className="absolute bottom-0 left-0 right-0 h-3 bg-[#FF9500] opacity-20 -rotate-1"></span>
+              <span className="absolute bottom-0 left-0 right-0 h-2 sm:h-2.5 md:h-3 bg-[#FF9500] opacity-20 -rotate-1"></span>
             </span>  Session
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
             Take the first step towards your dream of studying abroad. Our experts are here to guide you.
           </p>
         </div>
 
         {/* Form and Illustration */}
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-start">
           {/* Form Section */}
           <div className="bg-white">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">

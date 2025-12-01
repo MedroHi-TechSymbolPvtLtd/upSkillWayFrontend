@@ -194,7 +194,7 @@ const CertifiedCourses = () => {
           <div className="bg-white rounded-2xl shadow-[0_0_150px_rgba(0,0,0,0.1)] hover:shadow-lg transition-all duration-300 px-8 py-6 flex items-center gap-4 min-w-[280px]">
                <div>
                  <img 
-                  src={Certified2} 
+                  src={Certified} 
                   alt="Upskillway Logo" 
                   />
             </div>

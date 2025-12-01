@@ -420,21 +420,21 @@ const CorporateTrainingPage = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white">
         <div>
-          <div className="mt-30">
-            <div className="ml-0 sm:ml-8 md:ml-16 space-y-6 w-[945]">
-              <div className="inline-block bg-purple-100 text-purple-600 px-4 py-2 rounded-lg text-sm font-semibold">
+          <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-30 px-4 sm:px-6">
+            <div className="ml-0 sm:ml-4 md:ml-8 lg:ml-16 space-y-4 sm:space-y-5 md:space-y-6 max-w-full lg:w-[945px]">
+              <div className="inline-block bg-purple-100 text-purple-600 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold">
                 Corporate Training
               </div>
 
-              <h1 className=" max-w-[945px] font-['Plus_Jakarta_Sans'] font-bold text-[32px] sm:text-[40px] md:text-[50px] lg:text-[64px] leading-[100%] tracking-[0%]">
+              <h1 className="max-w-full lg:max-w-[945px] font-['Plus_Jakarta_Sans'] font-bold text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] leading-[110%] sm:leading-[105%] md:leading-[102%] lg:leading-[100%] tracking-[0%]">
                 Upskill your{" "}
-                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[32px] sm:text-[40px] md:text-[50px] lg:text-[64px] leading-[100%] tracking-[0%] text-[#FDB11F]">
+                <span className="font-['Plus_Jakarta_Sans'] font-bold text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] leading-[110%] sm:leading-[105%] md:leading-[102%] lg:leading-[100%] tracking-[0%] text-[#FDB11F]">
                   Workforce
                 </span>{" "}
                 in High-Demand Technologies
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-full sm:max-w-lg md:max-w-xl">
                 Close skill gaps, improve productivity, and accelerate digital
                 transformation with job-ready corporate training — tailored to
                 your business goals.
@@ -443,16 +443,16 @@ const CorporateTrainingPage = () => {
             
             </div>
 
-            <div className="mt-10 grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-start mb-5 ">
+            <div className="mt-6 sm:mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-start mb-5">
               {/* Feature Badges */}
-              <div className="ml-0 sm:ml-8 md:ml-16 space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+              <div className="ml-0 sm:ml-4 md:ml-8 lg:ml-16 space-y-4 sm:space-y-5 md:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm">
                     <div className="flex items-center space-x-2">
-                      <div className="w-5 h-5 border-2 border-blue-500 rounded-full flex items-center justify-center">
-                        <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-blue-500 rounded-full" />
                       </div>
-                      <span className="font-semibold text-gray-900 text-sm">
+                      <span className="font-semibold text-gray-900 text-xs sm:text-sm">
                         100% Industry-aligned Skills
                       </span>
                     </div>
@@ -489,7 +489,7 @@ const CorporateTrainingPage = () => {
                   </div>
                 </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-3 sm:pt-4">
                 <button
                   onClick={() => {
                     const element = document.getElementById('corporate-training-form');
@@ -497,7 +497,7 @@ const CorporateTrainingPage = () => {
                       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="w-full sm:w-[263px] h-[55px] rounded-[80px] px-8 py-4 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
+                  className="w-full sm:w-[240px] md:w-[263px] h-[48px] sm:h-[52px] md:h-[55px] rounded-[80px] px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
                   style={{
                     background:
                       "linear-gradient(270deg, #5835D2 0%, #FDB11F 100%)",
@@ -506,7 +506,7 @@ const CorporateTrainingPage = () => {
                   Schedule Consultation
                 </button>
                 <button
-                  className="w-full sm:w-[239px] h-[55px] rounded-[80px] px-8 py-4 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
+                  className="w-full sm:w-[220px] md:w-[239px] h-[48px] sm:h-[52px] md:h-[55px] rounded-[80px] px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
                   style={{
                     background:
                       "linear-gradient(270deg, #5D38DE 0%, #FDB11F 100%)",
@@ -542,15 +542,15 @@ const CorporateTrainingPage = () => {
               </div>
 
               {/* Right Section - Student Image with Purple Circle */}
-              <div className="relative flex justify-center items-center min-h-[500px] mt-[-300px]">
+              <div className="relative flex justify-center items-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px] mt-0 sm:-mt-20 md:-mt-40 lg:-mt-[300px]">
                 {/* Large Purple Circle Background */}
-                <div className="absolute w-[489px] h-[489px] bg-[#6742E1] rounded-full mt-90 "></div>
+                <div className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[420px] md:h-[420px] lg:w-[489px] lg:h-[489px] bg-[#6742E1] rounded-full mt-20 sm:mt-40 md:mt-60 lg:mt-90"></div>
                 {/* Student Image - Positioned in front of circle */}
                 <div className="relative z-10">
                   <img
                     src={resolvedData.cardImageUrl || CorporateFallback}
                     alt="Professional student"
-                    className="w-[350px] h-[450px] sm:w-[400px] sm:h-[500px] object-cover object-top mt-10"
+                    className="w-[250px] h-[320px] sm:w-[300px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[400px] lg:h-[500px] object-cover object-top mt-6 sm:mt-8 md:mt-10"
                     style={{ objectPosition: "center 20%" }}
                     onError={(event) => {
                       if (event.target.src !== CorporateFallback) {
@@ -562,30 +562,30 @@ const CorporateTrainingPage = () => {
                 </div>
 
                 {/* Floating Stats Card - Top Right */}
-                <div className="absolute top-8 -right-4 bg-white rounded-2xl p-2 shadow-xl z-20 max-w-[200px] mr-[80px]">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="flex -space-x-2">
-                      <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full border-2 border-white overflow-hidden">
+                <div className="absolute top-4 sm:top-6 md:top-8 -right-2 sm:-right-3 md:-right-4 bg-white rounded-xl sm:rounded-2xl p-2 sm:p-2 shadow-xl z-20 max-w-[160px] sm:max-w-[180px] md:max-w-[200px] mr-0 sm:mr-[40px] md:mr-[60px] lg:mr-[80px]">
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 mb-1.5 sm:mb-2">
+                    <div className="flex -space-x-1.5 sm:-space-x-2">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full border-2 border-white overflow-hidden">
                         <img src={User1} alt="Mentor 1" className="w-full h-full object-cover" />
                       </div>
-                      <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full border-2 border-white overflow-hidden">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full border-2 border-white overflow-hidden">
                         <img src={CollegeV3} alt="Mentor 2" className="w-full h-full object-cover" />
                       </div>
-                      <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full border-2 border-white overflow-hidden">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full border-2 border-white overflow-hidden">
                         <img src={CollegeV4} alt="Mentor 3" className="w-full h-full object-cover" />
                       </div>
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">2K+</p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">2K+</p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     Learn with expert mentors who are ready to guide & skills
                   </p>
                 </div>
 
                 {/* Decorative Star */}
-                <div className="absolute top-50 left-25 text-yellow-400 text-4xl z-20">
+                <div className="absolute top-20 sm:top-30 md:top-40 lg:top-50 left-10 sm:left-15 md:left-20 lg:left-25 text-yellow-400 text-2xl sm:text-3xl md:text-4xl z-20">
                   ✨
                 </div>
               </div>
@@ -598,15 +598,15 @@ const CorporateTrainingPage = () => {
       </section>
 
       {/* Trusted By Leading Organizations Section */}
-      <section className="py-20 bg-white">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-10 sm:py-12 md:py-16 lg:py-20 bg-white">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Section - Trusted By */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               Trusted By Leading{" "}
               <span className="text-[#FDB11F]">Organizations</span> Worldwide
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
               Partnering with global enterprises to build future-ready teams
             </p>
           </div>
@@ -700,19 +700,19 @@ const CorporateTrainingPage = () => {
           )}
 
           {/* Built For Enterprise Section */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               Built For <span className="text-[#FDB11F]">Enterprise</span>.
               Secured For The Fortune 500.
             </h2>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-4xl mx-auto">
               From cybersecurity to scalability — our programs are designed and
               delivered with enterprise-grade governance & compliance.
             </p>
           </div>
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-9 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-9 mb-8 sm:mb-10 md:mb-12">
             {/* Card 1 - Enterprise Security */}
             <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
@@ -863,8 +863,8 @@ const CorporateTrainingPage = () => {
           </div>
 
           {/* Download Button */}
-          <div className="text-center">
-            <button className="absolute w-[260px] h-[42px] left-[626px] bg-white text-Orange font-regular rounded-[8px] border-[2px] border-orange-500 hover:opacity-90 transition-opacity">
+          <div className="flex justify-center">
+            <button className="w-full sm:w-auto max-w-[260px] h-[42px] sm:h-[48px] bg-white text-orange-500 font-regular rounded-[8px] border-[2px] border-orange-500 hover:opacity-90 transition-opacity px-4 sm:px-6">
               Download Security Whitepaper
             </button>
           </div>
@@ -872,19 +872,19 @@ const CorporateTrainingPage = () => {
       </section>
 
       {/* Training That Actually Moves Your KPIs Section */}
-      <section className="py-10 bg-white">
+      <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Heading */}
-          <div className="text-center mb-6">
-            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-[48px] leading-[36px] tracking-[0] text-gray-900 text-center capitalize align-middle mb-10">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[36px] tracking-[0] text-gray-900 text-center capitalize align-middle mb-6 sm:mb-8 md:mb-10">
               Training That Actually Moves Your{" "}
               <span className="text-[#FDB11F]">KPIs</span>
             </h2>
-            <p className="font-['Plus_Jakarta_Sans'] font-normal text-[20px] leading-[160%] tracking-[0] text-center text-gray-800 mb-[10px]">
+            <p className="font-['Plus_Jakarta_Sans'] font-normal text-base sm:text-lg md:text-[20px] leading-[160%] tracking-[0] text-center text-gray-800 mb-3 sm:mb-4 md:mb-[10px]">
               Your competitors are already upskilling. Every day of delay costs
               you market share, innovation speed, and top talent.
             </p>
-            <p className="font-['Plus_Jakarta_Sans'] font-normal text-[18px] leading-[160%] tracking-[0] text-center text-gray-800">
+            <p className="font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[18px] leading-[160%] tracking-[0] text-center text-gray-800">
               AI is transforming industries, cloud migrations are urgent, and
               cyber threats grow daily. Hiring lags behind—Upskillway closes the
               gap by turning your teams into high performers, fast.
@@ -893,12 +893,12 @@ const CorporateTrainingPage = () => {
 
           {/* Feature Cards Grid */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-10 sm:mb-12 md:mb-16 mt-8 sm:mt-10 md:mt-12">
             {/* Card 1 - Expert-Led Curriculum */}
-            <div className="w-[389.328125px] h-[202px] bg-white rounded-[12px] border-[1px] border-gray-200 p-8 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+            <div className="w-full max-w-full lg:max-w-[389.328125px] h-auto min-h-[180px] sm:min-h-[190px] md:min-h-[202px] bg-white rounded-[12px] border-[1px] border-gray-200 p-4 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
                 <svg
-                  className="w-6 h-6 text-orange-500"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -911,10 +911,10 @@ const CorporateTrainingPage = () => {
                   />
                 </svg>
               </div>
-              <h3 className="font-['Plus_Jakarta_Sans'] font-semibold text-[18px] leading-[100%] tracking-[0] text-gray-900 mb-2">
+              <h3 className="font-['Plus_Jakarta_Sans'] font-semibold text-base sm:text-lg md:text-[18px] leading-tight sm:leading-tight md:leading-[100%] tracking-[0] text-gray-900 mb-2">
                 Expert-Led Curriculum
               </h3>
-              <p className="font-['Plus_Jakarta_Sans'] font-normal text-[14px] leading-[100%] tracking-[0] text-gray-600">
+              <p className="font-['Plus_Jakarta_Sans'] font-normal text-xs sm:text-sm md:text-[14px] leading-relaxed sm:leading-relaxed md:leading-[100%] tracking-[0] text-gray-600">
                 Learn from practitioners who've solved the exact challenges your
                 teams face — not academics teaching theory.
               </p>
@@ -1091,8 +1091,8 @@ const CorporateTrainingPage = () => {
       <section id="training-programs" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="text-center mb-12">
-            <h2 className="w-full font-['Plus_Jakarta_Sans'] font-bold text-[38px] leading-[46px] tracking-[0] text-gray-900  capitalize align-middle mb-4 -ml-18 ">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="w-full font-['Plus_Jakarta_Sans'] font-bold text-2xl sm:text-3xl md:text-[38px] leading-tight sm:leading-tight md:leading-[46px] tracking-[0] text-gray-900 capitalize align-middle mb-3 sm:mb-4">
               Build The <span className="text-[#FDB11F]">Capabilities</span>{" "}
               Your Business Strategy Demands
             </h2>
@@ -1801,13 +1801,13 @@ const CorporateTrainingPage = () => {
       <section className="py-20 bg-white -mt-20">
         <div className="max-w-[1216px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="text-center mb-12">
-            <h2 className="font-['Plus_Jakarta_Sans'] text-[38px] leading-[46px] font-bold text-black capitalize mb-4 -ml-60">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-[38px] leading-tight sm:leading-tight md:leading-[46px] font-bold text-black capitalize mb-3 sm:mb-4">
               From Day One To{" "}
               <span className="text-[#FDB11F]">Business Impact</span> In Under 6
               Weeks
             </h2>
-            <p className="font-['Plus_Jakarta_Sans'] text-[18px] leading-[32px] text-[#38393E] max-w-1xl mx-auto -ml-40">
+            <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base md:text-[18px] leading-relaxed sm:leading-relaxed md:leading-[32px] text-[#38393E] max-w-full sm:max-w-2xl md:max-w-1xl mx-auto">
               No six-month pilots. No endless planning. Your teams start
               learning—and applying skills—within weeks. Here's exactly how.
             </p>
@@ -2030,12 +2030,12 @@ const CorporateTrainingPage = () => {
       <section className="py-20 bg-white -mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="text-center mb-12">
-            <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[46px] font-bold text-black capitalize mb-4 -ml-140">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[46px] font-bold text-black capitalize mb-3 sm:mb-4">
               <span className="text-[#FDB11F]">Industry-Specific</span>{" "}
               Expertise
             </h2>
-            <p className="font-['Plus_Jakarta_Sans'] text-[18px] leading-[32px] text-[#38393E] max-w-1xl mx-auto -ml-140">
+            <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base md:text-[18px] leading-relaxed sm:leading-relaxed md:leading-[32px] text-[#38393E] max-w-full sm:max-w-2xl md:max-w-1xl mx-auto">
               We understand your unique compliance, security, and skill
               requirements.
             </p>
@@ -2149,9 +2149,9 @@ const CorporateTrainingPage = () => {
 
       {/* Institution Benefits */}
   {faqs.length > 0 ? (
-        <section className="py-20 bg-white">
-          <div className=" px-4 sm:px-6 lg:px-8">
-            <h2 className="text-[56px] font-bold text-center mb-16 -ml-150  ">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-20 bg-white">
+          <div className="px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[56px] font-bold text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
               Frequently asked Questions
             </h2>
 
@@ -2203,14 +2203,14 @@ const CorporateTrainingPage = () => {
               ))}
             </div>
 
-            <div className="text-center p-16">
-              <button className="relative text-white text-[20px] bg-[#FCB11F] w-[220px] h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center ml-90">
+            <div className="text-center p-4 sm:p-8 md:p-12 lg:p-16">
+              <button className="relative text-white text-base sm:text-lg lg:text-[20px] bg-[#FCB11F] w-full sm:w-[200px] lg:w-[220px] h-[48px] sm:h-[52px] lg:h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center mx-auto">
                 View More
                 <svg
-                  className=" mr-5 w-[40px] h-[40px] absolute -right-2 top-1/2 -translate-y-1/2 bg-[#FCB11F] text-white"
+                  className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] lg:w-[40px] lg:h-[40px] absolute -right-1 sm:-right-2 top-1/2 -translate-y-1/2 bg-[#FCB11F] text-white"
                   fill="none"
                   stroke="currentColor"
-                  viewBox="0 0 24 24 "
+                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"

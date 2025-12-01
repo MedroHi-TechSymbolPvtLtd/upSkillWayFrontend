@@ -70,12 +70,7 @@ const navigate = useNavigate();
   };
 
   // Function to get badge text based on course data
-  const getBadgeText = (course) => {
-    if (course.tags && course.tags.length > 0) {
-      return course.tags[0].replace('-', ' ').toUpperCase();
-    }
-    return 'COURSE';
-  };
+  
 
   // Function to generate mock rating and reviews (since API doesn't provide them)
   const getMockRating = (courseId) => {
@@ -129,17 +124,15 @@ const navigate = useNavigate();
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-white py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+      <section className="bg-white py-8 sm:py-10 md:py-14 lg:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-5 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-5 items-center">
             {/* Left Content */}
-            <div className="space-y-6 sm:space-y-8">
-              <div classname="w-[643] h-[318]">
+            <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
+              <div className="w-full">
                 <h1 
-                  className="font-bold text-black leading-none " 
+                  className="font-bold text-black leading-none w-full" 
                   style={{
-                    
-                    Width: '653px',
                     fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
                     fontSize: 'clamp(2rem, 6vw, 3.625rem)',
                     lineHeight: '1.14',
@@ -148,25 +141,16 @@ const navigate = useNavigate();
                   }}
                 >
                   Transform Your 
-                  <span className="bg-[#FCB11F] to-red-500 bg-clip-text text-transparent ml-[10px]">
+                  <span className="bg-[#FCB11F] to-red-500 bg-clip-text text-transparent ml-2">
                   Career
                   </span>
                   <br />
                   with Our Courses
                 </h1>
                 
-                <div 
-                  className="relative mx-auto sm:left-[-40px] md:left-[-60px] lg:left-[-80px]"
-                  style={{
-                    width: '100%',
-                    maxWidth: '504.0880126953125px',
-                    height: 'auto',
-                    top: '10px',
-                    left: '0',
-                  }}
-                >
+                <div className="relative w-full mt-4 sm:mt-5 md:mt-6">
                   <p 
-                    className="text-sm sm:text-base md:text-lg max-w-md mx-auto"
+                    className="text-sm sm:text-base md:text-lg w-full max-w-full lg:max-w-md"
                     style={{
                       fontFamily: 'Plus Jakarta Sans, sans-serif',
                       fontWeight: 400,
@@ -174,10 +158,7 @@ const navigate = useNavigate();
                       lineHeight: '1.5',
                       letterSpacing: '0px',
                       color: '#52525B',
-                      opacity: 1,
-                      transform: 'rotate(0deg)',  
-                      marginRight: '100px'
-
+                      opacity: 1
                     }}
                   >Industry-aligned curriculum, expert instructors, and hands-on projects to help you master in-demand skills
                   </p>
@@ -196,53 +177,20 @@ const navigate = useNavigate();
                 </div>
                 
                 <button 
-                  style={{
-                    width: '100%',
-                    maxWidth: '229.784912109375px',
-                    height: '50px',
-                    borderRadius: '3px',
-                    opacity: 1,
-                    transform: 'rotate(0deg)',
-                    backgroundColor: '#111827',
-                    color: 'white',
-                    paddingLeft: '24px',
-                    paddingRight: '24px',
-                    paddingTop: '10px',
-                    paddingBottom: '10px',
-                    fontWeight: '600',
-                    border: 'none',
-                    cursor: 'pointer',
-                    marginTop: '30px',
-                    transition: 'background-color 0.2s ease',
-                    fontSize: '14px'
-                  }}
-                  className="sm:w-[200px] sm:h-[55px] sm:px-[28px] sm:py-[12px] sm:text-base sm:mt-[35px] md:w-[229.784912109375px] md:h-[61px] md:px-[32px] md:py-[12px] md:mt-[40px]"
-                  onMouseEnter={(e) => e.target.style.backgroundColor = '#1f2937'}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = '#111827'}
+                  className="w-full sm:w-auto px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3 mt-6 sm:mt-7 md:mt-8 lg:mt-10 text-sm sm:text-base font-semibold rounded bg-gray-900 text-white hover:bg-gray-800 transition-colors"
                   onClick={() => navigate("/contact")}
-
                 >
                   Join with us
                 </button>
               </div>
               
               {/* Stats */}
-              <div className="">
-                <div className="space-y-3 sm:space-y-4 max-w-sm w-full">
+              <div className="w-full">
+                <div className="space-y-3 sm:space-y-4 w-full max-w-sm">
                   {/* Students Trained Card */}
                   <div 
-                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px]"
+                    className="shadow-lg w-full h-auto min-h-[70px] sm:min-h-[75px] md:min-h-[83px] rounded-2xl bg-white border border-gray-200"
                     style={{
-                      width: '100%',
-                      maxWidth: '343.57px',
-                      height: '70px',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E4E4E7',
-                      borderRadius: '16px',
-                      marginLeft: '10px',
-
-                      opacity: 1,
-                      transform: 'rotate(0deg)',
                       boxShadow: '-2px 5px 100px 0px #0000003B'
                     }}
                   >
@@ -259,17 +207,8 @@ const navigate = useNavigate();
 
                   {/* Hiring Partners Card */}
                   <div 
-                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px] sm:ml-[20px] md:ml-[40px]"
+                    className="shadow-lg w-full h-auto min-h-[70px] sm:min-h-[75px] md:min-h-[83px] rounded-2xl bg-white border border-gray-200 sm:ml-5 md:ml-10 lg:ml-[70px]"
                     style={{
-                      width: '100%',
-                      maxWidth: '343.57px',
-                      height: '70px',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E4E4E7',
-                      borderRadius: '16px',
-                      opacity: 1,
-                      transform: 'rotate(0deg)',
-                      marginLeft: '70px',
                       boxShadow: '-2px 5px 100px 0px #0000003B'
                     }}
                   >
@@ -286,17 +225,8 @@ const navigate = useNavigate();
 
                   {/* Placement Rate Card */}
                   <div 
-                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px] sm:ml-[20px] md:ml-[40px]"
+                    className="shadow-lg w-full h-auto min-h-[70px] sm:min-h-[75px] md:min-h-[83px] rounded-2xl bg-white border border-gray-200 sm:ml-5 md:ml-10 lg:ml-[70px]"
                     style={{
-                      width: '100%',
-                      maxWidth: '343.57px',
-                      height: '70px',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E4E4E7',
-                      borderRadius: '16px',
-                      opacity: 1,
-                      marginLeft: '70px',
-                      transform: 'rotate(0deg)',
                       boxShadow: '-2px 5px 100px 0px #0000003B'
                     }}
                   >
@@ -313,18 +243,8 @@ const navigate = useNavigate();
 
                   {/* Avg Salary Hike Card */}
                   <div 
-                    className="shadow-lg sm:w-[300px] sm:h-[75px] md:w-[343.57px] md:h-[83.22px] sm:rounded-[18px] md:rounded-[20px]"
+                    className="shadow-lg w-full h-auto min-h-[70px] sm:min-h-[75px] md:min-h-[83px] rounded-2xl bg-white border border-gray-200"
                     style={{
-                      width: '100%',
-                      maxWidth: '343.57px',
-                      height: '70px',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E4E4E7',
-                      borderRadius: '16px',
-                      opacity: 1,
-                      transform: 'rotate(0deg)',
-                      marginLeft: '10px',
-
                       boxShadow: '-2px 5px 100px 0px #0000003B'
                     }}
                   >
@@ -349,7 +269,7 @@ const navigate = useNavigate();
       </section>
 
       {/* Search Section */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white -mt-25">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 sm:px-6 bg-white -mt-10 sm:-mt-12 md:-mt-16 lg:-mt-25">
         <div className="max-w-4xl mx-auto">
           <div className="relative w-full max-w-2xl mx-auto">
             {/* Search Container with Gradient Border */}
@@ -396,7 +316,7 @@ const navigate = useNavigate();
       </section>
 
       {/* Courses Grid Section */}
-      <section className="py-8 sm:py-10 md:py-16 px-4 sm:px-6 bg-white min-h-screen -mt-25">
+      <section className="py-6 sm:py-8 md:py-12 lg:py-16 px-4 sm:px-6 bg-white min-h-screen -mt-10 sm:-mt-12 md:-mt-16 lg:-mt-25">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8 sm:mb-12">
@@ -467,7 +387,7 @@ const navigate = useNavigate();
               )}
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-8 sm:mb-12">
-                {filteredCourses.map((course, index) => {
+                {filteredCourses.map((course) => {
                   const mockData = getMockRating(course.id);
                   return (
                     <div
@@ -551,66 +471,35 @@ const navigate = useNavigate();
       </section>
 
       {/* Consultation Section */}
-      <section className="">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 style={{
-                width: '530px',
-                height: '91.35px',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontWeight: 600,
-                fontSize: '42px',
-                lineHeight: '48px',
-                letterSpacing: '0px',
-                color: 'black',
-                margin: 0,
-                opacity: 1,
-                transform: 'rotate(0deg)',
-                position: 'absolute',
-                left: '158px'
-              }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+            <div className="space-y-4 sm:space-y-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-semibold leading-tight text-black font-['Plus_Jakarta_Sans']">
                 Not sure which course to choose?
               </h2>
-              <p style={{
-                width: '431px',
-                height: '49.48px',
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontWeight: 400,
-                fontSize: '16px',
-                lineHeight: '26px',
-                letterSpacing: '0px',
-                color: '#6B7280',
-                marginBottom: '2rem',
-                position: 'absolute',
-                left: '158px',
-                opacity: 1,
-                marginTop: '6rem',
-                transform: 'rotate(0deg)'
-              }}>
+              <p className="text-sm sm:text-base text-gray-500 leading-relaxed max-w-full lg:max-w-[431px] font-['Plus_Jakarta_Sans']">
                 Schedule a free consultation with our career advisors to find the perfect course for you.
               </p>
-              <div className="mt-40 ml-10 relative">
-                <div className="absolute -top-0.5 -left-0.5 -bottom-0.5 w-1/3 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                <div className="relative">
-                  <button className="w-[228px] h-[53.287750244140625px] bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center">
+              <div className="pt-4 sm:pt-6">
+                <div className="relative inline-block group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                  <button className="relative w-full sm:w-auto px-6 sm:px-8 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors text-sm sm:text-base">
                     Schedule Consultation
                   </button>
                 </div>
               </div>
             </div>
             
-            <div className="relative">
-              <div className="bg-white rounded-3xl h-96 flex items-center justify-center">
-                <div className="text-center">
+            <div className="relative mt-8 lg:mt-0">
+              <div className="bg-white rounded-2xl sm:rounded-3xl h-auto flex items-center justify-center p-4 sm:p-6">
+                <div className="text-center w-full">
                   <video 
                     src={ScheduleAnime}
+                    className="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[598px] h-auto rounded-[20px] sm:rounded-[28px] md:rounded-[35px] mx-auto"
                     style={{
-                      width: '598px',
-                      height: '365px',
                       transform: 'rotate(0deg)',
-                      opacity: 1,
-                      borderRadius: '35px'
+                      opacity: 1
                     }}
                     autoPlay
                     loop

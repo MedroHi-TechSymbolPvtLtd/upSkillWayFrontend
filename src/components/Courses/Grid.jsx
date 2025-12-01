@@ -13,20 +13,21 @@ const UIWithGridBackground = () => {
         }
       `}</style>
       
-      <div className="relative flex h-[700px] w-[800px]  flex-col items-center justify-center overflow-hidden rounded-lg bg-white">
+      <div className="relative flex h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] w-full max-w-[350px] sm:max-w-[500px] md:max-w-[650px] lg:max-w-[800px] mx-auto flex-col items-center justify-center overflow-hidden rounded-lg bg-white">
         {/* Grid image background behind the card */}
         <img
           src={GRID}
           alt="grid background"
-      className="pointer-events-none select-none absolute opacity-80"
-  style={{
-    right: '',
-    top: '-90px',
-    width: '2248px', // Reasonable size
-    height: '1457px',
-    transform: '', // Shift it further
-    zIndex: 0,
-  }}
+          className="pointer-events-none select-none absolute opacity-60 sm:opacity-70 md:opacity-80"
+          style={{
+            right: '',
+            top: '-50px',
+            width: '100%',
+            maxWidth: '2248px',
+            height: 'auto',
+            transform: '',
+            zIndex: 0,
+          }}
         />
 
         {/* Foreground Card UI */}
@@ -46,9 +47,8 @@ const UIWithGridBackground = () => {
           />
           
           <div 
+            className="w-[280px] h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[370px] lg:h-[443px]"
             style={{
-              width: '370px',
-              height: '443px',
               color: 'rgba(255, 255, 255, 1)',
               transform: 'rotate(0deg)',
               opacity: 1,
@@ -60,16 +60,14 @@ const UIWithGridBackground = () => {
               alignItems: 'center',
               justifyContent: 'center',
               zIndex: 10
-              
             }}
           >
             {/* Placeholder for video - replace src with your actual video URL */}
             <video 
               src={anime}
               alt="Animation placeholder"
+              className="w-[220px] h-[260px] sm:w-[250px] sm:h-[290px] md:w-[270px] md:h-[310px] lg:w-[280px] lg:h-[329px]"
               style={{
-                width: '280px',
-                height: '329px',
                 transform: 'rotate(0deg)',
                 opacity: 1,
                 borderRadius: '35px',

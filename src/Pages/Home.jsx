@@ -72,17 +72,17 @@ export default function TrustSection() {
       <Course/>
 
 
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <section className="py-8 sm:py-10 md:py-14 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
       </section>
 
       {/* The Process We Follow Section */}
-      <section className="-mt-45 py-12 sm:py-16 md:py-20 bg-white">
+      <section className="-mt-20 sm:-mt-25 md:-mt-35 lg:-mt-45 py-8 sm:py-10 md:py-14 lg:py-20 bg-white">
         <div className="w-full">
           {/* Title container */}
-          <div className="text-center max-w-5xl mx-auto px-4 sm:ml-[100px] md:ml-[200px] lg:ml-[255px] ">
+          <div className="text-center max-w-5xl mx-auto px-4 sm:px-6">
             <h2
-              className="text-gray-900 mb-4"
+              className="text-gray-900 mb-3 sm:mb-4"
               style={{
                 fontFamily: "Plus Jakarta Sans, ui-sans-serif, system-ui",
                 fontWeight: 400,
@@ -92,12 +92,12 @@ export default function TrustSection() {
                 textAlign: "center",
               }}
             >
-              The <span className="text-[#FBB11F] font-['Oregano'] text-[96px] text-center">Process</span> We Follow
+              The <span className="text-[#FBB11F] font-['Oregano'] text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] text-center">Process</span> We Follow
             </h2>
           </div>
-          <div>
+          <div className="px-4 sm:px-6 lg:px-8">
             <video 
-            src={Process} alt="video" style={{width: '100%', height: '100%', objectFit: 'cover'}}
+            src={Process} alt="video" className="w-full h-auto" style={{objectFit: 'cover'}}
             autoPlay
                     loop
                     muted

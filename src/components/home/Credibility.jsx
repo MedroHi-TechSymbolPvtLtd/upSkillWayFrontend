@@ -31,7 +31,7 @@ const UpskillwayFeatures = () => {
                       <img
                         src={Logo}
                         alt="Upskillway"
-                        className="w-[1000px] h-[775px] mx-auto center"
+                        className="w-[1000px] lg:h-[775px] mx-auto center sm:h-[350px]"
                       />
                     </div>
                     </div>
