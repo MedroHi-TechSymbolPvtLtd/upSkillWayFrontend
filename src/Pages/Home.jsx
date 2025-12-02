@@ -113,7 +113,10 @@ export default function TrustSection() {
 
       {/* Testimonials Section */}
 
-      <Certified />
+      {/* Certified Section - Hidden on Mobile, Visible on Desktop */}
+      <div className="hidden lg:block">
+        <Certified />
+      </div>
 
       {/* Vired For Business Enterprise Section */}
     
@@ -121,69 +124,70 @@ export default function TrustSection() {
     
 
         {/* Discover Certification Section */}
-        <section className="py-12 sm:py-16 md:py-20 bg-white text-black -mt-50">
+        <section className="py-12 sm:py-16 md:py-20 bg-white text-black -mt-20 sm:-mt-30 md:-mt-40 lg:-mt-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
             <div>
-              <div className="inline-block bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium mb-6 -mt-1 ">
+              <div className="inline-block bg-gray-100 text-gray-600 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                 certifications
               </div>
-              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight -mt-5">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 leading-tight -mt-2 sm:-mt-3 md:-mt-4 lg:-mt-5">
                 discover
                 <br />
                 <span className="text-amber-500">certification</span>
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8 -mt-5 w-[761px] h-[69px]">
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 -mt-3 sm:-mt-4 md:-mt-5 w-full max-w-full md:max-w-[761px]">
                 Turn your interest into expertise with our industry-recognized certification courses. 
                 Whether you're a beginner or a working professional, these programs are designed to help 
                 you build job-ready skills and get certified by trusted institutions.
               </p>
 
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">What you'll gain:</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <div className="w-3 h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-2 ml-10">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">What you'll gain:</h3>
+                <ul className="space-y-2 sm:space-y-3">
+                  <li className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         
                       </svg>
                     </div>
-                    <span className="text-gray-700" >Globally recognized certificates from Upskillway & partners</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Globally recognized certificates from Upskillway & partners</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-3 h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 ml-10">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <li className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         
                       </svg>
                     </div>
-                    <span className="text-gray-700 -mt-2">Hands-on training with real-world projects</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Hands-on training with real-world projects</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-3 h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0  ml-10">
-                      <svg className="w-03 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <li className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       </svg>
                     </div>
-                    <span className="text-gray-700 -mt-2">Expert mentorship to guide your learning</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Expert mentorship to guide your learning</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-3 h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0  ml-10">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <li className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         
                       </svg>
                     </div>
-                    <span className="text-gray-700 -mt-2">Career-focused skills that employers value</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Career-focused skills that employers value</span>
                   </li>
                 </ul>
               </div>
 
-              <button className=" border-1 p-1 rounded-3xl flex items-center gap-2 text-gray-900 font-semibold hover:gap-3 transition-all group">
-                <span className=" ml-4">Explore certificate programs</span>
-                <div className="ml-20 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center group-hover:bg-gray-800 transition-colors">
-                  <ChevronRight className="w-4 h-4" />
+              <button className="border-1 p-1 rounded-3xl flex items-center gap-2 text-gray-900 font-semibold hover:gap-3 transition-all group w-full sm:w-auto justify-between sm:justify-start">
+                <span className="ml-3 sm:ml-4 text-sm sm:text-base">Explore certificate programs</span>
+                <div className="ml-auto sm:ml-12 md:ml-16 lg:ml-20 w-7 h-7 sm:w-8 sm:h-8 bg-black text-white rounded-full flex items-center justify-center group-hover:bg-gray-800 transition-colors">
+                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               </button> 
             </div>
-            <div className="relative ml-0 sm:ml-10 md:ml-20 lg:ml-70">
+            {/* Lottie Animation - Hidden on Mobile, Visible on Desktop */}
+            <div className="hidden lg:block relative lg:ml-70">
               <Lottie 
         animationData={walk}
         loop={true}
@@ -200,8 +204,10 @@ export default function TrustSection() {
       {/* Certificate Programs Section */}
       
 
-      <Enterprises/>
-    
+      {/* Enterprises Section - Hidden on Mobile, Visible on Desktop */}
+      <div className="hidden lg:block">
+        <Enterprises/>
+      </div>
 
       {/* FAQ Section */}
   
@@ -210,10 +216,10 @@ export default function TrustSection() {
       {/* Why Learners Trust Upskillway Section */}
      
 
-      {/* Refer & Earn Section */}
-      
-      <Refer/>
-      
+      {/* Refer & Earn Section - Hidden on Mobile, Visible on Desktop */}
+      <div className="hidden lg:block">
+        <Refer/>
+      </div>
 
       {/* Schedule Demo Section */}
     

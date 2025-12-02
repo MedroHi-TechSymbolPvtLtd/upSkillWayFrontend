@@ -104,7 +104,7 @@ const HeroSection = ({
         }
       `}</style>
       
-      <section className={`relative z-10 pt-32 pb-20 overflow-hidden ${className}`}>
+      <section className={`relative z-10 pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden ${className}`}>
         {/* Left gradient blob */}
         <div
           className="absolute opacity-100"
@@ -169,29 +169,25 @@ const HeroSection = ({
          
 
           {/* Main heading with background and animation */}
-          <div className="relative inline-block mb-8">
+          <div className="relative inline-block mb-6 sm:mb-8">
             <div className="absolute inset-0 rounded-lg transform translate-x-1 translate-y-1 opacity-60"></div>
-            <div >
-              <span className='inline-block p-[1px] w-[405px] rounded-[22px] bg-gradient-to-r from-[#FCB11F] via-black to-[#FCB11F]'>
+            <div>
+              <span className='inline-block p-[1px] w-full max-w-[280px] sm:max-w-[350px] md:max-w-[405px] rounded-[22px] bg-gradient-to-r from-[#FCB11F] via-black to-[#FCB11F]'>
                   
-            <div class="w-[403px] h-[30px] opacity-100    
-            rounded-[24px]   py-0.5  
-            bg-white border border-transparent 
-            [border-image:linear-gradient(180deg,#FDB11F_0%,#000000_100%)] [border-image-slice:1]">
+            <div className="w-full h-auto min-h-[30px] opacity-100 rounded-[24px] py-1 sm:py-0.5 px-2 bg-white border border-transparent [border-image:linear-gradient(180deg,#FDB11F_0%,#000000_100%)] [border-image-slice:1]">
               
-  <span className='w-[326px] h-[20px] opacity-100 
-            font-[Plus_Jakarta_Sans] font-medium text-[16px] leading-[20px] tracking-[0px] text-center'>India's #1 Project-Based Learning Platform</span>
+  <span className='block opacity-100 font-[Plus_Jakarta_Sans] font-medium text-xs sm:text-sm md:text-[16px] leading-tight sm:leading-[20px] tracking-[0px] text-center px-2'>India's #1 Project-Based Learning Platform</span>
           
 </div>
 </span>
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-1 sm:mb-2 mt-4">
                 <TextAnimate animation="blurInUp" by="character" once delay={10}>
-                  <span className="text-[72px] bg-[linear-gradient(to_bottom,#FFA800_60%,#000000_100%)] bg-clip-text text-transparent font-normal">
+                  <span className="text-3xl sm:text-4xl md:text-5xl lg:text-[72px] bg-[linear-gradient(to_bottom,#FFA800_60%,#000000_100%)] bg-clip-text text-transparent font-normal">
                     {mainTitle}
                   </span>
                 </TextAnimate>
               </h1>
-              <h2 className="bg-[linear-gradient(to_bottom,#000000_60%,#FFA800_100%)] bg-clip-text text-[72px]  font-normal -mt-10">
+              <h2 className="bg-[linear-gradient(to_bottom,#000000_60%,#FFA800_100%)] bg-clip-text text-3xl sm:text-4xl md:text-5xl lg:text-[72px] font-normal -mt-4 sm:-mt-6 md:-mt-8 lg:mt-1">
                 <TextAnimate animation="blurInUp" by="character" once delay={1200}>
                   {subTitle}
                 </TextAnimate>
@@ -200,10 +196,10 @@ const HeroSection = ({
           </div>
 
           {/* Description */}
-          <div className="mb-12 -mt-5">
-            <p className="text-lg text-gray-600 mb-4 max-w-2xl mx-auto leading-relaxed ">
+          <div className="mb-8 sm:mb-10 md:mb-12 -mt-3 sm:-mt-4 md:-mt-5">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-4 max-w-2xl mx-auto leading-relaxed px-4">
               Join{" "}
-              <span className="text-gray-600 px-2 py-1 rounded font-semibold">
+              <span className="text-gray-600 px-1 sm:px-2 py-0.5 sm:py-1 rounded font-semibold">
                 {statsNumber}
               </span>{" "}
               {description}
@@ -211,13 +207,13 @@ const HeroSection = ({
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16 md:mb-20 px-4">
             <button 
                 onClick={() => navigate("/courses")}
-              className="bg-amber-500 text-white px-8 py-3 -mt-5 rounded-full text-base font-medium hover:bg-amber-600 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+              className="bg-amber-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 -mt-3 sm:-mt-4 md:-mt-5 rounded-full text-sm sm:text-base font-medium hover:bg-amber-600 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
             >
               {primaryButtonText}
-              <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
+              <div className="w-4 h-4 sm:w-5 sm:h-5 bg-white/20 rounded-full flex items-center justify-center">
                 <ChevronRight className="w-3 h-3" />
               </div>
             </button>

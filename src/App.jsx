@@ -19,7 +19,7 @@ import ScrollToTop from "../src/components/ScrollToTop";
 function App() {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />  {/* Add Navbar here so it appears on all pages */}
+      <Navbar className="z-[999]" />  {/* Add Navbar here so it appears on all pages */}
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

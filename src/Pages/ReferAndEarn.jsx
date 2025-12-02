@@ -179,10 +179,10 @@ const FAQSection = () => {
       <div className="text-center p-6 sm:p-10 md:p-12 lg:p-16">
         <button
           onClick={() => navigate('/contact')}
-          className="text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px] sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px]"
+          className="relative text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px] sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center"
         >
-          View More
-          <svg className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px] -mt-8 sm:-mt-9 md:-mt-10 ml-35 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span className="mr-2">View More</span>
+          <svg className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px] absolute -top-2 right-2 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
           </svg>
         </button>
@@ -362,7 +362,7 @@ const ReferAndEarn = () => {
           opacity: 1
         }}
       >
-        <div className="px-4 sm:px-6 md:px-8 lg:ml-15 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-white relative">
@@ -402,12 +402,12 @@ const ReferAndEarn = () => {
                 </div>
 
               </div>
-              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 -mt-8 sm:-mt-9 md:-mt-9 lg:-mt-10 ml-50 fill-[#FFB84D] text-[black]" />
+              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 -mt-8 sm:-mt-9 md:-mt-9 lg:-mt-10 ml-auto fill-[#FFB84D] text-[black]" />
             </div>
 
             {/* Right Illustration */}
-            <div className="relative flex items-center justify-center">
-              <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[628px] h-auto aspect-[628/415] -mr-0 sm:-mr-2 md:-mr-3 lg:-mr-5 mt-4 sm:mt-6 md:mt-8 lg:mt-10">
+            <div className="relative flex items-center justify-center lg:justify-end">
+              <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[628px] h-auto aspect-[628/415] mt-4 sm:mt-6 md:mt-8 lg:mt-10">
                 <img
                   src={Refer7}
                   alt="Refer and Earn"
@@ -488,9 +488,9 @@ const ReferAndEarn = () => {
                     <th className="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-left text-xs sm:text-sm md:text-base font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">Referrals Achieved</th>
                     <th className="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-left text-xs sm:text-sm md:text-base font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">Your Exclusive Reward</th>
                     <th className="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-left text-xs sm:text-sm md:text-base font-semibold text-gray-900 border-b-2 border-dashed border-gray-300">
-                      <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
+                      <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 justify-between">
                         <span>For Your Friend (Added Benefit)</span>
-                        <div className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] lg:w-[60px] lg:h-[60px] bg-[#FDB11F] rounded-[40px] flex items-center justify-center flex-shrink-0 lg:ml-35">
+                        <div className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] lg:w-[60px] lg:h-[60px] bg-[#FDB11F] rounded-[40px] flex items-center justify-center flex-shrink-0">
                           <Star className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" fill="#FFFFFF" strokeWidth={2} />
                         </div>
                       </div>

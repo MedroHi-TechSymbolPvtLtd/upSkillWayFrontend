@@ -38,6 +38,7 @@ import CollegeTestimonials from "../components/College/CollegeTestimonials";
 
 
 
+
 const UpskillWayLanding = () => {
   const [programs, setPrograms] = React.useState([]);
 const [programsLoading, setProgramsLoading] = React.useState(true);
@@ -58,6 +59,78 @@ const [programsLoading, setProgramsLoading] = React.useState(true);
   // NEW: leads + loading state and fetch
   const [leads, setLeads] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+
+  // Testimonial carousel states
+  const [currentTestimonial, setCurrentTestimonial] = React.useState(0);
+  const [currentTestimonial2, setCurrentTestimonial2] = React.useState(0);
+
+  // Testimonials data for first section
+  const testimonials = [
+    {
+      id: 1,
+      quote: "Upskillway's programs transformed our confidence and placement readiness. The hands-on projects and mentoring helped me land my first job at a top MNC.",
+      author: "Priya Sharma",
+      designation: "B.Tech CSE",
+      college: "Mount Caramel College"
+    },
+    {
+      id: 2,
+      quote: "Upskillway's programs have enhanced our students' creativity and digital confidence — the energy in our classrooms is remarkable!",
+      author: "Neha Kapoor",
+      designation: "Academic Director",
+      college: "Maple Leaf Public School"
+    },
+    {
+      id: 3,
+      quote: "The industry-relevant curriculum and expert mentorship from Upskillway helped our students secure placements in top tech companies. Highly recommended!",
+      author: "Rajesh Kumar",
+      designation: "Placement Officer",
+      college: "St. Xavier's College"
+    }
+  ];
+
+  // Testimonials data for second section
+  const testimonials2 = [
+    {
+      id: 1,
+      quote: "Upskillway's programs transformed our placement results within one semester.",
+      author: "Priya Sharma",
+      designation: "B.Tech CSE",
+      college: "Mount Caramel College"
+    },
+    {
+      id: 2,
+      quote: "The practical approach and industry connections provided by Upskillway have significantly improved our students' employability and confidence.",
+      author: "Dr. Amit Verma",
+      designation: "Dean of Placements",
+      college: "Delhi Technical University"
+    },
+    {
+      id: 3,
+      quote: "Our partnership with Upskillway has been transformative. The placement rate increased by 40% and students are now getting offers from Fortune 500 companies.",
+      author: "Sunita Reddy",
+      designation: "Principal",
+      college: "Bangalore Institute of Technology"
+    }
+  ];
+
+  // Testimonial navigation functions for first carousel
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  // Testimonial navigation functions for second carousel
+  const nextTestimonial2 = () => {
+    setCurrentTestimonial2((prev) => (prev + 1) % testimonials2.length);
+  };
+
+  const prevTestimonial2 = () => {
+    setCurrentTestimonial2((prev) => (prev - 1 + testimonials2.length) % testimonials2.length);
+  };
 
   // Add this useEffect after your existing leads useEffect
 React.useEffect(() => {
@@ -206,9 +279,9 @@ React.useEffect(() => {
                 College Training
               </div>
 
-              <h1 className="w-full max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[722px] h-auto font-['Plus_Jakarta_Sans'] font-bold text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] leading-[120%] tracking-[0%] border border-transparent -mt-4 sm:-mt-6 md:-mt-8">
+              <h1 className="w-full max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[722px] h-auto font-['Plus_Jakarta_Sans'] font-bold text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] leading-[120%] tracking-[0%] border border-transparent -mt-4 sm:-mt-6 md:-mt-8 ">
                 "Transform Your Campus with{" "}
-                <span className="text-[#FDB11F] underline decoration-[#FDB11F]">
+                <span className="text-[#FDB11F] underline decoration-[#FDB11F] ">
                   Industry-Ready Skills Programs
                 </span>
                 "
@@ -216,14 +289,14 @@ React.useEffect(() => {
 
               <br className="hidden lg:block" />
 
-              <p className="w-full max-w-full sm:max-w-[600px] md:max-w-[680px] lg:max-w-[722px] h-auto font-plusJakarta font-normal not-italic text-base sm:text-lg md:text-[20px] leading-relaxed sm:leading-relaxed md:leading-[100%] tracking-[0%] -mt-6 sm:-mt-10 md:-mt-12 lg:-mt-15">
+              <p className="w-full max-w-full sm:max-w-[600px] md:max-w-[680px] lg:max-w-[722px] h-auto font-plusJakarta font-normal not-italic text-base sm:text-lg md:text-[20px] leading-relaxed sm:leading-relaxed md:leading-[100%] tracking-[0%] -mt-6 sm:-mt-10 md:-mt-12 lg:-mt-10">
                 Partner with Upskillway to integrate globally
                 recognized,hands-on programs designed by industry experts.
                 Empower your students, upskill your faculty, and strengthen your
                 placement outcomes.
               </p>
 
-              <div className="flex items-center space-x-3 sm:space-x-4 -mt-4 sm:-mt-6 md:-mt-9 w-auto max-w-[259px] h-auto">
+              <div className="flex items-center space-x-3 sm:space-x-4 -mt-4 sm:-mt-6 md:-mt-9 w-auto max-w-[259px] h-auto lg:mt-3">
                 <div className="flex -space-x-1.5 sm:-space-x-2">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full border-2 border-white overflow-hidden">
                     <img src={User1} alt="Student 1" className="w-full h-full object-cover" />
@@ -567,10 +640,10 @@ React.useEffect(() => {
             </div>
           </div>
 
-          {/* Testimonial */}
+          {/* Testimonial Carousel */}
           <div className="w-full max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-0">
             <div
-              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg"
+              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg transition-all duration-500"
               style={{
                 background: "#FEF9F8",
                 border: "1px solid #E5E7EB",
@@ -580,30 +653,55 @@ React.useEffect(() => {
               <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-6 sm:mb-8"></div>
 
               <blockquote className="text-center">
-                <p className="w-full max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0">
-                  "Upskillway's programs transformed our confidence and
-                  placement readiness. The hands-on projects and mentoring
-                  helped me land my first job at a top MNC."
+                <p className="w-full max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0 min-h-[120px] sm:min-h-[100px] flex items-center justify-center">
+                  "{testimonials[currentTestimonial].quote}"
                 </p>
                 <footer className="text-gray-600">
                   <div className="font-medium text-sm sm:text-base text-gray-900">
-                    — Priya Sharma, B.Tech CSE,
+                    — {testimonials[currentTestimonial].author}, {testimonials[currentTestimonial].designation}
                   </div>
-                  <div className="text-xs sm:text-sm mt-1">Mount Caramel College</div>
+                  <div className="text-xs sm:text-sm mt-1">{testimonials[currentTestimonial].college}</div>
                 </footer>
               </blockquote>
 
             </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex justify-center items-center gap-4 mt-6">
+              <button 
+                onClick={prevTestimonial}
+                className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 hover:bg-orange-50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Dots indicator */}
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial 
+                        ? 'bg-orange-500 w-8' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button 
+                onClick={nextTestimonial}
+                className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 hover:bg-orange-50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
-            <div className="flex justify-center items-center gap-4 mt-8">
-                <button className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors">
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors">
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
       </section>
 
       {/* What Colleges & Institutions Gain Section */}
@@ -676,10 +774,10 @@ React.useEffect(() => {
             </div>
           </div>
 
-          {/* Testimonial with Navigation */}
+          {/* Testimonial Carousel 2 */}
           <div className="w-full max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-0">
             <div
-              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg"
+              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg transition-all duration-500"
               style={{
                 background: "#FEF9F8",
                 border: "1px solid #E5E7EB",
@@ -689,17 +787,52 @@ React.useEffect(() => {
               <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-6 sm:mb-8"></div>
 
               <blockquote className="text-center">
-                <p className="w-full max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0">
-                  "Upskillway's programs transformed our placement results within one semester."
+                <p className="w-full max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0 min-h-[120px] sm:min-h-[100px] flex items-center justify-center">
+                  "{testimonials2[currentTestimonial2].quote}"
                 </p>
                 <footer className="text-gray-600">
                   <div className="font-medium text-sm sm:text-base font-['Plus_Jakarta_Sans'] text-gray-900">
-                    — Priya Sharma, B.Tech CSE,
-                    <div className="text-xs sm:text-sm mt-1">Mount Caramel College</div>
+                    — {testimonials2[currentTestimonial2].author}, {testimonials2[currentTestimonial2].designation}
                   </div>
+                  <div className="text-xs sm:text-sm mt-1">{testimonials2[currentTestimonial2].college}</div>
                 </footer>
               </blockquote>
 
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex justify-center items-center gap-4 mt-6">
+              <button 
+                onClick={prevTestimonial2}
+                className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 hover:bg-orange-50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Dots indicator */}
+              <div className="flex gap-2">
+                {testimonials2.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial2(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial2 
+                        ? 'bg-orange-500 w-8' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button 
+                onClick={nextTestimonial2}
+                className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 hover:bg-orange-50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>
@@ -794,37 +927,37 @@ React.useEffect(() => {
       </section>
 
       {/* Why Colleges & Institutions Choose Upskillway Section */}
-      <section className="py-20 bg-white -mt-22">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold text-[#141219] mb-4 -ml-[150px]">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#141219] mb-3 sm:mb-4 px-4 sm:px-0">
               Why Colleges & Institutions{" "}
               <span className="text-[#FDB11F]">Choose Upskillway</span>
             </h2>
-            <p className="text-lg text-[#38393E] max-w-3xl mx-auto  -ml-[30px]">
+            <p className="text-base sm:text-lg text-[#38393E] max-w-3xl mx-auto px-4 sm:px-0">
               Join 400+ colleges that have partnered with Upskillway to make
               their students job-ready.
             </p>
           </div>
 
           {/* Feature Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10 md:mb-12">
             {/* Card 1 - Industry-Aligned Curriculum */}
-            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="w-[592px] h-[134px] flex items-start gap-4">
-                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Target className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Target className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                     Industry-Aligned Curriculum
                   </h3>
-                  <p className="text-gray-600 mb-3">
+                  <p className="text-sm sm:text-base text-gray-600 mb-3">
                     Designed with industry experts to build job-ready talent.
                   </p>
                   <div className="flex items-start gap-2">
-                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1"></div>
-                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1 hidden sm:block"></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-2 sm:p-3 rounded-xl text-xs sm:text-sm text-gray-500 italic">
                       Updated quarterly based on industry feedback
                     </p>
                   </div>
@@ -833,22 +966,22 @@ React.useEffect(() => {
             </div>
 
             {/* Card 2 - Expert Trainers from Top Companies */}
-            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="flex items-start gap-4">
-                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Users className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Users className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                     Expert Trainers from Top Companies
                   </h3>
-                  <p className="text-gray-600 mb-3">
+                  <p className="text-sm sm:text-base text-gray-600 mb-3">
                     Delivered by professionals with 10+ years corporate
                     experience from Google, Microsoft, Amazon.
                   </p>
                   <div className="flex items-start gap-2">
-                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1"></div>
-                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1 hidden sm:block"></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-2 sm:p-3 rounded-xl text-xs sm:text-sm text-gray-500 italic">
                       Not academic professors - actual industry practitioners
                     </p>
                   </div>
@@ -857,47 +990,45 @@ React.useEffect(() => {
             </div>
 
             {/* Card 3 - Guaranteed Interview Opportunities */}
-            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="flex items-start gap-4">
-                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <UserCheck className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <UserCheck className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                     Guaranteed Interview Opportunities
                   </h3>
-                  <p className="text-gray-600 mb-3">
+                  <p className="text-sm sm:text-base text-gray-600 mb-3">
                     Real job connections with 200+ corporate partners. Not just
                     training - actual placement assistance.
                   </p>
                   <div className="flex items-start gap-2">
-                    <div className=""></div>
-                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-2 sm:p-3 rounded-xl text-xs sm:text-sm text-gray-500 italic">
                       Direct recruiter connections, not job board listings
                     </p>
-                 
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Card 4 - Post-Placement Support */}
-            <div className="w-[592px] h-[224px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="flex items-start gap-4">
-                <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Rocket className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Rocket className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                     Post-Placement Support
                   </h3>
-                  <p className="text-gray-600 mb-3">
+                  <p className="text-sm sm:text-base text-gray-600 mb-3">
                     Continuous mentorship for 6 months after placement to ensure
                     student success and retention.
                   </p>
                   <div className="flex items-start gap-2">
-                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1"></div>
-                    <p className="bg-white border-l-4 border-[#5D38DE] p-3 mb-4 rounded-xl text-sm text-gray-500 italic">
+                    <div className="w-1 h-full bg-purple-500 rounded-full mt-1 hidden sm:block"></div>
+                    <p className="bg-white border-l-4 border-[#5D38DE] p-2 sm:p-3 rounded-xl text-xs sm:text-sm text-gray-500 italic">
                       We care about long-term career growth, not just placement
                       numbers
                     </p>
@@ -908,33 +1039,33 @@ React.useEffect(() => {
           </div>
 
           {/* Stats Box */}
-          <div className="bg-white  rounded-3xl p-8 sm:p-12 border-2 border-[#FDB11F] border-b-white mb-12">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 border-2 border-[#FDB11F] border-b-white mb-8 sm:mb-10 md:mb-12">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               <div>
-                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   50k+
                 </div>
-                <div className="text-gray-600 font-medium">
+                <div className="text-sm sm:text-base text-gray-600 font-medium">
                   Students Trained
                 </div>
               </div>
               <div>
-                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   400+
                 </div>
-                <div className="text-gray-600 font-medium">Colleges</div>
+                <div className="text-sm sm:text-base text-gray-600 font-medium">Colleges</div>
               </div>
               <div>
-                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   92%
                 </div>
-                <div className="text-gray-600 font-medium">Placement Rate</div>
+                <div className="text-sm sm:text-base text-gray-600 font-medium">Placement Rate</div>
               </div>
               <div>
-                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   200+
                 </div>
-                <div className="text-gray-600 font-medium">
+                <div className="text-sm sm:text-base text-gray-600 font-medium">
                   Corporate Partners
                 </div>
               </div>
@@ -942,15 +1073,15 @@ React.useEffect(() => {
           </div>
 
           {/* MoU Partnership Benefits */}
-          <div className="text-center mb-12">
-            <div className="inline-block bg-[#EA580C]   text-white px-6 py-2 rounded-full text-sm font-semibold mb-6">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <div className="inline-block bg-[#EA580C] text-white px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
               MoU PARTNERSHIP BENEFITS
             </div>
-            <h3 className="w-full lg:w-[927px] text-2xl sm:text-3xl md:text-4xl lg:text-[50px] ml-0 lg:ml-40 font-['Plus_Jakarta_Sans'] font-bold text-gray-900 mb-4 px-4 lg:px-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[50px] font-['Plus_Jakarta_Sans'] font-bold text-gray-900 mb-3 sm:mb-4 px-4 max-w-5xl mx-auto">
               Why Signing an MoU with Upskillway is a Smart Choice for Your
               College
             </h3>
-            <p className="text-base sm:text-lg md:text-xl w-full max-w-6xl text-[#374151] mx-auto px-4">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl w-full max-w-4xl text-[#374151] mx-auto px-4">
               Risk-free, transparent partnerships designed with college
               administrators in mind. Experience measurable impact with zero
               infrastructure investment.
@@ -958,85 +1089,85 @@ React.useEffect(() => {
           </div>
 
           {/* MoU Benefits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10 md:mb-12">
             {/* Zero Risk Partnership */}
-            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <Shield className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h4 className="font-['Plus_Jakarta_Sans']  text-xl font-bold text-gray-900 mb-3">
+              <h4 className="font-['Plus_Jakarta_Sans'] text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Zero Risk Partnership
               </h4>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 No liability until placement delivered. Pilot program option
                 available.
               </p>
             </div>
 
             {/* Dedicated Account Manager */}
-            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <Phone className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <Phone className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+              <h4 className="font-['Plus_Jakarta_Sans'] text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Dedicated Account Manager
               </h4>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 24/7 support with a single point of contact for all your needs.
               </p>
             </div>
 
             {/* Long-term Institutional Branding */}
-            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <Star className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <Star className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+              <h4 className="font-['Plus_Jakarta_Sans'] text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Long-term Institutional Branding
               </h4>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Position your college as an industry-preferred recruitment
                 destination.
               </p>
             </div>
 
             {/* Co-branded Certificates */}
-            <div className="w-[384px] h-[248px] bg-white rounded-2xl p-8  hover:shadow-xl transition-shadow duration-300  outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
-              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <Award className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 outline-[#E9E9E9] outline-offset-[-2px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <Award className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+              <h4 className="font-['Plus_Jakarta_Sans'] text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Co-branded Certificates
               </h4>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Joint certification programs that add value to student
                 credentials.
               </p>
             </div>
 
             {/* Transparent MoU Terms */}
-            <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <FileText className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+              <h4 className="font-['Plus_Jakarta_Sans'] text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Transparent MoU Terms
               </h4>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Clear, flexible agreements with no hidden costs or surprise
                 fees.
               </p>
             </div>
 
             {/* Joint Industry Events */}
-            <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-6">
-                <Calendar className="w-7 h-7 text-white" />
+            <div className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100 hover:shadow-xl transition-shadow">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDB11F] rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-gray-900 mb-3">
+              <h4 className="font-['Plus_Jakarta_Sans'] text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Joint Industry Events
               </h4>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Access to corporate seminars, hackathons, and networking
                 opportunities.
               </p>
@@ -1217,8 +1348,8 @@ React.useEffect(() => {
       {/* Testimonials Section */}
       <CollegeTestimonials />
 
-      {/* CTA Section */}
-      <div className="flex-1 py-20 bg-white">
+      {/* CTA Section - Hidden on Mobile, Visible on Desktop */}
+      <div className="hidden lg:block flex-1 py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8 items-center">
             {/* Left Student Image */}

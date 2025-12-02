@@ -198,14 +198,14 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
   const avatarUrl = testimonial.avatarUrl || testimonial.studentImageUrl;
   
   return (
-    <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
-      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
+    <div className="w-[280px] sm:w-[320px] md:w-[350px] min-h-[380px] sm:min-h-[400px] md:min-h-[420px] flex-shrink-0 mx-2 sm:mx-3">
+      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 sm:p-5 md:p-6 h-full flex flex-col">
         {/* Profile Picture */}
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-3 sm:mb-4">
           <img
             src={avatarUrl || getPlaceholderImage(name)}
             alt={name}
-            className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-gray-200"
             onError={(e) => {
               e.target.src = getPlaceholderImage(name);
             }}
@@ -213,18 +213,18 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
         </div>
 
         {/* Name */}
-        <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 text-center mb-1">
           {name}
         </h3>
 
         {/* Role */}
-        <p className="text-sm text-gray-600 text-center mb-4">
+        <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
           {role}
         </p>
 
         {/* Testimonial Text - Flexible height */}
-        <div className="flex-grow mb-4">
-          <p className="text-gray-700 text-sm leading-relaxed italic">
+        <div className="flex-grow mb-3 sm:mb-4">
+          <p className="text-gray-700 text-xs sm:text-sm leading-relaxed italic">
             "{text}"
           </p>
         </div>
@@ -260,7 +260,6 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
 const AnimatedTestimonials = ({
   testimonials: propTestimonials,
   apiUrl = "http://localhost:3000/api/v1/cms/testimonials",
-  maxTestimonials = 12,
   title = "From Aspiration to Achievement Our Success Stories",
   subtitle = "Explore the inspiring journeys of Upskillway learners as they turn skills into careers and dreams into achievements.",
   baseVelocity = 15,
@@ -420,19 +419,19 @@ const AnimatedTestimonials = ({
 const navigate = useNavigate();
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-white to-white py-16 px-4 -mt-25">
+    <div className="w-full min-h-screen bg-gradient-to-br from-white to-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-25">
       {/* Badge */}
-      <div className="flex justify-center mb-4">
-      <span className="inline-block p-[2px] rounded-[22px] bg-gradient-to-r from-[#FCB11F] via-black to-[#FCB11F]">
-  <span className="block bg-white rounded-[22px] px-4 py-2 text-amber-700 text-sm font-medium">
-    Testimonial
-  </span>
-</span>
+      <div className="flex justify-center mb-3 sm:mb-4">
+        <span className="inline-block p-[2px] rounded-[22px] bg-gradient-to-r from-[#FCB11F] via-black to-[#FCB11F]">
+          <span className="block bg-white rounded-[22px] px-3 sm:px-4 py-1.5 sm:py-2 text-amber-700 text-xs sm:text-sm font-medium">
+            Testimonial
+          </span>
+        </span>
       </div>
 
       {/* Header */}
-      <div className="text-center mb-12 max-w-3xl mx-auto">
-        <h1 className="text-4xl whitespace-nowrap md:text-5xl font-bold text-gray-900 mb-4 -ml-50">
+      <div className="text-center mb-8 sm:mb-10 md:mb-12 max-w-5xl mx-auto px-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
           {title.split(" ").map((word, index) =>
             word === "Achievement" ? (
               <span key={index} className="text-amber-500">
@@ -443,7 +442,7 @@ const navigate = useNavigate();
             )
           )}
         </h1>
-        <p className="text-gray-600 text-lg">{subtitle}</p>
+        <p className="text-gray-600 text-sm sm:text-base md:text-lg px-4 sm:px-0">{subtitle}</p>
       </div>
 
       {testimonialsLoading ? (
@@ -498,13 +497,16 @@ const navigate = useNavigate();
             ))}
           </ScrollVelocityRow>
 
-  <div className="text-center p-8" >
-        <button className=" text-white text-[20px] bg-[#FCB11F] w-[220px] h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px]  " onClick={() => navigate("/contact")} >View More
-           <svg className="w-[40px] h-[40px] -mt-10 ml-35  bg-[#FCB11F] text-white " fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg> 
+  <div className="text-center p-4 sm:p-6 md:p-8 lg:ml-150">
+        <button 
+          className="relative text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px] sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center" 
+          onClick={() => navigate("/contact")}
+        >
+          <span className="mr-2">View More</span>
+          <svg className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px] absolute  right-2 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg> 
         </button>
-       
       </div>
           {/* Second Row - Moving Left */}
         </ScrollVelocityContainer>

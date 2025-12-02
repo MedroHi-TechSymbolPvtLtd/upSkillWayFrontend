@@ -271,14 +271,14 @@ const Course = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
-      <div className="bg-white py-16">
+      <div className="bg-white py-8 sm:py-12 md:py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">
-              Explore Our <span className="text-amber-500">Programs</span>
+          <div className="text-center mb-8 sm:mb-12 md:mb-14 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
+              Explore Our <span className="text-amber-500">Programs</span>
             </h2>
-         
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg -mb-20">
+
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4 -mb-12 sm:-mb-16 md:-mb-18 lg:-mb-20">
               Find the best Program for your Growth and boosts your
               Confidence 10x!
             </p>
@@ -297,10 +297,10 @@ const Course = () => {
                 {Array.from({ length: 6 }).map((_, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse"
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse mx-auto w-full sm:w-[340px] md:w-[360px] lg:w-[398px]"
                   >
-                    <div className="w-[398px] h-48 bg-gray-300"></div>
-                    <div className="p-6">
+                    <div className="w-full h-32 sm:h-40 md:h-48 bg-gray-300"></div>
+                    <div className="p-4 sm:p-5 md:p-6">
                       <div className="h-4 bg-gray-300 rounded mb-2"></div>
                       <div className="h-6 bg-gray-300 rounded mb-2"></div>
                       <div className="h-4 bg-gray-300 rounded mb-4"></div>
@@ -314,10 +314,10 @@ const Course = () => {
               </div>
             ) : error ? (
               // Error state
-              <div className="text-center py-16">
+              <div className="text-center py-12 sm:py-16 px-4">
                 <div className="text-red-500 mb-6">
                   <svg
-                    className="w-16 h-16 mx-auto mb-4"
+                    className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -329,23 +329,23 @@ const Course = () => {
                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path>
                   </svg>
-                  <p className="text-xl font-semibold">Failed to load courses</p>
-                  <p className="text-sm text-gray-600 mt-2">{error}</p>
+                  <p className="text-lg sm:text-xl font-semibold">Failed to load courses</p>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2">{error}</p>
                 </div>
                 <button
                   onClick={handleRetry}
-                  className="bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition-colors font-medium"
+                  className="bg-amber-500 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-amber-600 transition-colors font-medium text-sm sm:text-base"
                 >
                   Try Again
                 </button>
               </div>
             ) : courses.length === 0 ? (
               // No courses state
-              <div className="text-center py-16">
+              <div className="text-center py-12 sm:py-16 px-4">
                 <div className="text-gray-500">
-                  <BookOpen className="w-16 h-16 mx-auto mb-4" />
-                  <p className="text-xl font-semibold">No courses available</p>
-                  <p className="text-sm mt-2">Check back later for new courses!</p>
+                  <BookOpen className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4" />
+                  <p className="text-lg sm:text-xl font-semibold">No courses available</p>
+                  <p className="text-xs sm:text-sm mt-2">Check back later for new courses!</p>
                 </div>
               </div>
             ) : (
@@ -359,7 +359,7 @@ const Course = () => {
                   return (
                     <div
                       key={course.id}
-                      className="w-[398px] h-[338px] bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                      className="w-full sm:w-[340px] md:w-[360px] lg:w-[398px] h-auto sm:h-[320px] md:h-[330px] lg:h-[338px] bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 mx-auto"
                     >
                       {/* Course Illustration */}
                       <CourseIllustration 
@@ -368,29 +368,29 @@ const Course = () => {
                         bannerImageUrl={course.bannerImageUrl}
                       />
                       
-                      <div className="p-6">
+                      <div className="p-4 sm:p-5 md:p-6">
                         {/* Rating */}
-                        <div className="flex items-center justify-center mb-3">
-                          <Star className="w-4 h-4 text-amber-400 fill-current" />
-                          <span className="text-sm font-semibold text-gray-700 ml-1">
+                        <div className="flex items-center justify-center mb-2 sm:mb-3">
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400 fill-current" />
+                          <span className="text-xs sm:text-sm font-semibold text-gray-700 ml-1">
                             {course.rating} ({course.reviews})
                           </span>
                         </div>
                         
                         {/* Title */}
-                        <h3 className="text-center text-lg font-bold text-gray-900 mb-2 line-clamp-2">
+                        <h3 className="text-center text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 px-2">
                           {course.title}
                         </h3>
                         
                         {/* Duration */}
-                        <p className="text-center text-sm text-gray-500 mb-6">
+                        <p className="text-center text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
                           Duration: {course.duration}
                         </p>
                         
                         {/* Action Buttons */}
-                        <div className="flex items-center justify-center gap-4">
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
                           <button 
-                            className="w-[134px] h-[26px]  text-[12px] border-1 rounded-xl  text-sm text-gray-600 hover:text-gray-800 font-medium transition-colors"
+                            className="w-[110px] sm:w-[120px] md:w-[134px] h-[24px] sm:h-[26px] text-[10px] sm:text-[11px] md:text-[12px] border-1 rounded-xl text-gray-600 hover:text-gray-800 font-medium transition-colors"
                             onClick={() => {
                               // Handle download brochure
                               console.log('Download brochure for:', course.title);
@@ -399,7 +399,7 @@ const Course = () => {
                             Download Brochure
                           </button>
                           <button
-                            className="w-[134px] h-[26px]  text-[12px] border-1 rounded-xl  text-sm text-[black] hover:text-black-800 font-bold transition-colors"
+                            className="w-[110px] sm:w-[120px] md:w-[134px] h-[24px] sm:h-[26px] text-[10px] sm:text-[11px] md:text-[12px] border-1 rounded-xl text-[black] hover:text-black-800 font-bold transition-colors"
                             onClick={() => {
                               if (course.videoDemoUrl && course.videoDemoUrl !== '#') {
                                 window.open(course.videoDemoUrl, "_blank");
@@ -423,22 +423,22 @@ const Course = () => {
             
               {/* Navigation & View All */}
           {courses.length > 0 && (
-            <div className="mt-8 mb-10 pb-10 flex flex-col items-center gap-3">
-              <div className="flex items-center gap-100">
+            <div className="mt-6 sm:mt-8 mb-8 sm:mb-10 pb-8 sm:pb-10 flex flex-col items-center gap-3">
+              <div className="flex items-center gap-4 sm:gap-8 md:gap-12 lg:gap-100">
                 <button
                   onClick={prevSlide}
                   disabled={!canNavigate || currentIndex === 0}
-                  className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
                 <button
                   onClick={() => navigate("/courses")}
-                  className="bg-white border-2 border-[#FFE6A1] text-[20px] text-black px-8 py-3 rounded-4xl font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-4"
+                  className="bg-white border-2 border-[#FFE6A1] text-sm sm:text-base md:text-lg lg:text-[20px] text-black px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-4xl font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-2 sm:gap-3 md:gap-4"
                 >
                   View All
-                  <span className="w-10 h-10 flex items-center justify-center border-2 rounded-3xl bg-[#FCB11F] text-white">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center border-2 rounded-3xl bg-[#FCB11F] text-white">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
@@ -446,13 +446,13 @@ const Course = () => {
                 <button
                   onClick={nextSlide}
                   disabled={!canNavigate || currentIndex >= maxIndex}
-                  className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-orange-500 hover:text-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
               {canNavigate && (
-                <div className="text-sm text-gray-600">
+                <div className="text-xs sm:text-sm text-gray-600">
                   {currentIndex + 1} - {Math.min(currentIndex + itemsPerPage, courses.length)} of {courses.length}
                 </div>
               )}

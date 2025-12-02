@@ -65,7 +65,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-transparent absolute top-0 left-0 w-full z-[100] lg:-mt-1 lg:-ml-20" style={{ position: 'absolute', zIndex: 100 }}>
+    <nav className="bg-transparent absolute top-0 left-0 w-full z-[9999] lg:-mt-1 lg:-ml-20" style={{ position: 'absolute', zIndex: 9999 }}>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20 md:h-24 relative">
           {/* Logo */}
@@ -177,7 +177,7 @@ const Navbar = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center w-12 h-12 p-2 rounded-lg text-gray-900 hover:text-orange-500 transition-colors duration-200 bg-white shadow-lg border-2 border-gray-300 hover:border-orange-500 relative z-[110]"
+              className="inline-flex items-center justify-center w-12 h-12 p-2 rounded-lg text-gray-900 hover:text-orange-500 transition-colors duration-200 bg-white shadow-lg border-2 border-gray-300 hover:border-orange-500 relative z-[10000]"
               aria-label="Toggle menu"
               type="button"
             >
@@ -195,7 +195,7 @@ const Navbar = () => {
           <>
             {/* Backdrop overlay */}
             <div 
-              className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-[90]"
+              className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-[9998]"
               onClick={() => {
                 setIsMenuOpen(false);
                 setIsMobileServicesOpen(false);
@@ -204,7 +204,7 @@ const Navbar = () => {
             />
             
             {/* Menu content */}
-            <div className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 md:top-24 mx-4 z-[100]">
+            <div className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 md:top-24 mx-4 z-[9999]">
               <div 
                 className="px-4 pt-4 pb-4 space-y-2 bg-white rounded-lg shadow-2xl border-2 border-gray-300 max-h-[calc(100vh-6rem)] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
