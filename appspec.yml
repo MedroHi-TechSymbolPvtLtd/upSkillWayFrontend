@@ -5,15 +5,17 @@ files:
   - source: scripts/
     destination: /home/ec2-user/app/scripts
     overwrite: true
+
   - source: Dockerfile
     destination: /home/ec2-user/app
     overwrite: true
+
   - source: nginx.conf
     destination: /home/ec2-user/app
     overwrite: true
 
 hooks:
- BeforeInstall:
+  BeforeInstall:
     - location: scripts/clean.sh
       timeout: 300
       runas: ec2-user
