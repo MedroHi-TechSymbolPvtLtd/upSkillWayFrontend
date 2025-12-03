@@ -13,7 +13,10 @@ files:
     overwrite: true
 
 hooks:
-  BeforeInstall:
+ BeforeInstall:
+    - location: scripts/clean.sh
+      timeout: 300
+      runas: ec2-user
     - location: scripts/permissions.sh
       timeout: 300
       runas: ec2-user
