@@ -18,7 +18,7 @@ hooks:
   BeforeInstall:
     - location: scripts/clean.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
     - location: scripts/permissions.sh
       timeout: 300
       runas: ec2-user
