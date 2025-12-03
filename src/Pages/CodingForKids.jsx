@@ -790,7 +790,7 @@ const CodingForKids = () => {
           {/* Layout with illustration in center and cards on sides */}
           <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 -mt-[65px]">
             {/* Left Column - 3 Benefit Cards */}
-            <div className="flex flex-col gap-6 w-[310px] h-[10]    ">
+            <div className="flex flex-col gap-6 w-[310px] h-[50]    ">
               <div className="border-2 border-[rgba(93,56,222,0.5)] rounded-[15px] bg-white flex items-center gap-2 ">
                 <div className="w-[87.44px] h-[90px] bg-[rgba(93,56,222,0.5)] rounded-[15px] flex items-center justify-center flex-shrink-0">
                 <img src={User1} alt="User" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
