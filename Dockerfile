@@ -7,6 +7,9 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+COPY .env.production .env.production  # Explicitly ensure it is included
+
+COPY . .
 RUN npm run build
 
 # Serve with Nginx (ARM64)
