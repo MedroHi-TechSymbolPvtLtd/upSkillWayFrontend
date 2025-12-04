@@ -34,4 +34,5 @@ artifacts:
     - Dockerfile
     - nginx.conf
     - certs/**
+    - .env.production
   discard-paths: no
