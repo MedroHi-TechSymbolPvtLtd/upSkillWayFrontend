@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import config from '../../config/env';
 
 const LeadForm = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const LeadForm = () => {
     setSubmitStatus({ type: '', message: '' });
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/leads', {
+      const response = await fetch(`${config.apiBaseUrl}/leads`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

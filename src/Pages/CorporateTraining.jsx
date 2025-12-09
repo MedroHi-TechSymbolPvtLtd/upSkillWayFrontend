@@ -16,6 +16,42 @@ const COMPANY_LOGOS = [
   "Apple",
 ];
 
+import {
+  BookOpen,
+  Brain,
+  Lightbulb,
+  Award,
+  Play,
+  Code,
+  Gamepad2,
+  Smartphone,
+  GraduationCap,
+  Users,
+  Building,
+  Briefcase,
+  HeadphonesIcon,
+  Trophy,
+  Zap,
+  Target,
+  Rocket,
+  CheckCircle,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  TrendingUp,
+  Star,
+  Box,
+  Cpu,
+  Clock,
+  Package,
+  ChevronLeft,
+  ChevronRight,
+  Laptop,
+  Monitor,
+  Handshake,
+  FileEdit,
+} from "lucide-react";
+
 const HERO_HIGHLIGHTS = [
   "Measurable Impact",
   "Expert-Led Training",
@@ -277,7 +313,7 @@ const CorporateTrainingPage = () => {
       try {
         setProgramsLoading(true);
         const response = await fetch(
-          "http://localhost:3000/api/v1/cms/training-programs?page=1&limit=10&trainingType=corporate"
+          `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/cms/training-programs?page=1&limit=10&trainingType=corporate`
         );
         const data = await response.json();
 
@@ -365,7 +401,7 @@ const CorporateTrainingPage = () => {
     setSubmitStatus({ type: "", message: "" });
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/leads", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/leads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -712,9 +748,9 @@ const CorporateTrainingPage = () => {
           </div>
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-9 mb-8 sm:mb-10 md:mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-9 mb-8 sm:mb-10 md:mb-12 ">
             {/* Card 1 - Enterprise Security */}
-            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow">
+            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow lg:ml-25">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                 <svg
                   className="w-6 h-6 text-orange-500"
@@ -751,7 +787,7 @@ const CorporateTrainingPage = () => {
             </div>
 
             {/* Card 2 - 99.9% Uptime SLA */}
-            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow">
+            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow lg:ml-10">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                 <svg
                   className="w-6 h-6 text-orange-500"
@@ -785,8 +821,8 @@ const CorporateTrainingPage = () => {
             </div>
 
             {/* Card 3 - Enterprise LMS Integrations */}
-            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow lg:mr-10">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 ">
                 <svg
                   className="w-6 h-6 text-orange-500"
                   fill="none"
@@ -821,7 +857,7 @@ const CorporateTrainingPage = () => {
             </div>
 
             {/* Card 4 - Dedicated Customer Success */}
-            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow">
+            <div className="bg-white rounded-[12px] p-6 border-[3px] border-transparent [border-image:linear-gradient(to_right,theme(colors.orange.200),transparent)_1] hover:shadow-xl transition-shadow lg:mr-20">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                 <svg
                   className="w-6 h-6 text-orange-500"
@@ -1421,55 +1457,19 @@ const CorporateTrainingPage = () => {
                 {/* Features List */}
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
-                    <svg
-                      className="w-5 h-5 text-[#16A34A] flex-shrink-0 mt-0.5"
-                      fill="none"
-                      viewBox="0 0 20 20"
-                      stroke="currentColor"
-                      strokeWidth="1.67"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      />
-                    </svg>
+                   <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                     <span className="font-['Plus_Jakarta_Sans'] text-base leading-4 text-[#374151]">
                       Comprehensive skills gap analysis across your organization
                     </span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <svg
-                      className="w-5 h-5 text-[#16A34A] flex-shrink-0 mt-0.5"
-                      fill="none"
-                      viewBox="0 0 20 20"
-                      stroke="currentColor"
-                      strokeWidth="1.67"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      />
-                    </svg>
+                     <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                     <span className="font-['Plus_Jakarta_Sans'] text-base leading-4 text-[#374151]">
                       ROI projections with 12-month impact forecast
                     </span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <svg
-                      className="w-5 h-5 text-[#16A34A] flex-shrink-0 mt-0.5"
-                      fill="none"
-                      viewBox="0 0 20 20"
-                      stroke="currentColor"
-                      strokeWidth="1.67"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      />
-                    </svg>
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                     <span className="font-['Plus_Jakarta_Sans'] text-base leading-4 text-[#374151]">
                       Custom training roadmap aligned to your business goals
                     </span>
@@ -2117,6 +2117,7 @@ const CorporateTrainingPage = () => {
         testimonials={testimonials}
         title="Success Stories Powered by Strong Partnerships"
         subtitle="See how enterprises are improving productivity, accelerating digital adoption, and closing capability gaps with Upskillway."
+        
       />
 
       {/* Multi-Step Corporate Training Registration Form */}
@@ -2149,7 +2150,7 @@ const CorporateTrainingPage = () => {
 
       {/* Institution Benefits */}
   {faqs.length > 0 ? (
-        <section className="py-10 sm:py-12 md:py-16 lg:py-20 bg-white">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-0 bg-white ">
           <div className="px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[56px] font-bold text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
               Frequently asked Questions
@@ -2205,20 +2206,8 @@ const CorporateTrainingPage = () => {
 
             <div className="text-center p-4 sm:p-8 md:p-12 lg:p-16">
               <button className="relative text-white text-base sm:text-lg lg:text-[20px] bg-[#FCB11F] w-full sm:w-[200px] lg:w-[220px] h-[48px] sm:h-[52px] lg:h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center mx-auto">
-                View More
-                <svg
-                  className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] lg:w-[40px] lg:h-[40px] absolute -right-1 sm:-right-2 top-1/2 -translate-y-1/2 bg-[#FCB11F] text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M7 17L17 7M17 7H7M17 7V17"
-                  />
-                </svg>
+                View More ➔
+             
               </button>
             </div>
           </div>
@@ -2232,7 +2221,7 @@ const CorporateTrainingPage = () => {
           <div className="max-w-1xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-5 items-start">
               <div className="flex flex-col justify-center">
-                <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[46px] font-bold text-black capitalize mb-4">
+                <h2 className="font-['Plus_Jakarta_Sans'] text-[48px] leading-[46px] font-bold text-black capitalize ">
                   Register for <br></br>
                   <span className="font-['Plus_Jakarta_Sans'] text-[#FDB11F]">
                     Corporate Training
@@ -2472,7 +2461,7 @@ const CorporateTrainingPage = () => {
     
 
       {/* Schedule Consultation Section */}
-      <section className="py-12 sm:py-16 md:py-20">
+      <section className="py-12 sm:py-16 md:py-5">
         <div className="container mx-auto px-2 sm:px-6">
           <div className="max-w-[1182px] mx-auto">
             <div className="bg-black rounded-[30px] p-6 sm:p-10 text-white">
@@ -2493,29 +2482,10 @@ const CorporateTrainingPage = () => {
                   <img
                     src={CorporateConsultation}
                     alt="Schedule consultation"
-                    className="w-full h-[260px] sm:h-[320px] md:h-[380px] object-cover rounded-2xl"
+                    className="w-full h-[350px] sm:h-[320px] md:h-[600px] object-cover rounded-2xl"
                     loading="lazy"
                   />
-                  <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-md rounded-xl p-3 shadow-lg max-w-[220px]">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center text-white font-semibold">
-                        HM
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold text-gray-900">
-                          Harry Maguire
-                        </div>
-                        <div className="text-xs text-gray-600">
-                          CEO, GrowthCorp
-                        </div>
-                      </div>
-                      <div className="flex gap-1">
-                        <div className="w-2 h-2 bg-green-500 rounded-full" />
-                        <div className="w-2 h-2 bg-green-500 rounded-full" />
-                        <div className="w-2 h-2 bg-green-500 rounded-full" />
-                      </div>
-                    </div>
-                  </div>
+                
                 </div>
               </div>
             </div>
@@ -2755,7 +2725,7 @@ const ContactForm = () => {
     event.preventDefault();
     setStatus("loading");
     try {
-      await fetch("http://localhost:3000/api/v1/demo-request", {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/demo-request`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

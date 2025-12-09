@@ -298,20 +298,8 @@ const CorporateTestimonials = ({
                 className="text-white text-[20px] bg-[#FCB11F] w-[220px] h-[56px] p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px]"
                 onClick={() => navigate("/contact")}
               >
-                View More
-                <svg
-                  className="w-[40px] h-[40px] -mt-10 ml-35 bg-[#FCB11F] text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M7 17L17 7M17 7H7M17 7V17"
-                  />
-                </svg>
+                View More ➔
+               
               </button>
             </div>
           </ScrollVelocityContainer>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Star, ChevronRight, BookOpen, Loader2 } from 'lucide-react';
+import config from '../../config/env';
 
 const EBooksSection = () => {
   const [books, setBooks] = useState([]);
@@ -57,7 +58,7 @@ const EBooksSection = () => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch('http://localhost:3000/api/v1/cms/ebooks');
+      const response = await fetch(`${config.apiBaseUrl}/cms/ebooks`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

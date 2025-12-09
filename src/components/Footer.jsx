@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import config from '../config/env';
 import footerbabe from "../assets/Images/footerbabe.png";
 import footerlogo from "../assets/Images/footerlogo.png";
 
@@ -13,7 +14,7 @@ export default function Index() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/leads', {
+      const response = await fetch(`${config.apiBaseUrl}/leads`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -160,8 +161,11 @@ export default function Index() {
           </div>
 
           {/* Back to top button - responsive positioning */}
-          <div className="relative lg:absolute lg:left-[40px] lg:top-[472px] flex items-center gap-2 sm:gap-3 md:gap-4 text-white hover:text-[#FFE6A1] transition-colors cursor-pointer">
-            <span onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-sm sm:text-base md:text-lg font-general">Back to top</span>
+          <div 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+            className="relative lg:absolute lg:left-[40px] lg:top-[472px] flex items-center gap-2 sm:gap-3 md:gap-4 text-white hover:text-[#FFE6A1] transition-colors cursor-pointer"
+          >
+            <span className="text-sm sm:text-base md:text-lg font-general">Back to top</span>
             <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 border border-[rgba(255,255,255,0.4)] rounded-md hover:border-[rgba(255,255,255,0.6)] transition-colors">
               <svg width="12" height="12" className="sm:w-4 sm:h-4 md:w-5 md:h-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.81803 2.83301L7.81803 12.833" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />

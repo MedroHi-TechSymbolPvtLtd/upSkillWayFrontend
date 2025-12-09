@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Star, ChevronRight } from "lucide-react";
+import config from '../../config/env';
 import Certified1 from "../../assets/Images/Certified1.png"; 
 import Certified from '../../assets/Images/certified2.png';
 import Certified3 from "../../assets/Images/certified3.png";
@@ -17,7 +18,7 @@ const CertifiedCourses = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:3000/api/v1/cms/certified-courses"
+        `${config.apiBaseUrl}/cms/certified-courses`
       );
       const data = await response.json();
 
@@ -170,7 +171,7 @@ const CertifiedCourses = () => {
             Every <span className="text-amber-500">Big Journey</span> Starts
             with a Small Step <span className=" text-amber-500"></span>
           </h2>
-          <p className="w-[989px]  h-[36px] text-[#7F7E97] text-[32px]  ml-30">
+          <p className="w-[989px]  h-[36px] text-[#7F7E97] text-[32px]  ml-50">
             Not sure which program to choose? Take our Free Masterclass
           </p>
         </div>
@@ -181,7 +182,7 @@ const CertifiedCourses = () => {
           <div className="bg-white rounded-2xl  hover:shadow-lg transition-all duration-300 px-8 py-6 flex items-center gap-4 min-w-[280px] shadow-[0_0_150px_rgba(0,0,0,0.1)]">
             <div>
                  <img 
-                  src={Certified1} 
+                  src={Certified3} 
                   alt="Upskillway Logo" 
                   />
             </div>
@@ -207,7 +208,7 @@ const CertifiedCourses = () => {
           <div className="bg-white rounded-2xl shadow-[0_0_150px_rgba(0,0,0,0.1)] hover:shadow-lg transition-all duration-300 px-8 py-6 flex items-center gap-4 min-w-[280px]">
             <div>
                  <img 
-                  src={Certified3} 
+                  src={Certified1} 
                   alt="Upskillway Logo" 
                   />
             </div>
@@ -369,7 +370,7 @@ const CertifiedCourses = () => {
                         </div>
 
                         {/* Enroll Button */}
-                        <button className="mt-4 w-full py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition">
+                        <button className="mt-4 w-[103px] py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition  ml-25" >
                           Enroll Now
                         </button>
                       </div>

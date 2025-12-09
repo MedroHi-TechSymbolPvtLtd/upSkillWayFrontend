@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import config from '../../config/env';
 
 const StudyAbroad = () => {
   const [courses, setCourses] = useState([]);
@@ -10,7 +11,7 @@ const StudyAbroad = () => {
     const fetchCourses = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad');
+        const response = await fetch(`${config.apiBaseUrl}/cms/study-abroad`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +51,7 @@ const StudyAbroad = () => {
 
   if (loading) {
     return (
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-gray-50 ">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto"></div>
@@ -63,7 +64,7 @@ const StudyAbroad = () => {
 
   if (error) {
     return (
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-gray-50 ">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <div className="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg max-w-md mx-auto">
@@ -83,7 +84,7 @@ const StudyAbroad = () => {
   }
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-20 px-4 bg-white lg:-mt-20">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 -mt-22">
       
@@ -168,7 +169,7 @@ const StudyAbroad = () => {
                   {/* Learn More Button */}
                   <button 
                     onClick={() => handleLearnMore(course)}
-                    className="w-[228px] h-[41px] bg-[#FBB11F] text-gray-900 py-4 rounded-2xl font-bold text-lg hover:from-orange-500 hover:to-yellow-500 transition-all duration-200 flex items-center justify-center gap-2 ml-5"
+                    className="w-[228px] h-[41px] bg-[#FBB11F] text-gray-900 py-4 rounded-2xl font-semibold text-lg hover:from-orange-500 hover:to-yellow-500 transition-all duration-200 flex items-center justify-center gap-2 ml-5"
                   >
                     Learn More
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">

@@ -146,6 +146,10 @@ export const endpoints = {
     ebooks: '/cms/ebooks',
     studyAbroad: '/cms/study-abroad',
     trainingPrograms: '/cms/training-programs',
+    certifiedCourses: '/cms/certified-courses',
+    testimonials: '/cms/testimonials',
+    faqs: '/cms/faqs',
+    shortCourses: '/cms/short-courses',
   },
   
   // Lead endpoints

@@ -9,6 +9,7 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
+import config from '../../config/env';
 
 // Utility function
 const cn = (...classes) => {
@@ -242,8 +243,7 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
 
 // Main Animated Testimonials Component
 const AnimatedTestimonials = ({ 
-  apiUrl = "http://localhost:3000/api/v1/cms/testimonials",
-  maxTestimonials = 12,
+  apiUrl = `${config.apiBaseUrl}/cms/testimonials`,
   title = "Hear What Our Users Are Saying",
   subtitle = "Discover the varied perspectives and experiences as users share their stories, highlighting the versatility of our app.",
   baseVelocity = 15

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import config from '../../config/env';
 
 const FAQ = ({ 
-  apiUrl = "http://localhost:3000/api/v1/cms/faqs",
+  apiUrl = `${config.apiBaseUrl}/cms/faqs`,
   title = "Frequently asked Questions",
   className = "",
   gridCols = "md:grid-cols-2"

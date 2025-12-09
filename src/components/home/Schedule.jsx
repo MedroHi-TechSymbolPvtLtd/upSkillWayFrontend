@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Request from "../../assets/Images/Request.png";
+import config from '../../config/env';
 
 const ScheduleDemoSection = () => {
   // Form state
@@ -48,7 +49,7 @@ const ScheduleDemoSection = () => {
         source: "website",
       };
 
-      const response = await fetch("http://localhost:3000/api/v1/leads", {
+      const response = await fetch(`${config.apiBaseUrl}/leads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -295,7 +296,7 @@ const ScheduleDemoSection = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-[298px] h-[49px] text-white px-12 py-4 rounded-3xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
+                className={`w-[298px] h-[49px] text-white px-8 py-2 rounded-3xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
                   isSubmitting
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-[#FDB11F] hover:bg-[#FDB11F]"
@@ -304,7 +305,7 @@ const ScheduleDemoSection = () => {
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
                     <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white -mt-5"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

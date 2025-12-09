@@ -23,6 +23,7 @@ import {
   GraduationCap,
   Zap,
 } from "lucide-react";
+import config from '../config/env';
 import User1 from "../assets/Images/User1.png";
 import CollegeV1 from "../assets/Images/CollegeV1.png";
 import CollegeV2 from "../assets/Images/CollegeV2.png";
@@ -136,7 +137,7 @@ const [programsLoading, setProgramsLoading] = React.useState(true);
 React.useEffect(() => {
   let mounted = true;
   const url =
-    "http://localhost:3000/api/v1/cms/training-programs?page=1&limit=10&trainingType=college";
+    `${config.apiBaseUrl}/cms/training-programs?page=1&limit=10&trainingType=college`;
 
   async function loadPrograms() {
     setProgramsLoading(true);
@@ -167,7 +168,7 @@ React.useEffect(() => {
   React.useEffect(() => {
     let mounted = true;
     const url =
-      "http://localhost:3000/api/v1/cms/training-programs?page=1&limit=10&trainingType=college";
+      `${config.apiBaseUrl}/cms/training-programs?page=1&limit=10&trainingType=college`;
 
     async function load() {
       setIsLoading(true);
@@ -226,7 +227,7 @@ React.useEffect(() => {
     setSubmitStatus({ type: "", message: "" });
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/leads", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/leads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -322,13 +323,15 @@ React.useEffect(() => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 text-white -mt-3 sm:-mt-5">
-                <button
-                  className="w-full sm:w-[180px] md:w-[202px] h-[52px] sm:h-[56px] md:h-[58px] opacity-100 rounded-[80px] 
-            px-4 sm:px-6 md:px-8 py-3 sm:py-4 gap-[10px] 
-            bg-gradient-to-r from-[#5835D2] to-[#FDB11F] font-bold text-sm sm:text-base"
-                >
-                  Download Brochure
-                </button>
+          <button
+  className="w-full sm:w-[180px] md:w-[202px] h-[52px] sm:h-[56px] md:h-[58px] opacity-100 rounded-[80px] 
+  px-4 sm:px-6 md:px-8 py-3 sm:py-4 gap-[10px] 
+  bg-gradient-to-r from-[#5835D2] to-[#FDB11F] font-bold text-sm sm:text-base 
+  whitespace-nowrap"
+>
+  Download Brochure
+</button>
+
                 <button
                   onClick={() => {
                     const element = document.getElementById('get-in-touch');
@@ -345,7 +348,7 @@ React.useEffect(() => {
               </div>
             </div>
 
-            <div className="relative mt-8 lg:mt-0">
+            <div className="relative mt-8 lg:mt-0 hidden md:block">
               <div className="relative z-10">
                 <div>
                   <div className="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[550px] lg:max-w-[690px] h-auto text-white p-4 sm:p-6 md:p-8 rounded-2xl mx-auto lg:mx-0">
@@ -361,45 +364,46 @@ React.useEffect(() => {
           </div>
 
           {/* Stats */}
-          <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="w-full max-w-[227px] h-auto min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_3px_100px_0px_#0000003B] p-4 mx-auto sm:mx-0">
-              <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
-                50,000+
-              </div>
-              <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px]">
-                Students Trained
-              </div>
-            </div>
-            <div className="w-full max-w-[227px] h-auto min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_5px_100px_0px_#0000003B] p-4 mx-auto sm:mx-0">
-              <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
-                400+
-              </div>
-              <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px]">
-                Partner Colleges
-              </div>
-            </div>
-            <div className="w-full max-w-[227px] h-auto min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_5px_100px_0px_#0000003B] p-4 mx-auto sm:mx-0">
-              <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
-                92%
-              </div>
-              <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px]">
-                Placement Rate
-              </div>
-            </div>
-            <div className="w-full max-w-[227px] h-auto min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_5px_100px_0px_#0000003B] p-4 mx-auto sm:mx-0">
-              <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
-                200+
-              </div>
-              <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px]">
-                Corporate Partners
-              </div>
-            </div>
-          </div>
+         <div className="hidden md:grid -mt-30 sm:mt-16 md:mt-20 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4  justify-center">
+  <div className="w-full max-w-[227px] h-[83px] min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_3px_100px_0px_#0000003B] p-4 ml-60 -mt-10">
+    <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2 ">
+      50,000+
+    </div>
+    <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px] -mt-3">
+      Students Trained
+    </div>
+  </div>
+  <div className="w-full max-w-[227px] h-[83px] min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_5px_100px_0px_#0000003B] p-4 ml-30 -mt-10">
+    <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
+      400+
+    </div>
+    <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px] -mt-3">
+      Partner Colleges
+    </div>
+  </div>
+  <div className="w-full max-w-[227px] h-[83px] min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_5px_100px_0px_#0000003B] p-4 -mt-10">
+    <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
+      92%
+    </div>
+    <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px] -mt-3">
+      Placement Rate
+    </div>
+  </div>
+  <div className="w-full max-w-[227px] h-[83px] min-h-[83px] opacity-100 rounded-[20px] bg-white border border-[rgba(228,228,231,1)] shadow-[-2px_5px_100px_0px_#0000003B] p-4 -ml-30 -mt-10">
+    <div className="font-['Plus_Jakarta_Sans'] font-semibold text-lg sm:text-xl md:text-[20px] leading-[28px] tracking-[-0.2px] mb-2">
+      200+
+    </div>
+    <div className="text-gray-600 font-['Plus_Jakarta_Sans'] font-normal text-sm sm:text-base md:text-[20px] leading-[28px] tracking-[-0.2px] -mt-3">
+      Corporate Partners
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
 
       {/* Trusted By Leading Organizations Section */}
-      <section className="py-20 bg-white ">
+      <section className="py-20 bg-white -mt-30">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Section - Trusted By */}
           <div className="text-center mb-8 sm:mb-10 md:mb-[40px]">
@@ -641,19 +645,19 @@ React.useEffect(() => {
           </div>
 
           {/* Testimonial Carousel */}
-          <div className="w-full max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-0">
+          <div className="w-full max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-0  ">
             <div
-              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg transition-all duration-500"
+              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg transition-all duration-500 lg:h-[175px]"
               style={{
                 background: "#FEF9F8",
                 border: "1px solid #E5E7EB",
               }}
             >
               {/* Purple line accent */}
-              <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-6 sm:mb-8"></div>
+              <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-6 sm:mb-8 lg:-mt-21"></div>
 
               <blockquote className="text-center">
-                <p className="w-full max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0 min-h-[120px] sm:min-h-[100px] flex items-center justify-center">
+                <p className="w-full max-w-4xl mx-auto text-lg  sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0 min-h-[120px] sm:min-h-[100px] flex items-center justify-center">
                   "{testimonials[currentTestimonial].quote}"
                 </p>
                 <footer className="text-gray-600">
@@ -775,16 +779,16 @@ React.useEffect(() => {
           </div>
 
           {/* Testimonial Carousel 2 */}
-          <div className="w-full max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-0">
+          <div className="w-full max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-0 lg:h-[164px]">
             <div
-              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg transition-all duration-500"
+              className="rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg transition-all duration-500 lg:h-[174px]"
               style={{
                 background: "#FEF9F8",
                 border: "1px solid #E5E7EB",
               }}
             >
               {/* Purple line accent */}
-              <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-6 sm:mb-8"></div>
+              <div className="w-16 h-1 bg-[#FEF9F8] rounded-full mx-auto mb-6 sm:mb-8 lg:-mt-21"></div>
 
               <blockquote className="text-center">
                 <p className="w-full max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl font-['Plus_Jakarta_Sans'] font-semibold text-[#374151] mb-4 sm:mb-6 px-4 sm:px-0 min-h-[120px] sm:min-h-[100px] flex items-center justify-center">
@@ -1233,7 +1237,7 @@ React.useEffect(() => {
               <div className=" w-14 h-14 border-l-4 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20 ">
                 <Phone className="w-7 h-7 text-white item-center " />
               </div>
-              <h4 className="text-xl font-bold text-gray-900 mb-3">
+              <h4 className="text-xl text-center font-bold text-gray-900 mb-3">
                 Connect With Us
               </h4>
               <p className="text-gray-600 text-sm mb-4">
@@ -1256,7 +1260,7 @@ React.useEffect(() => {
               <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20">
                 <FileText className="w-7 h-7  text-white" />
               </div>
-              <h4 className="text-xl font-bold text-gray-900 mb-3">
+              <h4 className="text-xl text-center font-bold text-gray-900 mb-3">
                 Custom Proposal & MoU
               </h4>
               <p className="text-gray-600 text-sm mb-4">
@@ -1276,7 +1280,7 @@ React.useEffect(() => {
               <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20">
                 <GraduationCap className="w-7 h-7 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-gray-900 mb-3">
+              <h4 className="text-xl font-bold text-center text-gray-900 mb-3">
                 Training Implementation
               </h4>
               <p className="text-gray-600 text-sm mb-4">
@@ -1295,7 +1299,7 @@ React.useEffect(() => {
               <div className="w-14 h-14 bg-gradient-to-br from-[#FDB11F] to-[#976A13] rounded-xl flex items-center justify-center mb-6 ml-20">
                 <BarChart3 className="w-7 h-7 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-gray-900 mb-3">
+              <h4 className="text-xl font-bold text-center text-gray-900 mb-3">
                 Placement & Continuous Support
               </h4>
               <p className="text-gray-600 text-sm mb-4">
@@ -1542,7 +1546,7 @@ React.useEffect(() => {
               </div>
 
               {/* Right Side - Illustration (Hidden on mobile) */}
-              <div className="hidden lg:flex p-8 lg:p-12 xl:p-16 items-center justify-center bg-gradient-to-br from-orange-50 to-white">
+              <div className="hidden lg:flex p-8 lg:p-12 xl:p-16 items-center justify-center ">
                 <div className="w-full h-full flex items-center justify-center">
                   <img
                     src={GetInTouch}

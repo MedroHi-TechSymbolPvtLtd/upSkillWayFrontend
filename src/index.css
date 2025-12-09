@@ -5,6 +5,7 @@
 
 :root {
     --main-font: 'Plus Jakarta Sans', sans-serif;
+    --font-oregano: 'Oregano', cursive;
     --radius: 0.625rem;
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
@@ -118,4 +119,12 @@
   body {
     @apply bg-background text-foreground;
     }
+}
+
+@theme {
+  --font-family-oregano: 'Oregano', cursive;
+}
+
+.font-oregano {
+  font-family: 'Oregano', cursive;
 }

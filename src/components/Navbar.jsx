@@ -70,16 +70,16 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 sm:h-20 md:h-24 relative">
           {/* Logo */}
       <div className="flex items-center">
-  <Link to="/" className="block">
+  <Link to="/" className="block bg-[white] w-[200px] h-[45px] rounded-[30px] lg:ml-15 relative">
     <img
       src={logo}
       alt="Upskillway Logo"
       className="
-        w-32 h-auto mt-0
-        sm:w-[350px] sm:h-40 sm:mt-[-15px]
-        md:w-[400px] md:h-44 md:mt-[-17px]
-        lg:w-[309px] lg:h-48 lg:mt-[-19px]
+        w-32 h-auto -mt-[32px]
+        sm:w-[350px] sm:h-40 sm:-mt-[25px]
+        md:w-[400px] md:h-44 md:-mt-[65px] -ml-[8px]
         object-contain
+        absolute top-0 left-0
       "
     />
   </Link>
@@ -152,7 +152,7 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <button
               onClick={() => navigate("/contact")}
-              className="bg-transparent text-black px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-gray-400 hover:border-b-black transition-colors duration-200 flex items-center space-x-1 xl:space-x-2"
+              className="bg-transparent text-black px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-gray-400 hover:border-b-black transition-colors duration-200 flex items-center space-x-1 xl:space-x-2 lg:-mr-18"
             >
               <span>Contact Us</span>
               <div className="w-4 h-4 xl:w-5 xl:h-5 bg-orange-500 rounded-full flex items-center justify-center">
@@ -280,7 +280,7 @@ const Navbar = () => {
                       setIsMobileServicesOpen(false);
                       setIsMobileDiscoverOpen(false);
                     }}
-                    className="w-full bg-orange-500 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center space-x-2 shadow-md"
+                    className="w-full bg-orange-500 text-white px-6 py-3 rounded-full text-sm font-medium   hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center space-x-2 shadow-md "
                   >
                     <span>Contact Us</span>
                     <div className="w-5 h-5 bg-white bg-opacity-20 rounded-full flex items-center justify-center">

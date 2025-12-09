@@ -65,16 +65,16 @@ const ContactPageMain = () => {
             </div>
 
             {/* Illustration */}
-            <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[532px] h-40 sm:h-48 md:h-64 lg:h-[296px] opacity-100 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] border-[2px] [border-image:linear-gradient(180deg,#FBB11F_0%,#FFFFFF_100%)_1] mx-auto lg:mx-0">
-              <div className="flex justify-center h-full">
+            <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[532px] h-40 sm:h-48 md:h-64 lg:h-[296px] opacity-100 rounded-[16px] sm:rounded-[20px] md:rounded-[44px] border-[2px]  [border-image:linear-gradient(180deg,#FBB11F_0%,#FFFFFF_100%)_1] mx-auto lg:mx-0">
+              <div className="flex justify-center h-full rounded-2xl">
                 <div className="relative w-full">
                   {/* Desk */}
-                  <div className="w-full h-full bg-gray-800 rounded-t-sm relative overflow-hidden">
+                  <div className="lg:-mt-50 lg:ml-14 rounded-2xl">
                     <Lottie
                       animationData={Contact}
                       loop={true}
                       autoplay={true}
-                      className="w-full h-full object-cover"
+                      className="w-[400px] h-[700px] "
                     />
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const ContactPageMain = () => {
           </div>
 
           {/* Right Content - Contact Form */}
-          <div className="w-full max-w-[420px] bg-white rounded-2xl p-6 md:p-8 shadow-lg mx-auto lg:mx-0 lg:ml-[40px] order-1 lg:order-2">
+          <div className="w-full max-w-[420px] bg-white rounded-2xl p-6 md:p-8  mx-auto lg:mx-0 lg:ml-[40px] order-1 lg:order-2">
             {/* Navigation Tabs */}
             <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
               <button

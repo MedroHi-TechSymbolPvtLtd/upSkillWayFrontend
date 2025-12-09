@@ -9,7 +9,7 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
-
+import config from '../../config/env';
 
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 
@@ -190,39 +190,44 @@ function ScrollVelocityRow(props) {
 }
 
 // Individual Testimonial Card Component
-const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
-  <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
-      {/* Profile Picture */}
-      <div className="flex justify-center mb-4">
-        <img
-          src={
-            testimonial.avatarUrl || getPlaceholderImage(testimonial.authorName)
-          }
-          alt={testimonial.authorName}
-          className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
-          onError={(e) => {
-            e.target.src = getPlaceholderImage(testimonial.authorName);
-          }}
-        />
-      </div>
+const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
+  // Map API fields to component fields
+  const name = testimonial.studentName || testimonial.authorName || 'Anonymous';
+  const role = testimonial.studentRole || testimonial.role || 'Student';
+  const text = testimonial.testimonialText || testimonial.text || '';
+  const imageUrl = testimonial.studentImageUrl || testimonial.avatarUrl || null;
+  
+  return (
+    <div className="w-[350px] min-h-[420px] flex-shrink-0 mx-3">
+      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full flex flex-col">
+        {/* Profile Picture */}
+        <div className="flex justify-center mb-4">
+          <img
+            src={imageUrl || getPlaceholderImage(name)}
+            alt={name}
+            className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+            onError={(e) => {
+              e.target.src = getPlaceholderImage(name);
+            }}
+          />
+        </div>
 
-      {/* Name */}
-      <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
-        {testimonial.authorName}
-      </h3>
+        {/* Name */}
+        <h3 className="text-lg font-semibold text-gray-900 text-center mb-1">
+          {name}
+        </h3>
 
-      {/* Role */}
-      <p className="text-sm text-gray-600 text-center mb-4">
-        {testimonial.role}
-      </p>
-
-      {/* Testimonial Text - Flexible height */}
-      <div className="flex-grow mb-4">
-        <p className="text-gray-700 text-sm leading-relaxed italic">
-          "{testimonial.text}"
+        {/* Role */}
+        <p className="text-sm text-gray-600 text-center mb-4">
+          {role}
         </p>
-      </div>
+
+        {/* Testimonial Text - Flexible height */}
+        <div className="flex-grow mb-4">
+          <p className="text-gray-700 text-sm leading-relaxed italic">
+            "{text}"
+          </p>
+        </div>
 
       {/* Watch Video Button */}
       {testimonial.videoUrl && (
@@ -237,6 +242,28 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
         </div>
       )}
 
+      {/* Rating Stars */}
+      {testimonial.rating && (
+        <div className="flex justify-center mb-3">
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, index) => (
+              <svg
+                key={index}
+                className={`w-4 h-4 ${
+                  index < Math.floor(testimonial.rating)
+                    ? 'text-amber-500 fill-amber-500'
+                    : 'text-gray-300 fill-gray-300'
+                }`}
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+            <span className="ml-1 text-sm text-gray-600">({testimonial.rating})</span>
+          </div>
+        </div>
+      )}
+
       {/* Status Badge */}
       {testimonial.status && (
         <div className="flex justify-center">
@@ -247,19 +274,24 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
       )}
     </div>
   </div>
-);
+  );
+};
 
 // Main Animated Testimonials Component
 const AnimatedTestimonials = ({
+  course,
   testimonials: propTestimonials,
-  apiUrl = "http://localhost:3000/api/v1/cms/testimonials",
-  maxTestimonials = 12,
+  apiUrl = `${config.apiBaseUrl}/cms/testimonials`,
   title = "From Aspiration to Achievement Our Success Stories",
   subtitle = "Explore the inspiring journeys of Upskillway learners as they turn skills into careers and dreams into achievements.",
   baseVelocity = 15,
 }) => {
-  const [testimonials, setTestimonials] = useState(propTestimonials || []);
-  const [testimonialsLoading, setTestimonialsLoading] = useState(false);
+  // Use course testimonials if available
+  const courseTestimonials = course?.testimonials;
+  const initialTestimonials = courseTestimonials || propTestimonials || [];
+  
+  const [testimonials, setTestimonials] = useState(initialTestimonials);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(!courseTestimonials && !propTestimonials);
   const [testimonialsError, setTestimonialsError] = useState(null);
 
   // Mock testimonials data for demonstration
@@ -318,9 +350,9 @@ const AnimatedTestimonials = ({
   ];
 
   useEffect(() => {
-    // If testimonials are provided as props, don't fetch from API
-    if (propTestimonials && propTestimonials.length > 0) {
-      setTestimonials(propTestimonials);
+    // If testimonials are provided from course or props, don't fetch from API
+    if ((courseTestimonials && courseTestimonials.length > 0) || (propTestimonials && propTestimonials.length > 0)) {
+      setTestimonials(courseTestimonials || propTestimonials);
       setTestimonialsLoading(false);
       return;
     }
@@ -359,7 +391,7 @@ const AnimatedTestimonials = ({
     };
 
     fetchTestimonials();
-  }, [apiUrl, propTestimonials]);
+  }, [apiUrl, propTestimonials, courseTestimonials]);
 
   const handleRetry = () => {
     setTestimonialsError(null);
@@ -405,9 +437,7 @@ const AnimatedTestimonials = ({
     0,
     Math.ceil(testimonials.length / 2)
   );
-  const secondRowTestimonials = testimonials.slice(
-    Math.ceil(testimonials.length / 2)
-  );
+  
 
 const navigate = useNavigate();
 
@@ -427,7 +457,7 @@ const navigate = useNavigate();
         <h1 className="text-4xl whitespace-nowrap md:text-5xl font-bold text-gray-900 mb-4 -ml-50">
           {title.split(" ").map((word, index) =>
             word === "Achievement" ? (
-              <span key={index} className="text-amber-500">
+              <span key={index} className="text-[#FCB11F]">
                 {word}{" "}
               </span>
             ) : (

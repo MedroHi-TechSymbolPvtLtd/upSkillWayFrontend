@@ -10,6 +10,7 @@ import {
   useVelocity,
 } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import config from '../../config/env';
 
 // Utility function
 const cn = (...classes) => {
@@ -243,7 +244,7 @@ const TestimonialsDisplay = () => {
     const fetchTestimonials = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/v1/cms/training-programs?page=1&limit=10&trainingType=college');
+        const response = await fetch(`${config.apiBaseUrl}/cms/training-programs?page=1&limit=10&trainingType=college`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -356,11 +357,11 @@ const TestimonialsDisplay = () => {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Student <span className="text-[#FDB11F]">Success Stories</span>
+          <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
+            What Our <span className="text-[#FDB11F]">Partner</span> Institutions Say
           </h1>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Hear from our graduates who transformed their careers
+            Hear how Colleges & Instituations  are transforming learning through their partnership with Upskillway.
           </p>
         </div>
 

@@ -19,7 +19,7 @@ const UpskillwayFeatures = () => {
   return (
 
        <div className="text-center mb-12">
-          <h2 className="w- text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+          <h2 className="w- text-4xl sm:text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
             Why Learners Trust <br></br> Upskill<span className="text-[#FFB84D]">w</span>ay
           </h2>
           <p className="text-gray-600 text-lg font-medium max-w-3xl mx-auto">

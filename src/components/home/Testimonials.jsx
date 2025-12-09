@@ -9,7 +9,7 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
-
+import config from '../../config/env';
 
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 
@@ -259,7 +259,7 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => {
 // Main Animated Testimonials Component
 const AnimatedTestimonials = ({
   testimonials: propTestimonials,
-  apiUrl = "http://localhost:3000/api/v1/cms/testimonials",
+  apiUrl = `${config.apiBaseUrl}/cms/testimonials`,
   title = "From Aspiration to Achievement Our Success Stories",
   subtitle = "Explore the inspiring journeys of Upskillway learners as they turn skills into careers and dreams into achievements.",
   baseVelocity = 15,
@@ -431,7 +431,7 @@ const navigate = useNavigate();
 
       {/* Header */}
       <div className="text-center mb-8 sm:mb-10 md:mb-12 max-w-5xl mx-auto px-4">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-3 sm:mb-4 leading-tight lg:w-full">
           {title.split(" ").map((word, index) =>
             word === "Achievement" ? (
               <span key={index} className="text-amber-500">
@@ -497,15 +497,13 @@ const navigate = useNavigate();
             ))}
           </ScrollVelocityRow>
 
-  <div className="text-center p-4 sm:p-6 md:p-8 lg:ml-150">
+  <div className="text-center p-4 sm:p-6  md:p-8 lg:ml-140">
         <button 
-          className="relative text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px] sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center" 
+          className="relative text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px]  sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center" 
           onClick={() => navigate("/contact")}
         >
-          <span className="mr-2">View More</span>
-          <svg className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px] absolute  right-2 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg> 
+          <span className="mr-2">View More → </span>
+      
         </button>
       </div>
           {/* Second Row - Moving Left */}

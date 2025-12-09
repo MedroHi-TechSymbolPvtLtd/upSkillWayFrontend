@@ -781,14 +781,14 @@ const CodingForKids = () => {
       </section>
 
       {/* Benefits of Coding for Kids Section */}
-      <section className="py-12 sm:py-16 md:py-20 -mt-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[48px] leading-[142%] text-center text-black mb-12 sm:mb-16s capitalize sm:mt-20">
+      <section className="py-12 sm:py-18 md:py-20 -mt-30 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  ">
+          <h2 className=" mt-10 font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[48px] leading-[142%] text-center text-black mb-12 sm:mb-12 capitalize sm:mt-20">
             Benefits Of <span className="text-[#FF9500]">Coding</span> For Kids
           </h2>
           
           {/* Layout with illustration in center and cards on sides */}
-          <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 -mt-[65px]">
+          <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 -mt-[50px]">
             {/* Left Column - 3 Benefit Cards */}
             <div className="flex flex-col gap-6 w-[310px] h-[50]    ">
               <div className="border-2 border-[rgba(93,56,222,0.5)] rounded-[15px] bg-white flex items-center gap-2 ">
@@ -1013,7 +1013,7 @@ const CodingForKids = () => {
                 <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
                   {model.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start text-gray-600 text-xs sm:text-sm">
-                      <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -1330,7 +1330,7 @@ const CodingForKids = () => {
       </section>
 
       {/* Ready for Partnership CTA Section */}
-      <section className="py-12 sm:py-16 md:py-20 relative -mt-50">
+      <section className="hidden md:block py-12 sm:py-16 md:py-20 relative -mt-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative bg-[rgba(255,255,255,0.1)] border border-[rgba(253,177,31,0.5)] rounded-[24px] p-6 sm:p-8 md:p-12 lg:p-16 overflow-hidden">
             {/* Decorative Images */}
@@ -1347,13 +1347,13 @@ const CodingForKids = () => {
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
               {/* Left Content */}
               <div className="flex flex-col gap-4">
-               <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[42px] leading-[48px] text-left text-[#111827] mb-4">
+               <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-4xl sm:text-5xl md:text-[42px] leading-[48px] text-left text-[#111827] mb-1">
                 Ready for <span className="text-[#FFB84D]">Partnership</span>?
                 </h2>
-                <p className="font-['Plus_Jakarta_Sans'] font-normal text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-[160%] text-[#0D0D0D]">
+                <p className="font-['Plus_Jakarta_Sans'] font-normal text-lg sm:text-xl md:text-2xl lg:text-[28px] leading-[160%] text-[#0D0D0D] ">
                 Join the Growing Community of Schools transforming educations
                 </p>
-                <span className="font-['Plus_Jakarta_Sans'] leading-[160%]">
+                <span className="font-['Plus_Jakarta_Sans'] leading-[160%] ">
                   Connect with our team to discuss collobration <br></br> opportunities and bring coding to your classrooms.</span>
                   <div className="grid grid-cols-2 mt-10">
                   <button 

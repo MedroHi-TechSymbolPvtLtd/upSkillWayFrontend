@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import config from '../../config/env';
 
 const FAQ = ({ 
+  course,
   faqs: propFaqs,
-  apiUrl = "http://localhost:3000/api/v1/cms/faqs",
-  title = "",
+  apiUrl = `${config.apiBaseUrl}/cms/faqs`,
+  title = "Frequently Asked Questions",
   className = "",
   gridCols = "md:grid-cols-2"
 }) => {
+  // Use course FAQs if available, otherwise use propFaqs
+  const courseFaqs = course?.faqs;
+  const initialFaqs = courseFaqs || propFaqs || [];
+  
   // State for FAQs
-  const [faqs, setFaqs] = useState(propFaqs || []);
-  const [faqsLoading, setFaqsLoading] = useState(!propFaqs);
+  const [faqs, setFaqs] = useState(initialFaqs);
+  const [faqsLoading, setFaqsLoading] = useState(!courseFaqs && !propFaqs);
   const [faqsError, setFaqsError] = useState(null);
   
   // State for FAQ expansion
   const [expandedFaq, setExpandedFaq] = useState(null);
 
-  // Fetch FAQs from API only if not provided as props
+  // Fetch FAQs from API only if not provided as props or from course
   useEffect(() => {
-    if (propFaqs) {
-      setFaqs(propFaqs);
+    if (courseFaqs || propFaqs) {
+      setFaqs(courseFaqs || propFaqs);
       setFaqsLoading(false);
       return;
     }
@@ -43,7 +49,7 @@ const FAQ = ({
     };
 
     fetchFaqs();
-  }, [apiUrl, propFaqs]);
+  }, [apiUrl, propFaqs, courseFaqs]);
 
   const handleRetry = () => {
     setFaqsError(null);
@@ -54,8 +60,8 @@ const FAQ = ({
 
   return (
     <section className={`py-20 bg-white ${className}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:-mt-20">
+        <h2 className="text-[56px] font-bold text-center mb-16 lg:-ml-[600px]">
           {title}
         </h2>
 

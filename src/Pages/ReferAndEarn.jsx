@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import config from '../config/env';
 
 import {
   Star,
@@ -25,7 +26,7 @@ const FAQSection = () => {
     const fetchFAQs = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/api/v1/refer/partners");
+        const response = await fetch(`${config.apiBaseUrl}/refer/partners`);
         const data = await response.json();
 
         if (data.success && data.data) {
@@ -92,8 +93,8 @@ const FAQSection = () => {
   return (
     <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-20">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-          <span className="text-[#FF9500]">Frequently</span> Asked Questions
+        <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 lg:-ml-250">
+          <span className="text-[#FF9500]">Referral</span> Program FAQS 
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
@@ -175,14 +176,14 @@ const FAQSection = () => {
         </div>
       </div>
 
-      {/* View More Button */}
-      <div className="text-center p-6 sm:p-10 md:p-12 lg:p-16">
+      {/* View More Button - Hidden on mobile */}
+      <div className="hidden sm:block text-center p-6 sm:p-10 md:p-12 lg:p-16 ml-[720px]">
         <button
           onClick={() => navigate('/contact')}
-          className="relative text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px] sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center"
+          className="relative text-white text-base sm:text-lg md:text-[20px] bg-[#FCB11F] w-[180px] sm:w-[200px] md:w-[220px] h-[48px] sm:h-[52px] md:h-[56px] p-3 sm:p-3.5 md:p-4 rounded-tl-[40px] rounded-tr-[5px] rounded-br-[40px] rounded-bl-[5px] flex items-center justify-center ml-[150px] sm:-ml-[150px] "
         >
           <span className="mr-2">View More</span>
-          <svg className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px] absolute -top-2 right-2 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px] absolute  right-4 bg-[#FCB11F] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 17L17 7M17 7H7M17 7V17" />
           </svg>
         </button>
@@ -200,7 +201,7 @@ const ReferAndEarn = () => {
     const fetchPartners = async () => {
       try {
         setPartnersLoading(true);
-        const response = await fetch("http://localhost:3000/api/v1/refer/partners");
+        const response = await fetch(`${config.apiBaseUrl}/refer/partners`);
         const data = await response.json();
 
         if (data.success && data.data) {
@@ -362,12 +363,12 @@ const ReferAndEarn = () => {
           opacity: 1
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10 lg:mt-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-white relative">
+            <div className="text-white relative lg:-ml-20">
               <h1
-                className="mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-[100px] leading-tight sm:leading-tight md:leading-tight lg:leading-[127%]"
+                className="mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-[100px] leading-tight sm:leading-tight md:leading-tight lg:leading-[127%] lg:w-[942px]"
                 style={{
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
                   fontWeight: 400,
@@ -387,27 +388,27 @@ const ReferAndEarn = () => {
               <button className="w-[240px] sm:w-[270px] md:w-[290px] lg:w-[303px] h-[60px] sm:h-[66px] md:h-[70px] lg:h-[74px] bg-transparent text-white px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 rounded-[99px] font-semibold text-sm sm:text-base md:text-lg lg:text-[25px] mb-4 sm:mb-5 md:mb-6 lg:mb-8 border-2 border-white hover:bg-white hover:text-purple-700 transition-colors duration-300 flex items-center justify-center gap-2 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
                 <span className='font-bold'>Invite Friends</span>
               </button>
-              <p className="text-xs sm:text-sm md:text-base text-white mb-4 sm:mb-5 md:mb-6 lg:mb-8">
+              <p className="text-xs sm:text-sm md:text-base text-white mb-4 sm:mb-5 md:mb-6 lg:mb-8  text-nowrap">
                 Join over 20,000 users who've already benefited from our referral program.
               </p>
               {/* Rating Card */}
-              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-4xl px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 inline-flex items-center gap-2 sm:gap-3 md:gap-3.5 lg:gap-4">
-                <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-4xl  sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-2 inline-flex items-center gap-2 sm:gap-3 md:gap-3.5 lg:gap-4">
+                <div className="w-[120px] h-[35px] flex items-center gap-1.5 sm:gap-2">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5 fill-[#FFB84D] text-[#FFB84D]" />
                     ))}
                   </div>
-                  <span className="text-base sm:text-lg md:text-lg lg:text-xl font-bold text-white">4.9</span>
+                  <span className="text-base sm:text-lg md:text-lg lg:text-xl font-semibold text-black">4.9</span>
                 </div>
 
               </div>
-              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 -mt-8 sm:-mt-9 md:-mt-9 lg:-mt-10 ml-auto fill-[#FFB84D] text-[black]" />
+              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 -mt-8 sm:-mt-9 md:-mt-9 lg:-mt-10 lg:ml-45 fill-[#FFB84D] text-[black]" />
             </div>
 
             {/* Right Illustration */}
             <div className="relative flex items-center justify-center lg:justify-end">
-              <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[628px] h-auto aspect-[628/415] mt-4 sm:mt-6 md:mt-8 lg:mt-10">
+              <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[628px] h-[400px] aspect-[628/415]  sm:mt-6 md:mt-8 lg:mt-25 lg:-mr-20 ">
                 <img
                   src={Refer7}
                   alt="Refer and Earn"
@@ -581,7 +582,7 @@ const ReferAndEarn = () => {
 
       {/* Referral Program FAQ Section */}
       <section className="py-0 sm:py-0 md:py-0 -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-20">
-        <div className="w-full px-0 sm:px-0 lg:px-0">
+        <div className="w-full px-0 sm:px-0 lg:px-0 ">
 
           <FAQSection />
 
@@ -591,7 +592,7 @@ const ReferAndEarn = () => {
       {/* Our Partners Section */}
       <section className="py-8 sm:py-10 md:py-14 lg:py-20 bg-white -mt-20 sm:-mt-30 md:-mt-45 lg:-mt-65">
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-8 sm:mb-10 md:mb-12 lg:mb-16 mt-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-8 sm:mb-10 md:mb-12 lg:mb-16 mt-10 -ml-280">
             Our <span className="text-[#FF9500]">Partners</span>
           </h2>
           {partnersLoading ? (

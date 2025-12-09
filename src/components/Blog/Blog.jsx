@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import config from '../../config/env';
 
 const BlogSection = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -16,7 +17,7 @@ const BlogSection = () => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/v1/cms/blogs');
+        const response = await fetch(`${config.apiBaseUrl}/cms/blogs`);
         const result = await response.json();
         
         if (result.success) {

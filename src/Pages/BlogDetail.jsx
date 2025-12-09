@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, User, Tag, Share2 } from "lucide-react";
+import config from '../config/env';
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const BlogDetail = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3000/api/v1/cms/blogs/${id}`
+          `${config.apiBaseUrl}/cms/blogs/${id}`
         );
         const result = await response.json();
 
@@ -84,7 +85,7 @@ const BlogDetail = () => {
     setSubmitMessage("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/leads", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/leads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,7 +10,7 @@ const EnterpriseSection = () => {
     
 
     <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-2 p-8 rounded-[20px] text-[#FDB11F]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-2 p-8 rounded-[20px] text-[#FDB11F] border-amber-300">
         {/* Header */}
         <div className="mb-8">
           <div className="text-red-500 font-medium mb-4 uppercase text-2xl sm:text-3xl" style={{ color: '#FF302F' }}>

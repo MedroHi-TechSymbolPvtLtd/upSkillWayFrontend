@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, CheckCircle, Users, GraduationCap, CreditCard, Home, Calculator, Star, FileText, Building2, Award, TrendingUp, Plane, UserCircle, FileCheck, Wallet, MapPin, HeadphonesIcon, Phone, Send, Plus, X, ChevronRight } from 'lucide-react';
 import Study from "../components/Study/Study";
+import config from '../config/env';
 import Studyimg from "../assets/Images/Study.png";
 import Testimonial from "../components/home/Testimonials"
 import Study1 from "../assets/Images/Study1.png";
@@ -37,7 +38,7 @@ const Main = () => {
     const fetchPrograms = async () => {
       try {
         setProgramsLoading(true);
-        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad?page=1&limit=10');
+        const response = await fetch(`${config.apiBaseUrl}/cms/study-abroad?page=1&limit=10`);
         const data = await response.json();
         
         if (data.success && data.data) {
@@ -280,7 +281,7 @@ const Main = () => {
       <section className="relative bg-white py-8 sm:py-10 md:py-14 lg:py-20 px-4">
         <div className="max-w-7xl mx-auto relative">
           {/* Shadow - positioned behind image */}
-          <div className="absolute left-[862.31px] top-[186.09px] w-[559.32px] h-[707.86px] bg-gradient-to-l from-[rgba(253,177,31,0.6)] to-[rgba(93,56,222,0.6)] opacity-60 blur-[58.1664px] hidden lg:block"></div>
+          <div className="absolute right-[-20.31px] top-[-10.09px] w-[500.32px] h-[650.86px] bg-gradient-to-l from-[rgba(253,177,31,0.6)] to-[rgba(93,56,222,0.6)] opacity-60 blur-[38.1664px] hidden lg:block"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-start mt-8 sm:mt-12 md:mt-16 lg:mt-20">
             <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
@@ -294,7 +295,7 @@ const Main = () => {
               </div>
 
               {/* Description */}
-              <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-relaxed sm:leading-[26px] font-normal text-[#52525B]">
+              <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-relaxed sm:leading-[26px] font-normal text-[#52525B] lg:-mt-10">
                 Discover world-class education opportunities and unlock your potential with our comprehensive study abroad programs.
               </p>
               
@@ -439,7 +440,7 @@ const Main = () => {
             <div className="relative flex justify-center lg:justify-end mt-6 sm:mt-8 lg:mt-0">
               <div className="relative w-full max-w-[280px] sm:max-w-[350px] md:max-w-[450px] lg:w-[475px] h-[250px] sm:h-[320px] md:h-[420px] lg:h-[607px]">
                 {/* Image container with black background and white border */}
-                <div className="absolute left-0 top-0 w-full h-full bg-[#0B0B0B] border border-white rounded-[12px] sm:rounded-[15px] overflow-hidden">
+                <div className="absolute left-0 top-0 w-full h-full bg-[#0B0B0B] rounded-[12px] sm:rounded-[15px] overflow-hidden">
                   <img 
                     src={Studyimg}
                     alt="Group of diverse students"
@@ -457,15 +458,15 @@ const Main = () => {
       <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center sm:text-left mb-6 sm:mb-8 md:mb-12 lg:mb-16">
-          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px]  leading-tight sm:leading-tight md:leading-tight lg:leading-[66px] font-extrabold text-[#18181B]  sm:-ml-[670px] lg:ml-[300px]">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl md:text-4xl lg:text-[48px]  leading-tight sm:leading-tight md:leading-tight lg:leading-[66px] font-extrabold text-[#18181B]  sm:-ml-[670px] lg:ml-[50px]  lg:-mt-[90px]">
           Popular Study <span className="text-[#FDB11F]">Destination</span>
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 md:mt-5 lg:mt-6 sm:-ml-[730px] -mb-20 sm:-mb-30 md:-mb-35 lg:-mb-40 lg:ml-80">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 md:mt-5 lg:mt-6 sm:-ml-[730px] -mb-20 sm:-mb-30 md:-mb-35 lg:-mb-40 lg:ml-14">
             Explore world-class education opportunities across the globel.            </p>
           </div>
         </div>
       </section>
-      <Study className="-mt-4 sm:-mt-6 md:-mt-8 lg:-mt-9"/>
+      <Study className="-mt-4 sm:-mt-6 md:-mt-8 lg:-mt-29"/>
 
       {/* Find Your Perfect Program */}
       <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white relative">
@@ -483,7 +484,7 @@ const Main = () => {
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3 w-full max-w-[1216px] mb-6 sm:mb-7 md:mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3 w-full max-w-[1216px] mb-6 sm:mb-7 md:mb-8 lg:ml-40">
             <button
               onClick={() => setSelectedFilter('all')}
               className={`h-[40px] sm:h-[44px] md:h-[48px] px-4 sm:px-5 md:px-6 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap transition-all ${
@@ -496,7 +497,7 @@ const Main = () => {
                 <path d="M3 3h18v18H3z" strokeWidth="1.67" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M9 9h6v6H9z" strokeWidth="1.67" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">All Courses</span>
+              <span className="font-['Plus_Jakarta_Sans'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">All Courses</span>
             </button>
 
             <button
@@ -512,7 +513,7 @@ const Main = () => {
                 <path d="M16.67 3L16.67 9" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M12.5 9L12.5 15" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Undergraduate</span>
+              <span className="font-['Plus_Jakarta_Sans'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Undergraduate</span>
             </button>
 
             <button
@@ -529,7 +530,7 @@ const Main = () => {
                 <path d="M12 10L12 15" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M8.5 15L15.5 15" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Postgraduate</span>
+              <span className="font-['Plus_Jakarta_Sans'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Postgraduate</span>
             </button>
 
             <button
@@ -546,7 +547,7 @@ const Main = () => {
                 <path d="M18 2L18 8" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M8 13L16 13" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Short-Term</span>
+              <span className="font-['Plus_Jakarta_Sans'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Short-Term</span>
             </button>
 
             <button
@@ -561,7 +562,7 @@ const Main = () => {
                 <path d="M6 2L18 2" strokeWidth="1.67" strokeLinecap="round"/>
                 <path d="M12 10L12 18" strokeWidth="1.67" strokeLinecap="round"/>
               </svg>
-              <span className="font-['Inter'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Scholarship Programs</span>
+              <span className="font-['Plus_Jakarta_Sans'] text-sm sm:text-sm md:text-base leading-[19px] font-semibold">Scholarship Programs</span>
             </button>
           </div>
 
@@ -604,7 +605,7 @@ const Main = () => {
               <div className="flex items-center justify-center py-20">
                 <div className="text-center">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FBB03B] mx-auto mb-4"></div>
-                  <p className="font-['Inter'] text-base sm:text-lg text-[#6B7280]">Loading programs...</p>
+                  <p className=" font-['Plus_Jakarta_Sans'] text-base sm:text-lg text-[#6B7280]">Loading programs...</p>
                 </div>
               </div>
             ) : filteredPrograms.length > 0 ? (
@@ -623,18 +624,18 @@ const Main = () => {
                         </svg>
                       </div>
                       <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#DCFCE7] rounded-full">
-                        <span className="font-['Inter'] text-[10px] sm:text-xs leading-tight font-semibold text-[#15803D]">{program.status}</span>
+                        <span className="font-['Plus_Jakarta_Sans'] text-[10px] sm:text-xs leading-tight font-semibold text-[#15803D]">{program.status}</span>
                       </span>
                     </div>
-                    <h3 className="font-['Inter'] text-base sm:text-lg md:text-xl leading-tight sm:leading-6 font-bold text-[#111827] mb-2 line-clamp-2">{program.title}</h3>
-                    <p className="font-['Inter'] text-xs sm:text-sm leading-tight sm:leading-[17px] font-normal text-[#4B5563] mb-3 sm:mb-4 line-clamp-1">{program.university}</p>
+                    <h3 className="font-['Plus_Jakarta_Sans'] text-base sm:text-lg md:text-xl leading-tight sm:leading-6 font-bold text-[#111827] mb-2 line-clamp-2">{program.title}</h3>
+                    <p className="font-['Plus_Jakarta_Sans'] text-xs sm:text-sm leading-tight sm:leading-[17px] font-normal text-[#4B5563] mb-3 sm:mb-4 line-clamp-1">{program.university}</p>
                     <div className="flex gap-2 mb-3 sm:mb-4 flex-wrap">
-                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#F3F4F6] rounded-full font-['Inter'] text-[10px] sm:text-xs leading-tight font-normal text-[#374151]">{program.duration}</span>
-                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#F3F4F6] rounded-full font-['Inter'] text-[10px] sm:text-xs leading-tight font-normal text-[#374151]">{program.type}</span>
+                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#F3F4F6] rounded-full font-['Plus_Jakarta_Sans'] text-[10px] sm:text-xs leading-tight font-normal text-[#374151]">{program.duration}</span>
+                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 bg-[#F3F4F6] rounded-full font-['Plus_Jakarta_Sans'] text-[10px] sm:text-xs leading-tight font-normal text-[#374151]">{program.type}</span>
                     </div>
                     <div className="flex justify-between items-end">
-                      <span className="font-['Inter'] text-xs sm:text-sm leading-tight font-normal text-[#6B7280]">Tuition</span>
-                      <span className="font-['Inter'] text-sm sm:text-base leading-tight font-bold text-[#FBB03B]">{program.tuition}</span>
+                      <span className="font-['Plus_Jakarta_Sans'] text-xs sm:text-sm leading-tight font-normal text-[#6B7280]">Tuition</span>
+                      <span className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-tight font-bold text-[#FBB03B]">{program.tuition}</span>
                     </div>
                   </div>
                 ))}
@@ -642,14 +643,14 @@ const Main = () => {
             ) : (
               <div className="flex items-center justify-center py-20">
                 <div className="text-center">
-                  <p className="font-['Inter'] text-base sm:text-lg text-[#6B7280] mb-4">No programs found matching your filters.</p>
+                  <p className="font-['Plus_Jakarta_Sans'] text-base sm:text-lg text-[#6B7280] mb-4">No programs found matching your filters.</p>
                   <button
                     onClick={() => {
                       setSelectedLocation('All Locations');
                       setSelectedSubject('All Subjects');
                       setSelectedDuration('All Duration');
                     }}
-                    className="px-6 py-2 bg-[#FBB03B] text-white rounded-lg font-['Inter'] font-semibold hover:bg-[#E5A21C] transition-colors"
+                    className="px-6 py-2 bg-[#FBB03B] text-white rounded-lg font-['Plus_Jakarta_Sans'] font-semibold hover:bg-[#E5A21C] transition-colors"
                   >
                     Reset Filters
                   </button>
@@ -660,7 +661,7 @@ const Main = () => {
 
           {/* View All Programs Button */}
           <div className="w-full max-w-[1216px] flex justify-center">
-            <button className="w-full sm:w-auto px-8 sm:px-12 md:px-16 h-[44px] sm:h-[48px] bg-[#1A1A1A] rounded-lg flex items-center justify-center font-['Inter'] text-sm sm:text-base leading-[19px] font-semibold text-white hover:bg-[#2A2A2A] transition-colors">
+            <button className="w-full sm:w-auto px-8 sm:px-12 md:px-16 h-[44px] sm:h-[48px] bg-[#1A1A1A] rounded-lg flex items-center justify-center font-['Plus_Jakarta_Sans'] text-sm sm:text-base leading-[19px] font-semibold text-white hover:bg-[#2A2A2A] transition-colors">
               View All Programs
             </button>
           </div>
@@ -684,7 +685,7 @@ const Main = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 justify-items-center lg:justify-items-start">
             {/* Card 1: Expert Academic Counseling */}
             <div 
-              className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-4 sm:p-5 md:p-6 w-full max-w-[384px] lg:w-[384px]"
+              className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-4 sm:p-5 md:p-6 w-full max-w-[384px] lg:w-[384px]  "
               style={{
                 height: 'auto',
                 minHeight: '220px',
@@ -692,10 +693,10 @@ const Main = () => {
                 opacity: 1
               }}
             >
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-3 sm:mb-3.5 md:mb-4">
-                <UserCircle className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
+              <div className="w-12 h-12  text-center sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-3 sm:mb-3.5 md:mb-4 lg:ml-30">
+                <UserCircle className="w-6 h-6  sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
-              <h3 className="text-lg sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-2.5 md:mb-3">
+              <h3 className="text-lg  text-center sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-2.5 md:mb-3 ">
                 Expert Academic Counseling
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed flex-1">
@@ -712,10 +713,10 @@ const Main = () => {
                 opacity: 1
               }}
             >
-              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4 lg:ml-30">
                 <FileCheck className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold text-center text-gray-900 mb-3">
                 Visa & Documentation Support
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">
@@ -732,10 +733,10 @@ const Main = () => {
                 opacity: 1
               }}
             >
-              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4 lg:ml-30">
                 <Building2 className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold text-center text-gray-900 mb-3">
                 Accommodation Assistance
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">
@@ -752,10 +753,10 @@ const Main = () => {
                 opacity: 1
               }}
             >
-              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4 lg:ml-30">
                 <Wallet className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold text-center text-gray-900 mb-3">
                 Financial Planning & Scholarships
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">
@@ -772,10 +773,10 @@ const Main = () => {
                 opacity: 1
               }}
             >
-              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4 lg:ml-30">
                 <MapPin className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl text-center font-bold text-gray-900 mb-3">
                 End-to-End Guidance
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">
@@ -792,10 +793,10 @@ const Main = () => {
                 opacity: 1
               }}
             >
-              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4">
-                <Users className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-[#FDB11F] rounded-lg flex items-center justify-center mb-4 lg:ml-30">
+                <Users className="w-8 h-8  text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold text-center text-gray-900 mb-3">
                 24/7 Support
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">
@@ -806,50 +807,51 @@ const Main = () => {
         </div>
       </section>
 
-      {/* Newsletter / Free Counseling Banner */}
-      <section className="py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white relative">
-        <div className="max-w-[1519px] mx-auto relative">
-          {/* Main Container Frame */}
-          <div className="relative w-full max-w-[1519px] min-h-[280px] sm:min-h-[320px] md:min-h-[366px] bg-[#5D38DE] rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden">
-            {/* Decorative Vectors */}
-            <div className="absolute w-[323px] h-[101.62px] left-[879px] top-[297px] bg-[#6843E7] rounded hidden xl:block"></div>
-            <div className="absolute w-[323px] h-[101.62px] left-[-107.87px] top-[-120.46px] bg-[#6843E7] rounded rotate-[120deg] hidden xl:block"></div>
-            <div className="absolute w-[323px] h-[101.62px] left-[980px] top-[-64.49px] bg-[#6843E7] rounded rotate-[-150deg] hidden xl:block"></div>
+      {/* Newsletter / Free Counseling Banner - Hidden on mobile */}
+    <section className="hidden md:block py-8 sm:py-10 md:py-14 lg:py-20 px-4 bg-white relative">
+  <div className="max-w-[1519px] mx-auto relative">
+    {/* Main Container Frame */}
+    <div className="relative w-full max-w-[1519px] min-h-[280px] sm:min-h-[320px] md:min-h-[366px] bg-[#5D38DE] rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden">
+      {/* Decorative Vectors */}
+      <div className="absolute w-[323px] h-[101.62px] left-[879px] top-[297px] bg-[#6843E7] rounded hidden xl:block"></div>
+      <div className="absolute w-[323px] h-[101.62px] left-[-107.87px] top-[-120.46px] bg-[#6843E7] rounded rotate-[120deg] hidden xl:block"></div>
+      <div className="absolute w-[323px] h-[101.62px] left-[980px] top-[-64.49px] bg-[#6843E7] rounded rotate-[-150deg] hidden xl:block"></div>
 
-            {/* Content Section */}
-            <div className="relative z-10 px-4 sm:px-6 md:px-12 lg:px-[80px] py-6 sm:py-8 md:py-12 lg:py-[80px]">
-              <div className="max-w-[699px]">
-                {/* Heading */}
-                <h2 className="font-['Plus_Jakarta_Sans'] text-xl sm:text-2xl md:text-3xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[36px] font-bold text-white mb-3 sm:mb-3.5 md:mb-4">
-                  Ready to Start Your Journey?
-                </h2>
+      {/* Content Section */}
+      <div className="relative z-10 px-4 sm:px-6 md:px-12 lg:px-[80px] py-6 sm:py-8 md:py-12 lg:py-[80px]">
+        <div className="max-w-[699px]">
+          {/* Heading */}
+          <h2 className="font-['Plus_Jakarta_Sans'] text-xl sm:text-2xl md:text-3xl lg:text-[48px] leading-tight sm:leading-tight md:leading-tight lg:leading-[36px] font-bold text-white mb-3 sm:mb-3.5 md:mb-4">
+            Ready to Start Your Journey?
+          </h2>
 
-                {/* Description */}
-                <p className="font-['Inter'] text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-normal text-[rgba(255,255,255,0.9)] mb-4 sm:mb-5 md:mb-6 lg:mb-8 max-w-[427px]">
-                  Book a free counseling session with our experts today
-                </p>
+          {/* Description */}
+          <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-normal text-[rgba(255,255,255,0.9)] mb-4 sm:mb-5 md:mb-6 lg:mb-8 max-w-[427px]">
+            Book a free counseling session with our experts today
+          </p>
 
-                {/* Button */}
-                <button 
-                  onClick={() => setIsConsultationModalOpen(true)}
-                  className="w-full sm:w-[280px] md:w-[308px] h-[48px] sm:h-[52px] md:h-[54px] bg-white rounded-[80px] flex items-center justify-center font-['Inter'] text-sm sm:text-base md:text-lg leading-[22px] font-bold text-[#5D38DE] hover:bg-gray-100 transition-colors"
-                >
-                  Schedule Free Consultation
-                </button>
-              </div>
-            </div>
+          {/* Button */}
+          <button 
+            onClick={() => setIsConsultationModalOpen(true)}
+            className="w-full sm:w-[280px] md:w-[308px] h-[48px] sm:h-[52px] md:h-[54px] bg-white rounded-[80px] flex items-center justify-center font-['Plus_Jakarta_Sans'] text-sm sm:text-base md:text-lg leading-[22px] font-bold text-[#5D38DE] hover:bg-gray-100 transition-colors"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
 
-            {/* Image - positioned on the right side */}
-            <div className="absolute right-0 top-0 w-[35%] sm:w-[40%] md:w-[45%] lg:w-[600px] h-full max-h-[280px] sm:max-h-[320px] md:max-h-[366px] overflow-hidden opacity-60 sm:opacity-70 md:opacity-80 lg:opacity-100">
-              <img 
-                src={sitting}
-                alt="Counseling session illustration"
-                className="w-full object-cover object-center -mt-4 sm:-mt-5 md:-mt-6"
-              />
-            </div>
-          </div>
-        </div>  
-      </section>
+    {/* Sitting Image Half Out */}
+    <div className="absolute right-0 top-1/2 transform -translate-y-[58%] w-[45%] sm:w-[40%] md:w-[35%] lg:w-[550px] z-20">
+      <img 
+        src={sitting}
+        alt="Counseling session illustration"
+        className="w-full object-cover object-center"
+      />
+    </div>
+  </div>  
+</section>
+
 
       {/* Student Testimonials */}
 
@@ -1278,7 +1280,7 @@ const StudyAbroadTestimonials = () => {
     const fetchTestimonials = async () => {
       try {
         setTestimonialsLoading(true);
-        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad?page=1&limit=10');
+        const response = await fetch(`${config.apiBaseUrl}/cms/study-abroad?page=1&limit=10`);
         const data = await response.json();
         
         if (data.success && data.data) {
@@ -1427,7 +1429,7 @@ const FAQSection = () => {
     const fetchFAQs = async () => {
       try {
         setFaqsLoading(true);
-        const response = await fetch('http://localhost:3000/api/v1/cms/study-abroad?page=1&limit=10');
+        const response = await fetch(`${config.apiBaseUrl}/cms/study-abroad?page=1&limit=10`);
         const data = await response.json();
         
         if (data.success && data.data) {
@@ -1631,10 +1633,10 @@ const BookCounselingSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8 md:mb-12 -mt-10 sm:-mt-14 md:-mt-16 lg:-mt-20">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-gray-900 mb-3 sm:mb-4 md:mb-6">
             Book Your <span className="relative inline-block">
               <span className="text-[#FF9500] relative z-10">Free Counseling</span>
-              <span className="absolute bottom-0 left-0 right-0 h-2 sm:h-2.5 md:h-3 bg-[#FF9500] opacity-20 -rotate-1"></span>
+              
             </span>  Session
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import config from '../../config/env';
 
-const TrainingPrograms = ({ apiUrl = 'http://localhost:3000/api/v1/cms/short-courses', title = 'Our Training Programs' }) => {
+const TrainingPrograms = ({ apiUrl = `${config.apiBaseUrl}/cms/short-courses`, title = 'Our Training Programs' }) => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

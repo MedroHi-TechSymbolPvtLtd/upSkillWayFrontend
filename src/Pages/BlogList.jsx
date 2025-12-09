@@ -12,7 +12,7 @@ const MainContent = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/leads', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/leads`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

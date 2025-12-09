@@ -251,8 +251,8 @@ const TestimonialCard = ({ testimonial, getPlaceholderImage }) => (
 // Main Animated Testimonials Component
 const AnimatedTestimonials = ({
   testimonials: propTestimonials = [],
-  title = "Hear What Our Users Are Saying",
-  subtitle = "Discover the varied perspectives and experiences as users share their stories, highlighting the versatility of our platform.",
+  title = "What Our Partner Institutions Say",
+  subtitle = "Hear how schools are transforming learning through their partnership with Upskillway.",
   baseVelocity = 15,
 }) => {
   const testimonialsLoading = false;
@@ -344,9 +344,9 @@ const AnimatedTestimonials = ({
 
       {/* Header */}
       <div className="text-center mb-12 max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
           {title.split(" ").map((word, index) =>
-            word === "Users" ? (
+            word === "Partner" ? (
               <span key={index} className="text-amber-500">
                 {word}{" "}
               </span>

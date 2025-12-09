@@ -146,15 +146,15 @@ export default function TrustSection() {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">What you'll gain:</h3>
                 <ul className="space-y-2 sm:space-y-3">
                   <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2 lg:ml-10">
                       <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         
                       </svg>
                     </div>
-                    <span className="text-gray-700 text-sm sm:text-base">Globally recognized certificates from Upskillway & partners</span>
+                    <span className="text-gray-700 text-sm sm:text-base  ">Globally recognized certificates from Upskillway & partners</span>
                   </li>
                   <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2 lg:ml-10">
                       <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         
                       </svg>
@@ -162,14 +162,14 @@ export default function TrustSection() {
                     <span className="text-gray-700 text-sm sm:text-base">Hands-on training with real-world projects</span>
                   </li>
                   <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2 lg:ml-10">
                       <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       </svg>
                     </div>
                     <span className="text-gray-700 text-sm sm:text-base">Expert mentorship to guide your learning</span>
                   </li>
                   <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-1.5 sm:mt-2 lg:ml-10">
                       <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         
                       </svg>

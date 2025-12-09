@@ -24,7 +24,7 @@ const navigate = useNavigate();
   const fetchCourses = async (page = 1) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3000/api/v1/cms/courses?page=${page}&limit=10`);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/cms/courses?page=${page}&limit=10`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

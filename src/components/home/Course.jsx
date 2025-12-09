@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BookOpen, Star, Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import config from '../../config/env';
 
 
 
@@ -108,7 +109,7 @@ const Course = () => {
         setError(null);
         
         // Try to fetch from API first
-        const response = await fetch("http://localhost:3000/api/v1/cms/courses");
+        const response = await fetch(`${config.apiBaseUrl}/cms/courses`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -400,13 +401,7 @@ const Course = () => {
                           </button>
                           <button
                             className="w-[110px] sm:w-[120px] md:w-[134px] h-[24px] sm:h-[26px] text-[10px] sm:text-[11px] md:text-[12px] border-1 rounded-xl text-[black] hover:text-black-800 font-bold transition-colors"
-                            onClick={() => {
-                              if (course.videoDemoUrl && course.videoDemoUrl !== '#') {
-                                window.open(course.videoDemoUrl, "_blank");
-                              } else {
-                                console.log('View program for:', course.title);
-                              }
-                            }}
+                            onClick={() => navigate(`/course/${course.id}`)}
                           >
                             View Program
                           </button>

@@ -56,7 +56,7 @@ export default function UpskillWayEbooks() {
             <img
               src={Book}
               alt="floating books"
-              className="w-[300px] sm:w-[400px] md:w-[600px] lg:w-[1000px] lg:h-[786px] h-auto absolute left-1/2 -translate-x-1/2 top-[-40px] sm:top-[-60px] md:top-[-100px] lg:top-[-170px] select-none pointer-events-none z-20 lg:-mt-30 lg:ml-50 sm:translate-y-[-500px] sm:translate-x-[-20px]"
+              className="w-[300px] sm:w-[400px] md:w-[600px] lg:w-[1000px] lg:h-[786px] h-auto absolute left-1/2 -translate-x-1/2 top-[-40px] sm:top-[-60px] md:top-[-100px] lg:top-[-170px] select-none pointer-events-none z-20 lg:mt-90 lg:-ml-80 sm:translate-y-[-500px] sm:translate-x-[-20px]"
             />
 
             {/* Star image near floating books */}

@@ -9,7 +9,7 @@ import Contact from "./Pages/Contact";
 import Blog from "./Pages/BlogList";
 import Study from "./Pages/StudyAbroad";
 import Ebook from "./Pages/Ebook";
-import CourseDetail from './Pages/CourseDetail';
+import CourseDetail_NEW from './Pages/CourseDetail_NEW';
 import About from './Pages/About';
 import BlogDetail from './Pages/BlogDetail';
 import CodingForKids from './Pages/CodingForKids';
@@ -31,7 +31,7 @@ function App() {
         <Route path="/blog"  element={<Blog/>} />
         <Route path="/study" element={<Study/>}/>
         <Route path="/ebook" element={<Ebook/>}/>
-        <Route path="/course/:id" element={<CourseDetail />} />
+        <Route path="/course/:slug" element={<CourseDetail_NEW />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/coding-for-kids" element={<CodingForKids />} />
         <Route path="/refer-and-earn" element={<ReferAndEarn />} /> 
