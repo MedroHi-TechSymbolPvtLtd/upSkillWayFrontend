@@ -15,8 +15,8 @@ phases:
 
   build:
     commands:
-      - echo "Building ARM64 Docker image..."
-      - docker build --platform=linux/arm64 -t upskillway .
+      - echo "Building Docker image..."
+      - docker build -t upskillway .
 
       - echo "Tagging latest image..."
       - docker tag upskillway:latest 488479524661.dkr.ecr.ap-south-1.amazonaws.com/upskillway:latest
